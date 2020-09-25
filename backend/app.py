@@ -3,20 +3,19 @@ import uvicorn
 from fastapi import FastAPI
 from tortoise.contrib.fastapi import register_tortoise
 from starlette.middleware.cors import CORSMiddleware
-
-import users
+from logic import users, organizations, projects
 from settings import TORTOISE_ORM
 
 
-for _dir in ['migrations', 'db']:
+for _dir in ['db']:
     if not os.path.isdir(_dir):
         os.mkdir(_dir)
 
 
 app = FastAPI(
     version='0.0.1',
-    title='Tasker',
-    description='An example of full-stack service with auth',
+    title='Data App',
+    description='API for the data service',
 )
 
 register_tortoise(
@@ -38,6 +37,18 @@ app.include_router(
     users.router,
     prefix='/users',
     tags=['Users']
+)
+
+app.include_router(
+    organizations.router,
+    prefix='/organizations',
+    tags=['Organizations']
+)
+
+app.include_router(
+    projects.router,
+    prefix='/projects',
+    tags=['projects']
 )
 
 if __name__ == '__main__':

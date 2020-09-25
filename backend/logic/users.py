@@ -1,26 +1,19 @@
 from fastapi import APIRouter, HTTPException, Depends, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from tortoise.contrib.pydantic import pydantic_model_creator
-from models import User
+from models import User, Member, Leader
 from typing import Union, Optional
 from datetime import timedelta, datetime
 from passlib.context import CryptContext
 from jose import JWTError, jwt
 
 from settings import ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES, SECRET_KEY
-from views import Token, PrivateUser, PublicUser
+from logic.views import Token, PrivateUser, PublicUser
 
 
 router = APIRouter()
-user_view = pydantic_model_creator(User)
 pwd_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/users/token")
-
-
-@router.on_event('startup')
-async def init():
-    global user_view
-    user_view = pydantic_model_creator(User)
 
 
 async def authenticate_user(username: str, password: str) -> Union[User, None]:
@@ -53,6 +46,12 @@ async def get_user(token: str = Depends(oauth2_scheme)) -> User:
     return user
 
 
+async def get_admin(user: User = Depends(get_user)):
+    if user.is_admin:
+        return user
+    raise HTTPException(status_code=403, detail='Forbidden')
+
+
 def create_access_token(data, expires_data: Optional[timedelta] = None):
     to_encode = data.copy()
     if expires_data is not None:
@@ -66,6 +65,8 @@ def create_access_token(data, expires_data: Optional[timedelta] = None):
 
 async def create_user_and_token(email, password):
     user = await User.create(email=email, hashed_password=pwd_context.hash(password))
+    await Member.create(user=user)
+    await Leader.create(user=user)
     expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     return create_access_token(data={'sub': user.email}, expires_data=expires)
 
@@ -84,7 +85,7 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
     return Token(access_token=access_token, token_type='bearer')
 
 
-@router.post('/new', response_model=Token)
+@router.post('/create', response_model=Token)
 async def new_user(form_data: OAuth2PasswordRequestForm = Depends()):
     if await User.get_or_none(email=form_data.username) is not None:
         raise HTTPException(400, 'User already exists')

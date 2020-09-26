@@ -48,8 +48,9 @@ app.include_router(
 app.include_router(
     projects.router,
     prefix='/projects',
-    tags=['projects']
+    tags=['Projects']
 )
+
 
 if __name__ == '__main__':
     uvicorn.run('app:app', reload=True, use_colors=True)

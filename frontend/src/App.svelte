@@ -1,20 +1,10 @@
 <script>
-	import router from "page"
-	import Register from './components/Register.svelte'    
-
-	let page
-
-	router('/register', () => page = Register)
-
-	router.start()
-
+  import { Router } from "@sveltech/routify";
+  import { routes } from "../.routify/routes";
 </script>
 
-<svelte:head>
-	<title>{page}</title>
-</svelte:head>
-<h1>
-	Common Data
-</h1>
+<style  global>
+  @import "../static/global.css";
+</style>
 
-<svelte:component this={page} />
+<Router {routes} />

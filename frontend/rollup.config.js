@@ -1,75 +1,43 @@
-import svelte from 'rollup-plugin-svelte';
-import resolve from '@rollup/plugin-node-resolve';
-import commonjs from '@rollup/plugin-commonjs';
-import livereload from 'rollup-plugin-livereload';
-import { terser } from 'rollup-plugin-terser';
+import { createRollupConfigs } from './scripts/base.config.js'
+import autoPreprocess from 'svelte-preprocess'
+import postcssImport from 'postcss-import'
 
 const production = !process.env.ROLLUP_WATCH;
 
-function serve() {
-	let server;
-	
-	function toExit() {
-		if (server) server.kill(0);
-	}
-
-	return {
-		writeBundle() {
-			if (server) return;
-			server = require('child_process').spawn('npm', ['run', 'start', '--', '--dev'], {
-				stdio: ['ignore', 'inherit', 'inherit'],
-				shell: true
-			});
-
-			process.on('SIGTERM', toExit);
-			process.on('exit', toExit);
-		}
-	};
+export const config = {
+  staticDir: 'static',
+  distDir: 'dist',
+  buildDir: `dist/build`,
+  serve: !production,
+  production,
+  rollupWrapper: rollup => rollup,
+  svelteWrapper: svelte => {
+    svelte.preprocess = [
+      autoPreprocess({
+        postcss: { plugins: [postcssImport()] },
+        defaults: { style: 'postcss' }
+      })]
+  },
+  swWrapper: worker => worker,
 }
 
-export default {
-	input: 'src/main.js',
-	output: {
-		sourcemap: true,
-		format: 'iife',
-		name: 'app',
-		file: 'public/build/bundle.js'
-	},
-	plugins: [
-		svelte({
-			// enable run-time checks when not in production
-			dev: !production,
-			// we'll extract any component CSS out into
-			// a separate file - better for performance
-			css: css => {
-				css.write('bundle.css');
-			}
-		}),
+const configs = createRollupConfigs(config)
 
-		// If you have external dependencies installed from
-		// npm, you'll most likely need these plugins. In
-		// some cases you'll need additional configuration -
-		// consult the documentation for details:
-		// https://github.com/rollup/plugins/tree/master/packages/commonjs
-		resolve({
-			browser: true,
-			dedupe: ['svelte']
-		}),
-		commonjs(),
+export default configs
 
-		// In dev mode, call `npm run start` once
-		// the bundle has been generated
-		!production && serve(),
+/**
+  Wrappers can either mutate or return a config
 
-		// Watch the `public` directory and refresh the
-		// browser on changes when not in production
-		!production && livereload('public'),
+  wrapper example 1
+  svelteWrapper: (cfg, ctx) => {
+    cfg.preprocess: mdsvex({ extension: '.md' }),
+  }
 
-		// If we're building for production (npm run build
-		// instead of npm run dev), minify
-		production && terser()
-	],
-	watch: {
-		clearScreen: false
-	}
-};
+  wrapper example 2
+  rollupWrapper: cfg => {
+    cfg.plugins = [...cfg.plugins, myPlugin()]
+    return cfg
+  }
+*/
+
+

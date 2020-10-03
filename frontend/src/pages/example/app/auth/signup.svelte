@@ -4,6 +4,7 @@
     import {getContext} from 'svelte';
     import Input from '../_components/Input.svelte'
 
+    let socialNetworks = {facebook: 'https://facebook.com', twitter: 'https://twitter.com', vkontakte: 'https://vk.com'};
     let apiUrl = getContext('apiUrl');
     let form;
     let email;
@@ -45,74 +46,31 @@
     }
 </script>
 
-<!--<div>-->
-<!--    <h1>Регистрация</h1>-->
-<!--    <form bind:this={form}>-->
-<!--        <label class:showError>{errorMessage}</label>-->
+<div class="component">
+    <h1>Регистрация</h1>
+    <div class="social-networks">
+        <ul>
+        {#each Object.entries(socialNetworks) as [sn, url]}
+            <li><a href={url}>{sn}</a></li>
+        {/each}
+        </ul>
+    </div>
+    <form bind:this={form}>
+        <label class:showError>{errorMessage}</label>
+
 <!--        <Input class="neomorphic-input" bind:this={email} placeholder="Электронная почта" name="username" type="email"/>-->
 <!--        <Input class="neomorphic-input" bind:this={password} placeholder="Пароль" name="password" type="password"/>-->
 <!--        <Input class="neomorphic-input" bind:this={password2} placeholder="Подтверждение пароля" name="password" type="password"/>-->
-<!--        <button type="button"   on:click={submit}>Зарегистрироваться</button>-->
-<!--    </form>-->
-<!--    <p>Уже зарегистрированы? <a href='./signin'>Войдите</a></p>-->
-<!--</div>-->
+        <button type="button" on:click={submit}>Зарегистрироваться</button>
+    </form>
+    <p>Уже зарегистрированы? <a href='./signin'>Войдите</a></p>
+</div>
 
 <style>
-    div {
-        width: 400px;
-        height: 500px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        border-radius: 29px;
-        background: #DBEBFB;
-        box-shadow: 22px 22px 44px #7b848d,
-                   -22px -22px 44px #ffffff;
+    .component {
+        width: 100%;
+        flex-direction: row;
+        justify-items: flex-start;
     }
 
-    .showError {
-        opacity: 1;
-    }
-
-    form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-evenly;
-        height: 300px;
-        width: 300px;
-    }
-
-    label {
-        width: 250px;
-        margin: 10px auto;
-        padding: 5px;
-        opacity: 0;
-        transition: 0.5s ease;
-        color: white;
-        background: #E16684;
-        border-radius: 20px;
-        box-shadow: 0 0 15px #D7335C;
-        text-align: center;
-    }
-
-    button {
-        margin: 20px;
-        padding: 10px 30px;
-        border: none;
-        color: #0A335C;
-        border-radius: 29px;
-        background: linear-gradient(145deg, #eafbff, #c5d4e2);
-        box-shadow: 6px 6px 12px #7b848d,
-                   -6px -6px 12px #ffffff;
-    }
-
-    :global(.neomorphic-input) {
-        border-radius: 7px;
-        border-bottom-color: transparent;
-        background: #DBEBFB;
-        box-shadow: inset 3px 3px 10px #7b848d,
-                    inset -3px -3px 10px #ffffff;
-    }
 </style>

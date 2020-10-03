@@ -48,9 +48,10 @@ async def edit(organization: Organization = Depends(org_by_link),
     raise HTTPException(403, 'Access denied')
 
 
-@router.get('/all')
-async def get():
-    return await PrivateOrganization.from_queryset(Organization.all())
+# @router.delete('/delete')
+# async def destroy(user=Depends(get_user)):
+#     await user.delete()
+#     return {'ok': True}
 
 
 @router.post('/{link}/enter')
@@ -66,8 +67,7 @@ async def show(link: str):
     return await PublicOrganization.from_tortoise_orm(organization)
 
 
-# @router.post('/{link}')
-# async def update(organization: Organization = Depends(org_by_link),
-#                  edited: Edit = Body(...),
-#                  user: User = Depends(get_user)):
-    # organization
+@router.get('/all')
+async def get():
+    return await PrivateOrganization.from_queryset(Organization.all())
+

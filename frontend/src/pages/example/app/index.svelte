@@ -38,7 +38,7 @@
 </button>
 
 <main class="{$theme}">
-<Group {tasks}/>
+<!--<Group {tasks}/>-->
 </main>
 
 <style>

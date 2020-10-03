@@ -14,12 +14,13 @@
 html, body {
 	position: relative;
 	width: 100%;
+	height: 100%;
 }
 
 body {
 	background-color:  #F9F9F9;
 	margin: 0;
-	padding: 0px;
+	padding: 8px;
 	box-sizing: border-box;
 	font-family: "Helvetica Neue";
 }
@@ -33,10 +34,6 @@ body {
 
 h1, h2, h3, p {
 	color: #282828;
-}
-
-main {
-	padding-left: 5%;
 }
 
 

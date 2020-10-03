@@ -45,6 +45,7 @@
     }
 </script>
 
+
 <main>
 <div>
     <h1>Регистрация</h1>
@@ -60,11 +61,12 @@
 </main>
 <style>
     main {
-        position: absolute;
+        /*position: absolute;*/
         width: 100%;
         height: 100%;
         display: grid;
         place-items: center;
+        background: #0bf5cc;
     }
 
     div {

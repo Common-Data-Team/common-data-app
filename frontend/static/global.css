@@ -1,4 +1,16 @@
-  
+@font-face {
+        font-family: "Helvetica Neue";
+        src: url("/fonts/HelveticaNeueBoldCondensed.ttf") format("truetype");
+        font-style: normal;
+        font-weight: normal;
+    }
+
+@font-face {
+	font-family: "Helvetica Norm";
+	src: url("/fonts/HelveticaNeueCyr-Roman.ttf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
+}
 html, body {
 	position: relative;
 	width: 100%;
@@ -31,20 +43,6 @@ main {
 .text {
 	font-size: calc(40px + (50 - 40) * ((100vw - 300px) / (1600 - 300)));
 }
-
-@font-face {
-	font-family: "Helvetica Neue"; 
-	src: url("fonts/HelveticaNeueBoldCondensed.ttf") format("truetype"); 
-	font-style: normal; 
-	font-weight: normal; 
-} 
-
-@font-face {
-	font-family: "Helvetica Norm"; 
-	src: url("fonts/HelveticaNeueCyr-Roman.ttf") format("truetype"); 
-	font-style: normal; 
-	font-weight: normal; 
-} 
 
 button {
 	display: flex;

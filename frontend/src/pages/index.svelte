@@ -7,6 +7,7 @@
 </main>
 
 <footer>
+    <div class="flex">
     <img src="/logo_white.svg" class="logo-white" alt="logo">
     <div class="column-block">
         <h3>О НАС</h3>
@@ -30,6 +31,7 @@
             <li>vkontakte</li>
         </ul>
     </div>
+    </div>
 </footer>
 
 <style>
@@ -37,36 +39,54 @@
         position: absolute;
         bottom: 0;
         width: 100%;
-        height: 15%;
         padding: 30px 0;
+        margin-top: 100%;
         background: #282828;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
     }
 
+    .flex {
+        display: -ms-flexbox;	
+   display: -webkit-flex;	
+   display: -webkit-box;	
+   display: flex;
+   -ms-flex-pack: justify;	
+   -webkit-justify-content: space-between;	
+   -webkit-box-pack: justify;	
+   justify-content: space-between;
+    }
+    
     .logo-white {
-        width: 285px;
-        height: 40px;
+        width: 20%;
+        height: 20%;
     }
 
     .column-block {
-        display: inline-block;
-        padding-left: 5%;
-        padding-right: 5%;
+        flex: 1 1 10%;
     }
 
     h3 {
         color: #F9F9F9;
-        font-size: 16px;
+        --nav-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
         font-family: "Helvetica Neue";
     }
 
     li {
         list-style-type: none;
         color: #BDBDBD;
-        font-family: "Helvetica Norm";
+        font-family: "Helvetica Norm";--nav-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
     }
 
     ul {
         padding: 0;
     }
 
+    @media (max-width: 768px) {
+
+    .flex {
+        flex-direction: column;
+    }
+}
 </style>

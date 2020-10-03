@@ -45,30 +45,19 @@
     }
 </script>
 
+<!--<div>-->
+<!--    <h1>Регистрация</h1>-->
+<!--    <form bind:this={form}>-->
+<!--        <label class:showError>{errorMessage}</label>-->
+<!--        <Input class="neomorphic-input" bind:this={email} placeholder="Электронная почта" name="username" type="email"/>-->
+<!--        <Input class="neomorphic-input" bind:this={password} placeholder="Пароль" name="password" type="password"/>-->
+<!--        <Input class="neomorphic-input" bind:this={password2} placeholder="Подтверждение пароля" name="password" type="password"/>-->
+<!--        <button type="button"   on:click={submit}>Зарегистрироваться</button>-->
+<!--    </form>-->
+<!--    <p>Уже зарегистрированы? <a href='./signin'>Войдите</a></p>-->
+<!--</div>-->
 
-<main>
-<div>
-    <h1>Регистрация</h1>
-    <form bind:this={form}>
-        <label class:showError>{errorMessage}</label>
-        <Input class="neomorphic-input" bind:this={email} placeholder="Электронная почта" name="username" type="email"/>
-        <Input class="neomorphic-input" bind:this={password} placeholder="Пароль" name="password" type="password"/>
-        <Input class="neomorphic-input" bind:this={password2} placeholder="Подтверждение пароля" name="password" type="password"/>
-        <button type="button" on:click={submit}>Зарегистрироваться</button>
-    </form>
-    <p>Уже зарегистрированы? <a href='./signin'>Войдите</a></p>
-</div>
-</main>
 <style>
-    main {
-        /*position: absolute;*/
-        width: 100%;
-        height: 100%;
-        display: grid;
-        place-items: center;
-        background: #0bf5cc;
-    }
-
     div {
         width: 400px;
         height: 500px;

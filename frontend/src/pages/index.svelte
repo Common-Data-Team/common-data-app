@@ -8,7 +8,7 @@
 
 <footer>
     <div class="flex">
-    <img src="/logo_white.svg" class="logo-white" alt="logo">
+    <img src="white_logo.svg" class="logo-white" alt="logo-white" />
     <div class="column-block">
         <h3>О НАС</h3>
         <ul>
@@ -43,28 +43,33 @@
         margin-top: 100%;
         background: #282828;
         display: flex;
-        justify-content: flex-start;
+        justify-content: space-between;
         align-items: flex-start;
     }
 
     .flex {
         display: -ms-flexbox;	
-   display: -webkit-flex;	
-   display: -webkit-box;	
-   display: flex;
-   -ms-flex-pack: justify;	
-   -webkit-justify-content: space-between;	
-   -webkit-box-pack: justify;	
-   justify-content: space-between;
+        display: -webkit-flex;	
+        display: -webkit-box;	
+        display: flex;
+        -ms-flex-pack: justify;	
+        -webkit-justify-content: space-between;
+        -webkit-box-pack: justify;	
+        justify-content: space-between;
     }
     
     .logo-white {
-        width: 20%;
-        height: 20%;
+        flex: 1 1 0%;
+        max-width: 40%;
+        padding-left: 5%;
+        padding-right: 10%;
     }
 
     .column-block {
-        flex: 1 1 10%;
+        flex: 1 1 0%;
+        max-width: 20%;
+        padding-left: 5%;
+        padding-right: 5%;
     }
 
     h3 {

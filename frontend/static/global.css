@@ -18,7 +18,7 @@ html, body {
     height: 100%;
     font-family: "Helvetica Neue";
     --hero-font-size: calc(30px + (40 - 20) * ((100vw - 300px) / (1440 - 300)));
-    --plain-font-size: calc(20px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
+    --plain-font-size: min(calc(20px + (20 - 16) * ((100vw - 300px) / (1440 - 300))), 25px);
 }
 
 body {

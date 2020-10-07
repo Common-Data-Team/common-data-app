@@ -5,8 +5,8 @@
     export let value = "";
     export let name = "";
     export let placeholder = "";
-    export let spanColor = "#636DFF";
-    export let mainColor = "#3f3d56"
+    export let spanColor = "#4d4d4d";
+    export let mainColor = "black";
     export let input = null;
 
     let className = "";
@@ -21,8 +21,8 @@
     };
 </script>
 
-<label style="--placeholderColor: {spanColor};
-                  --mainColor: {mainColor};">
+<label style="--spanColor: {spanColor};
+              --mainColor: {mainColor};">
     <input bind:this={input} { placeholder } {type} class="{className}" {name} {value} on:input={handleInput}
            on:focus={() => focus = true}
            on:blur={() => focus = value !== ""}>
@@ -35,14 +35,15 @@
         transition: all .5s ease;
         margin-top: 10px;
         margin-left: 5px;
-        color: var(--placeholderColor);
-        font-weight: 700;
+        color: var(--spanColor);
+        font-weight: 100;
+        font-size: calc(var(--plain-font-size) - 3px);
         cursor: text;
     }
 
     .focus {
         margin-top: -7px;
-        font-size: 0.8em;
+        font-size: calc(var(--plain-font-size) - 7px);
     }
 
     textarea:focus, input:focus {
@@ -63,6 +64,7 @@
         border-bottom-color: var(--mainColor);
         color: var(--mainColor);
         width: 100%;
+        font-size: calc(var(--plain-font-size) - 5px);
         transition: 0.5s ease;
     }
 

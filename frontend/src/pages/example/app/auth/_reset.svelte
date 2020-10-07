@@ -5,7 +5,9 @@
 <main>
 <!--    <slot decorator={PageTransition}/>-->
     <img src="/logo.svg" alt="Common data">
-    <slot/>
+    <div>
+        <slot/>
+    </div>
 </main>
 
 <style>
@@ -13,10 +15,15 @@
         max-width: 1440px;
         position: absolute;
         width: 95%;
-        height: 100%;
+        height: 95%;
         margin-top: 24px;
     }
     img {
         width: 80%;
+    }
+    div {
+        height: 80vh;
+        display: grid;
+        place-items: center;
     }
 </style>

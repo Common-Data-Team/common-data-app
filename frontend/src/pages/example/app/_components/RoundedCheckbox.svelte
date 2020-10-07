@@ -42,7 +42,7 @@
         border: 2px solid black;
         background: transparent;
         transition: all .2s ease;
-
+        border-radius: 30px;
     }
 
     .check:checked + .box:before {
@@ -84,8 +84,7 @@
     .component {
         /*margin: 7px;*/
         display: flex;
-        justify-content: flex-start;
-        align-items: flex-start;
+        justify-content: start;
+        align-items: center;
     }
-
 </style>

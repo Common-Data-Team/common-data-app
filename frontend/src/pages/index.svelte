@@ -3,7 +3,9 @@
 </script>
 
 <main>
-
+    <div id="project-card">
+        <img src="/images/project_images/Rectangle 4.png" class="project-image" alt="project-image" />
+    </div>
 </main>
 
 <footer>
@@ -12,23 +14,23 @@
     <div class="column-block">
         <h3>О НАС</h3>
         <ul>
-            <li>проектам</li>
-            <li>пользователям</li>
+            <a href="vk.com"><li>проектам</li></a>
+            <a href="vk.com"><li>пользователям</li></a>
         </ul>
     </div>
     <div class="column-block">
         <h3>СВЯЗАТЬСЯ С НАМИ</h3>
         <ul>
-            <li>help@commondata.ru</li>
-            <li>+7 (901) 723-04-47</li>
+            <a href="vk.com"><li>help@commondata.ru</li></a>
+            <a href="vk.com"><li>+7 (901) 723-04-47</li></a>
         </ul>
     </div>
     <div class="column-block">
         <h3>СОЦСЕТИ</h3>
         <ul>
-            <li>facebook</li>
-            <li>telegram</li>
-            <li>vkontakte</li>
+            <a href="vk.com"><li>facebook</li></a>
+            <a href="vk.com"><li>telegram</li></a>
+            <a href="vk.com"><li>vkontakte</li></a>
         </ul>
     </div>
     </div>
@@ -62,7 +64,18 @@
         flex: 1 1 0%;
         max-width: 20%;
         padding-left: 5%;
-        padding-right: 20%;
+        padding-right: 15%;
+    }
+
+    a {
+        color: #BDBDBD;
+        font-family: "Helvetica Norm";
+        --plain-font-size: calc(12px + (14 - 12) * ((100vw - 300px) / (1440 - 300)));
+        text-decoration: none;
+    }
+
+    a:hover { 
+        color: #1355FF;
     }
 
     .column-block {
@@ -74,14 +87,12 @@
 
     h3 {
         color: #F9F9F9;
-        --nav-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
+        --plain-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
         font-family: "Helvetica Neue";
     }
 
     li {
         list-style-type: none;
-        color: #BDBDBD;
-        font-family: "Helvetica Norm";--nav-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
     }
 
     ul {
@@ -89,9 +100,9 @@
     }
 
     @media (max-width: 768px) {
-
-    .flex {
-        flex-direction: column;
+        .flex {
+            flex-direction: column;
+        }
     }
-}
+
 </style>

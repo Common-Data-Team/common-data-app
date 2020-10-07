@@ -62,7 +62,7 @@
         flex: 1 1 0%;
         max-width: 20%;
         padding-left: 5%;
-        padding-right: 10%;
+        padding-right: 20%;
     }
 
     .column-block {

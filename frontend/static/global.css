@@ -1,68 +1,73 @@
 @font-face {
-        font-family: "Helvetica Neue";
-        src: url("/fonts/HelveticaNeueBoldCondensed.ttf") format("truetype");
-        font-style: normal;
-        font-weight: normal;
-    }
+    font-family: "Helvetica Neue";
+    src: url("/fonts/HelveticaNeueBoldCondensed.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
 
 @font-face {
-	font-family: "Helvetica Norm";
-	src: url("/fonts/HelveticaNeueCyr-Roman.ttf") format("truetype");
-	font-style: normal;
-	font-weight: normal;
+    font-family: "Helvetica Norm";
+    src: url("/fonts/HelveticaNeueCyr-Roman.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
 }
+
 html, body {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	font-family: "Helvetica Neue";
-	--hero-font-size: calc(30px + (40 - 20) * ((100vw - 300px) / (1440 - 300)));
-	--plain-font-size: calc(20px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
+    position: relative;
+    width: 100%;
+    height: 100%;
+    font-family: "Helvetica Neue";
+    --hero-font-size: calc(30px + (40 - 20) * ((100vw - 300px) / (1440 - 300)));
+    --plain-font-size: calc(20px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
 }
 
 body {
-	background-color:  #F9F9F9;
-	margin: 0;
-	padding: 8px;
-	box-sizing: border-box;
+    background-color: #F9F9F9;
+    margin: 0;
+    padding: 8px;
+    box-sizing: border-box;
 }
 
 .logo-img {
-	max-width: 75%;
-	max-height: 10%;
-	padding-top: 3%;
-	padding-bottom: 2%;
+    max-width: 75%;
+    max-height: 10%;
+    padding-top: 3%;
+    padding-bottom: 2%;
 }
 
-h1, h2, h3, p, label, a{
-	color: #282828;
+h1, h2, h3, p, label, a {
+    color: #282828;
+    padding: 0;
+    margin: 0;
 }
 
 h1 {
-	font-size: var(--hero-font-size);
+    font-size: var(--hero-font-size);
 }
 
-label, p, button, a{
-	font-size: var(--plain-font-size);
+label, p, button, a {
+    font-size: var(--plain-font-size);
+    font-weight: normal;
+    font-family: "Helvetica Norm";
 }
 
 button {
-	background-color: #1355FF;
-	border: none;
-	color: #F9F9F9;
-	padding: 8px;
+    background-color: #1355FF;
+    border: none;
+    color: #F9F9F9;
+    padding: 8px;
 }
 
 
-input:focus { 
-	outline:none; 
+input:focus {
+    outline: none;
 }
 
 ::placeholder {
-	color: #282828;
+    color: #282828;
 }
 
 
 a:hover {
-	color: #1355FF;
+    color: #1355FF;
 }

@@ -4,9 +4,19 @@
 
 <main>
     <img src="/logo.svg" alt="Common data" class="logo">
+    <div class="menu-block">
+        <button>Все</button>
+        <button>Бытовое</button>
+        <button>Социальное</button>
+        <button>Наука</button>
+        <button>Медицина</button>
+        <button>Нейросети</button>
+    </div>
     <div class="popular-block">
-        <h2 class="block-title">ПОПУЛЯРНОЕ СЕЙЧАС</h2>
-        <p class="arrow">→</p>
+        <div class="block-title">
+            <h2>ПОПУЛЯРНОЕ СЕЙЧАС</h2>
+            <p class="arrow">→</p>
+        </div>
         <div class="сard-block">
             <div class="project-card">
                 <img src="/images/project_images/Rectangle 4.png" class="project-image" alt="project-image" />
@@ -102,12 +112,34 @@
 
     .arrow {
         font-family: "SF Pro Display";
+        text-align: center;
+        margin-left: 1%;
+    }
+
+    .menu-block {
+        display: flex;
+        margin-bottom: 3%;
+    }
+
+    .menu-block button {
+        background: transparent;
+        text-align: center;
+        color: #282828;
+        --plain-font-size: calc(14px + (16 - 14) * ((100vw - 300px) / (1440 - 300)));
+        margin-right: 1%;
+    }
+
+    .menu-block button:hover {
+        color: #F9F9F9;
+        background-color: #282828;
+        border-radius: 0;
     }
 
     .logo {
         max-width: 890px;
         max-height: 119px;
         margin-bottom: 3%;
+        margin-top: 3%;
     }
 
     .popular-block {
@@ -120,6 +152,8 @@
     }
 
     .block-title {
+        display: flex;
+        align-items: center;
         --plain-font-size: calc(24px + (32 - 24) * ((100vw - 300px) / (1440 - 300)));
         padding-bottom: 1%;
     }

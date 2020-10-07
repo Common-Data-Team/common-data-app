@@ -12,6 +12,13 @@
     font-weight: normal;
 }
 
+@font-face {
+    font-family: "SF Pro Display";
+    src: url("/fonts/SFProDisplay-Light.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
 html, body {
     position: relative;
     width: 100%;

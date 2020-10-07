@@ -60,7 +60,7 @@
     
     .logo-white {
         flex: 1 1 0%;
-        max-width: 40%;
+        max-width: 20%;
         padding-left: 5%;
         padding-right: 10%;
     }

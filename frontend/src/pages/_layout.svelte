@@ -8,9 +8,7 @@
     <a href="{selfUrl}">
         <img src="/logo.svg" alt="Common data">
     </a>
-    <div>
-        <slot decorator={PageTransition}/>
-    </div>
+    <slot decorator={PageTransition}/>
 </main>
 
 <style>
@@ -25,10 +23,5 @@
         width: 600px;
         margin-bottom: 50px;
         /*max-width;*/
-    }
-    div {
-        height: 80vh;
-        display: grid;
-        place-items: center;
     }
 </style>

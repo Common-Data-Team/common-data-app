@@ -3,7 +3,6 @@
 </script>
 
 <main>
-    <img src="/logo.svg" alt="Common data" class="logo">
     <div class="log-out-block">
         <h2 class="log-out-text">ПЛАТФОРМА ДОНОРСТВА ДАННЫХ ДЛЯ ПРОЕКТОВ И ИССЛЕДОВАНИЙ</h2>
         <div class="description">
@@ -51,8 +50,8 @@
         <button>Наука</button>
         <button>Медицина</button>
         <button>Нейросети</button>
-        <a href="/">Вход</a>
-        <a href="/">Регистрация</a>
+        <a href="./auth/signin">Вход</a>
+        <a href="/auth/signup">Регистрация</a>
     </div>
     <div class="popular-block">
         <div class="block-title">

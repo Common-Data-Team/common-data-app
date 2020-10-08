@@ -10,7 +10,7 @@
 <main>
     {#if !auth}
     <div class="log-out-block">
-        <h2 class="log-out-text">ПЛАТФОРМА ДОНОРСТВА ДАННЫХ ДЛЯ ПРОЕКТОВ И ИССЛЕДОВАНИЙ</h2>
+        <h2 class="log-out-text">ПЛАТФОРМА КРАУДСОРСИНГА ДАННЫХ ДЛЯ ПРОЕКТОВ И ИССЛЕДОВАНИЙ</h2>
         <div class="description">
             <h2>КТО МЫ?</h2>
             <p>Common data — это сервис, в котором пользователь может безопасно делиться своими данными с исследовательскими и гражданскими проектами, ценности которых он разделяет.</p>
@@ -157,10 +157,6 @@
 </footer>
 
 <style>
-    main {
-        flex: 1 0 auto;
-        margin-left: 3%;
-    }
 
     .arrow {
         font-family: "SF Pro Display";

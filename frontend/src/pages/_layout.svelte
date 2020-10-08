@@ -19,8 +19,14 @@
         margin-top: 24px;
     }
     img {
-        width: 600px;
+        max-width: 600px;
         margin-bottom: 50px;
         /*max-width;*/
+    }
+
+    @media (max-width: 768px) {
+        img { 
+            max-width: 300px;
+        }
     }
 </style>

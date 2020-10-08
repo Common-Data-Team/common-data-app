@@ -1,59 +1,99 @@
 <script>
     import {goto} from "@sveltech/routify"
     import {checkStoreAndCoockie, clearStoreAndCookie} from "./_api";
+    import Project from './_components/Project.svelte';
+    let data = [
+        {
+            title: 'Влияние проходимого расстояния на здоровье',
+            tags: ['Наука', 'Медицина'],
+            progress: 42,
+            author: "Камень Иванович",
+            userImageSrc: "/images/user_images/user.jpg",
+            projectImageSrc: "/images/project_images/Rectangle 4.png"
+        },
+        {
+            title: 'Влияние проходимого расстояния на здоровье',
+            tags: ['Наука', 'Медицина'],
+            progress: 42,
+            author: "Камень Иванович",
+            userImageSrc: "/images/user_images/user.jpg",
+            projectImageSrc: "/images/project_images/Rectangle 4.png"
+        },
+        {
+            title: 'Влияние проходимого расстояния на здоровье',
+            tags: ['Наука', 'Медицина'],
+            progress: 42,
+            author: "Камень Иванович",
+            userImageSrc: "/images/user_images/user.jpg",
+            projectImageSrc: "/images/project_images/Rectangle 4.png"
+        },
+    ]
+
     let auth = checkStoreAndCoockie();
-    function logout(){
+    function logout() {
         auth = false;
         clearStoreAndCookie();
     }
-    // $goto("./auth/signin", {}, true);
+
+
 
 </script>
 
 <main>
     {#if !auth}
-    <div class="log-out-block">
-        <h2 class="log-out-text">ПЛАТФОРМА КРАУДСОРСИНГА ДАННЫХ ДЛЯ ПРОЕКТОВ И ИССЛЕДОВАНИЙ</h2>
-        <div class="description">
-            <a href="./auth/signin">Вход</a>
-            <a href="./auth/signup">Регистрация</a>
-            <h2>КТО МЫ?</h2>
-            <p>Common data — это сервис, в котором пользователь может безопасно делиться своими данными с исследовательскими и гражданскими проектами, ценности которых он разделяет.</p>
-            <h2>ПОЧЕМУ</h2>
-            <div class="about-buttons">
-                <button onclick="(document.getElementById('users-block').style.display='block'); (document.getElementById('project-block').style.display='none');">Пользователям</button>
-                <button onclick="(document.getElementById('project-block').style.display='block'); (document.getElementById('users-block').style.display='none')">Проектам</button>
-                <div id="users-block">
-                    <div class="point-block">
-                        <h1>01</h1>
-                        <p>Участвуйте в том, что для вас интересно и важно. Мы будем рекомендовать проекты, которые могут вам понравиться.</p>
+        <div class="log-out-block">
+            <h2 class="log-out-text">ПЛАТФОРМА КРАУДСОРСИНГА ДАННЫХ ДЛЯ ПРОЕКТОВ И ИССЛЕДОВАНИЙ</h2>
+            <div class="description">
+                <a href="./auth/signin">Вход</a>
+                <a href="./auth/signup">Регистрация</a>
+                <h2>КТО МЫ?</h2>
+                <p>Common data — это сервис, в котором пользователь может безопасно делиться своими данными с
+                    исследовательскими и гражданскими проектами, ценности которых он разделяет.</p>
+                <h2>ПОЧЕМУ</h2>
+                <div class="about-buttons">
+                    <button onclick="(document.getElementById('users-block').style.display='block'); (document.getElementById('project-block').style.display='none');">
+                        Пользователям
+                    </button>
+                    <button onclick="(document.getElementById('project-block').style.display='block'); (document.getElementById('users-block').style.display='none')">
+                        Проектам
+                    </button>
+                    <div id="users-block">
+                        <div class="point-block">
+                            <h1>01</h1>
+                            <p>Участвуйте в том, что для вас интересно и важно. Мы будем рекомендовать проекты, которые
+                                могут вам понравиться.</p>
+                        </div>
+                        <div class="point-block">
+                            <h1>02</h1>
+                            <p>Вы знаете, как и для чего будут использоваться ваши данные. Мы будем сообщать, что
+                                происходит с вашими данными, и каких результатов достигли проекты благодаря вам. </p>
+                        </div>
+                        <div class="point-block">
+                            <h1>03</h1>
+                            <p>Вам не нужно беспокоиться об анонимности и безопасности ваших данных. Мы об этом
+                                позаботимся!</p>
+                        </div>
                     </div>
-                    <div class="point-block">
-                        <h1>02</h1>
-                        <p>Вы знаете, как и для чего будут использоваться ваши данные. Мы будем сообщать, что происходит с вашими данными, и каких результатов достигли проекты благодаря вам. </p>
-                    </div>
-                    <div class="point-block">
-                        <h1>03</h1>
-                        <p>Вам не нужно беспокоиться об анонимности и безопасности ваших данных. Мы об этом позаботимся!</p>
-                    </div>
-                </div>
-                <div id="project-block">
-                    <div class="point-block">
-                        <h1>01</h1>
-                        <p>Формируйте датасеты. Мы поможем вам составить форму для сбора данных, предоставим место для хранения и инструменты.</p>
-                    </div>
-                    <div class="point-block">
-                        <h1>02</h1>
-                        <p>Привлекайте людей в ваш проект. Наши алгоритмы порекомендуют ваш проект именно тем пользователям, которым он может быть интересен.</p>
-                    </div>
-                    <div class="point-block">
-                        <h1>03</h1>
-                        <p>Находите единомышленников и новые идеи. Смотрите результаты и модели исследований по вашей теме от других участников.</p>
+                    <div id="project-block">
+                        <div class="point-block">
+                            <h1>01</h1>
+                            <p>Формируйте датасеты. Мы поможем вам составить форму для сбора данных, предоставим место
+                                для хранения и инструменты.</p>
+                        </div>
+                        <div class="point-block">
+                            <h1>02</h1>
+                            <p>Привлекайте людей в ваш проект. Наши алгоритмы порекомендуют ваш проект именно тем
+                                пользователям, которым он может быть интересен.</p>
+                        </div>
+                        <div class="point-block">
+                            <h1>03</h1>
+                            <p>Находите единомышленников и новые идеи. Смотрите результаты и модели исследований по
+                                вашей теме от других участников.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     {/if}
     {#if auth}
         <button on:click={logout}>Выйти</button>
@@ -72,91 +112,51 @@
             <p class="arrow">→</p>
         </div>
         <div class="сard-block">
-            <div class="project-card">
-                <img src="/images/project_images/Rectangle 4.png" class="project-image" alt="project-image" />
-                <h2 class="project-title">Влияние проходимого расстояния на здоровье</h2>
-                <div class="tags">
-                    <a href="/" class="tag-href">Наука</a>
-                    <a href="/" class="tag-href">Медицина</a>
-                </div>
-                <p class="percent-title">Собрано 42%</p>
-                <div class="progress-bar horizontal">
-                    <div class="progress-track">
-                      <div class="progress-fill">
-                      </div>
-                    </div>
-                </div>
-                <div class="user">
-                    <img src="/images/user_images/user.jpg" class="user-img" alt="user-img" />
-                    <p>Камень Иванович</p>
-                </div>
-            </div>
-            <div class="project-card">
-                <img src="/images/project_images/Rectangle 4.png" class="project-image" alt="project-image" />
-                <h2 class="project-title">Влияние проходимого расстояния на здоровье</h2>
-                <div class="tags">
-                    <a href="/" class="tag-href">Здоровье</a>
-                    <a href="/" class="tag-href">Медицина</a>
-                </div>
-                <p class="percent-title">Собрано 42%</p>
-                <div class="progress-bar horizontal">
-                    <div class="progress-track">
-                      <div class="progress-fill">
-                      </div>
-                    </div>
-                </div>
-                <div class="user">
-                    <img src="/images/user_images/user.jpg" class="user-img" alt="user-img" />
-                    <p>Камень Иванович</p>
-                </div>
-            </div>
-            <div class="project-card">
-                <img src="/images/project_images/Rectangle 4.png" class="project-image" alt="project-image" />
-                <h2 class="project-title">Влияние проходимого расстояния на здоровье</h2>
-                <div class="tags">
-                    <a href="/" class="tag-href">Здоровье</a>
-                    <a href="/" class="tag-href">Медицина</a>
-                </div>
-                <p class="percent-title">Собрано 42%</p>
-                <div class="progress-bar horizontal">
-                    <div class="progress-track">
-                      <div class="progress-fill">
-                      </div>
-                    </div>
-                </div>
-                <div class="user">
-                    <img src="/images/user_images/user.jpg" class="user-img" alt="user-img" />
-                    <p>Камень Иванович</p>
-                </div>
-            </div>
+            {#each data as card}
+                <Project {card}/>
+            {/each}
         </div>
-        </div>
+    </div>
 </main>
 
 <footer>
-        <img src="white_logo.svg" class="logo-white" alt="logo-white" />
-        <div class="column-block">
-            <h3>О НАС</h3>
-            <ul>
-                <a href="vk.com"><li>проектам</li></a>
-                <a href="vk.com"><li>пользователям</li></a>
-            </ul>
-        </div>
-        <div class="column-block">
-            <h3>СВЯЗАТЬСЯ С НАМИ</h3>
-            <ul>
-                <a href="vk.com"><li>help@commondata.ru</li></a>
-                <a href="vk.com"><li>+7 (901) 723-04-47</li></a>
-            </ul>
-        </div>
-        <div class="column-block">
-            <h3>СОЦСЕТИ</h3>
-            <ul>
-                <a href="https://vk.com"><li>facebook</li></a>
-                <a href="vk.com"><li>telegram</li></a>
-                <a href="vk.com"><li>vkontakte</li></a>
-            </ul>
-        </div>
+    <img src="white_logo.svg" class="logo-white" alt="logo-white"/>
+    <div class="column-block">
+        <h3>О НАС</h3>
+        <ul>
+            <a href="vk.com">
+                <li>проектам</li>
+            </a>
+            <a href="vk.com">
+                <li>пользователям</li>
+            </a>
+        </ul>
+    </div>
+    <div class="column-block">
+        <h3>СВЯЗАТЬСЯ С НАМИ</h3>
+        <ul>
+            <a href="vk.com">
+                <li>help@commondata.ru</li>
+            </a>
+            <a href="vk.com">
+                <li>+7 (901) 723-04-47</li>
+            </a>
+        </ul>
+    </div>
+    <div class="column-block">
+        <h3>СОЦСЕТИ</h3>
+        <ul>
+            <a href="https://vk.com">
+                <li>facebook</li>
+            </a>
+            <a href="vk.com">
+                <li>telegram</li>
+            </a>
+            <a href="vk.com">
+                <li>vkontakte</li>
+            </a>
+        </ul>
+    </div>
 </footer>
 
 <style>
@@ -273,7 +273,7 @@
         justify-content: center;
         align-items: stretch;
     }
-    
+
     .logo-white {
         max-width: 285px;
         margin-right: 15%;
@@ -324,7 +324,7 @@
         color: #F9F9F9;
     }
 
-    a:hover { 
+    a:hover {
         color: #1355FF;
     }
 
@@ -342,7 +342,7 @@
         --plain-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
         font-family: "Helvetica Neue";
     }
-    
+
     .project-title {
         --plain-font-size: calc(24px + (32 - 24) * ((100vw - 300px) / (1440 - 300)));
         padding-top: 2%;

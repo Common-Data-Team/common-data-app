@@ -1,5 +1,6 @@
 <script>
-    import { url } from '@sveltech/routify'
+    import { url } from '@sveltech/routify';
+    import {selfUrl} from './_api.js';
 </script>
 
 <style>
@@ -19,6 +20,6 @@
   <div class="huge">404</div>
   <div class="big">Page not found. 
   <!-- link to the parent folder of _fallback.svelte -->
-  <a href={$url('../')}>Go back</a>
+  <a href={selfUrl}>Go back</a>
   </div>
 </div>

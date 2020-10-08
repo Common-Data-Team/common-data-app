@@ -4,6 +4,14 @@
 
 <main>
     <img src="/logo.svg" alt="Common data" class="logo">
+    <div class="log-out-block">
+        <h2 class="log-out-text">ПЛАТФОРМА ДОНОРСТВА ДАННЫХ ДЛЯ ПРОЕКТОВ И ИССЛЕДОВАНИЙ</h2>
+        <div class="description">
+            <h2>КТО МЫ?</h2>
+            <p>Common data — это сервис, в котором пользователь может безопасно делиться своими данными с исследовательскими и гражданскими проектами, ценности которых он разделяет.</p>
+            <h2>ПОЧЕМУ</h2>
+        </div>
+    </div>
     <div class="menu-block">
         <button>Все</button>
         <button>Бытовое</button>
@@ -108,12 +116,36 @@
 <style>
     main {
         flex: 1 0 auto;
+        margin-left: 3%;
     }
 
     .arrow {
         font-family: "SF Pro Display";
         text-align: center;
         margin-left: 1%;
+    }
+
+    .description {
+        display: flex;
+        flex-direction: column;
+        max-width: 40%;
+    }
+
+    .description h2 {
+        margin-bottom: 1%;
+    }
+
+    .description p {
+        margin-bottom: 5%;
+    }
+
+    .log-out-block {
+        display: flex;
+    }
+
+    .log-out-text {
+        max-width: 20%;
+        padding-right: 10%;
     }
 
     .menu-block {
@@ -284,8 +316,8 @@
     @media (max-width: 768px) {
         footer {
             flex-direction: column;
-            align-items: flex-start;
         }
+
         .logo-white {
             max-width: 200px;
             margin-left: 5%;

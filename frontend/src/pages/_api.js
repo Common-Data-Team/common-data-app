@@ -56,6 +56,12 @@ function getCookie(name) {
     return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
+function deleteCookie(name) {
+  setCookie(name, "", {
+    'max-age': -1
+  })
+}
+
 export function checkStoreAndCoockie() {
     if (get(user) === "") {
         let coockie_token = getCookie('access_token');
@@ -86,4 +92,9 @@ export async function authorizedRequest(apiPart, method, object) {
         return [null, json_response.detail]
     }
     return [json_response, null]
+}
+
+export function clearStoreAndCookie(){
+    user = "";
+    deleteCookie('access_token');
 }

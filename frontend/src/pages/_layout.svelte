@@ -4,7 +4,6 @@
 </script>
 
 <main>
-<!--    <slot decorator={PageTransition}/>-->
     <a href="{selfUrl}">
         <img src="/logo.svg" alt="Common data">
     </a>

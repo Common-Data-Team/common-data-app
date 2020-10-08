@@ -1,8 +1,14 @@
 <script>
-    
+    import {checkStoreAndCoockie, clearStoreAndCookie} from "./_api";
+    let auth = checkStoreAndCoockie();
+    function logout(){
+        auth = false;
+        clearStoreAndCookie();
+    }
 </script>
 
 <main>
+    {#if !auth}
     <div class="log-out-block">
         <h2 class="log-out-text">ПЛАТФОРМА ДОНОРСТВА ДАННЫХ ДЛЯ ПРОЕКТОВ И ИССЛЕДОВАНИЙ</h2>
         <div class="description">
@@ -43,6 +49,10 @@
             </div>
         </div>
     </div>
+    {/if}
+    {#if auth}
+        <button on:click={logout}>Выйти</button>
+    {/if}
     <div class="menu-block">
         <button>Все</button>
         <button>Бытовое</button>
@@ -51,7 +61,7 @@
         <button>Медицина</button>
         <button>Нейросети</button>
         <a href="./auth/signin">Вход</a>
-        <a href="/auth/signup">Регистрация</a>
+        <a href="./auth/signup">Регистрация</a>
     </div>
     <div class="popular-block">
         <div class="block-title">

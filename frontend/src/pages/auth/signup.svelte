@@ -52,7 +52,7 @@
 </script>
 
 <div class="component">
-    <h1>РЕГИСТРАЦИЯ:</h1>
+    <h2>РЕГИСТРАЦИЯ:</h2>
     <div class="right-block">
         <div class="social-networks">
             <p>Через соцсети:</p>
@@ -98,7 +98,7 @@
     }
 
     .checkboxes-block {
-        margin-top: 15px;
+        margin-top: 1%;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -170,16 +170,13 @@
         color: #1355FF;
     }
     .error-label {
-        background: #F45B69;
-        padding: 6px;
         text-align: center;
         align-self: center;
-        margin-bottom: 5px;
+        margin-bottom: 1%;
         opacity: 0;
         transition: opacity ease 0.5s;
-        color: white;
-
-
+        --plain-font-size: calc(16px + (18 - 16) * ((100vw - 300px) / (1440 - 300)));
+        color: red;
     }
     .showError{
         opacity: 1;

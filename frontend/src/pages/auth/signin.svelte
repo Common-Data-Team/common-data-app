@@ -43,7 +43,7 @@
 </script>
 
 <div class="component">
-    <h1>ВХОД:</h1>
+    <h2>ВХОД:</h2>
     <div class="right-block">
         <div class="social-networks">
             <p>Через соцсети:</p>
@@ -55,9 +55,9 @@
         </div>
         <form bind:this={form}>
             <div class="inputs-block">
-                <p class="error-label" class:showError>{errorMessage}</p>
                 <Input bind:this={email} span="E-mail" name="username" type="email"/>
                 <Input bind:this={password} span="Пароль" name="password" type="password"/>
+                <p class="error-label" class:showError>{errorMessage}</p>
             </div>
             <div class="button-block">
                 <button type="button" on:click={submit}>Войти</button>
@@ -75,7 +75,6 @@
         width: 100%;
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
     }
 
     .checkboxes-block {
@@ -101,13 +100,15 @@
     .social-networks {
         margin-right: 30px;
         width: 220px;
+        margin-left: 15%;
+        --plain-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
     }
 
     form {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        height: 250px;
+        height: 220px;
         width: 550px;
         margin-right: 5%;
     }
@@ -117,12 +118,14 @@
         justify-content: flex-start;
     }
 
-    button {
-        padding: 15px;
+    button:active, button:focus, button:hover {
+        outline: none;
+        background-color: #282828;
+        border-radius: 0;
     }
 
     .registration-p, .registration-a {
-        font-size: calc(var(--plain-font-size) - 5px);
+        --plain-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
     }
 
     .p-wrapper {
@@ -130,6 +133,7 @@
         align-items: center;
         justify-content: flex-start;
         margin-left: 20px;
+        --plain-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
     }
 
     .registration-p {
@@ -143,6 +147,13 @@
         padding: 0;
     }
 
+    button {
+        padding: 2%;
+        --plain-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
+        outline: none;
+        border-radius: 0;
+    }
+
     .social-link {
         text-decoration: none;
         color: #545454;
@@ -153,19 +164,44 @@
     }
 
     .error-label {
-        background: #F45B69;
-        padding: 6px;
         text-align: center;
         align-self: center;
-        margin-bottom: 5px;
+        margin-bottom: 1%;
         opacity: 0;
         transition: opacity ease 0.5s;
-        color: white;
-
-
+        margin-top: 2%;
+        --plain-font-size: calc(16px + (18 - 16) * ((100vw - 300px) / (1440 - 300)));
+        color: red;
     }
 
     .showError {
         opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+        .component {
+            flex-direction: column;
+        }
+        .right-block {
+            flex-direction: column;
+        }
+        
+        .social-networks {
+            margin-left: 0;
+            margin-top: 5%;
+        }
+
+        ul {
+            margin-block-start: 0.5em;
+        }
+
+        .error-label {
+            text-align: right;
+            align-self: flex-start;
+        }
+
+        form {
+            width: 95%;
+        }
     }
 </style>

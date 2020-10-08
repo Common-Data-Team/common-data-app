@@ -394,7 +394,7 @@
             margin-bottom: 5%;
         }
 
-        .project-card {
+        .сard-block {
             max-width: 90%;
             margin-bottom: 5%;
         }

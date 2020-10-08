@@ -63,6 +63,7 @@ button {
     border: none;
     color: #F9F9F9;
     padding: 8px;
+    cursor: pointer;
 }
 
 

@@ -2,7 +2,7 @@
     import {goto, url} from "@sveltech/routify";
     import {getContext} from 'svelte';
     import Input from '../_components/Input.svelte'
-    import {user, sendForm} from "../_api"
+    import {user, sendForm, selfUrl} from "../_api"
 
     let apiUrl = getContext('apiUrl');
     let form;
@@ -32,18 +32,19 @@
         if (!validateForm()) return;
         showError = false;
         let error = await sendForm(true, email.value, password.value);
-        alert(error)
         if (error) {
             errorMessage = error;
             return;
         }
-        $goto($url("../../"));
+        $goto(selfUrl, {}, false);
+
     }
+
 
 </script>
 
 <div class="component">
-    <h1>Вход:</h1>
+    <h1>ВХОД:</h1>
     <div class="right-block">
         <div class="social-networks">
             <p>Через соцсети:</p>
@@ -54,7 +55,6 @@
             </ul>
         </div>
         <form bind:this={form}>
-            <!--        <label class:showError>{errorMessage}</label>-->
             <div class="inputs-block">
                 <p class="error-label" class:showError>{errorMessage}</p>
                 <Input bind:this={email} span="E-mail" name="username" type="email"/>
@@ -90,7 +90,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        height: 100px;
+        height: 150px;
     }
 
     .right-block {

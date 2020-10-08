@@ -1,5 +1,5 @@
 <script>
-    import {user, sendForm} from "../_api.js";
+    import {user, sendForm, selfUrl} from "../_api.js";
     import {goto, url} from "@sveltech/routify";
     import {getContext} from 'svelte';
     import Input from '../_components/Input.svelte'
@@ -47,7 +47,7 @@
             errorMessage = error;
             return;
         }
-        $goto($url('../../'));
+        $goto(selfUrl, {}, false);
     }
 </script>
 

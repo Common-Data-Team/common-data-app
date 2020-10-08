@@ -1,10 +1,13 @@
 <script>
+    import {goto} from "@sveltech/routify"
     import {checkStoreAndCoockie, clearStoreAndCookie} from "./_api";
     let auth = checkStoreAndCoockie();
     function logout(){
         auth = false;
         clearStoreAndCookie();
     }
+    // $goto("./auth/signin", {}, true);
+
 </script>
 
 <main>

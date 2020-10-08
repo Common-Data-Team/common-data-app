@@ -14,6 +14,7 @@
 </div>
 <style>
     div {
-        margin-top: 150px;
+        margin-top: 3%;
+        padding-right: 10%;
     }
 </style>

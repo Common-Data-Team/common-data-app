@@ -1,6 +1,7 @@
 import {writable, get} from 'svelte/store'
 
-const apiUrl = 'http://127.0.0.1:8000/'
+export const apiUrl = 'http://127.0.0.1:8000/';
+export const selfUrl = 'http://localhost:5000/';
 export let user = writable("")
 
 

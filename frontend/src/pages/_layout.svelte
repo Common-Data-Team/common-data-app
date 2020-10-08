@@ -1,12 +1,15 @@
 <script>
     import PageTransition from './_components/PageTransition.svelte';
+    import {selfUrl} from './_api.js';
 </script>
 
 <main>
 <!--    <slot decorator={PageTransition}/>-->
-    <img src="/logo.svg" alt="Common data">
+    <a href="{selfUrl}">
+        <img src="/logo.svg" alt="Common data">
+    </a>
     <div>
-        <slot/>
+        <slot decorator={PageTransition}/>
     </div>
 </main>
 
@@ -19,8 +22,8 @@
         margin-top: 24px;
     }
     img {
-        width: 70%;
-        margin-bottom: 40px;
+        width: 600px;
+        margin-bottom: 50px;
         /*max-width;*/
     }
     div {

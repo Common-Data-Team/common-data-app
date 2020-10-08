@@ -15,6 +15,8 @@
     <div class="log-out-block">
         <h2 class="log-out-text">ПЛАТФОРМА КРАУДСОРСИНГА ДАННЫХ ДЛЯ ПРОЕКТОВ И ИССЛЕДОВАНИЙ</h2>
         <div class="description">
+            <a href="./auth/signin">Вход</a>
+            <a href="./auth/signup">Регистрация</a>
             <h2>КТО МЫ?</h2>
             <p>Common data — это сервис, в котором пользователь может безопасно делиться своими данными с исследовательскими и гражданскими проектами, ценности которых он разделяет.</p>
             <h2>ПОЧЕМУ</h2>
@@ -63,8 +65,6 @@
         <button>Наука</button>
         <button>Медицина</button>
         <button>Нейросети</button>
-        <a href="./auth/signin">Вход</a>
-        <a href="./auth/signup">Регистрация</a>
     </div>
     <div class="popular-block">
         <div class="block-title">

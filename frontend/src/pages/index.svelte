@@ -51,6 +51,8 @@
         <button>Наука</button>
         <button>Медицина</button>
         <button>Нейросети</button>
+        <a href="/">Вход</a>
+        <a href="/">Регистрация</a>
     </div>
     <div class="popular-block">
         <div class="block-title">

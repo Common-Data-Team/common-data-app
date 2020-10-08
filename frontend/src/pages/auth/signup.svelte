@@ -94,7 +94,6 @@
         width: 100%;
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
     }
 
     .checkboxes-block {
@@ -109,8 +108,12 @@
         flex-direction: column;
         justify-content: space-between;
         height: 200px;
+        --plain-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
     }
 
+    p {
+        --plain-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
+    }
     .right-block {
         display: flex;
         flex-direction: row;
@@ -119,14 +122,16 @@
 
     .social-networks {
         margin-right: 30px;
+        margin-left: 15%;
         width: 220px;
+        --plain-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
     }
 
     form {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        height: 500px;
+        height: 400px;
         width: 550px;
         margin-right: 5%;
     }
@@ -136,12 +141,20 @@
     }
 
     button {
-        padding: 15px;
-        cursor: pointer;
+        padding: 2%;
+        --plain-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
+        outline: none;
+        border-radius: 0;
+    }
+
+    button:active, button:focus, button:hover {
+        outline: none;
+        background-color: #282828;
+        border-radius: 0;
     }
 
     .registration-p, .registration-a {
-        font-size: calc(var(--plain-font-size) - 5px);
+        --plain-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
     }
     .p-wrapper {
         display: flex;
@@ -180,6 +193,33 @@
     }
     .showError{
         opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+        .component {
+            flex-direction: column;
+        }
+        .right-block {
+            flex-direction: column;
+        }
+        
+        .social-networks {
+            margin-left: 0;
+            margin-top: 5%;
+        }
+
+        ul {
+            margin-block-start: 0.5em;
+        }
+
+        .error-label {
+            text-align: right;
+            align-self: flex-start;
+        }
+
+        form {
+            width: 95%;
+        }
     }
 
 </style>

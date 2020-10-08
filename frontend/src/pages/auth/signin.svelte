@@ -111,11 +111,13 @@
         height: 220px;
         width: 550px;
         margin-right: 5%;
+        --plain-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
     }
 
     .button-block {
         display: flex;
         justify-content: flex-start;
+        --plain-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
     }
 
     button:active, button:focus, button:hover {

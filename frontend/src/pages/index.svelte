@@ -396,12 +396,37 @@
             margin-bottom: 5%;
         }
 
+        .project-card {
+            max-width: 90%;
+            margin-bottom: 5%;
+        }
+
+        .description {
+            max-width: 90%;
+        }
+
+        .description h2 {
+            margin-top: 2%;
+        }
+
+        .log-out-block {
+            flex-direction: column;
+        }
+
+        .сard-block {
+            flex-direction: column;
+        }
+
         .column-block {
             margin-left: 5%;
         }
 
         .popular-block {
             flex-direction: column;
+        }
+
+        .log-out-text {
+            max-width: 90%;
         }
     }
 

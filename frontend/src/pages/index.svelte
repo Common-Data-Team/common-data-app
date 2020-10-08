@@ -4,9 +4,17 @@
     import Project from './_components/Project.svelte';
     let data = [
         {
-            title: 'Влияние проходимого расстояния на здоровье',
+            title: 'Плитка из камня',
             tags: ['Наука', 'Медицина'],
             progress: 42,
+            author: "Камень Камень",
+            userImageSrc: "/images/user_images/user.jpg",
+            projectImageSrc: "/images/project_images/Rectangle 4.png"
+        },
+        {
+            title: 'Влияние проходимого расстояния на здоровье',
+            tags: ['Наука', 'Медицина'],
+            progress: 92,
             author: "Камень Иванович",
             userImageSrc: "/images/user_images/user.jpg",
             projectImageSrc: "/images/project_images/Rectangle 4.png"
@@ -14,15 +22,7 @@
         {
             title: 'Влияние проходимого расстояния на здоровье',
             tags: ['Наука', 'Медицина'],
-            progress: 42,
-            author: "Камень Иванович",
-            userImageSrc: "/images/user_images/user.jpg",
-            projectImageSrc: "/images/project_images/Rectangle 4.png"
-        },
-        {
-            title: 'Влияние проходимого расстояния на здоровье',
-            tags: ['Наука', 'Медицина'],
-            progress: 42,
+            progress: 80,
             author: "Камень Иванович",
             userImageSrc: "/images/user_images/user.jpg",
             projectImageSrc: "/images/project_images/Rectangle 4.png"
@@ -34,8 +34,6 @@
         auth = false;
         clearStoreAndCookie();
     }
-
-
 
 </script>
 
@@ -113,7 +111,7 @@
         </div>
         <div class="сard-block">
             {#each data as card}
-                <Project {card}/>
+                <Project {...card}/>
             {/each}
         </div>
     </div>

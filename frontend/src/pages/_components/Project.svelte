@@ -16,12 +16,9 @@
         {/each}
     </div>
     <p class="percent-title">Собрано {progress}%</p>
-    <div class="progress-bar horizontal">
-        <div class="progress-track">
-            <div class="progress-fill" style="--progress: {progress}%">
-            </div>
-        </div>
-    </div>
+
+    <div class="bar"><div class="progress" style="width: {progress}%"></div></div>
+
     <div class="user">
         <img src="{userImageSrc}" class="user-img" alt="user-img"/>
         <p>{author}</p>
@@ -30,6 +27,16 @@
 
 
 <style>
+    .bar {
+        width: 100%;
+        height: 3px;
+        background: #9B9B9B;
+    }
+    .progress {
+        background: black;
+        height: 3px;
+    }
+
     .project-title {
         --plain-font-size: calc(24px + (32 - 24) * ((100vw - 300px) / (1440 - 300)));
         padding-top: 2%;
@@ -58,22 +65,6 @@
         margin-right: 5%;
     }
 
-    .horizontal .progress-track {
-        position: relative;
-        max-width: 80%;
-        max-height: 5px;
-        border-radius: 6px;
-        background: #DADADA;
-    }
-
-    .horizontal .progress-fill {
-        position: relative;
-        background: #3d3434;
-        height: 5px;
-        border-radius: 6px;
-        max-width: var(--progress);
-        color: #fff;
-    }
 
     .project-image {
         max-width: 350px;
@@ -159,22 +150,6 @@
         margin-right: 5%;
     }
 
-    .horizontal .progress-track {
-        position: relative;
-        max-width: 80%;
-        max-height: 5px;
-        border-radius: 6px;
-        background: #DADADA;
-    }
-
-    .horizontal .progress-fill {
-        position: relative;
-        background: #3d3434;
-        height: 5px;
-        border-radius: 6px;
-        max-width: 42%;
-        color: #fff;
-    }
 
     .project-image {
         max-width: 350px;

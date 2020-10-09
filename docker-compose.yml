@@ -1,0 +1,47 @@
+version: '3'
+services:
+  frontend:
+    build: "./frontend"
+    ports:
+      - "5000:5000"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=Host(`commondata.ru`)"
+      - "traefik.http.routers.frontend.tls=true"
+      - "traefik.http.routers.frontend.tls.certresolver=letsEncrypt"
+
+  backend:
+    build: "./backend"
+    ports:
+      - "8000:8000"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.fastapi.rule=Host(`fastapi.commondata.ru`)"
+      - "traefik.http.routers.fastapi.tls=true"
+      - "traefik.http.routers.fastapi.tls.certresolver=letsEncrypt"
+
+  traefik:
+    image: traefik:v2.2
+    container_name: traefik
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./data/traefik.yml:/traefik.yml:ro
+      - ./data/acme.json:/acme.json
+
+#    labels:
+#      - "traefik.enable=true"
+#      - "traefik.http.routers.traefik.entrypoints=https"
+#      - "traefik.http.routers.traefik.rule=Host(`commondata.ru`)"
+#      - "traefik.http.routers.traefik.tls=true"
+#      - "traefik.http.routers.traefik.tls.certresolver=letsEncrypt"
+#      - "traefik.http.routers.traefik.service=api@internal"
+#      - "traefik.http.services.traefik-traefik.loadbalancer.server.port=8888"
+#      - "traefik.http.middlewares.traefik-auth.basicauth.users=admin:admin"
+#      - "traefik.http.routers.traefik.middlewares=traefik-auth"

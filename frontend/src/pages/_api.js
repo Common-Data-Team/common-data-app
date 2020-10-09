@@ -1,7 +1,7 @@
 import {writable, get} from 'svelte/store'
 
-export const apiUrl = 'http://commondata.ru/';
-export const selfUrl = 'http://localhost:5000/';
+export const apiUrl = 'http://commondata.ru:8000/';
+export const selfUrl = 'https://commondata.ru/';
 export let user = writable("")
 
 

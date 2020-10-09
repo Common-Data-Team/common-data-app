@@ -2,6 +2,7 @@
     import {goto} from "@sveltech/routify"
     import {checkStoreAndCoockie, clearStoreAndCookie} from "./_api";
     import Project from './_components/Project.svelte';
+    let current = 'user';
     let data = [
         {
             title: 'Плитка из камня',
@@ -47,53 +48,59 @@
         <div class="log-out-block">
             <h2 class="log-out-text">ПЛАТФОРМА КРАУДСОРСИНГА ДАННЫХ ДЛЯ ПРОЕКТОВ И ИССЛЕДОВАНИЙ</h2>
             <div class="description">
-                <a href="./auth/signin">Вход</a>
-                <a href="./auth/signup">Регистрация</a>
                 <h2>КТО МЫ?</h2>
                 <p>Common data — это сервис, в котором пользователь может безопасно делиться своими данными с
                     исследовательскими и гражданскими проектами, ценности которых он разделяет.</p>
-                <h2>ПОЧЕМУ</h2>
-                <div class="about-buttons">
-                    <button onclick="(document.getElementById('users-block').style.display='block'); (document.getElementById('project-block').style.display='none');">
-                        Пользователям
-                    </button>
-                    <button onclick="(document.getElementById('project-block').style.display='block'); (document.getElementById('users-block').style.display='none')">
-                        Проектам
-                    </button>
-                    <div id="users-block">
-                        <div class="point-block">
-                            <h1>01</h1>
-                            <p>Участвуйте в том, что для вас интересно и важно. Мы будем рекомендовать проекты, которые
+                <h2>ПОЧЕМУ МЫ?</h2>
+                <div class="btn-about">
+                    <button
+                    class:active="{current === 'user'}"
+                    on:click="{() => current = 'user'}"
+                >Пользователям</button>
+                <button
+                    class:active="{current === 'project'}"
+                    on:click="{() => current = 'project'}"
+                >Проектам</button>
+                </div>
+                {#if current == 'user'}
+                <div id="users-block">
+                    <div class="point-block">
+                        <h2>01</h2>
+                        <p>Участвуйте в том, что для вас интересно и важно. Мы будем рекомендовать проекты, которые
                                 могут вам понравиться.</p>
-                        </div>
-                        <div class="point-block">
-                            <h1>02</h1>
-                            <p>Вы знаете, как и для чего будут использоваться ваши данные. Мы будем сообщать, что
+                    </div>
+                    <div class="point-block">
+                        <h2>02</h2>
+                        <p>Вы знаете, как и для чего будут использоваться ваши данные. Мы будем сообщать, что
                                 происходит с вашими данными, и каких результатов достигли проекты благодаря вам. </p>
-                        </div>
-                        <div class="point-block">
-                            <h1>03</h1>
-                            <p>Вам не нужно беспокоиться об анонимности и безопасности ваших данных. Мы об этом
+                    </div>
+                    <div class="point-block">
+                        <h2>03</h2>
+                        <p>Вам не нужно беспокоиться об анонимности и безопасности ваших данных. Мы об этом
                                 позаботимся!</p>
-                        </div>
                     </div>
-                    <div id="project-block">
-                        <div class="point-block">
-                            <h1>01</h1>
-                            <p>Формируйте датасеты. Мы поможем вам составить форму для сбора данных, предоставим место
+                </div>
+                {:else}
+                <div id="users-block">
+                    <div class="point-block">
+                        <h2>01</h2>
+                        <p>Формируйте датасеты. Мы поможем вам составить форму для сбора данных, предоставим место
                                 для хранения и инструменты.</p>
-                        </div>
-                        <div class="point-block">
-                            <h1>02</h1>
-                            <p>Привлекайте людей в ваш проект. Наши алгоритмы порекомендуют ваш проект именно тем
-                                пользователям, которым он может быть интересен.</p>
-                        </div>
-                        <div class="point-block">
-                            <h1>03</h1>
-                            <p>Находите единомышленников и новые идеи. Смотрите результаты и модели исследований по
-                                вашей теме от других участников.</p>
-                        </div>
                     </div>
+                    <div class="point-block">
+                        <h2>02</h2>
+                        <p>Привлекайте людей в ваш проект. Наши алгоритмы порекомендуют ваш проект именно тем
+                                пользователям, которым он может быть интересен.</p>
+                    </div>
+                    <div class="point-block">
+                        <h2>03</h2>
+                        <p>Находите единомышленников и новые идеи. Смотрите результаты и модели исследований по
+                                вашей теме от других участников.</p>
+                    </div>
+                </div>
+                {/if}
+                <div class="about-buttons">
+                    <a href="./auth/signin"><button id="auth-buttons" onclick="./auth/signin">Регистрация</button></a>
                 </div>
             </div>
         </div>
@@ -164,6 +171,10 @@
 
 <style>
 
+    .btn-about {
+        display: flex;
+    }
+
     main {
         margin-left: 5%;
     }
@@ -174,6 +185,11 @@
         margin-left: 1%;
     }
 
+    #auth-buttons {
+        font-size: 20px;
+        max-width: 211px;
+    }
+
     #project-block {
         display: none;
     }
@@ -181,7 +197,7 @@
     .description {
         display: flex;
         flex-direction: column;
-        max-width: 40%;
+        max-width: 537px;
     }
 
     .description h2 {
@@ -195,36 +211,66 @@
 
     .log-out-block {
         display: flex;
+        margin-bottom: 2%;
     }
 
-    .about-buttons button {
+    .about-buttons {
+        display: flex;
+    }
+
+    button {
+        margin-top: 2%;
         background: transparent;
         text-align: center;
         color: #282828;
+        width: 178px;
         border: 1px solid #282828;
         border-radius: 0;
-        --plain-font-size: calc(14px + (16 - 14) * ((100vw - 300px) / (1440 - 300)));
+        --plain-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
     }
 
-    .about-buttons button:focus, .about-buttons button:active, .about-buttons button:hover {
+    button:hover {
+        outline:2px dashed#282828;
+        outline-offset:-12px;
+    }
+
+    button:focus {
+        background-color: #BDBDBD;
+        outline:2px dashed#282828;
+        outline-offset:-4px;
+        color: #282828;
+    }
+
+    .about-buttons button:focus, .about-buttons button:checked, .about-buttons button:active, .about-buttons button:hover {
         background-color: #282828;
         outline: none;
         color: #F9F9F9;
     }
 
+    
+	.active {
+        background-color: #282828;
+        outline: none;
+        color: #F9F9F9;
+	}
+
     .point-block {
         display: flex;
-        align-content: center;
+        align-items: stretch;
         margin-top: 5%;
     }
 
-    .point-block h1 {
+    .point-block p {
+        max-width: 300px;
+    }
+
+    .point-block h2 {
         padding-right: 2%;
+        font-size: calc(38px + (40 - 38) * ((100vw - 300px) / (1440 - 300)));
     }
 
     .log-out-text {
-        max-width: 20%;
-        padding-right: 10%;
+        max-width: 40%;
     }
 
     .menu-block {
@@ -302,6 +348,10 @@
         display: flex;
         align-items: center;
     }
+
+    button {
+		display: block;
+	}
 
     .user p {
         --plain-font-size: calc(14px + (16 - 14) * ((100vw - 300px) / (1440 - 300)));

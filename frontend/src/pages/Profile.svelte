@@ -66,12 +66,10 @@
     }
     /*main_block*/
     /*Привет пздц*/
-    .arrow{ 
-
+    .arrow {
         font-family: "SF Pro Display";
         font-size: 32px;
         text-align: center;
-
         color: #282828;
         transform: rotate(-180deg);
         align-self: center;

@@ -8,7 +8,9 @@
 </script>
 
 <div class="project-card">
-    <img src="{projectImageSrc}" class="project-image" alt="project-image"/>
+    <div class="img-wrapper">
+        <img size="100%, 20%" src="{projectImageSrc}" class="img" alt="project-image">
+    </div>
     <h2 class="project-title">{title}</h2>
     <div class="tags">
         {#each tags as tag}
@@ -17,7 +19,9 @@
     </div>
     <p class="percent-title">Собрано {progress}%</p>
 
-    <div class="bar"><div class="progress" style="width: {progress}%"></div></div>
+    <div class="bar">
+        <div class="progress" style="width: {progress}%"></div>
+    </div>
 
     <div class="user">
         <img src="{userImageSrc}" class="user-img" alt="user-img"/>
@@ -27,11 +31,23 @@
 
 
 <style>
+    .img {
+        max-height: 100%;
+        max-width: 100%;
+    }
+
+    .img-wrapper {
+        width: 100%;
+        height: 60%;
+        text-align: center;
+    }
+
     .bar {
         width: 100%;
         height: 3px;
         background: #9B9B9B;
     }
+
     .progress {
         background: black;
         height: 3px;
@@ -61,14 +77,8 @@
     .project-card {
         display: flex;
         flex-direction: column;
-        max-width: 20%;
-        margin-right: 5%;
-    }
-
-
-    .project-image {
-        max-width: 350px;
-        max-height: 268px;
+        width: 300px;
+        margin: 0 10px;
     }
 
     .user-img {
@@ -131,7 +141,6 @@
         padding-bottom: 2%;
     }
 
-
     h3 {
         color: #F9F9F9;
         --plain-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
@@ -141,19 +150,6 @@
     .project-title {
         --plain-font-size: calc(24px + (32 - 24) * ((100vw - 300px) / (1440 - 300)));
         padding-top: 2%;
-    }
-
-    .project-card {
-        display: flex;
-        flex-direction: column;
-        max-width: 20%;
-        margin-right: 5%;
-    }
-
-
-    .project-image {
-        max-width: 350px;
-        max-height: 268px;
     }
 
     li {

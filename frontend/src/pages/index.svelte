@@ -175,6 +175,10 @@
         display: flex;
     }
 
+    .btn-about button {
+        width: 178px;
+    }
+
     main {
         margin-left: 5%;
     }
@@ -223,7 +227,7 @@
         background: transparent;
         text-align: center;
         color: #282828;
-        width: 178px;
+        max-width: 178px;
         border: 1px solid #282828;
         border-radius: 0;
         --plain-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
@@ -285,11 +289,14 @@
     }
 
     .menu-block button {
+        box-shadow: none;
+        border: none;
         background: transparent;
         text-align: center;
         color: #282828;
         --plain-font-size: calc(14px + (16 - 14) * ((100vw - 300px) / (1440 - 300)));
         margin-right: 1%;
+        max-width: 10%;
     }
 
     .menu-block button:hover {

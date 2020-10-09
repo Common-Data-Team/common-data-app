@@ -108,12 +108,8 @@
         flex-direction: column;
         justify-content: space-between;
         height: 200px;
-        --plain-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
     }
 
-    p {
-        --plain-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
-    }
     .right-block {
         display: flex;
         flex-direction: row;

@@ -98,6 +98,7 @@
         width: 100%;
         display: flex;
         flex-direction: row;
+        margin-left: 5%;
     }
 
     .checkboxes-block {

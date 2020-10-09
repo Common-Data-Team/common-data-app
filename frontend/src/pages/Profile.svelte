@@ -60,6 +60,10 @@
         flex-direction: row;
         align-items: flex-start;
     }
+
+    main {
+        margin-left: 5%;
+    }
     /*main_block*/
     /*Привет пздц*/
     .arrow{ 

@@ -126,7 +126,6 @@
         </div>
     </div>
 </main>
-
 <footer>
     <img src="white_logo.svg" class="logo-white" alt="logo-white"/>
     <div class="column-block">
@@ -166,7 +165,6 @@
         </ul>
     </div>
 </footer>
-
 <style>
 
     .btn-about {
@@ -333,10 +331,8 @@
     footer {
         flex: 0 0 auto;
         display: flex;
-        bottom: 0;
         padding: 5% 0;
         margin-top: 5%;
-        width: 100%;
         background: #282828;
         justify-content: center;
         align-items: stretch;

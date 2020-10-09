@@ -3,8 +3,12 @@
     import {selfUrl} from './_api.js';
 </script>
 
+<svelte:head>
+    <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml">
+</svelte:head>
+
 <main>
-    <a href="{selfUrl}">
+    <a href="{selfUrl}" class="logo-class">
         <img src="/logo.svg" alt="Common data">
     </a>
     <slot decorator={PageTransition}/>

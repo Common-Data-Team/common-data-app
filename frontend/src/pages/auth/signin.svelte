@@ -42,6 +42,10 @@
 
 </script>
 
+<svelte:head>
+    <title>Вход</title>
+</svelte:head>
+
 <div class="component">
     <h2>ВХОД:</h2>
     <div class="right-block">
@@ -117,7 +121,6 @@
     .button-block {
         display: flex;
         justify-content: flex-start;
-        --plain-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
     }
 
     button:active, button:focus, button:hover {

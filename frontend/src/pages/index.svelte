@@ -37,6 +37,11 @@
 
 </script>
 
+<svelte:head>
+    <title>Common Data</title>
+    <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml">
+</svelte:head>
+
 <main>
     {#if !auth}
         <div class="log-out-block">

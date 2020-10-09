@@ -9,12 +9,12 @@
     </div>
     <div class = "profile">
         <div class="main-block">
-                <h1 class="pr">Профиль</h1>
+                <h2 class="pr">Профиль</h2>
                 <a href="/" class="edit"><br>Редактировать</a>   
         </div> 
         <div class="user_info">
             <div class="user">
-                <img src="/" class="photo" alt="user_photo"/>
+                <img src="/images/user_images/user.jpg" class="photo" alt="user_photo"/>
                 <h2 class="title"> Даня Драгун </h2>
             </div>
             <div class="self">
@@ -32,10 +32,12 @@
             <div clsaa="exexperience">
                 <h2 class="title">Участие в проектах:</h2>
                 <div class="exexperience-tags">
-                    <a href="/" class="ex-tag">Карта ночного неба</a>
-                    <p><a href="/" class="ex-tag"><br>Влияние проходимого расстояния на здоровье</a></p>
-                    <p><a href="/" class="ex-tag"><br>Облысение. Исследование</a></p>
-                    <p><a href="/" class="ex-tag"><br>Длительность жизни обуви</a></p>
+                    <li>
+                        <ul><a href="/" class="ex-tag">Карта ночного неба</a></ul>
+                        <ul><a href="/" class="ex-tag"><br>Влияние проходимого расстояния на здоровье</a></ul>
+                        <ul><a href="/" class="ex-tag"><br>Облысение. Исследование</a></ul>
+                        <ul><a href="/" class="ex-tag"><br>Длительность жизни обуви</a></ul>
+                    </li>
                 </div>
             </div>
         </div>
@@ -56,35 +58,22 @@
     .return {
         display: flex;
         flex-direction: row;
-        align-items:flex-start;
+        align-items: flex-start;
     }
     /*main_block*/
     /*Привет пздц*/
-    .arrow {
-        order: 1;
-        width: 37px;
-        height: 38px;
-        left: 37px;
-        top: 38px;
+    .arrow{ 
 
-        font-family: SF Pro Display;
-        font-style: normal;
-        font-weight: 300;
+        font-family: "SF Pro Display";
         font-size: 32px;
-        line-height: 38px;
         text-align: center;
 
-        color: #000000;
-
+        color: #282828;
         transform: rotate(-180deg);
-
-        /* Inside Auto Layout */
-        flex: none;
-        order: 0;
         align-self: center;
-        flex-grow: 0;
-        margin: 16px 0px;
+        margin-right: 2%;
     }
+
     .chaif {
         position: static;
         width: 77px;
@@ -93,10 +82,10 @@
         top: 7px;
 
         /* just text */
-        font-family: Helvetica Neue;
+        font-family: "Helvetica Norm";
         font-style: normal;
         font-weight: normal;
-        font-size: 20px;
+        --plain-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
         line-height: 24px;
         /* identical to box height */
         display: flex;
@@ -110,10 +99,9 @@
         margin: 16px 0px;
     }
     .edit {
-        position: absolute;
         font-style: normal;
         font-weight: normal;
-        font-size: 16px;
+        --plain-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
         line-height: 19px;
         text-decoration-line: underline;
     }
@@ -122,8 +110,9 @@
         display: flex;
         flex-direction: column;
         margin-right: 15% ;
-        margin-left: 25%;
+        margin-left: 15%;
     }
+
     .user {
         margin-bottom: 10%;
     }
@@ -143,8 +132,6 @@
         color: #F9F9F9;
         text-decoration: none;
         text-align: center;
-  
-
     }
     .tag-href {
         background-color: #282828;
@@ -154,15 +141,34 @@
         margin-right: 2%;
         margin-left: 0%;
         color: #F9F9F9;
-        font-size: 120%
     }
     .exexperience-tags {
-        margin-top: 3%;
+        margin-top: 2%;
     }
     .ex-tag {
         text-decoration: none;
-        font-size: 20px;
-        line-height: 24px;
+        --plain-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
+    }
+
+    .photo {
+        width: 128px;
+        height: 128px;
+        border-radius: 50%;
+        margin-bottom: 5%;
+    }
+
+    li {
+        list-style-type: none;
+        margin-bottom: 30%;
+    }
+
+    ul {
+        padding: 0;
+        margin-block-start: 0em;
+        margin-block-end: 0em;
+        padding: 0;
+        margin: 0;
+        padding-inline-start: 0px;
     }
 
     /*
@@ -178,5 +184,18 @@
         color: #545454;
     }
     */
+
+    @media (max-width: 768px) {
+        .profile {
+            flex-direction: column;
+        }
+
+        .user_info {
+            margin-right: 0%;
+            margin-left: 0%;
+            max-width: 90%;
+            margin-top: 5%;
+        }
+    }
 
 </style>

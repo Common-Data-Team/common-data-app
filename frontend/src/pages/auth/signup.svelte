@@ -51,6 +51,10 @@
     }
 </script>
 
+<svelte:head>
+    <title>Регистрация</title>
+</svelte:head>
+
 <div class="component">
     <h2>РЕГИСТРАЦИЯ:</h2>
     <div class="right-block">

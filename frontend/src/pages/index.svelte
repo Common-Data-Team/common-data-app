@@ -99,9 +99,7 @@
                     </div>
                 </div>
                 {/if}
-                <div class="about-buttons">
-                    <a href="./auth/signin"><button id="auth-buttons" onclick="./auth/signin">Регистрация</button></a>
-                </div>
+                <a href="./auth/signin"><button class="auth-buttons" onclick="./auth/signin">Регистрация</button></a>
             </div>
         </div>
     {/if}
@@ -189,9 +187,13 @@
         margin-left: 1%;
     }
 
-    #auth-buttons {
+    .auth-buttons {
+        width: 211px;
+        height: 43px;
         font-size: 20px;
-        max-width: 211px;
+        background-color: #282828;
+        color: #f9f9f9;
+        text-align: center;
     }
 
     #project-block {
@@ -234,14 +236,14 @@
     }
 
     button:hover {
-        box-shadow: inset 0px 0px 0px 3px #282828;
+        box-shadow: inset 0px 0px 0px 2px #282828;
         border-radius: 0;
         outline: none;
     }
 
     button:active {
         background-color: #E8E8E8;
-        box-shadow: inset 0px 0px 0px 2px  #282828;
+        box-shadow: inset 0px 0px 0px 1px  #282828;
         border-radius: 0;
         color: #282828;
         outline: none;
@@ -497,6 +499,10 @@
 
         .log-out-text {
             max-width: 90%;
+        }
+
+        .menu-block {
+            display: none;
         }
     }
 

@@ -76,7 +76,7 @@
 <style>
     .component {
         height: 50%;
-        width: 100%;
+        width: 90%;
         display: flex;
         flex-direction: row;
         margin-left: 5%;

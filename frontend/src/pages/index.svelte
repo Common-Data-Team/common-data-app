@@ -230,15 +230,21 @@
     }
 
     button:hover {
-        outline:2px dashed#282828;
-        outline-offset:-12px;
+        box-shadow: inset 0px 0px 0px 3px #282828;
+        border-radius: 0;
+        outline: none;
+    }
+
+    button:active {
+        background-color: #E8E8E8;
+        box-shadow: inset 0px 0px 0px 2px  #282828;
+        border-radius: 0;
+        color: #282828;
+        outline: none;
     }
 
     button:focus {
-        background-color: #BDBDBD;
-        outline:2px dashed#282828;
-        outline-offset:-4px;
-        color: #282828;
+        outline: none;
     }
 
     .about-buttons button:focus, .about-buttons button:checked, .about-buttons button:active, .about-buttons button:hover {

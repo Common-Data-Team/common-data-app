@@ -15,16 +15,19 @@
 </main>
 
 <style>
+
     main {
         max-width: 1440px;
         position: absolute;
-        width: 95%;
+        width: 100%;
         height: 95%;
         margin-top: 24px;
     }
+
     img {
         max-width: 600px;
         margin-bottom: 3%;
+        margin-left: 5%;
     }
 
     @media (max-width: 768px) {

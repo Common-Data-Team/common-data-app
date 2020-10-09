@@ -164,6 +164,10 @@
 
 <style>
 
+    main {
+        margin-left: 5%;
+    }
+
     .arrow {
         font-family: "SF Pro Display";
         text-align: center;

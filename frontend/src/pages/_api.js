@@ -1,6 +1,6 @@
 import {writable, get} from 'svelte/store'
 
-export const apiUrl = 'https://backend.commondata.ru/';
+export const apiUrl = 'https://commondata.ru:8000/';
 export const selfUrl = 'https://commondata.ru/';
 export let user = writable("")
 
@@ -24,7 +24,6 @@ export async function sendForm(login, username, password) {
     let {access_token, token_type} = json_response;
     user.set(access_token);
     setCookie('access_token', access_token, {samesite: 'lax'});
-
 }
 
 function setCookie(name, value, options = {}) {

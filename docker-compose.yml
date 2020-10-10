@@ -35,7 +35,8 @@ services:
       - ./data/traefik.yml:/traefik.yml:ro
       - ./data/acme.json:/acme.json
 
-#    labels:
+    labels:
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
 #      - "traefik.enable=true"
 #      - "traefik.http.routers.traefik.entrypoints=https"
 #      - "traefik.http.routers.traefik.rule=Host(`commondata.ru`)"

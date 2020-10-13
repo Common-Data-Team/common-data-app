@@ -99,21 +99,21 @@
                     </div>
                 </div>
                 {/if}
-                <a href="./auth/signin"><button class="auth-buttons" onclick="./auth/signin">Регистрация</button></a>
+                <a href="./auth/signup"><button class="auth-buttons" onclick="./auth/signin">Регистрация</button></a>
             </div>
         </div>
     {/if}
     {#if auth}
-        <button on:click={logout}>Выйти</button>
+        <div class="menu-block">
+            <button>Все</button>
+            <button>Бытовое</button>
+            <button>Социальное</button>
+            <button>Наука</button>
+            <button>Медицина</button>
+            <button>Нейросети</button>
+            <button on:click={logout}>Выйти</button>
+        </div>
     {/if}
-    <div class="menu-block">
-        <button>Все</button>
-        <button>Бытовое</button>
-        <button>Социальное</button>
-        <button>Наука</button>
-        <button>Медицина</button>
-        <button>Нейросети</button>
-    </div>
     <div class="popular-block">
         <div class="block-title">
             <h2>ПОПУЛЯРНОЕ СЕЙЧАС</h2>

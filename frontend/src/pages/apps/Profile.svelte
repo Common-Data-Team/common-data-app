@@ -83,7 +83,17 @@
                         <option>Наука</option>
                         <option>Бытовое</option>
                     </select>
-                    <button on:click={() => add({selected})}></button>
+                    <input type="image" src="/images/button_images/add_btn.svg" class="btn" alt="Кнопка «input»" on:click={() => add({selected})}>
+                    <div class="dropdown">
+                      <button class="btn" style="border-left:1px solid navy">
+                        <i class="fa fa-caret-down"></i>
+                      </button>
+                      <div class="dropdown-content">
+                        <button on:click={() => add("Медицина")}>Медицина</button>
+                        <button on:click={() => add("Наука")}>Наука</button>
+                      </div>
+                    </div>
+                    <input type="image" src="/images/button_images/add_btn.svg" class="btn" alt="Кнопка «input»" on:click={() => add({selected})}>
                 </div>
             </div>
             <div clsaa="exexperience">
@@ -98,12 +108,6 @@
                 </div>
             </div>
         </div>
-        <!--
-        <div class="sections">
-            <a href="/" class="sec-teg"><p>Информация</p></a>
-            <a href="/" class="sec-teg"><p>Достижения</p></a>
-        </div>
-        -->
     </div>
 </main>
 <style>
@@ -123,8 +127,7 @@
     main {
         margin-left: 5%;
     }
-    /*main_block*/
-    /*Привет пздц*/
+
     .arrow{ 
 
         font-family: "SF Pro Display";
@@ -143,17 +146,12 @@
         height: 24px;
         left: 53px;
         top: 7px;
-
-        /* just text */
         font-family: "Helvetica Norm";
         font-style: normal;
         font-weight: normal;
         line-height: 24px;
-        /* identical to box height */
         display: flex;
         align-items: center;
-
-        /* Inside Auto Layout */
         flex: none;
         order: 1;
         align-self: center;
@@ -167,7 +165,7 @@
         margin-top: 2%;
         text-decoration-line: underline;
     }
-    /*user-info*/
+
     .user_info {
         display: flex;
         flex-direction: column;
@@ -190,6 +188,7 @@
         margin-top: 3%;
         max-width: 10%;
     }  
+
     .close {
         margin-left: 4px;
         color: #F9F9F9;
@@ -206,6 +205,13 @@
 
     .remove-btn:focus {
         outline: none;
+    }
+
+    .add-btn {
+        background-image: url("/images/button_images/add_btn.svg");
+        background-color: transparent;
+        width: 19px;
+        height: 19px;
     }
 
     .tag-href {
@@ -241,7 +247,50 @@
         list-style-type: none;
         margin-bottom: 30%;
     }
+    .btn {
+    background-color: #2196F3;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+}
 
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: absolute;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.btn:hover, .dropdown:hover .btn  {
+    background-color: #0b7dda;
+}
     ul {
         padding: 0;
         margin-block-start: 0em;
@@ -251,21 +300,11 @@
         padding-inline-start: 0px;
     }
 
-    /*
-    .sections {
-        display:flex;
-        flex-direction: column;
-    }
-    .sec-teg {
-        margin-top: 5%;
-        text-decoration: none;
-        font-size: 16px;
-        line-height: 19px;
-        color: #545454;
-    }
-    */
-
     @media (max-width: 768px) {
+
+        main {
+            width: 95%;
+        }
         .profile {
             flex-direction: column;
         }

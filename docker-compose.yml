@@ -2,23 +2,29 @@ version: '3'
 services:
   frontend:
     build: "./frontend"
+    container_name: "front"
     ports:
       - "5000:5000"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=Host(`commondata.ru`)"
-      - "traefik.http.routers.frontend.tls=true"
-      - "traefik.http.routers.frontend.tls.certresolver=letsEncrypt"
+      - "traefik.http.routers.front.entrypoints=https"
+      - "traefik.http.routers.front.rule=Host(`commondata.ru`)"
+      - "traefik.http.routers.front.tls=true"
+      - "traefik.http.routers.front.tls.certresolver=letsEncrypt"
+      - "traefik.http.middlewares.redirect-to-https.redirectScheme.scheme=https"
 
   backend:
     build: "./backend"
+    container_name: "back"
     ports:
       - "8000:8000"
     labels:
       - "traefik.enable=true"
+      - "traefik.http.routers.backend.entrypoints=https"
       - "traefik.http.routers.backend.rule=Host(`backend.commondata.ru`)"
       - "traefik.http.routers.backend.tls=true"
       - "traefik.http.routers.backend.tls.certresolver=letsEncrypt"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
 
   traefik:
     image: traefik:v2.2
@@ -37,12 +43,18 @@ services:
 
     labels:
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
-#      - "traefik.enable=true"
-#      - "traefik.http.routers.traefik.entrypoints=https"
-#      - "traefik.http.routers.traefik.rule=Host(`commondata.ru`)"
-#      - "traefik.http.routers.traefik.tls=true"
-#      - "traefik.http.routers.traefik.tls.certresolver=letsEncrypt"
-#      - "traefik.http.routers.traefik.service=api@internal"
-#      - "traefik.http.services.traefik-traefik.loadbalancer.server.port=8888"
-#      - "traefik.http.middlewares.traefik-auth.basicauth.users=admin:admin"
-#      - "traefik.http.routers.traefik.middlewares=traefik-auth"
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.entrypoints=https"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.commondata.ru`)"
+      - "traefik.http.routers.traefik.tls=true"
+      - "traefik.http.routers.traefik.tls.certresolver=letsEncrypt"
+      - "traefik.http.routers.traefik.service=api@internal"
+      - "traefik.http.services.traefik-traefik.loadbalancer.server.port=8001"
+      - "traefik.http.middlewares.traefik-auth.basicauth.users=admin:$$apr1$$OHsymSWA$$FcWFxYK.9iH8Ny/FlJ8pv1"
+      - "traefik.http.routers.traefik.middlewares=traefik-auth"
+
+      - "traefik.http.middlewares.https_redirect.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.https_redirect.redirectscheme.permanent=true"
+      - "traefik.http.routers.http_catchall.rule=HostRegexp(`{any:.+}`)"
+      - "traefik.http.routers.http_catchall.entrypoints=http"
+      - "traefik.http.routers.http_catchall.middlewares=https_redirect"

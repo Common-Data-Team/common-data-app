@@ -9,7 +9,7 @@
 
 <div class="project-card">
     <div class="img-wrapper">
-        <img size="100%, 20%" src="{projectImageSrc}" class="img" alt="project-image">
+        <img size="100%, 20%" src="{projectImageSrc}" class="img" alt="Картинка проекта">
     </div>
     <h2 class="project-title">{title}</h2>
     <div class="tags">
@@ -24,7 +24,7 @@
     </div>
 
     <div class="user">
-        <img src="{userImageSrc}" class="user-img" alt="user-img"/>
+        <img src="{userImageSrc}" class="user-img" alt="Аватарка"/>
         <p>{author}</p>
     </div>
 </div>

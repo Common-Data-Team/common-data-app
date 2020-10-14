@@ -15,7 +15,7 @@ providers:
 http:
   routers:
     http-catchall:
-      rule: hostregexp(`{host:.+}`)
+      rule: HostRegexp(`{host:.+}`)
       entrypoints:
       - http
       middlewares:
@@ -24,13 +24,13 @@ http:
     redirect-to-https:
       redirectScheme:
         scheme: https
-        permanent: false
+        permanent: true
 
 certificatesResolvers:
   letsEncrypt:
     acme:
-      email: example@example.com
+      email: dmitriy1d01@gmail.com
       storage: acme.json
-      caServer: "https://acme-staging-v02.api.letsencrypt.org/directory"
+#      caServer: "https://acme-staging-v02.api.letsencrypt.org/directory"
       httpChallenge:
         entryPoint: http

@@ -1,5 +1,5 @@
 <script>
-    export let checked = false;
+    let checked = false;
     export let text = "";
     export let id = 0;
 </script>

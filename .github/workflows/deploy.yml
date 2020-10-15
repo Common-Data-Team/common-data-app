@@ -21,7 +21,9 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          script: git clone https://github.com/tpofd/common-data-app/ temp &&
+          script:
+                  rm -rf ./temp &&
+                  git clone https://github.com/tpofd/common-data-app/ temp &&
                   mv ./temp/backend ./backend &&
                   mv ./temp/frontend ./frontend &&
                   mv ./temp/data/ ./data &&

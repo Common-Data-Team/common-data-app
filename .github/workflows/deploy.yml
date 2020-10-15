@@ -22,9 +22,9 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script:
-                  rm -rf ./temp &&
-                  git clone https://github.com/tpofd/common-data-app/ ./temp &&
-                  rsync -a ./temp ./app &&
-                  rm -rf ./temp &&
-                  cd .app/ &&
+                  rm -rf temp &&
+                  git clone https://github.com/tpofd/common-data-app/ temp &&
+                  rsync -a temp app &&
+                  rm -rf temp &&
+                  cd app &&
                   docker-compose up --build -d

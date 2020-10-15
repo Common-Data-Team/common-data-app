@@ -15,7 +15,7 @@ for _dir in ['db']:
 app = FastAPI(
     version='0.0.1',
     title='Data App',
-    description='API for the Common Data app',
+    description='API for the Common Data app based on FastAPI',
 )
 
 register_tortoise(

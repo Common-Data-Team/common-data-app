@@ -3,6 +3,4 @@ ADD requirements.txt ./temp/requirements.txt
 RUN pip3 install -r ./temp/requirements.txt
 ADD ./ backend/
 WORKDIR backend/
-#EXPOSE 80
-#ENTRYPOINT ["uvicorn", "app:app", "--port", "80", "--host", "0.0.0.0"]
 ENTRYPOINT ["gunicorn", "app:app", "--bind", "0.0.0.0:8000", "-k uvicorn.workers.UvicornWorker"]

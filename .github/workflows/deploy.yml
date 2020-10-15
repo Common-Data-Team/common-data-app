@@ -27,4 +27,4 @@ jobs:
                   mv ./temp/data/ ./data &&
                   mv ./temp/docker-compose.yml ./docker-compose.yml &&
                   rm -rf ./temp &&
-                  docker-compose up --build
+                  docker-compose up --build -d

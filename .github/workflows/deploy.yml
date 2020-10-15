@@ -14,11 +14,11 @@ jobs:
       - name: test actions
         uses: actions/checkout@v1
 
-      - name: Publish to Github Packages Registry
+      - name: Connect via SSH
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          script: whoami
+          script: ls && docker-compose up --build

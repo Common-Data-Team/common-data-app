@@ -23,7 +23,7 @@ jobs:
           port: ${{ secrets.PORT }}
           script:
                   rm -rf ./temp &&
-                  git clone https://github.com/tpofd/common-data-app/ temp &&
+                  git clone https://github.com/tpofd/common-data-app/ ./temp &&
                   mv ./temp/backend ./backend &&
                   mv ./temp/frontend ./frontend &&
                   mv ./temp/data/ ./data &&

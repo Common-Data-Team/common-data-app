@@ -11,7 +11,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: test actions
+      - name: Actions checkout
         uses: actions/checkout@v1
 
       - name: Connect via SSH
@@ -21,4 +21,10 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          script: ls && docker-compose up --build
+          script: git clone https://github.com/tpofd/common-data-app/ temp &&
+                  mv ./temp/backend ./backend &&
+                  mv ./temp/frontend ./frontend &&
+                  mv ./temp/data/ ./data &&
+                  mv ./temp/docker-compose.yml ./docker-compose.yml &&
+                  rm -rf ./temp &&
+                  docker-compose up --build

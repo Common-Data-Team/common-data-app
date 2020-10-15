@@ -2,7 +2,6 @@ version: '3'
 services:
   frontend:
     build: "./frontend"
-    container_name: "front"
     ports:
       - "5000:5000"
     labels:
@@ -15,7 +14,6 @@ services:
 
   backend:
     build: "./backend"
-    container_name: "back"
     ports:
       - "8000:8000"
     labels:
@@ -28,7 +26,6 @@ services:
 
   traefik:
     image: traefik:v2.2
-    container_name: traefik
     restart: unless-stopped
     security_opt:
       - no-new-privileges:true

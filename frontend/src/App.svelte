@@ -3,6 +3,10 @@
     import {routes} from "../.routify/routes";
 </script>
 
+<svelte:head>
+    <link rel="shortcut icon" href="/flavicon.svg" type="image/svg+xml">
+</svelte:head>
+
 <style global>
     @import "../static/global.css";
     #routify-app{

@@ -13,6 +13,7 @@
     };
     let apiUrl = getContext('apiUrl');
     let form;
+    let name;
     let email;
     let password;
     let password2;
@@ -67,15 +68,9 @@
             </ul>
         </div>
         <form bind:this={form}>
-            <div>
-                <p class="label">Я хочу...</p>
-                <div class="checkboxes-block">
-                    <Checkbox id=0 text="Делиться данными"/>
-                    <Checkbox id=1 text="Получать данные"/>
-                </div>
-            </div>
             <div class="inputs-block">
                 <p class="error-label" class:showError>{errorMessage}</p>
+                <Input bind:this={name} span="Имя и фамилия" name="name" type="text"/>
                 <Input bind:this={email} span="E-mail" name="username" type="email"/>
                 <Input bind:this={password} span="Пароль" name="password" type="password"/>
                 <Input bind:this={password2} span="Подтверждение пароля" name="password" type="password"/>

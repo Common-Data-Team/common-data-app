@@ -39,7 +39,7 @@
 </script>
 
 <svelte:head>
-    <title>Common Data</title>W
+    <title>Common Data</title>
 </svelte:head>
 
 <main>
@@ -103,14 +103,19 @@
         </div>
     {/if}
     {#if auth}
-        <div class="menu-block">
-            <button>Все</button>
-            <button>Бытовое</button>
-            <button>Социальное</button>
-            <button>Наука</button>
-            <button>Медицина</button>
-            <button>Нейросети</button>
-            <button on:click={logout}>Выйти</button>
+        <div class="auth-menu">
+            <div class="menu-block">
+                <button>Все</button>
+                <button>Бытовое</button>
+                <button>Социальное</button>
+                <button>Наука</button>
+                <button>Медицина</button>
+                <button>Нейросети</button>
+            </div>
+            <img src="/images/user_images/user.jpg" class="user-image-menu"/>
+            <div class="user-buttons-menu">
+                <button on:click={logout}>Выйти</button>
+            </div>
         </div>
     {/if}
     <div class="popular-block">
@@ -125,45 +130,7 @@
         </div>
     </div>
 </main>
-<footer>
-    <img src="white_logo.svg" class="logo-white" alt="logo-white"/>
-    <div class="column-block">
-        <h3>О НАС</h3>
-        <ul>
-            <a href="vk.com">
-                <li>проектам</li>
-            </a>
-            <a href="vk.com">
-                <li>пользователям</li>
-            </a>
-        </ul>
-    </div>
-    <div class="column-block">
-        <h3>СВЯЗАТЬСЯ С НАМИ</h3>
-        <ul>
-            <a href="vk.com">
-                <li>help@commondata.ru</li>
-            </a>
-            <a href="vk.com">
-                <li>+7 (901) 723-04-47</li>
-            </a>
-        </ul>
-    </div>
-    <div class="column-block">
-        <h3>СОЦСЕТИ</h3>
-        <ul>
-            <a href="https://vk.com">
-                <li>facebook</li>
-            </a>
-            <a href="vk.com">
-                <li>telegram</li>
-            </a>
-            <a href="vk.com">
-                <li>vkontakte</li>
-            </a>
-        </ul>
-    </div>
-</footer>
+
 <style>
 
     .btn-about {
@@ -193,10 +160,6 @@
         text-align: center;
     }
 
-    #project-block {
-        display: none;
-    }
-
     .description {
         display: flex;
         flex-direction: column;
@@ -215,10 +178,6 @@
     .log-out-block {
         display: flex;
         margin-bottom: 2%;
-    }
-
-    .about-buttons {
-        display: flex;
     }
 
     button {
@@ -249,14 +208,7 @@
     button:focus {
         outline: none;
     }
-
-    .about-buttons button:focus, .about-buttons button:checked, .about-buttons button:active, .about-buttons button:hover {
-        background-color: #282828;
-        outline: none;
-        color: #F9F9F9;
-    }
-
-    
+  
 	.active {
         background-color: #282828;
         outline: none;
@@ -284,7 +236,7 @@
 
     .menu-block {
         display: flex;
-        margin-bottom: 3%;
+        width: 70%;
     }
 
     .menu-block button {
@@ -304,13 +256,6 @@
         border-radius: 0;
     }
 
-    .logo {
-        max-width: 890px;
-        max-height: 119px;
-        margin-bottom: 3%;
-        margin-top: 3%;
-    }
-
     .popular-block {
         flex-direction: column;
         display: flex;
@@ -327,21 +272,6 @@
         padding-bottom: 1%;
     }
 
-    footer {
-        flex: 0 0 auto;
-        display: flex;
-        padding: 5% 0;
-        margin-top: 5%;
-        background: #282828;
-        justify-content: center;
-        align-items: stretch;
-    }
-
-    .logo-white {
-        max-width: 285px;
-        margin-right: 15%;
-    }
-
     a {
         color: #BDBDBD;
         font-family: "Helvetica Norm";
@@ -349,119 +279,30 @@
         text-decoration: none;
     }
 
-    .tags {
-        display: flex;
-    }
-
-    .user {
-        margin-top: 5%;
-        display: flex;
-        align-items: center;
-    }
-
     button {
 		display: block;
-	}
-
-    .user p {
-        --plain-font-size: calc(14px + (16 - 14) * ((100vw - 300px) / (1440 - 300)));
-        text-align: center;
-        margin-left: 2%;
     }
-
-    .user-img {
+    
+    .user-image-menu {
         width: 36px;
         height: 36px;
         border-radius: 50%;
     }
 
-    .tag-href {
-        background-color: #282828;
-        border-radius: 18px;
-        text-align: center;
-        padding: 0.6em 0.6em;
-        margin: 5%;
-        margin-right: 2%;
-        margin-left: 0%;
-        color: #F9F9F9;
-    }
-
-    .tag-href:hover {
-        background-color: #1355FF;
-        color: #F9F9F9;
+    .user-buttons-menu {
+        display: none;
     }
 
     a:hover {
         color: #1355FF;
     }
 
-    .percent-title {
-        --plain-font-size: calc(12px + (14 - 12) * ((100vw - 300px) / (1440 - 300)));
-        padding-bottom: 2%;
-    }
-
-    .column-block {
-        margin-right: 10%;
-    }
-
-    h3 {
-        color: #F9F9F9;
-        --plain-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
-        font-family: "Helvetica Neue";
-    }
-
-    .project-title {
-        --plain-font-size: calc(24px + (32 - 24) * ((100vw - 300px) / (1440 - 300)));
-        padding-top: 2%;
-    }
-
-    .project-card {
+    .auth-menu {
         display: flex;
-        flex-direction: column;
-        max-width: 20%;
-        margin-right: 5%;
-    }
-
-    .horizontal .progress-track {
-        position: relative;
-        max-width: 80%;
-        max-height: 5px;
-        border-radius: 6px;
-        background: #DADADA;
-    }
-
-    .horizontal .progress-fill {
-        position: relative;
-        background: #3d3434;
-        height: 5px;
-        border-radius: 6px;
-        max-width: 42%;
-        color: #fff;
-    }
-
-    .project-image {
-        max-width: 350px;
-        max-height: 268px;
-    }
-
-    li {
-        list-style-type: none;
-    }
-
-    ul {
-        padding: 0;
+        align-items: center;
     }
 
     @media (max-width: 768px) {
-        footer {
-            flex-direction: column;
-        }
-
-        .logo-white {
-            max-width: 200px;
-            margin-left: 5%;
-            margin-bottom: 5%;
-        }
 
         .сard-block {
             max-width: 90%;
@@ -477,10 +318,6 @@
         }
 
         .log-out-block {
-            flex-direction: column;
-        }
-
-        .сard-block {
             flex-direction: column;
         }
 

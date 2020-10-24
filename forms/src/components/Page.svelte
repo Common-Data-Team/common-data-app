@@ -6,7 +6,8 @@
     import ShortText from './ShortText.svelte';
     import Statement from './Statement.svelte';
     import {fade} from 'svelte/transition';
-    export let answers = [{type: "ShortText"}];
+
+    export let questions = [{type: "ShortText"}];
 
     let components = {
         FileUpload: FileUpload,
@@ -16,13 +17,12 @@
         ShortText: ShortText,
         Statement: Statement
     };
-    // alert(JSON.stringify(components));
 
 </script>
 
 <div class="component" transition:fade>
-    {#each answers as answer}
-        <svelte:component this={components[answer.type]}/>
+    {#each questions as question}
+        <svelte:component this={components[question.type]}/>
     {/each}
 </div>
 

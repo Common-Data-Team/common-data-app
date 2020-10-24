@@ -5,11 +5,10 @@
     import Picture from './Picture.svelte';
     import ShortText from './ShortText.svelte';
     import Statement from './Statement.svelte';
-    import {fade} from 'svelte/transition';
-import OneChoice from './OneChoice.svelte';
+    import OneChoice from './OneChoice.svelte';
 
     import {CurrentPage} from '../stores';
-    export let questions = [];
+    export let questions = [{type: "OneChoice"}];
 
     let components = {
         FileUpload: FileUpload,
@@ -22,15 +21,13 @@ import OneChoice from './OneChoice.svelte';
 
 </script>
 
-<div class="component" transition:fade>
+<div class="component">
     {#each questions as question}
         <svelte:component this={components[question.type]}/>
     {/each}
     <button on:click={() => CurrentPage.update(val => val + 1)}>+</button>
 	<button on:click={() => CurrentPage.update(val => val - 1)}>-</button>
 </div>
-
-<OneChoice></OneChoice>
 
 <style>
 

@@ -6,6 +6,7 @@
     import ShortText from './ShortText.svelte';
     import Statement from './Statement.svelte';
     import {fade} from 'svelte/transition';
+import OneChoice from './OneChoice.svelte';
 
     export let questions = [{type: "ShortText"}];
 
@@ -25,6 +26,8 @@
         <svelte:component this={components[question.type]}/>
     {/each}
 </div>
+
+<OneChoice></OneChoice>
 
 <style>
 

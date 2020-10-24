@@ -7,7 +7,8 @@
     import Statement from './Statement.svelte';
     import {fade} from 'svelte/transition';
 
-    export let questions = [{type: "ShortText"}];
+    import {CurrentPage} from '../stores';
+    export let questions = [];
 
     let components = {
         FileUpload: FileUpload,
@@ -24,6 +25,8 @@
     {#each questions as question}
         <svelte:component this={components[question.type]}/>
     {/each}
+    <button on:click={() => CurrentPage.update(val => val + 1)}>+</button>
+	<button on:click={() => CurrentPage.update(val => val - 1)}>-</button>
 </div>
 
 <style>

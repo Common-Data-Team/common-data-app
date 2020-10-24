@@ -6,6 +6,7 @@
     import ShortText from './ShortText.svelte';
     import Statement from './Statement.svelte';
     import {fade} from 'svelte/transition';
+import OneChoice from './OneChoice.svelte';
 
     import {CurrentPage} from '../stores';
     export let questions = [];
@@ -28,6 +29,8 @@
     <button on:click={() => CurrentPage.update(val => val + 1)}>+</button>
 	<button on:click={() => CurrentPage.update(val => val - 1)}>-</button>
 </div>
+
+<OneChoice></OneChoice>
 
 <style>
 

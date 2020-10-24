@@ -1,5 +1,5 @@
 <script>
-    let name = 'input name';
+    export let name = 'input name';
 </script>
 
 <h1>{name}</h1>

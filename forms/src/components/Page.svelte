@@ -6,9 +6,10 @@
     import ShortText from './ShortText.svelte';
     import Statement from './Statement.svelte';
     import OneChoice from './OneChoice.svelte';
-
     import {CurrentPage} from '../stores';
-    export let questions = [{type: "OneChoice"}];
+
+    export let questions;
+    questions = questions || [{type: "OneChoice"}];
 
     let components = {
         FileUpload: FileUpload,
@@ -16,7 +17,8 @@
         MultipleChoice: MultipleChoice,
         Picture: Picture,
         ShortText: ShortText,
-        Statement: Statement
+        Statement: Statement,
+        OneChoice: OneChoice
     };
 
 </script>

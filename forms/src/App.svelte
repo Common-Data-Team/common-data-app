@@ -3,8 +3,10 @@
 	import {fade} from 'svelte/transition';
 	import {CurrentPage} from './stores';
 	let pages = [
+			undefined,
 			[{type: "ShortText"}, {type: "ShortText"}],
 			[{type: "MultipleChoice"}, {type: "MultipleChoice"}],
+			[{type: "OneChoice"}, {type: "OneChoice"}],
 	];
 </script>
 
@@ -13,7 +15,7 @@
 	<div class="animation-box">
 		{#each pages as page}
 			{#if $CurrentPage === pages.indexOf(page)}
-				<div class="page-wrapper">
+				<div class="page-wrapper" transition:fade>
 					<Page questions={page}/>
 				</div>
 			{/if}

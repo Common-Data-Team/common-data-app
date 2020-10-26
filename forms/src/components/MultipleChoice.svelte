@@ -3,92 +3,55 @@
     export let options = ['1', '2', '3', '4'];
 </script>
 
-<h1>{name}</h1>
+<h2>{name}</h2>
 {#each options as option}
-    <input type="checkbox" value={option}>{option}
+<label class="wrapper-login01">
+    <input type=checkbox class="checkbox-login01" value={option}>
+    <span class="style-login01"></span>
+    <span class="text-login01">{option}</span>
+</label>
 {/each}
 
-<div class="component">
-    <input id="checkbox-{id}" type="checkbox" class="check">
-    <label class="box" for="checkbox-{id}"></label>
-    <label class="label" for="checkbox-{id}">{@html text}</label>
-</div>
-
-
 <style>
-    .check:not(:checked),
-    .check:checked {
+    
+   .checkbox-login01 {
         display: none;
     }
-
-    .box {
-        width: 25px;
-        height: 25px;
-        /*margin: 0 20px;*/
-    }
-
-    .check:not(:checked) + .box,
-    .check:checked + .box {
-        position: relative;
-        /*margin: 0 20px;*/
-        cursor: pointer;
-    }
-
-    /* checkbox aspect */
-    .check:not(:checked) + .box:before,
-    .check:checked + .box:before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 20px;
-        height: 20px;
-        border: 2px solid black;
-        background: transparent;
-        transition: all .2s ease;
-
-    }
-
-    .check:checked + .box:before {
-        background: black;
-        box-shadow: black;
-    }
-
-    /* checked mark aspect */
-    .check:not(:checked) + .box:after,
-    .check:checked + .box:after {
-        content: '•';
-        position: absolute;
-        border-radius: 80px;
-        top: 3px;
-        left: 7px;
-        font-size: 23px;
-        line-height: 0.8;
-        background-color: black;
-        color: white;
-        transition: all .3s ease;
-    }
-
-    /* checked mark aspect changes */
-    .check:not(:checked) + .box:after {
-        opacity: 0;
-        transform: scale(0);
-    }
-
-    .check:checked + .box:after {
-        opacity: 1;
-        transform: scale(1);
-    }
-    .label {
+    .style-login01 {
         display: inline-block;
+        height: 16px;
+        width: 16px;
+        border: 1px solid #282828;
+        background-color: #ffff;
+        position: relative;
+        margin-right: 10px;
         cursor: pointer;
-        margin-left: 5px;
-        font-size: calc(var(--plain-font-size) - 2px);
     }
-    .component {
-        /*margin: 7px;*/
+
+    .style-login01::before {
+        content: '●';
+        position: absolute;
+        color: #ffffff;
+        font-size: 16px;
+        height: 16px;
+        width: 16px;
+        border: 1px solid #282828;
+        background-color: #282828;
         display: flex;
-        justify-content: flex-start;
-        align-items: flex-start;
+        align-items: center;
+        justify-content: center;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: .3s;
     }
+    .text-login01 {
+        cursor: pointer;
+    }
+
+    .checkbox-login01:checked + .style-login01::before {
+        opacity: 1;
+    }
+
 </style>

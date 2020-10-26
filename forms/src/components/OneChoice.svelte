@@ -30,28 +30,28 @@
     }
 
     .style-login01::before {
-            content: '●';
-            position: absolute;
-            color: #ffffff;
-            font-size: 16px;
-            height: 16px;
-            width: 16px;
-            border: 1px solid #282828;
-            border-radius: 50%;
-            background-color: #282828;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            opacity: 0;
-            transition: .3s;
+        content: '●';
+        position: absolute;
+        color: #ffffff;
+        font-size: 16px;
+        height: 16px;
+        width: 16px;
+        border: 1px solid #282828;
+        border-radius: 50%;
+        background-color: #282828;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: .3s;
     }
     .text-login01 {
-    cursor: pointer;
+        cursor: pointer;
     }
     .checkbox-login01:checked + .style-login01::before {
-    opacity: 1;
+        opacity: 1;
     }
 </style>

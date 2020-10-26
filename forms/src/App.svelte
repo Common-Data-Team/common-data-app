@@ -2,6 +2,7 @@
 	import Page from './components/Page.svelte';
 	import {fade} from 'svelte/transition';
 	import {CurrentPage} from './stores';
+import MultipleChoice from './components/MultipleChoice.svelte';
 	let pages = [
 			undefined,
 			[{type: "ShortText"}, {type: "ShortText"}],

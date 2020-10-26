@@ -4,7 +4,6 @@
     export let id = 0;
 </script>
 
-
 <div class="component">
     <input id="checkbox-{id}" type="checkbox" class="check">
     <label class="box" for="checkbox-{id}"></label>

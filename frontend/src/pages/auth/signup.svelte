@@ -3,8 +3,10 @@
     import {goto, url} from "@sveltech/routify";
     import {getContext} from 'svelte';
     import Input from '../_components/Input.svelte'
-    import Checkbox from '../_components/Checkbox.svelte'
     import RoundedCheckbox from '../_components/RoundedCheckbox.svelte'
+    import Checkbox from "svelte-checkbox";
+    
+    let checked = false;
 
     let socialNetworks = {
         facebook: 'https://facebook.com',
@@ -69,25 +71,40 @@
         </div>
         <form bind:this={form}>
             <div class="inputs-block">
-                <p class="error-label" class:showError>{errorMessage}</p>
                 <Input bind:this={name} span="Имя и фамилия" name="name" type="text"/>
                 <Input bind:this={email} span="E-mail" name="username" type="email"/>
                 <Input bind:this={password} span="Пароль" name="password" type="password"/>
                 <Input bind:this={password2} span="Подтверждение пароля" name="password" type="password"/>
             </div>
-            <RoundedCheckbox id=3 text="Я принимаю <a
-            style='text-decoration: underline;
-            font-size: min(calc(var(--plain-font-size) - 2px), 20px);'>
-            пользовательское соглашение</a>"/>
+            <div class="privacy-policy">
+                <Checkbox size="1.5rem" secondaryColor="#282828" primaryColor="#1355FF"></Checkbox><span class="text-login01">Я принимаю <a
+                    style='text-decoration: underline;'>
+                    пользовательское соглашение</a></span>
+            </div>
             <div class="button-block">
                 <button type="button" on:click={submit}>Регистрация</button>
-                <div class="p-wrapper"><p class="registration-p">Уже зарегистрированы? <a class="registration-a" href='./signin'>Войдите</a></p></div>
+                <div class="p-wrapper"><p class="registration-p"><a class="registration-a" href='./signin'>Авторизация</a></p></div>
             </div>
         </form>
     </div>
 </div>
 
 <style>
+
+    .privacy-policy {
+        display: flex;
+        text-align: center;
+    }
+
+    .text-login01 {
+        cursor: pointer;
+        margin-right: 3%;
+        margin-left: 3%;
+        font-family: "Helvetica Norm";
+        text-align: center;
+        align-self: center;
+    }
+
     .component {
         height: 70%;
         width: 90%;
@@ -137,8 +154,8 @@
     }
 
     button {
+        font-size: 16px;
         padding: 2%;
-        --plain-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
         outline: none;
         border-radius: 0;
     }

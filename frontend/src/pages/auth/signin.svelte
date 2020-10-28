@@ -64,9 +64,9 @@
                 <p class="error-label" class:showError>{errorMessage}</p>
             </div>
             <div class="button-block">
-                <button type="button" on:click={submit}>Войти</button>
-                <div class="p-wrapper"><p class="registration-p">Нет аккаунта? <a class="registration-a"
-                                                                                  href='./signup'>Зарегистрируйтесь</a>
+                <button type="button" on:click={submit}>Вход</button>
+                <div class="p-wrapper"><p class="registration-p"><a class="registration-a"
+                                                                                  href='./signup'>Регистрация</a>
                 </p></div>
             </div>
         </form>
@@ -155,7 +155,7 @@
 
     button {
         padding: 2%;
-        --plain-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
+        font-size: 16px;
         outline: none;
         border-radius: 0;
     }

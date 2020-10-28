@@ -8,6 +8,7 @@ import MultipleChoice from './components/MultipleChoice.svelte';
 			[{type: "ShortText"}, {type: "ShortText"}],
 			[{type: "MultipleChoice"}, {type: "MultipleChoice"}],
 			[{type: "OneChoice"}, {type: "OneChoice"}],
+			[{type: "FileUpload"}],
 	];
 </script>
 

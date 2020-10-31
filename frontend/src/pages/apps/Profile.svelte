@@ -5,7 +5,6 @@
     let about = '23 y.o. designer from San Francisco';
     let projects = ['Карта ночного неба', 'Влияние проходимого расстояния на здоровье'];
 
-	const [send, receive] = crossfade({
     let full_name = user_name + " " + user_surname;
 </script>
 

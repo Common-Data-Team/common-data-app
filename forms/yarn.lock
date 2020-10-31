@@ -642,6 +642,11 @@ svelte-filepond@0.0.1:
   resolved "https://registry.yarnpkg.com/svelte-filepond/-/svelte-filepond-0.0.1.tgz#7c20379213dac746192499d3d1de649d6db51c4b"
   integrity sha512-R5z/Gj/2VSdV70GxvW226ww4zrVyV2EFTXrsWIdn7sEB7uYWIJvvciUNQVTfYZfcAgGsa4gprGsuqWNG3auSKw==
 
+svelte-mui@^0.3.3-4:
+  version "0.3.3-4"
+  resolved "https://registry.yarnpkg.com/svelte-mui/-/svelte-mui-0.3.3-4.tgz#ca136de4e0578a614a328849cd3da1f18cc435e4"
+  integrity sha512-FytBWkvTQFLCqqkoFHkldGWcKj/vg8Qqinv/NH98VzGyAWY5xrK6alZw1HXmWXWGRKTl2AR6zeOf7ZO0aYoI4g==
+
 svelte-radio@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/svelte-radio/-/svelte-radio-0.1.0.tgz#fe0d9fe390a08fdf8a85362d1b8c1f925baa03fa"

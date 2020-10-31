@@ -1,33 +1,32 @@
 <script>
-    export let name = 'Short Text';
+  export let name = 'Short Text';
 </script>
 
 <label>
-    <input type="text" placeholder={name}>
+  <input type="text" placeholder={name}>
 </label>
 
 <style>
-    input {
-        background: transparent;
-        border: 2px solid transparent;
-        border-bottom-color: var(--mainColor);
-        color: var(--mainColor);
-        width: 100%;
-        font-size: calc(var(--plain-font-size) - 5px);
-        transition: 0.5s ease;
-        color: #282828;
-    }
+  input {
+    background: transparent;
+    border: 2px solid transparent;
+    border-bottom-color: #666666;
+    width: 100%;
+    font-size: calc(var(--plain-font-size) - 5px);
+    transition: 0.5s ease;
+    color: #282828;
+  }
 
-    input:focus {
-        outline: none;
-    }
+  input:focus {
+    outline: none;
+  }
 
-    label {
-        display: flex;
-        position: relative;
-        height: 50px;
-        margin-bottom: 10px;
-        width: 100%;
-    }
+  label {
+    display: flex;
+    position: relative;
+    height: 50px;
+    margin-bottom: 10px;
+    width: 100%;
+  }
 
 </style>

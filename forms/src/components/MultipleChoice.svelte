@@ -10,7 +10,8 @@
 <h2>{name}</h2>
 {#each options as option}
     <div>
-        <Checkbox name={option} id={option} size="1.5rem" primaryColor="#1355FF"></Checkbox><span class="text-login01">{option}</span>
+        <Checkbox name={option} id={option} size="1.5rem" primaryColor="#1355FF"/>
+        <label class="text-login01">{option}</label>
     </div>
 {/each}
 

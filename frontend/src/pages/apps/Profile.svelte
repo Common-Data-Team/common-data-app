@@ -1,50 +1,12 @@
 <script>
-	import { quintOut } from 'svelte/easing';
-    import { crossfade } from 'svelte/transition';
-
-    let selected = 'Медицина';
+    let user_name = "Даня";
+    let user_surname = "Драгун";
+    let tags = ['Медицина', 'Здоровье'];
+    let about = '23 y.o. designer from San Francisco';
+    let projects = ['Карта ночного неба', 'Влияние проходимого расстояния на здоровье'];
 
 	const [send, receive] = crossfade({
-		duration: d => Math.sqrt(d * 200),
-
-		fallback(node, params) {
-			const style = getComputedStyle(node);
-			const transform = style.transform === 'none' ? '' : style.transform;
-
-			return {
-				duration: 600,
-				easing: quintOut,
-				css: t => `
-					transform: ${transform} scale(${t});
-					opacity: ${t}
-				`
-			};
-		}
-	});
-
-	let uid = 1;
-
-	let tags = [
-		{ id: uid++, description: 'Медицина' },
-		{ id: uid++, description: 'Наука' },
-		{ id: uid++, description: 'Бытовое' },
-		{ id: uid++, description: 'Социальное' },
-		{ id: uid++, description: 'Нейросети' },
-	];
-
-	function add() {
-		const tag = {
-			id: uid++,
-			description: selected
-		};
-
-		tags = [tag, ...tags];
-		selected = '';
-	}
-
-	function remove(tag) {
-		tags = tags.filter(t => t !== tag);
-	}
+    let full_name = user_name + " " + user_surname;
 </script>
 
 <main>
@@ -60,40 +22,15 @@
         <div class="user_info">
             <div class="user">
                 <img src="/images/user_images/user.jpg" class="photo" alt="user_photo"/>
-                <h2 class="title"> Даня Драгун </h2>
+                <h2 class="title" id="name">{full_name}</h2>
             </div>
             <div class="self">
-                <h2 class="title"> О себе </h2>
-                <p> 23 y.o. designer from San Francisco </p>
+                <h2 class="title"> О себе:</h2>
+                <p>{about}</p>
             </div>
             <div class="catigories">
                 <h2 class="title">Предпочтения</h2>
                 <div class="tags">
-                    {#each tags as tag (tag.id)}
-                    <p class="tag-href"
-                        in:receive="{{key: tag.id}}"
-                        out:send="{{key: tag.id}}"
-                    >
-                        {tag.description}
-                        <button on:click="{() => remove(tag)}" class="remove-btn">&times;</button>
-                    </p>
-                    {/each}
-                    <select bind:value={selected}>
-                        <option>Медицина</option>
-                        <option>Наука</option>
-                        <option>Бытовое</option>
-                    </select>
-                    <input type="image" src="/images/button_images/add_btn.svg" class="btn" alt="Кнопка «input»" on:click={() => add({selected})}>
-                    <div class="dropdown">
-                      <button class="btn" style="border-left:1px solid navy">
-                        <i class="fa fa-caret-down"></i>
-                      </button>
-                      <div class="dropdown-content">
-                        <button on:click={() => add("Медицина")}>Медицина</button>
-                        <button on:click={() => add("Наука")}>Наука</button>
-                      </div>
-                    </div>
-                    <input type="image" src="/images/button_images/add_btn.svg" class="btn" alt="Кнопка «input»" on:click={() => add({selected})}>
                 </div>
             </div>
             <div clsaa="exexperience">
@@ -108,9 +45,31 @@
                 </div>
             </div>
         </div>
+        <div class="right-menu">
+            <u><a href="/info">Информация</a></u>
+            <a href="/info">Достижения</a>
+        </div>
     </div>
 </main>
 <style>
+
+    .right-menu a {
+        color: #545454;
+        font-family: "Helvetica Norm";
+        font-size: 20px;
+        display: flex;
+        flex-direction: column;
+        text-decoration: none;
+    }
+
+    #name {
+        padding-top: 3%;
+    }
+
+    .title {
+        font-size: 24px;
+    }
+
     .profile {
         display: flex;
         flex-direction: row;
@@ -122,6 +81,11 @@
         align-items: flex-start;
         margin-top: 2%;
         margin-bottom: 2%;
+    }
+
+    .pr {
+        padding-bottom: 5%;
+        font-size: 40px;
     }
 
     main {
@@ -161,8 +125,8 @@
     .edit {
         font-style: normal;
         font-weight: normal;
-        line-height: 19px;
-        margin-top: 2%;
+        font-size: 16px;
+        margin-top: 15%;
         text-decoration-line: underline;
     }
 
@@ -189,46 +153,6 @@
         max-width: 10%;
     }  
 
-    .close {
-        margin-left: 4px;
-        color: #F9F9F9;
-        text-decoration: none;
-        text-align: center;
-    }
-
-    .remove-btn {
-        background-color: transparent;
-        align-self: center;
-        order: 1;
-        font-size: 20px;
-    }
-
-    .remove-btn:focus {
-        outline: none;
-    }
-
-    .add-btn {
-        background-image: url("/images/button_images/add_btn.svg");
-        background-color: transparent;
-        width: 19px;
-        height: 19px;
-    }
-
-    .tag-href {
-        background-color: #282828;
-        display: flex;
-        align-items: flex-start;
-        align-content: center;
-        flex-direction: row;
-        justify-content: center;
-        font-size: 14px;
-        border-radius: 18px;
-        padding: 6px 0px 0px 12px;
-        height: 30px;
-        margin-right: 2%;
-        margin-left: 0%;
-        color: #F9F9F9;
-    }
     .exexperience-tags {
         margin-top: 2%;
     }
@@ -247,50 +171,7 @@
         list-style-type: none;
         margin-bottom: 30%;
     }
-    .btn {
-    background-color: #2196F3;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    outline: none;
-}
 
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-    position: absolute;
-    display: inline-block;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    z-index: 1;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.btn:hover, .dropdown:hover .btn  {
-    background-color: #0b7dda;
-}
     ul {
         padding: 0;
         margin-block-start: 0em;

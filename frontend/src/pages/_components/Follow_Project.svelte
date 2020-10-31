@@ -1,28 +1,28 @@
 <script>
     export let title = 'Влияние проходимого расстояния на здоровье';
     export let tags = ['Наука', 'Медицина'];
-    export let progress = 42;
     export let author = "Камень Иванович";
+    export let description = "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.";
     export let userImageSrc = "/images/user_images/user.jpg";
-    export let projectImageSrc = "/images/project_images/Rectangle 4.png";
+    export let projectImageSrc = "/images/project_images/follow_project_card.png";
 </script>
 
 <div class="project-card">
     <div class="img-wrapper">
         <img size="100%, 20%" src="{projectImageSrc}" class="img" alt="Картинка проекта">
     </div>
-    <div class="title">
-        <h2 class="project-title">{title}</h2>
-    </div>
+
     <div class="tags">
         {#each tags as tag}
             <a href="/" class="tag-href">{tag}</a>
         {/each}
     </div>
-    <p class="percent-title">Собрано {progress}%</p>
+    <div class="title">
+        <h2 class="project-title">{title}</h2>
+    </div>
 
-    <div class="bar">
-        <div class="progress" style="width: {progress}%"></div>
+    <div class="project-description">
+        <p class="project-description">{description}</p>
     </div>
 
     <div class="user">
@@ -35,31 +35,25 @@
 <style>
 
     .title {
-        padding-top: 2%;
-        max-height: 60px;
-        padding-bottom: 1%;
+        padding-top: 1%;
     }
 
     .img {
-        max-height: 100%;
-        max-width: 100%;
+        object-fit: cover;
+        height: 375px;
+        width: 600px;
+
     }
 
     .img-wrapper {
         width: 100%;
         height: 60%;
         text-align: center;
+        margin-bottom: 3%;
     }
 
-    .bar {
-        width: 80%;
-        height: 4px;
-        background: #9B9B9B;
-    }
-
-    .progress {
-        background: black;
-        height: 4px;
+    .project-description {
+        margin-top: 1%;
     }
 
     .project-title {
@@ -69,7 +63,7 @@
     .project-card {
         display: flex;
         flex-direction: column;
-        width: 350px;
+        max-width: 600px;
         padding-right: 25px;
         padding-bottom: 5%;
     }
@@ -92,7 +86,7 @@
     }
 
     .user {
-        margin-top: 5%;
+        margin-top: 4%;
         display: flex;
         align-items: center;
     }
@@ -114,7 +108,7 @@
         border-radius: 18px;
         text-align: center;
         padding: 0.375em 0.75em;
-        margin: 5%;
+        margin: 1%;
         margin-right: 2%;
         margin-left: 0%;
         color: #F9F9F9;
@@ -129,14 +123,9 @@
         color: #1355FF;
     }
 
-    .percent-title {
-        --plain-font-size: calc(12px + (14 - 12) * ((100vw - 300px) / (1440 - 300)));
-        padding-bottom: 2%;
-    }
-
     .project-title {
         --plain-font-size: calc(24px + (32 - 24) * ((100vw - 300px) / (1440 - 300)));
         padding-top: 2%;
     }
-
+    
 </style>

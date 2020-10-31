@@ -1,7 +1,9 @@
 <script>
-    import {goto} from "@sveltech/routify"
     import {checkStoreAndCoockie, clearStoreAndCookie} from "./_api";
     import Project from './_components/Project.svelte';
+    import FollowProject from './_components/Follow_Project.svelte';
+    import NewProject from './_components/New_Project.svelte';
+    import Footer from './_components/Footer.svelte';
     let current = 'user';
     let data = [
         {
@@ -9,6 +11,7 @@
             tags: ['Наука', 'Медицина'],
             progress: 42,
             author: "Камень Камень",
+            description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
             userImageSrc: "/images/user_images/user.jpg",
             projectImageSrc: "/images/project_images/Rectangle 4.png"
         },
@@ -17,17 +20,88 @@
             tags: ['Наука', 'Медицина'],
             progress: 92,
             author: "Камень Иванович",
+            description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
             userImageSrc: "/images/user_images/user.jpg",
-            projectImageSrc: "/images/project_images/Rectangle 4.png"
+            projectImageSrc: "/images/project_images/star_project.png"
         },
         {
             title: 'Влияние проходимого расстояния на здоровье',
             tags: ['Наука', 'Медицина'],
             progress: 80,
             author: "Камень Иванович",
+            description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
+            userImageSrc: "/images/user_images/user.jpg",
+            projectImageSrc: "/images/project_images/follow_project_card.png"
+        },
+    ]
+
+    let follow_projects = [
+        {
+            title: 'Облысение. Что мы узнали благодаря вам',
+            tags: ['Наука', 'Медицина'],
+            progress: 42,
+            author: "Камень Камень",
+            description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
+            userImageSrc: "/images/user_images/user.jpg",
+            projectImageSrc: "/images/project_images/follow_project_card.png"
+        },
+        {
+            title: 'Ходьба оказалась вредной?',
+            tags: ['Медицина'],
+            progress: 92,
+            author: "Камень Иванович",
+            description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
+            userImageSrc: "/images/user_images/user.jpg",
+            projectImageSrc: "/images/project_images/follow_project_card.png"
+        },
+        {
+            title: 'Ходьба оказалась вредной?',
+            tags: ['Медицина'],
+            progress: 92,
+            author: "Камень Иванович",
+            description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
+            userImageSrc: "/images/user_images/user.jpg",
+            projectImageSrc: "/images/project_images/follow_project_card.png"
+        },
+        {
+            title: 'Ходьба оказалась вредной?',
+            tags: ['Медицина'],
+            progress: 92,
+            author: "Камень Иванович",
+            description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
+            userImageSrc: "/images/user_images/user.jpg",
+            projectImageSrc: "/images/project_images/follow_project_card.png"
+        }
+    ]
+
+    let new_projects = [
+        {
+            title: 'Облысение. Что мы узнали благодаря вам',
+            tags: ['Наука', 'Медицина'],
+            progress: 42,
+            author: "Камень Камень",
+            description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
+            userImageSrc: "/images/user_images/user.jpg",
+            projectImageSrc: "/images/project_images/follow_project_card.png"
+        },
+        {
+            title: 'Ходьба оказалась вредной?',
+            tags: ['Медицина'],
+            progress: 92,
+            author: "Камень Иванович",
+            description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
+            userImageSrc: "/images/user_images/user.jpg",
+            projectImageSrc: "/images/project_images/star_project.png"
+        },
+        {
+            title: 'Ходьба оказалась вредной?',
+            tags: ['Медицина'],
+            progress: 92,
+            author: "Камень Иванович",
+            description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
             userImageSrc: "/images/user_images/user.jpg",
             projectImageSrc: "/images/project_images/Rectangle 4.png"
-        },
+        }
     ]
 
     let auth = checkStoreAndCoockie();
@@ -44,7 +118,7 @@
 
 <main>
     <div class="main-content-block">
-            {#if !auth}
+        {#if !auth}
             <div class="log-out-block">
                 <h2 class="log-out-text">ПЛАТФОРМА КРАУДСОРСИНГА ДАННЫХ ДЛЯ ПРОЕКТОВ И ИССЛЕДОВАНИЙ</h2>
                 <div class="description">
@@ -103,75 +177,78 @@
                 </div>
             </div>
         {/if}
-        {#if auth}
-            <div class="auth-menu">
+
+        <!--
+        <div class="auth-menu">
                 <div class="menu-block">
-                    <button>Все</button>
-                    <button>Бытовое</button>
-                    <button>Социальное</button>
+                    <button 
+                        class:menu-active="{selected_tag === 'all'}" 
+                        on:click="{() => selected_tag = 'all'}">Все</button>
+                    <button class:active="{selected_tag === 'bit'}" on:click="{() => selected_tag = 'bit'}">Бытовое</button>
                     <button>Наука</button>
                     <button>Медицина</button>
                     <button>Нейросети</button>
                 </div>
-                <img src="/images/user_images/user.jpg" class="user-image-menu"/>
-                <div class="user-buttons-menu">
-                    <button on:click={logout}>Выйти</button>
-                </div>
-            </div>
-        {/if}
+                {#if auth}
+                    <div class="user-buttons-menu">
+                        <img src="/images/user_images/user.jpg" class="user-image-menu"/>
+                    </div>
+                {/if}
+                {#if !auth} 
+                    <div class="not-user-buttons-menu">
+                        <a href='./auth/signin'>вход</a>
+                        <a href='./auth/signup'>регистрация</a>
+                    </div>
+                {/if}
+        </div>
+        -->
         <div class="popular-block">
             <div class="block-title">
                 <h2>ПОПУЛЯРНОЕ СЕЙЧАС</h2>
                 <p class="arrow">→</p>
             </div>
-            <div class="сard-block">
-                {#each data as card}
-                    <Project {...card}/>
-                {/each}
+            <div class="container">
+                <div class="cards">
+                  {#each data as card}
+                    <Project {...card}></Project>
+                  {/each}
+                </div>
+            </div>
+        </div>
+
+        {#if auth}
+        <div class="popular-block">
+            <div class="block-title">
+                <h2>ВЫ ОТСЛЕЖИВАЕТЕ</h2>
+                <p class="arrow">→</p>
+            </div>
+            <div class="container">
+                <div class="cards">
+                  {#each follow_projects as card}
+                    <FollowProject {...card}></FollowProject>
+                  {/each}
+                </div>
+            </div>
+        </div>
+        {/if}
+
+        <div class="popular-block">
+            <div class="block-title">
+                <h2>НОВЫЕ ПРОЕКТЫ</h2>
+                <p class="arrow">→</p>
+            </div>
+            <div class="container">
+                <div class="cards">
+                  {#each new_projects as card}
+                    <NewProject {...card}></NewProject>
+                  {/each}
+                </div>
             </div>
         </div>
     </div>
 </main>
 
-<footer>
-    <img src="white_logo.svg" class="logo-white" alt="logo-white"/>
-    <div class="column-block">
-        <h3>О НАС</h3>
-        <ul>
-            <a href="vk.com">
-                <li>проектам</li>
-            </a>
-            <a href="vk.com">
-                <li>пользователям</li>
-            </a>
-        </ul>
-    </div>
-    <div class="column-block">
-        <h3>СВЯЗАТЬСЯ С НАМИ</h3>
-        <ul>
-            <a href="vk.com">
-                <li>help@commondata.ru</li>
-            </a>
-            <a href="vk.com">
-                <li>+7 (901) 723-04-47</li>
-            </a>
-        </ul>
-    </div>
-    <div class="column-block">
-        <h3>СОЦСЕТИ</h3>
-        <ul>
-            <a href="https://vk.com">
-                <li>facebook</li>
-            </a>
-            <a href="vk.com">
-                <li>telegram</li>
-            </a>
-            <a href="vk.com">
-                <li>vkontakte</li>
-            </a>
-        </ul>
-    </div>
-</footer>
+<Footer></Footer>
 
 <style>
 
@@ -186,22 +263,6 @@
     .btn-about button {
         width: 178px;
     }
-
-    .column-block {
-        margin-right: 10%;
-    }
-
-    .logo-white {
-        max-width: 285px;
-        margin-right: 15%;
-    }
-
-    h3 {
-        color: #F9F9F9;
-        --plain-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
-        font-family: "Helvetica Neue";
-    }
-
 
     .arrow {
         font-family: "SF Pro Display";
@@ -293,34 +354,9 @@
         padding-right: 2%;
     }
 
-    .menu-block {
-        display: flex;
-        width: 70%;
-    }
-
-    .menu-block button {
-        box-shadow: none;
-        border: none;
-        background: transparent;
-        text-align: center;
-        color: #282828;
-        --plain-font-size: calc(14px + (16 - 14) * ((100vw - 300px) / (1440 - 300)));
-        margin-right: 1%;
-        max-width: 10%;
-    }
-
-    .menu-block button:hover {
-        color: #F9F9F9;
-        background-color: #282828;
-        border-radius: 0;
-    }
-
     .popular-block {
+        max-width: 1130px;
         flex-direction: column;
-        display: flex;
-    }
-
-    .сard-block {
         display: flex;
     }
 
@@ -329,6 +365,7 @@
         align-items: center;
         --plain-font-size: calc(24px + (32 - 24) * ((100vw - 300px) / (1440 - 300)));
         padding-bottom: 1%;
+        padding-top: 5%;
     }
 
     a {
@@ -341,53 +378,23 @@
     button {
 		display: block;
     }
-    
-    .user-image-menu {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-    }
-
-    .user-buttons-menu {
-        display: none;
-    }
 
     a:hover {
         color: #1355FF;
     }
 
-    .auth-menu {
-        display: flex;
-        align-items: center;
+    .container {
+        max-width: 1200px;
+        text-align: left;
     }
-
-    footer {
-        flex: 0 0 auto;
+    .cards {
         display: flex;
-        bottom: 0;
-        padding: 5% 0;
-        margin-top: 5%;
-        width: 100%;
-        background: #282828;
-        justify-content: center;
-        align-items: stretch;
+        justify-content: left;
+        align-items: left;
+        flex-wrap: wrap;
     }
-
     
-    li {
-            list-style-type: none;
-        }
-        ul {
-            padding: 0;
-        }
-
     @media (max-width: 768px) {
-
-        .сard-block {
-            max-width: 90%;
-            margin-bottom: 5%;
-        }
-
         .description {
             max-width: 90%;
         }
@@ -400,26 +407,12 @@
             flex-direction: column;
         }
 
-        .logo-white {
-            max-width: 200px;
-            margin-left: 5%;
-            margin-bottom: 5%;
-        }
-
-        .column-block {
-            margin-left: 5%;
-        }
-
         .popular-block {
             flex-direction: column;
         }
 
         .log-out-text {
             max-width: 90%;
-        }
-
-        .menu-block {
-            display: none;
         }
     }
 

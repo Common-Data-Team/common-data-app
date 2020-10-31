@@ -46,10 +46,6 @@
         font-size: calc(var(--plain-font-size) - 7px);
     }
 
-    textarea:focus, input:focus {
-        outline: none;
-    }
-
     label {
         display: flex;
         position: relative;

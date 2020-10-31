@@ -82,13 +82,6 @@
         margin-left: 5%;
     }
 
-    .checkboxes-block {
-        margin-top: 15px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
     .inputs-block {
         display: flex;
         flex-direction: column;
@@ -140,11 +133,6 @@
         justify-content: flex-start;
         margin-left: 20px;
         --plain-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
-    }
-
-    .registration-p {
-        /*margin-left: 20px;*/
-        /*margin-top: 5px;*/
     }
 
     ul {

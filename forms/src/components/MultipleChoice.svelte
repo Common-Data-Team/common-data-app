@@ -3,11 +3,11 @@
 
     let checked = false;
     
-    export let name = 'Miltiple Choice';
+    export let question = 'Choose multiple';
     export let options = ['1', '2', '3', '4'];
 </script>
 
-<h2>{name}</h2>
+<h2>{question}</h2>
 {#each options as option}
     <div>
         <Checkbox name={option} id={option} size="1.5rem" primaryColor="#1355FF"/>

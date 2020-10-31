@@ -1,16 +1,20 @@
 <script>
-  import Page from './components/Page.svelte';
   import {fade} from 'svelte/transition';
+
+  import Page from './components/Page.svelte';
   import MultipleChoice from './components/MultipleChoice.svelte';
 
+  let answers = {};
   let pages = [
     undefined,
-    [{type: "ShortText"}, {type: "ShortText"}],
-    [{type: "MultipleChoice"}, {type: "MultipleChoice"}],
-    [{type: "OneChoice"}, {type: "OneChoice"}],
+    [{type: "ShortText", content: {question: 'Как вас зовут?', placeholder: 'Иван Иванов'}}],
+    [{
+      type: "MultipleChoice",
+      content: {question: 'Что добавить в мороженое?', options: ['Ваниль', 'Шоколад', 'Маршмеллоу']}
+    }],
+    [{type: "OneChoice", content: {question: 'У вас хорошее настроение?', options: ['Да', 'Бывало и лучше', 'Нет']}}],
   ];
 
-  // let percentDelta = ;
   let currentPage = 0;
   $: percent = currentPage * 100 / (pages.length - 1);
 
@@ -53,13 +57,13 @@
         <div class="filled-progress-bar" style="width: {percent}%"></div>
       </div>
     </div>
-    <button on:click={() => updatePage(-1)}>
+    <button class="switch-page-button" on:click={() => updatePage(-1)}>
       <svg width="30" height="30px">
         <line x1="0" x2="15" y1="25" y2="7"></line>
         <line x1="30" x2="15" y1="25" y2="7"></line>
       </svg>
     </button>
-    <button on:click={() => updatePage(+1)}>
+    <button class="switch-page-button" on:click={() => updatePage(+1)}>
       <svg width="30" height="30px">
         <line x1="0" x2="15" y1="7" y2="25"></line>
         <line x1="30" x2="15" y1="7" y2="25"></line>
@@ -99,6 +103,7 @@
     display: flex;
     flex-direction: column;
     width: 60%;
+    margin-top: -100px;
   }
 
   .animation-box {
@@ -129,13 +134,16 @@
     color: white;
   }
 
-
   .bottom-block {
     position: absolute;
     bottom: 50px;
     right: 50px;
     display: flex;
     align-items: center;
+  }
+
+  .switch-page-button:hover {
+    background: rgba(60, 60, 60, 0.2);
   }
 
   .progress-bar {

@@ -8,7 +8,7 @@
   import OneChoice from './OneChoice.svelte';
 
   export let questions;
-  questions = questions || [{type: "OneChoice"}];
+  questions = questions || [{type: "Statement", content: {statement: "Упсс, это пустая страница :)"}}];
 
   let components = {
     FileUpload: FileUpload,
@@ -25,7 +25,7 @@
 
 <div class="component">
   {#each questions as question}
-    <svelte:component this={components[question.type]}/>
+    <svelte:component this={components[question.type]} {...question.content || {}}/>
   {/each}
 </div>
 

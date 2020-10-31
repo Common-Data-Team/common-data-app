@@ -1,10 +1,13 @@
 <script>
-  export let name = 'Short Text';
+  export let question = 'Enter a text';
+  export let placeholder = 'Short Text';
 </script>
 
+<h2>{question}</h2>
 <label>
-  <input type="text" placeholder={name}>
+  <input type="text" placeholder={placeholder}>
 </label>
+
 
 <style>
   input {

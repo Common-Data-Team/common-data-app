@@ -11,7 +11,9 @@
     <div class="img-wrapper">
         <img size="100%, 20%" src="{projectImageSrc}" class="img" alt="Картинка проекта">
     </div>
-    <h2 class="project-title">{title}</h2>
+    <div class="title">
+        <h2 class="project-title">{title}</h2>
+    </div>
     <div class="tags">
         {#each tags as tag}
             <a href="/" class="tag-href">{tag}</a>
@@ -31,6 +33,13 @@
 
 
 <style>
+
+    .title {
+        padding-top: 2%;
+        height: 60px;
+        padding-bottom: 1%;
+    }
+
     .img {
         max-height: 100%;
         max-width: 100%;
@@ -43,42 +52,26 @@
     }
 
     .bar {
-        width: 100%;
-        height: 3px;
+        width: 80%;
+        height: 4px;
         background: #9B9B9B;
     }
 
     .progress {
         background: black;
-        height: 3px;
+        height: 4px;
     }
 
     .project-title {
         --plain-font-size: calc(24px + (32 - 24) * ((100vw - 300px) / (1440 - 300)));
-        padding-top: 2%;
-    }
-
-    .tag-href {
-        background-color: #282828;
-        border-radius: 18px;
-        text-align: center;
-        padding: 0.6em 0.6em;
-        margin: 5%;
-        margin-right: 2%;
-        margin-left: 0%;
-        color: #F9F9F9;
-    }
-
-    .tag-href:hover {
-        background-color: #1355FF;
-        color: #F9F9F9;
     }
 
     .project-card {
         display: flex;
         flex-direction: column;
-        width: 300px;
-        margin: 0 10px;
+        width: 350px;
+        padding-right: 25px;
+        padding-bottom: 5%;
     }
 
     .user-img {
@@ -120,7 +113,7 @@
         background-color: #282828;
         border-radius: 18px;
         text-align: center;
-        padding: 0.6em 0.6em;
+        padding: 0.375em 0.75em;
         margin: 5%;
         margin-right: 2%;
         margin-left: 0%;

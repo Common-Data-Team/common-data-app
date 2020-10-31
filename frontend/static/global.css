@@ -75,6 +75,9 @@ input:focus {
     color: #282828;
 }
 
+.main-content-block {
+    max-width: 1440px;
+}
 
 a:hover {
     color: #1355FF;

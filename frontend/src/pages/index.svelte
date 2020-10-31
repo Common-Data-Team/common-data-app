@@ -43,95 +43,141 @@
 </svelte:head>
 
 <main>
-    {#if !auth}
-        <div class="log-out-block">
-            <h2 class="log-out-text">ПЛАТФОРМА КРАУДСОРСИНГА ДАННЫХ ДЛЯ ПРОЕКТОВ И ИССЛЕДОВАНИЙ</h2>
-            <div class="description">
-                <h2>КТО МЫ?</h2>
-                <p>Common data — это сервис, в котором пользователь может безопасно делиться своими данными с
-                    исследовательскими и гражданскими проектами, ценности которых он разделяет.</p>
-                <h2>ПОЧЕМУ МЫ?</h2>
-                <div class="btn-about">
+    <div class="main-content-block">
+            {#if !auth}
+            <div class="log-out-block">
+                <h2 class="log-out-text">ПЛАТФОРМА КРАУДСОРСИНГА ДАННЫХ ДЛЯ ПРОЕКТОВ И ИССЛЕДОВАНИЙ</h2>
+                <div class="description">
+                    <h2>КТО МЫ?</h2>
+                    <p>Common data — это сервис, в котором пользователь может безопасно делиться своими данными с
+                        исследовательскими и гражданскими проектами, ценности которых он разделяет.</p>
+                    <h2>ПОЧЕМУ МЫ?</h2>
+                    <div class="btn-about">
+                        <button
+                        class:active="{current === 'user'}"
+                        on:click="{() => current = 'user'}"
+                    >Пользователям</button>
                     <button
-                    class:active="{current === 'user'}"
-                    on:click="{() => current = 'user'}"
-                >Пользователям</button>
-                <button
-                    class:active="{current === 'project'}"
-                    on:click="{() => current = 'project'}"
-                >Проектам</button>
+                        class:active="{current === 'project'}"
+                        on:click="{() => current = 'project'}"
+                    >Проектам</button>
+                    </div>
+                    {#if current == 'user'}
+                    <div id="users-block">
+                        <div class="point-block">
+                            <h2>01</h2>
+                            <p>Участвуйте в том, что для вас интересно и важно. Мы будем рекомендовать проекты, которые
+                                    могут вам понравиться.</p>
+                        </div>
+                        <div class="point-block">
+                            <h2>02</h2>
+                            <p>Вы знаете, как и для чего будут использоваться ваши данные. Мы будем сообщать, что
+                                    происходит с вашими данными, и каких результатов достигли проекты благодаря вам. </p>
+                        </div>
+                        <div class="point-block">
+                            <h2>03</h2>
+                            <p>Вам не нужно беспокоиться об анонимности и безопасности ваших данных. Мы об этом
+                                    позаботимся!</p>
+                        </div>
+                    </div>
+                    {:else}
+                    <div id="users-block">
+                        <div class="point-block">
+                            <h2>01</h2>
+                            <p>Формируйте датасеты. Мы поможем вам составить форму для сбора данных, предоставим место
+                                    для хранения и инструменты.</p>
+                        </div>
+                        <div class="point-block">
+                            <h2>02</h2>
+                            <p>Привлекайте людей в ваш проект. Наши алгоритмы порекомендуют ваш проект именно тем
+                                    пользователям, которым он может быть интересен.</p>
+                        </div>
+                        <div class="point-block">
+                            <h2>03</h2>
+                            <p>Находите единомышленников и новые идеи. Смотрите результаты и модели исследований по
+                                    вашей теме от других участников.</p>
+                        </div>
+                    </div>
+                    {/if}
+                    <a href="./auth/signup"><button class="auth-buttons" onclick="./auth/signin">Регистрация</button></a>
                 </div>
-                {#if current == 'user'}
-                <div id="users-block">
-                    <div class="point-block">
-                        <h2>01</h2>
-                        <p>Участвуйте в том, что для вас интересно и важно. Мы будем рекомендовать проекты, которые
-                                могут вам понравиться.</p>
-                    </div>
-                    <div class="point-block">
-                        <h2>02</h2>
-                        <p>Вы знаете, как и для чего будут использоваться ваши данные. Мы будем сообщать, что
-                                происходит с вашими данными, и каких результатов достигли проекты благодаря вам. </p>
-                    </div>
-                    <div class="point-block">
-                        <h2>03</h2>
-                        <p>Вам не нужно беспокоиться об анонимности и безопасности ваших данных. Мы об этом
-                                позаботимся!</p>
-                    </div>
+            </div>
+        {/if}
+        {#if auth}
+            <div class="auth-menu">
+                <div class="menu-block">
+                    <button>Все</button>
+                    <button>Бытовое</button>
+                    <button>Социальное</button>
+                    <button>Наука</button>
+                    <button>Медицина</button>
+                    <button>Нейросети</button>
                 </div>
-                {:else}
-                <div id="users-block">
-                    <div class="point-block">
-                        <h2>01</h2>
-                        <p>Формируйте датасеты. Мы поможем вам составить форму для сбора данных, предоставим место
-                                для хранения и инструменты.</p>
-                    </div>
-                    <div class="point-block">
-                        <h2>02</h2>
-                        <p>Привлекайте людей в ваш проект. Наши алгоритмы порекомендуют ваш проект именно тем
-                                пользователям, которым он может быть интересен.</p>
-                    </div>
-                    <div class="point-block">
-                        <h2>03</h2>
-                        <p>Находите единомышленников и новые идеи. Смотрите результаты и модели исследований по
-                                вашей теме от других участников.</p>
-                    </div>
+                <img src="/images/user_images/user.jpg" class="user-image-menu"/>
+                <div class="user-buttons-menu">
+                    <button on:click={logout}>Выйти</button>
                 </div>
-                {/if}
-                <a href="./auth/signup"><button class="auth-buttons" onclick="./auth/signin">Регистрация</button></a>
             </div>
-        </div>
-    {/if}
-    {#if auth}
-        <div class="auth-menu">
-            <div class="menu-block">
-                <button>Все</button>
-                <button>Бытовое</button>
-                <button>Социальное</button>
-                <button>Наука</button>
-                <button>Медицина</button>
-                <button>Нейросети</button>
+        {/if}
+        <div class="popular-block">
+            <div class="block-title">
+                <h2>ПОПУЛЯРНОЕ СЕЙЧАС</h2>
+                <p class="arrow">→</p>
             </div>
-            <img src="/images/user_images/user.jpg" class="user-image-menu"/>
-            <div class="user-buttons-menu">
-                <button on:click={logout}>Выйти</button>
+            <div class="сard-block">
+                {#each data as card}
+                    <Project {...card}/>
+                {/each}
             </div>
-        </div>
-    {/if}
-    <div class="popular-block">
-        <div class="block-title">
-            <h2>ПОПУЛЯРНОЕ СЕЙЧАС</h2>
-            <p class="arrow">→</p>
-        </div>
-        <div class="сard-block">
-            {#each data as card}
-                <Project {...card}/>
-            {/each}
         </div>
     </div>
 </main>
 
+<footer>
+    <img src="white_logo.svg" class="logo-white" alt="logo-white"/>
+    <div class="column-block">
+        <h3>О НАС</h3>
+        <ul>
+            <a href="vk.com">
+                <li>проектам</li>
+            </a>
+            <a href="vk.com">
+                <li>пользователям</li>
+            </a>
+        </ul>
+    </div>
+    <div class="column-block">
+        <h3>СВЯЗАТЬСЯ С НАМИ</h3>
+        <ul>
+            <a href="vk.com">
+                <li>help@commondata.ru</li>
+            </a>
+            <a href="vk.com">
+                <li>+7 (901) 723-04-47</li>
+            </a>
+        </ul>
+    </div>
+    <div class="column-block">
+        <h3>СОЦСЕТИ</h3>
+        <ul>
+            <a href="https://vk.com">
+                <li>facebook</li>
+            </a>
+            <a href="vk.com">
+                <li>telegram</li>
+            </a>
+            <a href="vk.com">
+                <li>vkontakte</li>
+            </a>
+        </ul>
+    </div>
+</footer>
+
 <style>
+
+    main {
+        padding-left: 5%;
+    }
 
     .btn-about {
         display: flex;
@@ -141,9 +187,21 @@
         width: 178px;
     }
 
-    main {
-        margin-left: 5%;
+    .column-block {
+        margin-right: 10%;
     }
+
+    .logo-white {
+        max-width: 285px;
+        margin-right: 15%;
+    }
+
+    h3 {
+        color: #F9F9F9;
+        --plain-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
+        font-family: "Helvetica Neue";
+    }
+
 
     .arrow {
         font-family: "SF Pro Display";
@@ -232,6 +290,7 @@
 
     .log-out-text {
         max-width: 40%;
+        padding-right: 2%;
     }
 
     .menu-block {
@@ -302,6 +361,26 @@
         align-items: center;
     }
 
+    footer {
+        flex: 0 0 auto;
+        display: flex;
+        bottom: 0;
+        padding: 5% 0;
+        margin-top: 5%;
+        width: 100%;
+        background: #282828;
+        justify-content: center;
+        align-items: stretch;
+    }
+
+    
+    li {
+            list-style-type: none;
+        }
+        ul {
+            padding: 0;
+        }
+
     @media (max-width: 768px) {
 
         .сard-block {
@@ -319,6 +398,12 @@
 
         .log-out-block {
             flex-direction: column;
+        }
+
+        .logo-white {
+            max-width: 200px;
+            margin-left: 5%;
+            margin-bottom: 5%;
         }
 
         .column-block {

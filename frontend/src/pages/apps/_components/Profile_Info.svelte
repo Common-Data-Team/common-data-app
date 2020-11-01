@@ -1,18 +1,59 @@
 <script>
-    let user_name = "Даня";
-    let user_surname = "Драгун";
-    let tags = ['Медицина', 'Здоровье'];
-    let about = '23 y.o. designer from San Francisco';
-    let projects = ['Карта ночного неба', 'Влияние проходимого расстояния на здоровье'];
+    export let user_name = "Даня";
+    export let user_surname = "Драгун";
+    export let user_avatar_link = "/images/user_images/user.jpg";
+    export let tags = [
+        {
+            tag_name: "Здоровье",
+            tag_href: "/health"
+        },
+        {
+            tag_name: "Наука",
+            tag_href: "/health"
+        },
+        {
+            tag_name: "Здоровье",
+            tag_href: "/health"
+        },
+        {
+            tag_name: "Здоровье",
+            tag_href: "/health"
+        },
+        {
+            tag_name: "Здоровье",
+            tag_href: "/health"
+        },
+        {
+            tag_name: "Здоровье",
+            tag_href: "/health"
+        },
+        {
+            tag_name: "Здоровье",
+            tag_href: "/health"
+        }
+    ];
+    export let about = '23 y.o. designer from San Francisco';
+    export let projects = [
+        {
+            title: "Карта ночного неба",
+            project_href: "/project325"
+        },
+        {
+            title: "Влияние проходимого расстояния на здоровье",
+            project_href: "/project"
+        }
+    ]
 
     let full_name = user_name + " " + user_surname;
 </script>
 
 <main>
-    <div class = "return"> 
-        <p class="arrow">→</p>
-        <div class="chaif">Главная</div>
-    </div>
+    <a href="/" class="return-link">
+        <div class = "return"> 
+            <p class="arrow">→</p>
+            <div class="chaif">Главная</div>
+        </div>
+    </a>
     <div class = "profile">
         <div class="main-block">
                 <h2 class="pr">Профиль</h2>
@@ -20,7 +61,7 @@
         </div> 
         <div class="user_info">
             <div class="user">
-                <img src="/images/user_images/user.jpg" class="photo" alt="user_photo"/>
+                <img src={user_avatar_link} class="photo" alt="user_photo"/>
                 <h2 class="title" id="name">{full_name}</h2>
             </div>
             <div class="self">
@@ -29,28 +70,65 @@
             </div>
             <div class="catigories">
                 <h2 class="title">Предпочтения</h2>
-                <div class="tags">
+                <div class="tag-container">
+                    <div class="tags">
+                        {#each tags as tag}
+                            <a href={tag.tag_href} class="tag-href">{tag.tag_name}</a>
+                        {/each}
+                    </div>
                 </div>
             </div>
             <div clsaa="exexperience">
                 <h2 class="title">Участие в проектах:</h2>
                 <div class="exexperience-tags">
                     <li>
-                        <ul><a href="/" class="ex-tag">Карта ночного неба</a></ul>
-                        <ul><a href="/" class="ex-tag">Влияние проходимого расстояния на здоровье</a></ul>
-                        <ul><a href="/" class="ex-tag">Облысение. Исследование</a></ul>
-                        <ul><a href="/" class="ex-tag">Длительность жизни обуви</a></ul>
+                        {#each projects as project}
+                            <ul><a href={project.project_href} class="ex-tag">{project.title}</a></ul>
+                        {/each}
                     </li>
                 </div>
             </div>
         </div>
         <div class="right-menu">
-            <u><a href="/info">Информация</a></u>
+            <u><a href="/apps/profile_info">Информация</a></u>
             <a href="/info">Достижения</a>
         </div>
     </div>
 </main>
 <style>
+
+    .tag-container {
+        margin-top: 2%;
+        max-width: 70%;
+        text-align: left;
+    }
+
+    .tag-href {
+        background-color: #282828;
+        border-radius: 18px;
+        text-align: center;
+        padding: 0.375em 0.75em;
+        margin-right: 2%;
+        margin-left: 0%;
+        color: #F9F9F9;
+        text-decoration: none;
+        margin-top: 2%;
+    }
+
+    .ex-tag {
+        text-decoration: none;
+    }
+
+    .tags {
+        display: flex;
+        justify-content: left;
+        align-items: left;
+        flex-wrap: wrap;
+    }
+
+    .right-menu {
+        margin-right: 5%;
+    }
 
     .right-menu a {
         color: #545454;
@@ -58,6 +136,7 @@
         font-size: 20px;
         display: flex;
         flex-direction: column;
+        text-align: right;
         text-decoration: none;
     }
 
@@ -80,6 +159,14 @@
         align-items: flex-start;
         margin-top: 2%;
         margin-bottom: 2%;
+    }
+
+    .return-link {
+        text-decoration: none;
+    }
+
+    .return-link:hover {
+        color: #282828;
     }
 
     .pr {
@@ -132,8 +219,9 @@
     .user_info {
         display: flex;
         flex-direction: column;
-        margin-right: 15% ;
-        margin-left: 25%;
+        width: 40%;
+        margin-right: 15%;
+        margin-left: 20%;
     }
 
     .user {
@@ -145,12 +233,6 @@
     .catigories {
         margin-bottom: 10%;
     }
-    .tags {
-        display: flex;
-        align-items: center;
-        margin-top: 3%;
-        max-width: 10%;
-    }  
 
     .exexperience-tags {
         margin-top: 2%;
@@ -160,6 +242,7 @@
     }
 
     .photo {
+        object-fit: cover;
         width: 128px;
         height: 128px;
         border-radius: 50%;
@@ -194,6 +277,10 @@
             margin-left: 0%;
             max-width: 90%;
             margin-top: 5%;
+        }
+
+        .right-menu {
+            display: none;
         }
     }
 

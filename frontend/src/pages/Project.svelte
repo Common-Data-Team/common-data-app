@@ -1,11 +1,5 @@
 <script>
-
+    import ProjectPage from './_components/ProjectPage.svelte';
 </script>
 
-<main>
-
-</main>
-
-<style>
-    
-</style>
+<ProjectPage></ProjectPage>

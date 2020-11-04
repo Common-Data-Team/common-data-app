@@ -80,7 +80,7 @@
             </div>
             <div clsaa="exexperience">
                 <h2 class="title">Участие в проектах:</h2>
-                <div class="exexperience-tags">
+                <div class="experience-tags">
                     <li>
                         {#each projects as project}
                             <ul><a href={project.project_href} class="ex-tag">{project.title}</a></ul>
@@ -153,6 +153,7 @@
         flex-direction: row;
         align-items: flex-start;
     }
+
     .return {
         display: flex;
         flex-direction: row;
@@ -208,6 +209,7 @@
         flex-grow: 0;
         margin: 16px 0px;
     }
+
     .edit {
         font-style: normal;
         font-weight: normal;
@@ -227,16 +229,19 @@
     .user {
         margin-bottom: 10%;
     }
+
     .self {
         margin-bottom: 10%;
     }
+
     .catigories {
         margin-bottom: 10%;
     }
 
-    .exexperience-tags {
+    .experience-tags {
         margin-top: 2%;
     }
+
     .ex-tag {
         text-decoration: none;
     }

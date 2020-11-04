@@ -1,12 +1,13 @@
 <script>
-    import { url } from '@sveltech/routify';
-    import {selfUrl} from './_api.js';
+  import {url} from '@sveltech/routify';
+  import {selfUrl} from './_api.js';
 </script>
 
 <style>
   .huge {
     font-size: 12rem;
   }
+
   .e404 {
     position: absolute;
     left: 50%;
@@ -18,8 +19,8 @@
 
 <div class="e404">
   <div class="huge">404</div>
-  <div class="big">Page not found. 
-  <!-- link to the parent folder of _fallback.svelte -->
-  <a href={selfUrl}>Go back</a>
+  <div class="big">Page not found.
+    <!-- link to the parent folder of _fallback.svelte -->
+    <a href={selfUrl}>Go back</a>
   </div>
 </div>

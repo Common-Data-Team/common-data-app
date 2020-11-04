@@ -1,17 +1,17 @@
 <script>
-  import { BaseTransition } from '@sveltech/routify/decorators'
-  import { fade } from 'svelte/transition'
+  import {BaseTransition} from '@sveltech/routify/decorators'
+  import {fade} from 'svelte/transition'
 
   const configs = [
     {
-        condition: (meta)=>true,
-        transition: fade,
-        // inParams: { duration: 1000},
-        // outParams: { duration: 1000 }
+      condition: (meta) => true,
+      transition: fade,
+      // inParams: { duration: 1000},
+      // outParams: { duration: 1000 }
     }
   ]
 </script>
 
 <BaseTransition {configs}>
-  <slot />
+  <slot/>
 </BaseTransition>

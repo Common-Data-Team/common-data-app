@@ -1,6 +1,6 @@
 import {writable, get} from 'svelte/store'
 
-export const apiUrl = 'https://commondata.ru:8000/';
+export const apiUrl = 'https://backend.commondata.ru/';
 export const selfUrl = 'https://commondata.ru/';
 export let user = writable("")
 
@@ -57,9 +57,9 @@ function getCookie(name) {
 }
 
 function deleteCookie(name) {
-  setCookie(name, "", {
-    'max-age': -1
-  })
+    setCookie(name, "", {
+        'max-age': -1
+    })
 }
 
 export function checkStoreAndCoockie() {
@@ -94,7 +94,7 @@ export async function authorizedRequest(apiPart, method, object) {
     return [json_response, null]
 }
 
-export function clearStoreAndCookie(){
+export function clearStoreAndCookie() {
     user = "";
     deleteCookie('access_token');
 }

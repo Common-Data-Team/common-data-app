@@ -1,12 +1,18 @@
 <script>
     import Project from './Project.svelte';
+<<<<<<< HEAD
 
+=======
+>>>>>>> development
     export let user_name = "Даня";
     export let user_surname = "Драгун";
     export let user_projects_page = '/user465_projects';
     export let user_profile_page = '/apps/user465';
     let full_name = user_name + " " + user_surname;
+<<<<<<< HEAD
 
+=======
+>>>>>>> development
     let my_projects = [
     {
       title: 'Облысение. Что мы узнали благодаря вам',
@@ -76,11 +82,17 @@
     </div>
 </main>
 <style>
+<<<<<<< HEAD
 
     .right-menu {
         margin-right: 5%;
     }
 
+=======
+    .right-menu {
+        margin-right: 5%;
+    }
+>>>>>>> development
     .right-menu a {
         color: #545454;
         font-family: "Helvetica Norm";
@@ -90,13 +102,19 @@
         text-align: right;
         text-decoration: none;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> development
     .profile {
         display: flex;
         flex-direction: row;
         align-items: flex-start;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> development
     .return {
         display: flex;
         flex-direction: row;
@@ -104,6 +122,7 @@
         margin-top: 2%;
         margin-bottom: 2%;
     }
+<<<<<<< HEAD
 
     .return-link {
         text-decoration: none;
@@ -113,10 +132,19 @@
         color: #282828;
     }
 
+=======
+    .return-link {
+        text-decoration: none;
+    }
+    .return-link:hover {
+        color: #282828;
+    }
+>>>>>>> development
     .pr {
         padding-bottom: 5%;
         font-size: 40px;
     }
+<<<<<<< HEAD
 
     main {
         margin-left: 5%;
@@ -128,12 +156,24 @@
         font-size: 32px;
         text-align: center;
 
+=======
+    main {
+        margin-left: 5%;
+    }
+    .arrow{ 
+        font-family: "SF Pro Display";
+        font-size: 32px;
+        text-align: center;
+>>>>>>> development
         color: #282828;
         transform: rotate(-180deg);
         align-self: center;
         margin-right: 2%;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> development
     .chaif {
         position: static;
         width: 77px;
@@ -152,7 +192,10 @@
         flex-grow: 0;
         margin: 16px 0px;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> development
     .edit {
         font-style: normal;
         font-weight: normal;
@@ -160,7 +203,10 @@
         margin-top: 15%;
         text-decoration-line: underline;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> development
     .user_info {
         display: flex;
         flex-direction: column;
@@ -168,26 +214,39 @@
         margin-right: 15%;
         margin-left: 20%;
     }
+<<<<<<< HEAD
 
     @media (max-width: 768px) {
 
+=======
+    @media (max-width: 768px) {
+>>>>>>> development
         main {
             width: 95%;
         }
         .profile {
             flex-direction: column;
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> development
         .user_info {
             margin-right: 0%;
             margin-left: 0%;
             max-width: 90%;
             margin-top: 5%;
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> development
         .right-menu {
             display: none;
         }
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> development
 </style>

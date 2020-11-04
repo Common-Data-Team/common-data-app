@@ -65,6 +65,7 @@ class Project(Model):
     members = fields.ManyToManyField('models.Member', related_name='projects')
     leaders = fields.ManyToManyField('models.Leader', related_name='projects')
     organization = fields.ForeignKeyField('models.Organization', related_name='projects')
+    progress = fields.IntField()
     tags: fields.ManyToManyRelation['Tag']
 
 

@@ -81,6 +81,7 @@
             style='text-decoration: underline;'>
                     пользовательское соглашение</a></span>
       </div>
+      <p class="error-label" class:showError>{errorMessage}</p>
       <div class="button-block">
         <button type="button" on:click={submit}>Регистрация</button>
         <div class="p-wrapper"><p class="registration-p"><a class="registration-a" href='./signin'>Авторизация</a></p>

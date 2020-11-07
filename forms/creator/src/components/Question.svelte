@@ -23,14 +23,22 @@
 </script>
 
 <script>
+  import {fade} from 'svelte/transition';
   export let type;
-  export let content;
-  let selected;
+  export let content = {};
 </script>
 
-<h1>{selected}</h1>
-<select bind:value={selected}>
+<h1>{type}</h1>
+<select bind:value={type}>
   {#each Object.entries(components) as [comp_name, [object, name]]}
     <option value="{comp_name}">{name}</option>
   {/each}
 </select>
+<svelte:component this={components[type][0]} {content}/>
+
+<style>
+  select {
+    width: 200px;
+  }
+
+</style>

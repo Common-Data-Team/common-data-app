@@ -25,7 +25,12 @@
   {/each}
 </div>
 <div>
-  <button>Новый вопрос</button>
+  <button on:click={() => {
+    questions = questions.concat({
+      type: "MultipleChoice",
+      content: {question: 'Что добавить в мороженое?',
+                options: ['Ваниль', 'Шоколад', 'Маршмеллоу']}})
+  }}>Новый вопрос</button>
 </div>
 
 
@@ -35,6 +40,8 @@
     flex-flow: column nowrap;
     width: 100%;
     height: 100%;
+    border: 1px solid #666666;
+    border-radius: 30px;
   }
 
 </style>

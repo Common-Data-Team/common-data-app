@@ -1,30 +1,27 @@
 <script>
-    import Checkbox from "svelte-checkbox";
-
-    let checked = false;
-    
-    export let question = 'Choose multiple';
-    export let options = ['1', '2', '3', '4'];
+  import {Checkbox} from "svelte-mui";
+  export let question = 'Выберите несколько';
+  export let options = ['1', '2'];
+  let group = [];
 </script>
 
 <h2>{question}</h2>
 {#each options as option}
-    <div>
-        <Checkbox name={option} id={option} size="1.5rem" primaryColor="#1355FF"/>
-        <label class="text-login01">{option}</label>
-    </div>
+  <div class="option-block">
+    <Checkbox style="width: 40px" color="#1355FF"/>
+    <label>
+    <input value={option}>
+    </label>
+  </div>
 {/each}
 
 <style>
-    div {
-        display: flex;
-        margin-bottom: 1%;
-    }
+  .option-block {
+    display: flex;
+    justify-items: flex-start;
+    /*align-items: flex-start;*/
+  }
+  input {
 
-    .text-login01 {
-        cursor: pointer;
-        margin-right: 3%;
-        margin-left: 3%;
-    }
-
+  }
 </style>

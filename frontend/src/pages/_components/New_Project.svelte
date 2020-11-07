@@ -21,10 +21,6 @@
 
 <style>
 
-  .title {
-    margin-top: 10%;
-  }
-
   .img {
     object-fit: cover;
     height: 194px;
@@ -34,9 +30,7 @@
 
   .img-wrapper {
     width: 100%;
-    height: 60%;
     text-align: center;
-    margin-bottom: 1%;
   }
 
   .project-title {
@@ -48,8 +42,8 @@
     display: flex;
     flex-direction: column;
     max-width: 223px;
-    padding-right: 25px;
-    padding-bottom: 2%;
+    padding-right: 1%;
+    padding-bottom: 5%;
   }
 
   .user {

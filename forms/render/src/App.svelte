@@ -7,11 +7,15 @@
   let answers = {};
   let pages = [
     undefined,
-    [{type: "ShortText", content: {question: 'Как вас зовут?', placeholder: 'Иван Иванов'}}],
     [{
       type: "MultipleChoice",
       content: {question: 'Что добавить в мороженое?', options: ['Ваниль', 'Шоколад', 'Маршмеллоу']}
+    },
+    {
+      type: "MultipleChoice",
+      content: {question: 'Что добавить в мороженое?', options: ['Ваниль', 'Шоколад', 'Маршмеллоу']}
     }],
+    [{type: "ShortText", content: {question: 'Как вас зовут?', placeholder: 'Иван Иванов'}},],
     [{type: "OneChoice", content: {question: 'У вас хорошее настроение?', options: ['Да', 'Бывало и лучше', 'Нет']}}],
   ];
 
@@ -51,8 +55,9 @@
   </div>
 
   <div class="bottom-block">
+    <p class="created-on">Сделано на <a class="commondata-link" href="https://commondata.ru">Common Data</a></p>
     <div>
-      <p>Прогресс: {Math.round(percent)}%</p>
+      <p class="progress-title">Прогресс: {Math.round(percent)}%</p>
       <div class="progress-bar">
         <div class="filled-progress-bar" style="width: {percent}%"></div>
       </div>
@@ -93,9 +98,24 @@
     transition: all ease 0.5s;
   }
 
-  p {
+  .progress-title {
     padding: 0;
     margin: 0 0 5px 0;
+  }
+
+  .created-on {
+    margin-right: 20px;
+    cursor: default;
+  }
+
+  .commondata-link {
+    color: #0b7dda;
+    transition: color 0.7s ease;
+  }
+
+  .commondata-link:hover {
+    text-decoration: none;
+    color: #1355FF;
   }
 
   .page-wrapper {
@@ -107,6 +127,7 @@
   }
 
   .animation-box {
+    position: relative;
     width: 100%;
     height: 100%;
     display: grid;

@@ -4,7 +4,9 @@
   import FollowProject from './_components/Follow_Project.svelte';
   import NewProject from './_components/New_Project.svelte';
   import Footer from './_components/Footer.svelte';
+  import { Menu, Menuitem, Button, Icon } from 'svelte-mui';
 
+  let current_tag = 'all';
   let screenWidth;
   let current = 'user';
   let data = [
@@ -62,75 +64,6 @@
       description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
       userImageSrc: "/images/user_images/user.jpg",
       projectImageSrc: "/images/project_images/follow_project_card.png"
-    }
-  ]
-
-  let follow_projects = [
-    {
-      title: 'Облысение. Что мы узнали благодаря вам',
-      tags: ['Наука', 'Медицина'],
-      progress: 42,
-      author: "Камень Камень",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
-      projectImageSrc: "/images/project_images/follow_project_card.png"
-    },
-    {
-      title: 'Ходьба оказалась вредной?',
-      tags: ['Медицина'],
-      progress: 92,
-      author: "Камень Иванович",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
-      projectImageSrc: "/images/project_images/follow_project_card.png"
-    },
-    {
-      title: 'Ходьба оказалась вредной?',
-      tags: ['Медицина'],
-      progress: 92,
-      author: "Камень Иванович",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
-      projectImageSrc: "/images/project_images/follow_project_card.png"
-    },
-    {
-      title: 'Ходьба оказалась вредной?',
-      tags: ['Медицина'],
-      progress: 92,
-      author: "Камень Иванович",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
-      projectImageSrc: "/images/project_images/follow_project_card.png"
-    }
-  ]
-
-  let new_projects = [
-    {
-      title: 'Облысение. Что мы узнали благодаря вам',
-      tags: ['Наука', 'Медицина'],
-      progress: 42,
-      author: "Камень Камень",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
-      projectImageSrc: "/images/project_images/follow_project_card.png"
-    },
-    {
-      title: 'Ходьба оказалась вредной?',
-      tags: ['Медицина'],
-      progress: 92,
-      author: "Камень Иванович",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
-      projectImageSrc: "/images/project_images/star_project.png"
-    },
-    {
-      title: 'Ходьба оказалась вредной?',
-      tags: ['Медицина'],
-      progress: 92,
-      author: "Камень Иванович",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
-      projectImageSrc: "/images/project_images/Rectangle 4.png"
     }
   ]
 
@@ -214,21 +147,33 @@
       </div>
     {/if}
 
-    <!--
     <div class="auth-menu">
             <div class="menu-block">
-                <button
-                    class:menu-active="{selected_tag === 'all'}"
-                    on:click="{() => selected_tag = 'all'}">Все</button>
-                <button class:active="{selected_tag === 'bit'}" on:click="{() => selected_tag = 'bit'}">Бытовое</button>
-                <button>Наука</button>
-                <button>Медицина</button>
-                <button>Нейросети</button>
+            <button
+                class:active="{current_tag === 'all'}"
+                on:click="{() => current_tag = 'all'}"
+            >Все</button>
+                <button class:active="{current_tag === 'Бытовое'}"
+                on:click="{() => current_tag = 'Бытовое'}">Бытовое</button>
+                <button class:active="{current_tag === 'Наука'}"
+                on:click="{() => current_tag = 'Наука'}">Наука</button>
+                <button class:active="{current_tag === 'Медицина'}"
+                on:click="{() => current_tag = 'Медицина'}">Медицина</button>
+                <button class:active="{current_tag === 'Нейросети'}"
+                on:click="{() => current_tag = 'Нейросети'}">Нейросети</button>
             </div>
-            {#if auth}
-                <div class="user-buttons-menu">
-                    <img src="/images/user_images/user.jpg" class="user-image-menu"/>
-                </div>
+            <div class="user-buttons-menu">
+              {#if auth}
+                  <Menu origin="top right" width=328 dy=53>
+                    <div slot="activator">
+                      <img src="/images/user_images/user.jpg" class="user-image-menu"/>
+                    </div>
+                
+                    <Menuitem>Достижения</Menuitem>
+                    <Menuitem>Настройки</Menuitem>
+                    <hr />
+                    <Menuitem on:click={logout}>Выйти</Menuitem>
+                </Menu>
             {/if}
             {#if !auth}
                 <div class="not-user-buttons-menu">
@@ -236,27 +181,28 @@
                     <a href='./auth/signup'>регистрация</a>
                 </div>
             {/if}
+            </div>
     </div>
-    -->
+
     <div class="popular-block">
       <div class="block-title">
         <h2>ПОПУЛЯРНОЕ СЕЙЧАС</h2>
         <p class="arrow">→</p>
       </div>
-      <section style="--columns-amount: {Math.floor((Math.min(screenWidth, 1200) - 10) / 350)}">
+      <section style="--columns-amount: {Math.floor((Math.min(screenWidth, 1200) - 30) / 350)}">
           {#each data as card}
-            <Project {...card}></Project>
+                <Project {...card}></Project>
           {/each}
       </section>
     </div>
 
-    {#if auth}
+    {#if !auth}
       <div class="popular-block">
         <div class="block-title">
           <h2>ВЫ ОТСЛЕЖИВАЕТЕ</h2>
           <p class="arrow">→</p>
         </div>
-        <section style="--columns-amount: {Math.floor((Math.min(screenWidth, 1200) - 10) / 600)}">
+        <section style="--columns-amount: {Math.floor((Math.min(screenWidth, 1200) - 30) / 500)}">
             {#each data as card}
                 <FollowProject {...card}></FollowProject>
             {/each}
@@ -269,7 +215,7 @@
         <h2>НОВЫЕ ПРОЕКТЫ</h2>
         <p class="arrow">→</p>
       </div>
-      <section style="--columns-amount: {Math.floor((Math.min(screenWidth, 1200) - 10) / 223)}">
+      <section style="--columns-amount: {Math.floor((Math.min(screenWidth, 1200) - 30) / 223)}">
         {#each data as card}
             <NewProject {...card}></NewProject>
         {/each}
@@ -315,6 +261,16 @@
     background-color: #282828;
     color: #f9f9f9;
     text-align: center;
+  }
+
+  .not-user-buttons-menu {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+  }
+
+  .not-user-buttons-menu a {
+    color: #282828;
   }
 
   .description {
@@ -393,7 +349,7 @@
   }
 
   .popular-block {
-    max-width: 1200px;
+    max-width: 95%;
     flex-direction: column;
     display: flex;
   }
@@ -411,6 +367,31 @@
     font-family: "Helvetica Norm";
     --plain-font-size: calc(12px + (14 - 12) * ((100vw - 300px) / (1440 - 300)));
     text-decoration: none;
+  }
+
+  .user-buttons-menu {
+    margin-left: auto;
+  }
+
+  .auth-menu {
+    display: flex;
+    max-width: 90%;
+  }
+
+  .menu-block {
+    display: flex;
+  }
+
+  .user-image-menu {
+    width: 41px;
+    height: 41px;
+    border-radius: 50%;
+  }
+
+
+  .auth-menu button {
+    border: none;
+    padding: 0.188em 0.625em;
   }
 
   button {

@@ -5,6 +5,7 @@
   import NewProject from './_components/New_Project.svelte';
   import Footer from './_components/Footer.svelte';
 
+  let screenWidth;
   let current = 'user';
   let data = [
     {
@@ -34,6 +35,34 @@
       userImageSrc: "/images/user_images/user.jpg",
       projectImageSrc: "/images/project_images/follow_project_card.png"
     },
+
+    {
+      title: 'Плитка из камня',
+      tags: ['Наука', 'Медицина'],
+      progress: 42,
+      author: "Камень Камень",
+      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
+      userImageSrc: "/images/user_images/user.jpg",
+      projectImageSrc: "/images/project_images/Rectangle 4.png"
+    },
+    {
+      title: 'Влияние проходимого расстояния на здоровье',
+      tags: ['Наука', 'Медицина'],
+      progress: 92,
+      author: "Камень Иванович",
+      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
+      userImageSrc: "/images/user_images/user.jpg",
+      projectImageSrc: "/images/project_images/star_project.png"
+    },
+    {
+      title: 'Влияние проходимого расстояния на здоровье',
+      tags: ['Наука', 'Медицина'],
+      progress: 80,
+      author: "Камень Иванович",
+      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
+      userImageSrc: "/images/user_images/user.jpg",
+      projectImageSrc: "/images/project_images/follow_project_card.png"
+    }
   ]
 
   let follow_projects = [
@@ -117,6 +146,7 @@
 <svelte:head>
   <title>Common Data</title>
 </svelte:head>
+<svelte:window bind:innerWidth={screenWidth}/>
 
 <main>
   <div class="main-content-block">
@@ -213,13 +243,11 @@
         <h2>ПОПУЛЯРНОЕ СЕЙЧАС</h2>
         <p class="arrow">→</p>
       </div>
-      <div class="container">
-        <div class="cards">
+      <section style="--columns-amount: {Math.floor((Math.min(screenWidth, 1200) - 10) / 350)}">
           {#each data as card}
             <Project {...card}></Project>
           {/each}
-        </div>
-      </div>
+      </section>
     </div>
 
     {#if auth}
@@ -228,13 +256,11 @@
           <h2>ВЫ ОТСЛЕЖИВАЕТЕ</h2>
           <p class="arrow">→</p>
         </div>
-        <div class="container">
-          <div class="cards">
-            {#each follow_projects as card}
-              <FollowProject {...card}></FollowProject>
+        <section style="--columns-amount: {Math.floor((Math.min(screenWidth, 1200) - 10) / 600)}">
+            {#each data as card}
+                <FollowProject {...card}></FollowProject>
             {/each}
-          </div>
-        </div>
+        </section>
       </div>
     {/if}
 
@@ -243,13 +269,11 @@
         <h2>НОВЫЕ ПРОЕКТЫ</h2>
         <p class="arrow">→</p>
       </div>
-      <div class="container">
-        <div class="cards">
-          {#each new_projects as card}
+      <section style="--columns-amount: {Math.floor((Math.min(screenWidth, 1200) - 10) / 223)}">
+        {#each data as card}
             <NewProject {...card}></NewProject>
-          {/each}
-        </div>
-      </div>
+        {/each}
+      </section>
     </div>
   </div>
 </main>
@@ -268,6 +292,14 @@
 
   .btn-about button {
     width: 178px;
+  }
+
+  section {
+    display: grid;
+    justify-items: left;
+    grid-template-columns: repeat(var(--columns-amount), 1fr);
+    height: 100%;
+    width: 100%;
   }
 
   .arrow {
@@ -361,7 +393,7 @@
   }
 
   .popular-block {
-    max-width: 1130px;
+    max-width: 1200px;
     flex-direction: column;
     display: flex;
   }
@@ -389,19 +421,12 @@
     color: #1355FF;
   }
 
-  .container {
-    max-width: 1200px;
-    text-align: left;
-  }
-
-  .cards {
-    display: flex;
-    justify-content: left;
-    align-items: left;
-    flex-wrap: wrap;
-  }
-
   @media (max-width: 768px) {
+
+    .popular-block {
+      max-width: 768px;
+    }
+
     .description {
       max-width: 90%;
     }

@@ -1,14 +1,12 @@
 <script>
-    import { Radio } from 'svelte-mui';
+  import {Radio} from 'svelte-mui';
+  import Choice from './Choice.svelte';
 
-    export let question = 'Choose one';
-    export let group = null;
-    export let options = ['1', '2', '3', '4'];
+  export let question = 'Выберите несколько';
+  export let options = ["1", ];
+  let group = [];
 </script>
 
-<h2>{question}</h2>
-{#each options as option}
-    <Radio color="#1355FF" ripple bind:group value={option}>
-        <span>{option}</span>
-    </Radio>
-{/each}
+<Choice {question} {options} {group} component={Radio}/>
+
+

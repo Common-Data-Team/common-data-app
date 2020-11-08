@@ -5,10 +5,13 @@
 </script>
 
 <main>
-  {#each pages as page}
+  {#each Array.from(pages.entries()) as [i, page]}
     <Page/>
+    <button on:click={() => {pages.splice(i, 1); pages=pages}}>Удалить страницу</button>
+
   {/each}
   <button on:click={() => {pages = pages.concat(Page)}}>Новая страница</button>
+
 </main>
 
 <style>

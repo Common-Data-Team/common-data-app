@@ -17,26 +17,14 @@
   <div class="column-block">
     <h3>СВЯЗАТЬСЯ С НАМИ</h3>
     <ul>
-      <a href="vk.com">
+      <a href="mailto:help@commondata.ru">
         <li>help@commondata.ru</li>
-      </a>
-      <a href="vk.com">
-        <li>+7 (901) 723-04-47</li>
       </a>
     </ul>
   </div>
   <div class="column-block">
     <h3>СОЦСЕТИ</h3>
     <ul>
-      <a href="https://vk.com">
-        <li>facebook</li>
-      </a>
-      <a href="vk.com">
-        <li>telegram</li>
-      </a>
-      <a href="vk.com">
-        <li>vkontakte</li>
-      </a>
       <a href="https://github.com/tpofd/common-data-app">
         <li>github</li>
       </a>

@@ -78,6 +78,7 @@
 
 <svelte:head>
   <title>Common Data</title>
+  <meta name="yandex-verification" content="e2935006109ebd77" />
 </svelte:head>
 <svelte:window bind:innerWidth={screenWidth}/>
 

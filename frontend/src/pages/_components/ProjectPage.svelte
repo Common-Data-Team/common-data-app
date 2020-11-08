@@ -4,46 +4,79 @@
     import Footer from './Footer.svelte';
     import Tag from './Tag.svelte';
     
-    export let name = 'project_name';
-    export let projectImageSrc = "/images/project_images/main_project.png";
-    export let userImageSrc = "/images/user_images/user.jpg";
-    export let author = "Камень Иванович";
+    export let project_data = {
+        project_id: 0,
+        author_id: 0,
+        title: 'Project_Name',
+        projectImgSrc: "./images/project_images/main_project.png",
+        project_description: "Какое-то значение",
+        project_participants_count: 2500,
+        project_participant_target: 5000,
+        project_create_date: "08-11-2020",
+        project_status: "active",
+        project_page: "Project.svelte",
+        project_markdown: "# Example Title\n\n- this\n- is\n- a list\n\n![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)",
+        tags: [
+            {
+                tag_name: 'Наука',
+                tag_href: '/science'
+            }
+        ]
+    }
 
-    export let author_id = 123;
-    export let user_id = 123;
+    export let user_data = {
+        user_id: 0,
+        user_name: "Камень Иванович",
+        email: "kamen.ivanovich@gmail.com",
+        about: "Я каменщик, работаю три дня",
+        userImageSrc: "./images/user_images/user.jpg",
+        user_projects_page: "/apps/user465_projects",
+        user_profile_page: "/apps/user465",
+        tags: [
+            {
+                tag_name: 'Наука',
+                tag_href: '/science'
+            }
+        ],
+        user_projects: [
+            {
+                project_id: 0
+            }
+        ],
+        participant_projects: [
+            {
+                project_id: 0
+            }
+        ],
+        followed_projects: [
+            {
+                project_id: 0
+            }
+        ]
+    }
 
-    export let target = 5000;
-    export let participants = 2500;
-
-    export let tags = [
-        {
-            tag_name: 'Наука',
-            tag_href: '/science'
-        }
-    ]
-
-    let markdown = "# Example Title\n\n- this\n- is\n- a list\n\n![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)";
-    let progress = participants / target * 100;
+    let name = "project_data.title"
+    let progress = project_data.project_participants_count / project_data.project_participant_target * 100;
     
 </script>
 
-{#if author_id == user_id}
+{#if project_data.author_id == user_data.user_id}
     <div class="project-block-content">
         <div class="project-description">
             <div class="img-wrapper">
-                <img size="100%, 20%" src="{projectImageSrc}" class="img" alt="Картинка проекта">
+                <img size="100%, 20%" src="{project_data.projectImageSrc}" class="img" alt="Картинка проекта">
             </div>
             <div class="text-description" >
                 <Textfield
                     autocomplete="off"
                     label='Название проекта'
-                    value={name}
+                    value={project_data.title}
                     bind:name
                 />
                 <Textfield
                     autocomplete="off"
                     label='Необходимое количество пользователей'
-                    value={target}
+                    value={project_data.target}
                     type=number
                     bind:name
                 />
@@ -51,8 +84,8 @@
         </div>
     
         <div class='project-info'>
-            <textarea bind:value={markdown} placeholder="Enter markdown here"/>
-            <div class="preview">{@html marked(markdown)}</div>
+            <textarea bind:value={project_data.project_markdown} placeholder="Enter markdown here"/>
+            <div class="preview">{@html marked(project_data.project_markdown)}</div>
         </div>
     
         <button class='take-part-btn'>Сохранить</button>
@@ -61,31 +94,31 @@
     <div class="project-block-content">
         <div class="project-description">
             <div class="img-wrapper">
-                <img size="100%, 20%" src="{projectImageSrc}" class="img" alt="Картинка проекта">
+                <img size="100%, 20%" src="{project_data.projectImageSrc}" class="img" alt="Картинка проекта">
             </div>
             <div class="text-description" >
                 <h2>{name}</h2>
                 <div class="bar">
                     <div class="progress" style="width: {progress}%"></div>
                 </div>
-                <p><strong>{participants}</strong> человек приняло участие</p>
-                <p class="target">из {target} запрошенных</p>
+                <p><strong>{project_data.project_participants_count}</strong> человек приняло участие</p>
+                <p class="target">из {project_data.project_participant_target} запрошенных</p>
                 <div class="tag-container">
                     <div class="tags">
-                        {#each tags as tag}
+                        {#each project_data.tags as tag}
                             <Tag {...tag}></Tag>
                         {/each}
                     </div>
                 </div>
                 <div class="user">
-                    <img src="{userImageSrc}" class="user-img" alt="Аватарка"/>
-                    <p>{author}</p>
+                    <img src="{user_data.userImageSrc}" class="user-img" alt="Аватарка"/>
+                    <p>{user_data.user_name}</p>
                 </div>
                 <button class='take-part-btn'>Принять участие</button>
             </div>
         </div> 
         <div class='project-info'>
-            <div>{@html marked(markdown)}</div>
+            <div>{@html marked(project_data.project_markdown)}</div>
         </div>
     </div>
 {/if}
@@ -150,6 +183,8 @@
     }
 
     .project-info {
+        max-width: 100%;
+        display: flex;
         margin-top: 5%;
     }
 
@@ -178,20 +213,20 @@
     textarea, .preview {
 		box-sizing: border-box;
 		display: block;
-		width: 70%;
 	}
 
 	textarea {
+        width: 30%;
 		font-family: monospace, Roboto;
-		height: 200px;
+		height: 500px;
 		border: none;
 		margin: 0;
 	}
 
 	.preview {
+        width: 65%;
 		height: 75%;
 		padding: 2rem;
-		border-top: solid 2px #282828;
 	}
 
 	:global(body) {

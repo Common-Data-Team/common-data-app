@@ -1,8 +1,7 @@
 <script>
     import ProfileInfo from './_components/Profile_Info.svelte';
 
-    let data = [
-        {
+    let data = {
         user_name: "user",
         user_surname: "Драгун",
         user_avatar_link: "/images/user_images/user465.jpg",
@@ -40,9 +39,6 @@
             }
         ]
     }
-]
 </script>
 
-{#each data as user}
-    <ProfileInfo {...user}></ProfileInfo>
-{/each}
+<ProfileInfo {...data}></ProfileInfo>

@@ -78,6 +78,7 @@
 
 <svelte:head>
   <title>Common Data</title>
+  <meta name="yandex-verification" content="e2935006109ebd77" />
 </svelte:head>
 <svelte:window bind:innerWidth={screenWidth}/>
 
@@ -166,7 +167,8 @@
               {#if auth}
                   <Menu origin="top right" width=328 dy=53>
                     <div slot="activator">
-                      <img src="/images/user_images/user.jpg" class="user-image-menu"/>
+                      <!-- svelte-ignore a11y-missing-attribute -->
+                      <img src="/images/user_images/user.jpg" class="user-image-menu" />
                     </div>
                 
                     <Menuitem>Достижения</Menuitem>
@@ -196,7 +198,7 @@
       </section>
     </div>
 
-    {#if !auth}
+    {#if auth}
       <div class="popular-block">
         <div class="block-title">
           <h2>ВЫ ОТСЛЕЖИВАЕТЕ</h2>

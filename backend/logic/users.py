@@ -100,14 +100,13 @@ async def profile(user: User = Depends(get_user)):
 
 
 class Edit(BaseModel):
-    name: Optional[str]
     fio: Optional[str]
     tags: Optional[List[str]]
 
 
 @router.put('/edit', response_model=PrivateUser)
 async def edit(edited: Edit, user=Depends(get_user)):
-    user = await user.update_from_dict(**edited.dict())
+    user = await user.update_from_dict(edited.dict())
     await user.save()
     return await PrivateUser(user)
 
@@ -116,3 +115,8 @@ async def edit(edited: Edit, user=Depends(get_user)):
 async def destroy(user=Depends(get_user)):
     await user.delete()
     return {'ok': True}
+
+
+@router.get('/all')
+async def all_users():
+    return await PrivateUser.from_queryset(User.all())

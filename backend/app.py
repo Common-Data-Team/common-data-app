@@ -3,7 +3,7 @@ import uvicorn
 from fastapi import FastAPI
 from tortoise.contrib.fastapi import register_tortoise
 from starlette.middleware.cors import CORSMiddleware
-from logic import users, organizations, projects
+from logic import users, projects, tags
 from settings import TORTOISE_ORM
 
 
@@ -40,15 +40,15 @@ app.include_router(
 )
 
 app.include_router(
-    organizations.router,
-    prefix='/organizations',
-    tags=['Organizations']
-)
-
-app.include_router(
     projects.router,
     prefix='/projects',
     tags=['Projects']
+)
+
+app.include_router(
+    tags.router,
+    prefix='/tags',
+    tags=['Tags']
 )
 
 

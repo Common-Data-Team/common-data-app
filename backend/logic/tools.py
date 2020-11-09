@@ -10,13 +10,13 @@ def random_string(length=5):
 
 async def generate_link(model):
     counter = 5
-    link = random_string(counter)
+    project_link = random_string(counter)
     while True:
-        if await model.get_or_none(link=link) is None:
+        if await model.get_or_none(project_link=project_link) is None:
             break
         counter += 1
-        link = random_string(counter)
-    return link
+        project_link = random_string(counter)
+    return project_link
 
 
 async def instance_getter(model, **params):

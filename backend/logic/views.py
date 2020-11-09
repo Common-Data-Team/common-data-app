@@ -27,11 +27,6 @@ class Success(BaseModel):
     payload: Optional[Any] = None
 
 
-class EditTask(BaseModel):
-    title: Optional[str] = None
-    done: Optional[bool] = None
-
-
 class EditGroup(BaseModel):
     title: Optional[str] = None
     public: Optional[bool] = None

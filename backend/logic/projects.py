@@ -1,15 +1,15 @@
 from fastapi import APIRouter, Depends, Body, HTTPException, Query
-from models import Project, User
+from models import Project, User, Tag
 from pydantic import BaseModel, Field
 from tortoise.contrib.pydantic import pydantic_model_creator, pydantic_queryset_creator
 from logic.users import get_user
-from logic.tools import generate_link, instance_getter, m2m_editor
-from tools import exclude
+from logic.tools import generate_link, instance_getter, m2m_editor, exclude
 
 
 PrivateProject = pydantic_model_creator(Project)
 PublicProject = pydantic_model_creator(Project, exclude=('is_active', ))
-EditableProject = pydantic_model_creator(Project, exclude=('id', 'is_active', 'members', 'leaders', 'tags'))
+EditableProject = pydantic_model_creator(Project, exclude=(
+    'id', 'is_active', 'members', 'leaders', 'creation_date', 'project_link', 'participants_count'))
 router = APIRouter()
 
 
@@ -46,7 +46,7 @@ async def edit(project: Project = Depends(project_by_link),
                edited: EditableProject = Body(...)):
     if await project.leaders.filter(user=user):
         project = await project.update_from_dict(exclude(edited.dict(), ['tags', ]))
-        await m2m_editor(project.tags, {edited.tags})
+        await m2m_editor(project.tags, [tag for tag in edited.dict()['tags']], Tag)
         await project.save()
 
         return await PrivateProject.from_tortoise_orm(project)

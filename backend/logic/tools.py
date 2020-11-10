@@ -9,17 +9,16 @@ def random_string(length=5):
 
 
 def exclude(dictionary, exclude_keys):
-    return {key: value for key, value in dictionary.items() if exclude_keys not in dictionary.keys()}
+    return {key: value for key, value in dictionary.items() if key not in exclude_keys}
 
 
 async def m2m_editor(instances_to, insert_items, inserted_instance):
     buf = await instances_to.all()
-
     if len(buf) > 0:
         await instances_to.remove(*buf)
 
     for pair in insert_items:
-        tag_instance = await inserted_instance.get_or_none(*pair)
+        tag_instance = await inserted_instance.get_or_none(**pair)
         if tag_instance is not None:
             await instances_to.add(tag_instance)
 

@@ -1,6 +1,6 @@
 
-TORTOISE_ORM = {
-    "connections": {"default": "sqlite://db/db.sqlite3"},
+PROD_TORTOISE_ORM = {
+    "connections": {"default": "sqlite://db/prod/db.sqlite3"},
     "apps": {
         "models": {
             "models": ["models"],
@@ -8,6 +8,17 @@ TORTOISE_ORM = {
         },
     },
 }
+
+TEST_TORTOISE_ORM = {
+    "connections": {"default": "sqlite://db/test/db.sqlite3"},
+    "apps": {
+        "models": {
+            "models": ["models"],
+            "default_connection": "default",
+        },
+    },
+}
+
 
 SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
 ALGORITHM = "HS256"

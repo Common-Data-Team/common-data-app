@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Depends, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from tortoise.contrib.pydantic import pydantic_model_creator
-from models import User, Member, Leader
+from models import User, Member, Leader, Tag
 from typing import Union, Optional, List
 from datetime import timedelta, datetime
 from passlib.context import CryptContext
@@ -100,15 +100,24 @@ async def profile(user: User = Depends(get_user)):
 
 
 class Edit(BaseModel):
-    fio: Optional[str]
-    tags: Optional[List[str]]
+    fio: str
+    tags: List[str]
+    about: str
 
 
 @router.put('/edit', response_model=PrivateUser)
 async def edit(edited: Edit, user=Depends(get_user)):
-    user = await user.update_from_dict(edited.dict())
+    user = await user.update_from_dict(dict(fio=edited.fio, about=edited.about))
+    user_tags = set(await user.tags.all())
+    if len(user_tags) > 0:
+        await user.tags.remove(*user_tags)
+
+    for tag in edited.tags:
+        tag_instance = await Tag.get_or_none(name=tag)
+        if tag_instance is not None:
+            await user.tags.add(tag_instance)
     await user.save()
-    return await PrivateUser(user)
+    return await PrivateUser.from_tortoise_orm(user)
 
 
 @router.delete('/delete')

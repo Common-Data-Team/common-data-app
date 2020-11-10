@@ -3,10 +3,13 @@ from models import Project, User
 from pydantic import BaseModel, Field
 from tortoise.contrib.pydantic import pydantic_model_creator, pydantic_queryset_creator
 from logic.users import get_user
-from logic.tools import generate_link, instance_getter
+from logic.tools import generate_link, instance_getter, m2m_editor
+from tools import exclude
+
 
 PrivateProject = pydantic_model_creator(Project)
-PublicProject = pydantic_model_creator(Project)
+PublicProject = pydantic_model_creator(Project, exclude=('is_active', ))
+EditableProject = pydantic_model_creator(Project, exclude=('id', 'is_active', 'members', 'leaders', 'tags'))
 router = APIRouter()
 
 
@@ -16,10 +19,13 @@ class New(BaseModel):
     participants_target: int
 
 
-class Edit(BaseModel):
-    name: str = Field(max_length=128)
-    description: str
-    participants_target: int
+# class Edit(BaseModel):
+#     title: str = Field(max_length=128)
+#     description: str
+#     participants_target: int
+#     questionnaire: str
+#     markdown: str
+#     description: str
 
 
 async def project_by_link(project_link: str):
@@ -30,16 +36,21 @@ async def project_by_link(project_link: str):
 async def create(new_project: New = Body(...), user: User = Depends(get_user)):
     project_link = await generate_link(Project)
     project = await Project.create(**new_project.dict(), project_link=project_link)
+    await project.leaders.add(user)
     return await PrivateProject.from_tortoise_orm(project)
 
 
 @router.put('/{project_link}/edit', response_model=PrivateProject)
 async def edit(project: Project = Depends(project_by_link),
                user: User = Depends(get_user),
-               edited: Edit = Body(...)):
-    project = await project.update_from_dict(edited.dict())
-    await project.save()
-    return await PrivateProject.from_tortoise_orm(project)
+               edited: EditableProject = Body(...)):
+    if await project.leaders.filter(user=user):
+        project = await project.update_from_dict(exclude(edited.dict(), ['tags', ]))
+        await m2m_editor(project.tags, {edited.tags})
+        await project.save()
+
+        return await PrivateProject.from_tortoise_orm(project)
+    raise HTTPException(403, 'Access denied')
 
 
 @router.get('/all')

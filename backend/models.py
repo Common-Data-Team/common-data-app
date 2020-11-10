@@ -45,7 +45,7 @@ class Project(Model):
     project_link = fields.CharField(max_length=64)
     participants_target = fields.IntField()
 
-    questionnaire_link = fields.CharField(null=True, max_length=256)
+    questionnaire = fields.TextField(null=True)
     is_active = fields.BooleanField(default=True)
     markdown = fields.TextField(default="# Вы можете редактировать содержимое страницы")
     creation_date = fields.DatetimeField(auto_now_add=True)
@@ -63,6 +63,9 @@ class Tag(Model):
     name = fields.CharField(max_length=64)
     projects = fields.ManyToManyField('models.Project', related_name='tags')
     users: fields.ManyToManyRelation['User']
+
+    class PydanticMeta:
+        exclude = ['id', 'users']
 
 
 Tortoise.init_models(["models"], "models")

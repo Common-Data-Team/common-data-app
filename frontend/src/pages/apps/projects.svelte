@@ -1,6 +1,6 @@
 <script>
     import { Dialog, Textfield } from 'svelte-mui';
-    import Project from './Project.svelte';
+    import Project from './_components/Project.svelte';
 
     let screenWidth;
 

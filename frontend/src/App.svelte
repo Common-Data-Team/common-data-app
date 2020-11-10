@@ -1,6 +1,10 @@
 <script>
   import {Router} from "@sveltech/routify";
   import {routes} from "../.routify/routes";
+  import {setContext} from "svelte";
+
+  setContext('apiUrl', 'http://localhost:8000/');
+  setContext('selfUrl', 'http://localhost:5000/');
 </script>
 
 <svelte:head>

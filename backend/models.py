@@ -55,6 +55,7 @@ class Project(Model):
 
     members = fields.ManyToManyField('models.Member', related_name='projects')
     leaders = fields.ManyToManyField('models.Leader', related_name='projects')
+    # subscribers = fields.ManyToManyField('models.User', related_name='favourite_projects')
     tags: fields.ManyToManyRelation['Tag']
 
 

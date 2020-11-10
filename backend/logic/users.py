@@ -2,19 +2,44 @@ from fastapi import APIRouter, HTTPException, Depends, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from tortoise.contrib.pydantic import pydantic_model_creator
 from models import User, Member, Leader, Tag
-from typing import Union, Optional, List
+from typing import Union, Optional, List, Any
 from datetime import timedelta, datetime
 from passlib.context import CryptContext
 from jose import JWTError, jwt
 
 from settings import ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES, SECRET_KEY
-from logic.views import Token, PrivateUser, PublicUser
 from pydantic import BaseModel
 
 
 router = APIRouter()
 pwd_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/users/token")
+
+PublicUser = pydantic_model_creator(User, name='PublicUser')
+PrivateUser = pydantic_model_creator(User, name='PrivateUser')
+
+
+class NewUser(BaseModel):
+    username: str
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+
+class PublicHash(BaseModel):
+    hash: str
+
+
+class Success(BaseModel):
+    ok: bool
+    payload: Optional[Any] = None
+
+
+class EditGroup(BaseModel):
+    title: Optional[str] = None
+    public: Optional[bool] = None
 
 
 async def authenticate_user(username: str, password: str) -> Union[User, None]:
@@ -93,7 +118,6 @@ async def new_user(form_data: OAuth2PasswordRequestForm = Depends()):
     token = await create_user_and_token(form_data.username, form_data.password)
     return Token(access_token=token, token_type='bearer')
 
-
 @router.get('/profile', response_model=PrivateUser)
 async def profile(user: User = Depends(get_user)):
     return await PrivateUser.from_tortoise_orm(user)
@@ -124,6 +148,14 @@ async def edit(edited: Edit, user=Depends(get_user)):
 async def destroy(user=Depends(get_user)):
     await user.delete()
     return {'ok': True}
+
+
+@router.get('/{user_id}')
+async def user_by_id(user_id: int):
+    user = await User.get_or_none(id=user_id)
+    if user:
+        return await PublicUser.from_tortoise_orm(user)
+    raise HTTPException(404, 'User not found')
 
 
 @router.get('/all')

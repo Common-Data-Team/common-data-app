@@ -3,6 +3,7 @@
   import MultipleChoice from './MultipleChoice.svelte';
   import OneChoice from './OneChoice.svelte';
   import ShortText from './ShortText.svelte';
+
   // import FileUpload from './FileUpload.svelte';
   // import LongText from './LongText.svelte';
   // import Picture from './Picture.svelte';
@@ -23,17 +24,22 @@
 </script>
 
 <script>
-  export let type;
-  export let content = {};
+  export let instance = {};
+  export let destroyer = () => {
+  };
+  let selected = "OneChoice";
 </script>
 
 <div class="component">
-  <select bind:value={type}>
-    {#each Object.entries(components) as [component_str, {name, component_js}]}
-      <option value="{component_str}">{name}</option>
-    {/each}
-  </select>
-  <svelte:component this={components[type].component}/>
+  <div class="panel">
+    <select bind:value={selected}>
+      {#each Object.entries(components) as [component_str, {name, component_js}]}
+        <option value="{component_str}">{name}</option>
+      {/each}
+    </select>
+    <button on:click={destroyer}>Удалить вопрос</button>
+  </div>
+  <svelte:component this={components[selected].component} content={instance.content}/>
 </div>
 
 <style>
@@ -42,7 +48,18 @@
   }
 
   .component {
-    max-width: 800px;
+    width: 80%;
+    max-width: 1000px;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    border: 1px solid #888888;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
   }
 
+  .panel {
+    display: flex;
+  }
 </style>

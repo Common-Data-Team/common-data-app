@@ -1,9 +1,13 @@
 <script>
-  export let question = 'Enter a text';
-  export let placeholder = 'Short Text';
+  export let content = {};
+  let {question, placeholder} = content;
+  question = question || 'Enter a text';
+  placeholder = placeholder || 'Short Text';
 </script>
 
-<h2>{question}</h2>
+<label>
+  <input class="question" placeholder="Новый вопрос">
+</label>
 <label>
   <input type="text" placeholder={placeholder}>
 </label>
@@ -27,9 +31,13 @@
   label {
     display: flex;
     position: relative;
-    height: 50px;
-    margin-bottom: 10px;
+    /*height: 50px;*/
+    /*margin-bottom: 10px;*/
     width: 100%;
+  }
+  .question{
+    font-weight: bold;
+    border: none;
   }
 
 </style>

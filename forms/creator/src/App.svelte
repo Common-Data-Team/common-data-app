@@ -1,6 +1,6 @@
 <script>
   import Page from './components/Page.svelte';
-  let pages = [0,];
+  let pages = [0, 1];
 
 </script>
 
@@ -8,7 +8,6 @@
   {#each Array.from(pages.entries()) as [i, page]}
     <Page/>
     <button on:click={() => {pages.splice(i, 1); pages=pages}}>Удалить страницу</button>
-
   {/each}
   <button on:click={() => {pages = pages.concat(Page)}}>Новая страница</button>
 

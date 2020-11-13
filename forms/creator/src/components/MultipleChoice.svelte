@@ -1,8 +1,10 @@
 <script>
   import {Checkbox} from 'svelte-mui';
   import Choice from './Choice.svelte';
-  export let question = 'Выберите несколько';
-  export let options = ["1", ];
+  export let content = {};
+  let {question, options} = content;
+  question = question || 'Выберите несколько';
+  options = options || ["", ];
   let group = [];
 </script>
 

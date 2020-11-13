@@ -2,37 +2,26 @@
   import Question from './Question.svelte';
 
 
-  export let questions =
-      [
-        {
-          type: "MultipleChoice",
-          content: {question: 'Что добавить в мороженое?', options: ['Ваниль', 'Шоколад', 'Маршмеллоу']}
-        },
-        {
-          type: "MultipleChoice",
-          content: {question: 'Что добавить в мороженое?', options: ['Ваниль', 'Шоколад', 'Маршмеллоу']}
-        }
-      ];
+  export let questions = [1, 2];
 
   // questions = questions || [{type: "Statement", content: {statement: "Упсс, это пустая страница :)"}}];
 
   let selected;
 
+  function destroyer(destroy){
+    questions = questions.filter(item => item !== destroy)
+    console.log(JSON.stringify(questions))
+  }
 </script>
 
 <div class="component">
-  {#each Array.from(questions.entries()) as [i, {type, content}]}
-    <Question {type} {content}/>
-<!--    <button on:click={() => {options.splice(i, 1); options = options}}>Удалить опцию</button>-->
-    <button on:click={() => {questions.splice(i, 1); questions=questions}}>Удалить вопрос</button>
+  {#each Array.from(questions.entries()) as [i, _]}
+    <Question bind:instance={questions[i]} destroyer={() => destroyer(questions[i])}/>
   {/each}
 </div>
 <div>
   <button on:click={() => {
-    questions = questions.concat({
-      type: "MultipleChoice",
-      content: {question: 'Что добавить в мороженое?',
-                options: ['Ваниль', 'Шоколад', 'Маршмеллоу']}})
+    questions = questions.concat({})
   }}>Новый вопрос</button>
 </div>
 

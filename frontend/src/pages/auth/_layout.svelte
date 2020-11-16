@@ -1,5 +1,5 @@
 <script>
-  import {goto, url} from "@sveltech/routify";
+  import {goto, url} from "@roxi/routify";
   import {checkStoreAndCoockie, user, selfUrl} from "../_api.js";
 
   // $: if (!checkStoreAndCoockie()) $goto("./auth/signup", {}, false);

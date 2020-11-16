@@ -1,5 +1,5 @@
 <script>
-  import {BaseTransition} from '@sveltech/routify/decorators'
+  import {BaseTransition} from '@roxi/routify/decorators'
   import {fade} from 'svelte/transition'
 
   const configs = [

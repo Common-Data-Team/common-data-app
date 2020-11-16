@@ -1,5 +1,5 @@
 <script>
-  import {ready, url, params} from '@sveltech/routify';
+  import {ready, url, params} from '@roxi/routify';
   import {getContext} from 'svelte';
   import {writable} from "svelte/store";
 

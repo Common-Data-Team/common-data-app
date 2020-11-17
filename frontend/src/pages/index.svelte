@@ -1,5 +1,6 @@
 <script>
-  import {checkStoreAndCoockie, clearStoreAndCookie} from "./_api";
+  import { goto } from '@roxi/routify';
+  import {checkStoreAndCoockie, clearStoreAndCookie, getCookie} from "./_api";
   import Project from './_components/Project.svelte';
   import FollowProject from './_components/Follow_Project.svelte';
   import NewProject from './_components/New_Project.svelte';
@@ -172,7 +173,7 @@
                     </div>
                 
                     <Menuitem>Достижения</Menuitem>
-                    <Menuitem>Настройки</Menuitem>
+                    <Menuitem on:click={() => $goto('./apps/user'+getCookie('user_id'))}>Настройки</Menuitem>
                     <hr />
                     <Menuitem on:click={logout}>Выйти</Menuitem>
                 </Menu>

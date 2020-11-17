@@ -1,12 +1,14 @@
 <script>
+    import { goto } from '@roxi/routify';
+
     export let title = 'Влияние проходимого расстояния на здоровье';
     export let progress = 42;
-    export let projectImageSrc = "/images/project_images/follow_project_card.png";
+    export let project_img = "/images/project_images/follow_project_card.png";
   </script>
   
-  <div class="project-card">
+  <div class="project-card" on:click={() => $goto('../../project')}>
     <div class="img-wrapper">
-      <img size="100%, 20%" src="{projectImageSrc}" class="img" alt="Картинка проекта">
+      <img size="100%, 20%" src="{project_img}" class="img" alt="Картинка проекта">
     </div>
   
     <div class="title">

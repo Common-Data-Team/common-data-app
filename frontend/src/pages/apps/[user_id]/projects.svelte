@@ -77,12 +77,13 @@ function textareaIncrease(event) {
         elem.style.height = elem.scrollHeight + 'px';
     }
 }
+
 onMount(() => getCookie('user_id') === $params.user_id.slice(4) ? auth = true : auth = false);
+
 async function createProject() {
     const response = await authorizedRequest('projects/create', 'Post', {title, description, participants_target});
-    data = [...data, response[0]];
+    if (response[0] !== null) data = [...data, response[0]];
     visible = false;
-    console.log(data);
 }
 </script>
 

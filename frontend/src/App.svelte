@@ -1,6 +1,16 @@
 <script>
-  import {Router} from "@sveltech/routify";
+  import {Router} from "@roxi/routify";
   import {routes} from "../.routify/routes";
+  import {setContext} from "svelte";
+
+  // TODO Выстроить условие среды
+  if (true) {
+    setContext('apiUrl', 'http://localhost:8000/');
+    setContext('selfUrl', 'http://localhost:5000/');
+  } else {
+    setContext('apiUrl', 'https://backend.commondata.ru/');
+    setContext('selfUrl', 'https://commondata.ru/');
+  }
 </script>
 
 <svelte:head>

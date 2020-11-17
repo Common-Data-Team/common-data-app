@@ -1,7 +1,10 @@
 import {writable, get} from 'svelte/store'
+import {setContext} from "svelte";
 
 export const apiUrl = 'https://backend.commondata.ru/';
-export const selfUrl = 'https://commondata.ru/';
+export const selfUrl = 'http://localhost:5000/';
+
+
 export let user = writable("")
 
 
@@ -97,4 +100,24 @@ export async function authorizedRequest(apiPart, method, object) {
 export function clearStoreAndCookie() {
     user = "";
     deleteCookie('access_token');
+}
+
+
+// API part
+
+// const cache = new Map();
+
+export async function getData(url){
+    const store = writable(new Promise(() => {}));
+    // if (cache.has(url)){
+    //     store.set(Promise.resolve(cache.get(url)))
+    // }
+    const load = async () => {
+        const response = fetch(url);
+        const data = response.json();
+        // cache.set(url, data)
+        store.set(Promise.resolve(data));
+    };
+    load();
+    return store;
 }

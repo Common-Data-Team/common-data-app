@@ -1,20 +1,41 @@
 from fastapi import APIRouter, HTTPException, Depends, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from tortoise.contrib.pydantic import pydantic_model_creator
-from models import User, Member, Leader
-from typing import Union, Optional, List
+from models import User, Member, Leader, Tag
+from typing import Union, Optional, List, Any
 from datetime import timedelta, datetime
 from passlib.context import CryptContext
 from jose import JWTError, jwt
 
 from settings import ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES, SECRET_KEY
-from logic.views import Token, PrivateUser, PublicUser
 from pydantic import BaseModel
-
 
 router = APIRouter()
 pwd_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/users/token")
+
+included = (
+    'email', 'level', 'avatar', 'about', 'tags', 'tags.name',
+    'as_leader', 'as_leader.projects', 'as_leader.projects.project_link', 'as_leader.projects.title',
+    'as_member', 'as_member.projects', 'as_member.projects.project_link', 'as_member.projects.title'
+)
+
+PublicUser = pydantic_model_creator(User, name='PublicUser', include=included)
+PrivateUser = pydantic_model_creator(User, name='PrivateUser', include=included)
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+
+class PublicHash(BaseModel):
+    hash: str
+
+
+class Success(BaseModel):
+    ok: bool
+    payload: Optional[Any] = None
 
 
 async def authenticate_user(username: str, password: str) -> Union[User, None]:
@@ -100,19 +121,40 @@ async def profile(user: User = Depends(get_user)):
 
 
 class Edit(BaseModel):
-    name: Optional[str]
-    fio: Optional[str]
-    tags: Optional[List[str]]
+    fio: str
+    tags: List[str]
+    about: str
 
 
 @router.put('/edit', response_model=PrivateUser)
 async def edit(edited: Edit, user=Depends(get_user)):
-    user = await user.update_from_dict(**edited.dict())
+    user = await user.update_from_dict(dict(fio=edited.fio, about=edited.about))
+    user_tags = set(await user.tags.all())
+    if len(user_tags) > 0:
+        await user.tags.remove(*user_tags)
+
+    for tag in edited.tags:
+        tag_instance = await Tag.get_or_none(name=tag)
+        if tag_instance is not None:
+            await user.tags.add(tag_instance)
     await user.save()
-    return await PrivateUser(user)
+    return await PrivateUser.from_tortoise_orm(user)
 
 
 @router.delete('/delete')
 async def destroy(user=Depends(get_user)):
     await user.delete()
     return {'ok': True}
+
+
+@router.get('/{user_id}', response_model=PublicUser)
+async def user_by_id(user_id: int):
+    user = await User.get_or_none(id=user_id)
+    if user:
+        return await PublicUser.from_tortoise_orm(user)
+    raise HTTPException(404, 'User not found')
+
+
+@router.get('/all')
+async def all_users():
+    return await PrivateUser.from_queryset(User.all())

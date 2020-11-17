@@ -1,6 +1,7 @@
 <script>
+    import { Textfield } from 'svelte-mui';
+
     export let user_name = "Даня";
-    export let user_surname = "Драгун";
     export let user_avatar_link = "/images/user_images/user.jpg";
     export let user_projects_page = '/apps/user465_projects';
     export let user_profile_page = '/apps/user465';
@@ -45,8 +46,6 @@
             project_href: "/project"
         }
     ]
-
-    let full_name = user_name + " " + user_surname;
 </script>
 
 <main>
@@ -64,11 +63,23 @@
         <div class="user_info">
             <div class="user">
                 <img src={user_avatar_link} class="photo" alt="user_photo"/>
-                <h2 class="title" id="name">{full_name}</h2>
+                <Textfield
+                    autocomplete="off"
+                    label={user_name}
+                    required
+                    bind:user_name
+                    message="message text"
+                />
             </div>
             <div class="self">
                 <h2 class="title"> О себе:</h2>
-                <p>{about}</p>
+                <Textfield
+                    autocomplete="off"
+                    label={about}
+                    required
+                    bind:about
+                    message="message text"
+                />
             </div>
             <div class="catigories">
                 <h2 class="title">Предпочтения</h2>

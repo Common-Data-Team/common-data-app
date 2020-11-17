@@ -1,5 +1,6 @@
 aiomysql==0.0.20
 aiosqlite==0.15.0
+asynctest==0.13.0
 atomicwrites==1.4.0
 attrs==20.2.0
 bcrypt==3.2.0

@@ -1,5 +1,5 @@
 <script>
-    import ProfileInfo from './_components/Profile_Info.svelte';
+    import ProfileEdit from './_components/Profile_Edit.svelte';
 
     let data = {
         user_name: "user",
@@ -41,4 +41,4 @@
     }
 </script>
 
-<ProfileInfo {...data}></ProfileInfo>
+<ProfileEdit {...data}></ProfileEdit>

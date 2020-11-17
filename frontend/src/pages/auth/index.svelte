@@ -1,5 +1,5 @@
 <script>
-  import {goto, url} from "@sveltech/routify";
+  import {goto, url} from "@roxi/routify";
 
   $goto($url('../signup'), {}, false);
 </script>

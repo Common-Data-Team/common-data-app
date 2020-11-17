@@ -1,5 +1,5 @@
 <script>
-  import {goto, url} from "@sveltech/routify";
+  import {goto, url} from "@roxi/routify";
   import {getContext} from 'svelte';
   import Input from '../_components/Input.svelte'
   import {user, sendForm, selfUrl} from "../_api"

@@ -27,6 +27,7 @@ PrivateUser = pydantic_model_creator(User, name='PrivateUser', include=included)
 class Token(BaseModel):
     access_token: str
     token_type: str
+    user_id: int
 
 
 class PublicHash(BaseModel):
@@ -90,7 +91,7 @@ async def create_user_and_token(email, password):
     await Member.create(user=user)
     await Leader.create(user=user)
     expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    return create_access_token(data={'sub': user.email}, expires_data=expires)
+    return user, create_access_token(data={'sub': user.email}, expires_data=expires)
 
 
 @router.post('/token', response_model=Token)
@@ -104,15 +105,16 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
         )
     expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(data={'sub': user.email}, expires_data=expires)
-    return Token(access_token=access_token, token_type='bearer')
+    return Token(access_token=access_token, token_type='bearer', user_id=user.id)
 
 
 @router.post('/create', response_model=Token)
 async def new_user(form_data: OAuth2PasswordRequestForm = Depends()):
-    if await User.get_or_none(email=form_data.username) is not None:
+    user = await User.get_or_none(email=form_data.username)
+    if user is not None:
         raise HTTPException(400, 'User already exists')
-    token = await create_user_and_token(form_data.username, form_data.password)
-    return Token(access_token=token, token_type='bearer')
+    user, token = await create_user_and_token(form_data.username, form_data.password)
+    return Token(access_token=token, token_type='bearer', user_id=user.id)
 
 
 @router.get('/profile', response_model=PrivateUser)

@@ -1,72 +1,89 @@
 <script>
-    import { Dialog, Textfield } from 'svelte-mui';
     import Project from '../_components/Project.svelte';
-
+    import { Dialog, Textfield } from 'svelte-mui';
+    import {params} from '@roxi/routify';
+    import { authorizedRequest, getCookie } from '../../_api.js';
+    import { onMount } from 'svelte';
     let screenWidth;
 
     export let user_projects_page = '/apps/user465_projects';
     export let user_profile_page = '/apps/user465';
     export let visible = false;
-    export let project_name = '';
-    export let project_description = '';
-
-    export let data = [
-    {
-      title: 'Плитка из камня',
-      tags: ['Наука', 'Медицина'],
-      progress: 42,
-      author: "Камень Камень",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
-      projectImageSrc: "/images/project_images/Rectangle 4.png"
-    },
-    {
-      title: 'Влияние проходимого расстояния на здоровье',
-      tags: ['Наука', 'Медицина'],
-      progress: 92,
-      author: "Камень Иванович",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
-      projectImageSrc: "/images/project_images/star_project.png"
-    },
-    {
-      title: 'Влияние проходимого расстояния на здоровье',
-      tags: ['Наука', 'Медицина'],
-      progress: 80,
-      author: "Камень Иванович",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
-      projectImageSrc: "/images/project_images/follow_project_card.png"
-    },
-
-    {
-      title: 'Плитка из камня',
-      tags: ['Наука', 'Медицина'],
-      progress: 42,
-      author: "Камень Камень",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
-      projectImageSrc: "/images/project_images/Rectangle 4.png"
-    },
-    {
-      title: 'Влияние проходимого расстояния на здоровье',
-      tags: ['Наука', 'Медицина'],
-      progress: 92,
-      author: "Камень Иванович",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
-      projectImageSrc: "/images/project_images/star_project.png"
-    },
-    {
-      title: 'Влияние проходимого расстояния на здоровье',
-      tags: ['Наука', 'Медицина'],
-      progress: 80,
-      author: "Камень Иванович",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
-      projectImageSrc: "/images/project_images/follow_project_card.png"
+    let title = '';
+    let description = '';
+    let participants_target = '';
+    let data = [];
+  //   export let data = [
+  //   {
+  //     title: 'Плитка из камня',
+  //     tags: ['Наука', 'Медицина'],
+  //     progress: 42,
+  //     author: "Камень Камень",
+  //     description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
+  //     userImageSrc: "/images/user_images/user.jpg",
+  //     projectImageSrc: "/images/project_images/Rectangle 4.png"
+  //   },
+  //   {
+  //     title: 'Влияние проходимого расстояния на здоровье',
+  //     tags: ['Наука', 'Медицина'],
+  //     progress: 92,
+  //     author: "Камень Иванович",
+  //     description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
+  //     userImageSrc: "/images/user_images/user.jpg",
+  //     projectImageSrc: "/images/project_images/star_project.png"
+  //   },
+  //   {
+  //     title: 'Влияние проходимого расстояния на здоровье',
+  //     tags: ['Наука', 'Медицина'],
+  //     progress: 80,
+  //     author: "Камень Иванович",
+  //     description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
+  //     userImageSrc: "/images/user_images/user.jpg",
+  //     projectImageSrc: "/images/project_images/follow_project_card.png"
+  //   },
+  //
+  //   {
+  //     title: 'Плитка из камня',
+  //     tags: ['Наука', 'Медицина'],
+  //     progress: 42,
+  //     author: "Камень Камень",
+  //     description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
+  //     userImageSrc: "/images/user_images/user.jpg",
+  //     projectImageSrc: "/images/project_images/Rectangle 4.png"
+  //   },
+  //   {
+  //     title: 'Влияние проходимого расстояния на здоровье',
+  //     tags: ['Наука', 'Медицина'],
+  //     progress: 92,
+  //     author: "Камень Иванович",
+  //     description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
+  //     userImageSrc: "/images/user_images/user.jpg",
+  //     projectImageSrc: "/images/project_images/star_project.png"
+  //   },
+  //   {
+  //     title: 'Влияние проходимого расстояния на здоровье',
+  //     tags: ['Наука', 'Медицина'],
+  //     progress: 80,
+  //     author: "Камень Иванович",
+  //     description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
+  //     userImageSrc: "/images/user_images/user.jpg",
+  //     projectImageSrc: "/images/project_images/follow_project_card.png"
+  //   }
+  // ];
+let auth;
+function textareaIncrease(event) {
+    let elem = event.target;
+    if (elem.scrollTop > 0) {
+        elem.style.height = elem.scrollHeight + 'px';
     }
-  ]
+}
+onMount(() => getCookie('user_id') === $params.user_id.slice(4) ? auth = true : auth = false);
+async function createProject() {
+    const response = await authorizedRequest('projects/create', 'Post', {title, description, participants_target});
+    data = [...data, response[0]];
+    visible = false;
+    console.log(data);
+}
 </script>
 
 <svelte:head>
@@ -74,36 +91,40 @@
 </svelte:head>
 <svelte:window bind:innerWidth={screenWidth}/>
 
-<Dialog width="290" bind:visible>
+<Dialog width="490" bind:visible>
     <div slot="title">Новый проект</div>
 
     <Textfield
         name="Название проекта"
         autocomplete="off"
-        required
-        bind:value={project_name}
+        bind:value={title}
         label="Название проекта"
-        message="Введите название проекта"
     />
-
+<!--    TODO сделать улетающий label для textarea-->
+    <textarea class="description_input" placeholder="Описание проекта" on:keyup={textareaIncrease} bind:value={description}></textarea>
+    <div class="focus-line"></div>
+    <Textfield
+        name="Сколько человек требуется опросить?"
+        autocomplete="off"
+        bind:value={participants_target}
+        label="Сколько человек требуется опросить?"
+    />
     <div slot="actions" class="actions center">
-        <button disabled>Создать проект</button>
+        <button on:click={createProject}>Создать проект</button>
     </div>
 </Dialog>
 
 <main>
-    <a href="/" class="return-link">
-        <div class = "return"> 
-            <p class="arrow">→</p>
-            <div class="chaif">Главная</div>
-        </div>
-    </a>
     <div class = "profile">
         <div class="main-block">
                 <h2 class="pr">Проекты</h2>
+            {#if auth}
+        <a href="/" class="edit">Редактировать</a>
+          {/if}
         </div> 
         <div class="user_info">
             <section style="--columns-amount: {Math.floor((Math.min(screenWidth, 500) - 30) / 223)}">
+                {#if auth}
                 <button on:click={() => {
                     visible = true;
                 }} class="new-project-btn"><div class="project-card">
@@ -115,20 +136,56 @@
                       <h2 class="project-title">Новый проект</h2>
                     </div>
                 </div></button>
+                    {/if}
                 {#each data as card}
                     <Project {...card}></Project>
                 {/each}
             </section>
         </div>
-        <div class="right-menu">
-            <a href={user_profile_page}>Информация</a>
-            <a href="/info" disabled>Достижения</a>
-            <u><a href={user_projects_page}>Мои проекты</a></u>
-        </div>
     </div>
 </main>
 <style>
 
+    .description_input {
+        width: 100%;
+        border: 0;
+        border-bottom: 1px solid #999999;
+        background-color: transparent;
+        resize: vertical;
+        font-size: 17px;
+        height: 25px;
+        font-family: Roboto, 'Segoe UI', sans-serif;
+        font-weight: 400;
+        color: #333;
+        padding: 0;
+    }
+    .description_input:focus {
+        outline: none;
+    }
+    .description_input::placeholder {
+        padding: 5px 0 0 0;
+        font-size: 15px;
+        color: #ababab;
+    }
+    .description_input:focus ~ .focus-line {
+		transform: scaleX(1);
+		opacity: 1;
+	}
+    .focus-line {
+		height: 2px;
+		-webkit-transform: scaleX(0);
+		transform: scaleX(0);
+		transition: transform 0.18s cubic-bezier(0.4, 0, 0.2, 1),
+			opacity 0.18s cubic-bezier(0.4, 0, 0.2, 1),
+			-webkit-transform 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+		transition: transform 0.18s cubic-bezier(0.4, 0, 0.2, 1),
+			opacity 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+		opacity: 0;
+		z-index: 2;
+		background: #1976d2;
+        margin: -5px 0 0 0;
+        width: 100%;
+	}
     .new-project-btn {
         background-color: transparent;
         text-align: left;
@@ -166,10 +223,6 @@
         width: 100%;
     }
 
-    .right-menu {
-        margin-right: 5%;
-    }
-
     .right-menu a {
         color: #545454;
         font-family: "Helvetica Norm";
@@ -186,21 +239,6 @@
         align-items: flex-start;
     }
 
-    .return {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        margin-top: 2%;
-        margin-bottom: 2%;
-    }
-
-    .return-link {
-        text-decoration: none;
-    }
-
-    .return-link:hover {
-        color: #282828;
-    }
 
     .pr {
         padding-bottom: 5%;
@@ -209,37 +247,6 @@
 
     main {
         margin-left: 5%;
-    }
-
-    .arrow{ 
-
-        font-family: "SF Pro Display";
-        font-size: 32px;
-        text-align: center;
-
-        color: #282828;
-        transform: rotate(-180deg);
-        align-self: center;
-        margin-right: 2%;
-    }
-
-    .chaif {
-        position: static;
-        width: 77px;
-        height: 24px;
-        left: 53px;
-        top: 7px;
-        font-family: "Helvetica Norm";
-        font-style: normal;
-        font-weight: normal;
-        line-height: 24px;
-        display: flex;
-        align-items: center;
-        flex: none;
-        order: 1;
-        align-self: center;
-        flex-grow: 0;
-        margin: 16px 0px;
     }
 
     .edit {

@@ -12,7 +12,7 @@ import { url, isActive } from '@roxi/routify';
     <div class="content">
     <slot />
     <div class="right-menu">
-          <a href={$url('./')} class:current={$isActive('./:user_id')}>Информация</a>
+          <a href={$url('./:user_id/index')} class:current={$isActive('./:user_id/index')}>Информация</a>
           <a href='/'>Достижения</a>
           <a href={$url('./:user_id/projects')} class:current={$isActive('./:user_id/projects')}>Мои проекты</a>
       </div>

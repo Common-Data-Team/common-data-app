@@ -6,10 +6,16 @@ from logic.users import get_user
 from logic.tools import generate_link, instance_getter, m2m_editor, exclude
 
 
-PrivateProject = pydantic_model_creator(Project)
-PublicProject = pydantic_model_creator(Project, exclude=('is_active', ))
+included = (
+    'id', 'title', 'project_link', 'participants_target', 'questionnaire', 'is_active',
+    'markdown', 'creation_date', 'description', 'participants_count', 'project_img', 'tags'
+    # 'members', 'members.user', 'members.user.fio', 'members.user.avatar', 'members.user.id'
+)
+PrivateProject = pydantic_model_creator(Project, include=included)
+PublicProject = pydantic_model_creator(Project, exclude=('is_active',), include=included)
 EditableProject = pydantic_model_creator(Project, exclude=(
-    'id', 'is_active', 'members', 'leaders', 'creation_date', 'project_link', 'participants_count'))
+    'id', 'is_active', 'members', 'leaders', 'creation_date', 'project_link', 'participants_count'
+))
 router = APIRouter()
 
 
@@ -32,7 +38,7 @@ async def project_by_link(project_link: str):
     return await instance_getter(Project, project_link=project_link)
 
 
-@router.post('/create')
+@router.post('/create', response_model=PrivateProject)
 async def create(new_project: New = Body(...), user: User = Depends(get_user)):
     project_link = await generate_link(Project)
     project = await Project.create(**new_project.dict(), project_link=project_link)
@@ -58,11 +64,19 @@ async def get():
     return await PrivateProject.from_queryset(Project.all())
 
 
-@router.post('/{project_link}/enter')
+@router.post('/{project_link}/enter', response_model=PublicProject)
 async def enter(project_link: str, user: User = Depends(get_user)):
     project: Project = await project_by_link(project_link)
     await project.members.add(await user.as_member)
     return await PublicProject.from_tortoise_orm(project)
+
+
+@router.get('/{project_link}/plus')
+async def add_participant(project_link: str):
+    project: Project = await project_by_link(project_link)
+    project.participants_count += 1
+    await project.save()
+    return {'ok': True}
 
 
 @router.get('/{project_link}', response_model=PublicProject)

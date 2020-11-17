@@ -49,7 +49,11 @@ app.include_router(
 # config_var = TEST_TORTOISE_ORM
 config_var = PROD_TORTOISE_ORM
 
-shutil.rmtree('db/test')  # Удаляем папку с тестовой базой данных при запуске и импорте
+try:
+    shutil.rmtree('db/test')  # Удаляем папку с тестовой базой данных при запуске и импорте
+except FileNotFoundError:
+    pass
+
 for path in ['db/test', 'db/prod']:
     Path(path).mkdir(parents=True, exist_ok=True)
 

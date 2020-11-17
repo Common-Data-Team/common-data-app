@@ -10,17 +10,18 @@ from jose import JWTError, jwt
 from settings import ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES, SECRET_KEY
 from pydantic import BaseModel
 
-
 router = APIRouter()
 pwd_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/users/token")
 
-PublicUser = pydantic_model_creator(User, name='PublicUser')
-PrivateUser = pydantic_model_creator(User, name='PrivateUser')
+included = (
+    'email', 'level', 'avatar', 'about', 'tags', 'tags.name',
+    'as_leader', 'as_leader.projects', 'as_leader.projects.project_link', 'as_leader.projects.title',
+    'as_member', 'as_member.projects', 'as_member.projects.project_link', 'as_member.projects.title'
+)
 
-
-class NewUser(BaseModel):
-    username: str
+PublicUser = pydantic_model_creator(User, name='PublicUser', include=included)
+PrivateUser = pydantic_model_creator(User, name='PrivateUser', include=included)
 
 
 class Token(BaseModel):
@@ -35,11 +36,6 @@ class PublicHash(BaseModel):
 class Success(BaseModel):
     ok: bool
     payload: Optional[Any] = None
-
-
-class EditGroup(BaseModel):
-    title: Optional[str] = None
-    public: Optional[bool] = None
 
 
 async def authenticate_user(username: str, password: str) -> Union[User, None]:
@@ -118,6 +114,7 @@ async def new_user(form_data: OAuth2PasswordRequestForm = Depends()):
     token = await create_user_and_token(form_data.username, form_data.password)
     return Token(access_token=token, token_type='bearer')
 
+
 @router.get('/profile', response_model=PrivateUser)
 async def profile(user: User = Depends(get_user)):
     return await PrivateUser.from_tortoise_orm(user)
@@ -150,7 +147,7 @@ async def destroy(user=Depends(get_user)):
     return {'ok': True}
 
 
-@router.get('/{user_id}')
+@router.get('/{user_id}', response_model=PublicUser)
 async def user_by_id(user_id: int):
     user = await User.get_or_none(id=user_id)
     if user:

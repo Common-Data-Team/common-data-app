@@ -24,7 +24,7 @@ class User(Model):
         return str(self.email)
 
     class PydanticMeta:
-        exclude = ['id', 'hashed_password', 'is_admin']
+        exclude = ['hashed_password', 'is_admin']
 
 
 class Member(Model):

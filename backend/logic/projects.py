@@ -46,7 +46,7 @@ async def project_by_link(project_link: str):
 async def create(new_project: New = Body(...), user: User = Depends(get_user)):
     project_link = await generate_link(Project)
     project = await Project.create(**new_project.dict(), project_link=project_link)
-    await project.leaders.add(user)
+    await project.leaders.add(await user.as_leader)
     return await PrivateProject.from_tortoise_orm(project)
 
 

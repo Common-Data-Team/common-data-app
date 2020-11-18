@@ -12,64 +12,63 @@
     let title = '';
     let description = '';
     let participants_target = '';
-    let data = [];
-  //   export let data = [
-  //   {
-  //     title: 'Плитка из камня',
-  //     tags: ['Наука', 'Медицина'],
-  //     progress: 42,
-  //     author: "Камень Камень",
-  //     description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-  //     userImageSrc: "/images/user_images/user.jpg",
-  //     projectImageSrc: "/images/project_images/Rectangle 4.png"
-  //   },
-  //   {
-  //     title: 'Влияние проходимого расстояния на здоровье',
-  //     tags: ['Наука', 'Медицина'],
-  //     progress: 92,
-  //     author: "Камень Иванович",
-  //     description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-  //     userImageSrc: "/images/user_images/user.jpg",
-  //     projectImageSrc: "/images/project_images/star_project.png"
-  //   },
-  //   {
-  //     title: 'Влияние проходимого расстояния на здоровье',
-  //     tags: ['Наука', 'Медицина'],
-  //     progress: 80,
-  //     author: "Камень Иванович",
-  //     description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-  //     userImageSrc: "/images/user_images/user.jpg",
-  //     projectImageSrc: "/images/project_images/follow_project_card.png"
-  //   },
-  //
-  //   {
-  //     title: 'Плитка из камня',
-  //     tags: ['Наука', 'Медицина'],
-  //     progress: 42,
-  //     author: "Камень Камень",
-  //     description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-  //     userImageSrc: "/images/user_images/user.jpg",
-  //     projectImageSrc: "/images/project_images/Rectangle 4.png"
-  //   },
-  //   {
-  //     title: 'Влияние проходимого расстояния на здоровье',
-  //     tags: ['Наука', 'Медицина'],
-  //     progress: 92,
-  //     author: "Камень Иванович",
-  //     description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-  //     userImageSrc: "/images/user_images/user.jpg",
-  //     projectImageSrc: "/images/project_images/star_project.png"
-  //   },
-  //   {
-  //     title: 'Влияние проходимого расстояния на здоровье',
-  //     tags: ['Наука', 'Медицина'],
-  //     progress: 80,
-  //     author: "Камень Иванович",
-  //     description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-  //     userImageSrc: "/images/user_images/user.jpg",
-  //     projectImageSrc: "/images/project_images/follow_project_card.png"
-  //   }
-  // ];
+    export let data = [
+    {
+      title: 'Плитка из камня',
+      tags: ['Наука', 'Медицина'],
+      progress: 42,
+      author: "Камень Камень",
+      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
+      userImageSrc: "/images/user_images/user.jpg",
+      projectImageSrc: "/images/project_images/Rectangle 4.png"
+    },
+    {
+      title: 'Влияние проходимого расстояния на здоровье',
+      tags: ['Наука', 'Медицина'],
+      progress: 92,
+      author: "Камень Иванович",
+      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
+      userImageSrc: "/images/user_images/user.jpg",
+      projectImageSrc: "/images/project_images/star_project.png"
+    },
+    {
+      title: 'Влияние проходимого расстояния на здоровье',
+      tags: ['Наука', 'Медицина'],
+      progress: 80,
+      author: "Камень Иванович",
+      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
+      userImageSrc: "/images/user_images/user.jpg",
+      projectImageSrc: "/images/project_images/follow_project_card.png"
+    },
+
+    {
+      title: 'Плитка из камня',
+      tags: ['Наука', 'Медицина'],
+      progress: 42,
+      author: "Камень Камень",
+      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
+      userImageSrc: "/images/user_images/user.jpg",
+      projectImageSrc: "/images/project_images/Rectangle 4.png"
+    },
+    {
+      title: 'Влияние проходимого расстояния на здоровье',
+      tags: ['Наука', 'Медицина'],
+      progress: 92,
+      author: "Камень Иванович",
+      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
+      userImageSrc: "/images/user_images/user.jpg",
+      projectImageSrc: "/images/project_images/star_project.png"
+    },
+    {
+      title: 'Влияние проходимого расстояния на здоровье',
+      tags: ['Наука', 'Медицина'],
+      progress: 80,
+      author: "Камень Иванович",
+      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
+      userImageSrc: "/images/user_images/user.jpg",
+      projectImageSrc: "/images/project_images/follow_project_card.png"
+    }
+  ];
 let auth;
 function textareaIncrease(event) {
     let elem = event.target;
@@ -82,7 +81,8 @@ onMount(() => getCookie('user_id') === $params.user_id.slice(4) ? auth = true : 
 
 async function createProject() {
     const response = await authorizedRequest('projects/create', 'Post', {title, description, participants_target});
-    if (response[0] !== null) data = [...data, response[0]];
+    if (response[0].project_img === null) response[0].project_img = '/images/project_images/follow_project_card.png';
+    if (response[0] !== null) data = [response[0], ...data];
     visible = false;
 }
 </script>
@@ -124,11 +124,11 @@ async function createProject() {
           {/if}
         </div> 
         <div class="user_info">
-            <section style="--columns-amount: {Math.floor((Math.min(screenWidth, 500) - 30) / 223)}">
+            <section id='card_section' style="--columns-amount: {Math.floor((Math.min(screenWidth, 500) - 30) / 223)}">
                 {#if auth}
-                <button on:click={() => {
+                <div  class="new-project-btn" on:click={() => {
                     visible = true;
-                }} class="new-project-btn"><div class="project-card">
+                }}><div class="project-card">
                     <div class="img-wrapper">
                       <img size="100%, 20%" src="/images/project_images/new_project.svg" class="img" alt="Картинка проекта">
                     </div>
@@ -136,7 +136,7 @@ async function createProject() {
                     <div class="title">
                       <h2 class="project-title">Новый проект</h2>
                     </div>
-                </div></button>
+                </div></div>
                     {/if}
                 {#each data as card}
                     <Project {...card}></Project>
@@ -187,17 +187,23 @@ async function createProject() {
         margin: -5px 0 0 0;
         width: 100%;
 	}
+    section {
+        min-width: 466px;
+    }
     .new-project-btn {
         background-color: transparent;
         text-align: left;
         padding: 0;
         margin: 0;
+        width: 223px;
     }
 
     .new-project-btn {
         outline: none;
     }
-
+    .project-card {
+        height: 100%;
+    }
     .img {
         object-fit: cover;
         height: 194px;
@@ -212,16 +218,7 @@ async function createProject() {
     }
     
     .img-wrapper {
-        width: 100%;
         text-align: center;
-    }
-
-    section {
-        display: grid;
-        justify-items: left;
-        grid-template-columns: repeat(var(--columns-amount), 1fr);
-        height: 100%;
-        width: 100%;
     }
 
     .right-menu a {
@@ -265,12 +262,22 @@ async function createProject() {
         margin-right: 15%;
         margin-left: 20%;
     }
-
-    @media (max-width: 768px) {
-
-        main {
-            width: 95%;
+    @media (max-width: 1100px) {
+        .user_info {
+            margin-left: 5%;
         }
+    }
+    @media (min-width: 500px) {
+         section {
+        display: grid;
+        justify-items: left;
+        grid-template-columns: repeat(var(--columns-amount), 1fr);
+        height: 100%;
+        width: 100%;
+    }
+    }
+    @media (max-width: 870px) {
+
         .profile {
             flex-direction: column;
         }
@@ -281,10 +288,16 @@ async function createProject() {
             max-width: 90%;
             margin-top: 5%;
         }
-
-        .right-menu {
-            display: none;
+    }
+    @media (max-width: 500px) {
+        main {
+            margin: 0;
+            width: 223px;
+        }
+        section {
+            min-width: 223px !important;
+            display: flex !important;
+            flex-direction: column;
         }
     }
-
 </style>

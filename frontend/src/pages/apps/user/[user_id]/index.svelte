@@ -32,7 +32,7 @@
   <div class="profile">
     {#await $promise}
       <h1>Загрузка...</h1>
-    {:then {fio, avatar, about, tags, as_member, auth}}
+    {:then {fio, avatar, about, tags, as_leader, auth}}
       <div class="main-block">
         <h2 class="pr">Профиль</h2>
         {#if auth}
@@ -62,10 +62,10 @@
           <h2 class="title">Участие в проектах:</h2>
           <div class="experience-tags">
             <li>
-            {#if as_member.projects.length === 0}
+            {#if as_leader.projects.length === 0}
             <ul>Пока проектов нет.</ul>
               {:else}
-              {#each as_member.projects as project}
+              {#each as_leader.projects as project}
                 <ul><a href={project.project_href} class="ex-tag">{project.title}</a></ul>
               {/each}
               {/if}

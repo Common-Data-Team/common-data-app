@@ -1,8 +1,8 @@
 <script>
-    import Project from '../_components/Project.svelte';
+    import Project from '../../_components/Project.svelte';
     import { Dialog, Textfield } from 'svelte-mui';
     import {params} from '@roxi/routify';
-    import { authorizedRequest, getCookie } from '../../_api.js';
+    import { authorizedRequest, getCookie } from '../../../_api.js';
     import { onMount } from 'svelte';
     let screenWidth;
 
@@ -77,7 +77,7 @@ function textareaIncrease(event) {
     }
 }
 
-onMount(() => getCookie('user_id') === $params.user_id.slice(4) ? auth = true : auth = false);
+onMount(() => getCookie('user_id') === $params.user_id ? auth = true : auth = false);
 
 async function createProject() {
     const response = await authorizedRequest('projects/create', 'Post', {title, description, participants_target});

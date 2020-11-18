@@ -2,12 +2,11 @@
   import {ready, url, params} from '@roxi/routify';
   import {getContext} from 'svelte';
   import {writable} from "svelte/store";
-  import { getCookie } from '../../_api.js';
+  import { getCookie } from '../../../_api.js';
 
   let apiUrl = getContext('apiUrl');
   let fio, email, avatar, about, tags;
   function getData(id) {
-    id = id.slice(4);
     const store = writable(new Promise(() => {}));
 
     const load = async () => {

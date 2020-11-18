@@ -15,9 +15,16 @@ pwd_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/users/token")
 
 included = (
-    'email', 'level', 'avatar', 'about', 'tags', 'tags.name',
+    'fio', 'email', 'level', 'avatar', 'about', 'tags', 'tags.name',
     'as_leader', 'as_leader.projects', 'as_leader.projects.project_link', 'as_leader.projects.title',
-    'as_member', 'as_member.projects', 'as_member.projects.project_link', 'as_member.projects.title'
+    'as_leader.projects.participants_count', 'as_leader.projects.participants_target', 'as_leader.projects.project_img',
+    'as_leader.projects.tags', 'as_leader.projects.tags.name',
+
+    # 'as_member', 'as_member.projects', 'as_member.projects.project_link', 'as_member.projects.title'
+)
+
+excluded = (
+
 )
 
 PublicUser = pydantic_model_creator(User, name='PublicUser', include=included)

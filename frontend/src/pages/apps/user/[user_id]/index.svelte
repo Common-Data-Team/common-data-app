@@ -2,6 +2,7 @@
   import {ready, url, params} from '@roxi/routify';
   import {getContext} from 'svelte';
   import {writable} from "svelte/store";
+  import { getCookie } from '../../../_api.js';
 
   let apiUrl = getContext('apiUrl');
   let fio, email, avatar, about, tags;
@@ -9,31 +10,34 @@
     const store = writable(new Promise(() => {}));
 
     const load = async () => {
+      let auth = false;
+      if (getCookie('user_id') === id) auth = true;
       const response = await fetch(apiUrl + `users/${id}`);
       const data = await response.json();
+      console.log(data);
+      if (data.about === null) data.about = 'Напишите о себе!';
+      if (data.avatar === null) data.avatar = '/images/user_images/user.jpg';
+      data.auth = auth;
+      if (data.tags.length === 0) data.tags.push({name: 'Пока нет('});
       store.set(Promise.resolve(data));
       $ready();
     };
-    load()
+    load();
     return store;
   }
   const promise = getData($params.user_id);
 </script>
 
 <main>
-  <a href="/" class="return-link">
-    <div class="return">
-      <p class="arrow">→</p>
-      <div class="chaif">Главная</div>
-    </div>
-  </a>
   <div class="profile">
     {#await $promise}
       <h1>Загрузка...</h1>
-    {:then {fio, email, avatar, about, tags}}
+    {:then {fio, avatar, about, tags, as_member, auth}}
       <div class="main-block">
         <h2 class="pr">Профиль</h2>
+        {#if auth}
         <a href="/" class="edit">Редактировать</a>
+          {/if}
       </div>
       <div class="user_info">
         <div class="user">
@@ -58,18 +62,18 @@
           <h2 class="title">Участие в проектах:</h2>
           <div class="experience-tags">
             <li>
-              <!--{#each projects as project}-->
-              <!--                            <ul><a href={project.project_href} class="ex-tag">{project.title}</a></ul>-->
-              <!--                        {/each}-->
+            {#if as_member.projects.length === 0}
+            <ul>Пока проектов нет.</ul>
+              {:else}
+              {#each as_member.projects as project}
+                <ul><a href={project.project_href} class="ex-tag">{project.title}</a></ul>
+              {/each}
+              {/if}
             </li>
           </div>
         </div>
       </div>
-      <div class="right-menu">
-        <!--            <u><a href={user_profile_page}>Информация</a></u>-->
-        <!--            <a href="/info">Достижения</a>-->
-        <!--            <a href={user_projects_page}>Мои проекты</a>-->
-      </div>
+
     {/await}
   </div>
 </main>
@@ -88,7 +92,7 @@
     text-align: center;
     padding: 0.375em 0.75em;
     margin-right: 2%;
-    margin-left: 0%;
+    margin-left: 0;
     color: #F9F9F9;
     text-decoration: none;
     margin-top: 2%;
@@ -105,20 +109,6 @@
     flex-wrap: wrap;
   }
 
-  .right-menu {
-    margin-right: 5%;
-  }
-
-  .right-menu a {
-    color: #545454;
-    font-family: "Helvetica Norm";
-    font-size: 20px;
-    display: flex;
-    flex-direction: column;
-    text-align: right;
-    text-decoration: none;
-  }
-
   #name {
     padding-top: 3%;
   }
@@ -130,23 +120,9 @@
   .profile {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: flex-start;
-  }
-
-  .return {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    margin-top: 2%;
-    margin-bottom: 2%;
-  }
-
-  .return-link {
-    text-decoration: none;
-  }
-
-  .return-link:hover {
-    color: #282828;
+    width: 60%;
   }
 
   .pr {
@@ -158,36 +134,6 @@
     margin-left: 5%;
   }
 
-  .arrow {
-
-    font-family: "SF Pro Display";
-    font-size: 32px;
-    text-align: center;
-
-    color: #282828;
-    transform: rotate(-180deg);
-    align-self: center;
-    margin-right: 2%;
-  }
-
-  .chaif {
-    position: static;
-    width: 77px;
-    height: 24px;
-    left: 53px;
-    top: 7px;
-    font-family: "Helvetica Norm";
-    font-style: normal;
-    font-weight: normal;
-    line-height: 24px;
-    display: flex;
-    align-items: center;
-    flex: none;
-    order: 1;
-    align-self: center;
-    flex-grow: 0;
-    margin: 16px 0px;
-  }
 
   .edit {
     font-style: normal;
@@ -201,8 +147,6 @@
     display: flex;
     flex-direction: column;
     width: 40%;
-    margin-right: 15%;
-    margin-left: 20%;
   }
 
   .user {

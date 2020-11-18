@@ -4,12 +4,13 @@
   export let progress = 42;
   export let author = "Камень Иванович";
   export let userImageSrc = "/images/user_images/user.jpg";
-  export let projectImageSrc = "/images/project_images/Rectangle 4.png";
+  export let project_img = "/images/project_images/Rectangle 4.png";
+  export let project_link = '';
 </script>
 
 <div class="project-card">
   <div class="img-wrapper">
-    <img size="100%, 20%" src="{projectImageSrc}" class="img" alt="Картинка проекта">
+    <img size="100%, 20%" src="{project_img}" class="img" alt="Картинка проекта">
   </div>
   <div class="title">
     <h2 class="project-title">{title}</h2>

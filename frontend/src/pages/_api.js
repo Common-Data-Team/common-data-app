@@ -4,8 +4,7 @@ import {setContext} from "svelte";
 export const apiUrl = 'https://backend.commondata.ru/';
 export const selfUrl = 'http://localhost:5000/';
 
-
-export let user = writable("")
+export let user = writable("");
 
 
 export async function sendForm(login, username, password) {
@@ -24,9 +23,10 @@ export async function sendForm(login, username, password) {
     if (json_response.detail) {
         return login ? "Неправильная почта или пароль" : "Такая почта уже используется"
     }
-    let {access_token, token_type} = json_response;
+    let {access_token, token_type, user_id} = json_response;
     user.set(access_token);
     setCookie('access_token', access_token, {samesite: 'lax'});
+    setCookie('user_id', user_id, {samesite: 'lax'});
 }
 
 function setCookie(name, value, options = {}) {
@@ -52,7 +52,7 @@ function setCookie(name, value, options = {}) {
     document.cookie = updatedCookie;
 }
 
-function getCookie(name) {
+export function getCookie(name) {
     let matches = document.cookie.match(new RegExp(
         "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
     ));

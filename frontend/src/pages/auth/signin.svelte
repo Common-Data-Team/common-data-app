@@ -1,8 +1,9 @@
 <script>
   import {goto, url} from "@roxi/routify";
   import {getContext} from 'svelte';
-  import Input from '../_components/Input.svelte'
-  import {user, sendForm, submitForm, selfUrl} from "../_api"
+  import {get} from 'svelte/store';
+  import Input from '../_components/Input.svelte';
+  import {user, sendForm, submitForm, selfUrl} from "../_api";
 
   let apiUrl = getContext('apiUrl');
   let form;

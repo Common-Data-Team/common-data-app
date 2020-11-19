@@ -10,7 +10,6 @@ services:
       - "traefik.http.routers.front.rule=Host(`commondata.ru`)"
       - "traefik.http.routers.front.tls=true"
       - "traefik.http.routers.front.tls.certresolver=letsEncrypt"
-      - "traefik.http.middlewares.redirect-to-https.redirectScheme.scheme=https"
 
   backend:
     build: "./backend"
@@ -22,7 +21,6 @@ services:
       - "traefik.http.routers.backend.rule=Host(`backend.commondata.ru`)"
       - "traefik.http.routers.backend.tls=true"
       - "traefik.http.routers.backend.tls.certresolver=letsEncrypt"
-      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
 
   traefik:
     image: traefik:v2.2

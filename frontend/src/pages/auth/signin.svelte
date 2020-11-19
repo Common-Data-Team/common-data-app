@@ -31,14 +31,13 @@
   async function handleClick() {
     if (!validateForm()) return;
     showError = false;
-    let error = submitForm(true, email.value, password.value)
-    if (error) {
-      errorMessage = error;
-      return;
-    }
-
-
-    $goto(selfUrl, {}, false);
+    let dataStore = submitForm(true, email.value, password.value)
+    alert(await get(dataStore))
+    // if (error) {
+    //   errorMessage = error;
+    //   return;
+    // }
+    // $goto(selfUrl, {}, false);
   }
 
 

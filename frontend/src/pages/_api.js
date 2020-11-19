@@ -22,28 +22,30 @@ export function fetchStore(url, params) {
   return store;
 }
 
-export async function submitForm(isLogin, username, password) {
-  const store = fetchStore(
-    'https://backend.commondata.ru/users/create', {
+export function submitForm(isLogin, username, password) {
+  return fetchStore(
+    'https://backend.commondata.ru/users/' + (isLogin ? 'token/':'create/'), {
       method: 'POST',
-      credentials: 'omit',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
+      headers: new Headers({
+        Accept: 'application/json',
+        // Content-Type: 'application/x-www-form-urlencoded'
+      }),
       body: `username=${username}&password=${password}`
     },
   );
-  let data = await get(store);
-  if (data.detail) {
-    return isLogin ? "Неправильная почта или пароль" : "Такая почта уже используется"
-  }
+  // console.log(data)
+  // if (data.detail) {
+  //   return isLogin ? "Неправильная почта или пароль" : "Такая почта уже используется"
+  // }
+
+}
+
+export function setUserData(data){
   let {access_token, token_type, user_id} = data;
   user.set(access_token);
   setCookie('access_token', access_token, {samesite: 'lax'});
   setCookie('user_id', user_id, {samesite: 'lax'});
 }
-
 // export async function sendForm(login, username, password) {
 //   let json_response = await fetch(
 //     apiUrl + (login ? 'users/token' : 'users/create'),

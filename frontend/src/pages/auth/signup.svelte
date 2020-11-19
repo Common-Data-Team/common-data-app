@@ -1,6 +1,7 @@
 <script>
   import {user, submitForm, selfUrl} from "../_api.js";
   import {goto, url} from "@roxi/routify";
+  import {get} from 'svelte/store'
   import {getContext} from 'svelte';
   import Input from '../_components/Input.svelte'
   import Checkbox from "svelte-checkbox";
@@ -44,13 +45,14 @@
   async function handleClick() {
     if (!validateForm()) return;
     showError = false;
-    let error = await submitForm(false, email.value, password.value);
-    alert(error)
-    if (error) {
-      errorMessage = error;
-      return;
-    }
-    $goto(selfUrl, {}, false);
+    const dataStore = submitForm(false, email.value, password.value);
+    // let data = $dataStore;
+    console.log(await get(dataStore))
+    // if (error) {
+    //   errorMessage = error;
+    //   return;
+    // }
+    // $goto(selfUrl, {}, false);
   }
 </script>
 

@@ -41,7 +41,7 @@
 </svelte:head>
 
 <style global>
-  @import "../static/global.css";
+  @import "../assets/global.css";
 
   #routify-app {
     height: 100%;

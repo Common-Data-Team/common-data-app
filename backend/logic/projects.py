@@ -92,3 +92,5 @@ async def show(project_link: str):
 @router.get('/all')
 async def get_all():
     return await PrivateProject.from_queryset(Project.all())
+
+# Test commit

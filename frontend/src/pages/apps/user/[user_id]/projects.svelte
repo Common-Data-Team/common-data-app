@@ -1,7 +1,7 @@
 <script>
     import Project from '../../_components/Project.svelte';
     import { Dialog, Textfield } from 'svelte-mui';
-    import {params} from '@roxi/routify';
+    import {params, goto} from '@roxi/routify';
     import { authorizedRequest, getCookie } from '../../../_api.js';
     import { onMount } from 'svelte';
     let screenWidth;
@@ -81,6 +81,7 @@ onMount(() => getCookie('user_id') === $params.user_id ? auth = true : auth = fa
 
 async function createProject() {
     const response = await authorizedRequest('projects/create', 'Post', {title, description, participants_target});
+    console.log(response[0].project_link);
     if (response[0].project_img === null) response[0].project_img = '/images/project_images/follow_project_card.png';
     if (response[0] !== null) data = [response[0], ...data];
     visible = false;

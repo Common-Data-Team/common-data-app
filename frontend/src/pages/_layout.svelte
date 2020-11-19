@@ -26,7 +26,7 @@
   img {
     max-width: 600px;
     margin-bottom: 3%;
-    margin-left: 5%;
+    margin-left: 3%;
   }
 
   @media (max-width: 768px) {

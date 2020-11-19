@@ -173,7 +173,7 @@
                     </div>
                 
                     <Menuitem>Достижения</Menuitem>
-                    <Menuitem on:click={() => $goto('./apps/user/'+getCookie('user_id'))}>Настройки</Menuitem>
+                    <Menuitem on:click={() => $goto('../apps/user/'+getCookie('user_id'))}>Настройки</Menuitem>
                     <hr />
                     <Menuitem on:click={logout}>Выйти</Menuitem>
                 </Menu>

@@ -7,7 +7,7 @@
        const response = await fetch(apiUrl+'projects/' + $params.project_link).then(res => res.json());
        console.log(response);
         if (response.project_img === null) response.project_img = '/images/project_images/main_project.png';
-        if (response.leaders[0].user.avatar === null) response.leaders[0].user.avatar = '/images/user_images/leader_avatar.svg';
+        if (response.leaders[0].user.avatar === null) response.leaders[0].user.avatar = '/images/user_images/user.jpg';
        return response;
     }
 </script>

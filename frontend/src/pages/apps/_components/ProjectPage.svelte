@@ -21,6 +21,13 @@
 <img src={leaders[0].user.avatar} alt="leader_ava">
 <p>{leaders[0].user.fio}</p>
 </div>
+<p class="date">{creation_date.slice(8, 10)}.{creation_date.slice(5, 7)} - ???</p>
+<p class="date_title">время сбора</p>
+<button class="enter_button">Принять участие</button>
+<div class="subscribe_block">
+<img src='/images/button_images/Subscribe.svg' alt="">
+<p>Подписаться на обновления</p>
+</div>
 </div>
 </main>
 <style>
@@ -29,9 +36,11 @@
         width: 100%;
         display: flex;
     }
+    p, h1 {
+        color: #282828;
+    }
     .project_img {
         margin: 0 50px 0 3%;
-        width: 600px;
     }
     .info_block {
         display: flex;
@@ -96,5 +105,39 @@
         border-radius: 37px;
         margin: 0 30px 0 0;
         border: 1px solid #E0E0E0;
+    }
+    .date {
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 29px;
+        margin: 20px 0 0 0;
+    }
+    .date_title {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+    }
+    .enter_button {
+        background-color: #282828;
+        padding: 12px 71px;
+        font-weight: 300;
+        font-size: 20px;
+        line-height: 24px;
+        width: 300px;
+        margin: 30px 0 0 0;
+    }
+    .subscribe_block {
+        display: flex;
+        align-items: center;
+        margin: 20px 0 0 0;
+    }
+    .subscribe_block:hover {
+        cursor: pointer;
+    }
+    .subscribe_block p {
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 24px;
+        margin: 0 0 0 20px;
     }
 </style>

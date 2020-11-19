@@ -1,5 +1,5 @@
 <script>
-  import {ready, url, params} from '@roxi/routify';
+  import {ready, url, params, goto} from '@roxi/routify';
   import {getContext} from 'svelte';
   import {writable} from "svelte/store";
   import { getCookie } from '../../../_api.js';
@@ -66,7 +66,7 @@
             <ul>Пока проектов нет.</ul>
               {:else}
               {#each as_leader.projects as project}
-                <ul><a href={project.project_href} class="ex-tag">{project.title}</a></ul>
+                <ul><a on:click={() => $goto('../../project/'+project.project_link)} class="ex-tag">{project.title}</a></ul>
               {/each}
               {/if}
             </li>
@@ -102,6 +102,9 @@
     text-decoration: none;
   }
 
+  .ex-tag:hover {
+    cursor: pointer;
+          }
   .tags {
     display: flex;
     justify-content: left;

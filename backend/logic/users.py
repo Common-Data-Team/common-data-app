@@ -23,7 +23,22 @@ included = (
 )
 
 excluded = (
-    'tags.projects', 'as_leader.projects',
+    'tags.projects',
+    'as_member.projects.questionnaire',
+    'as_member.projects.markdown',
+    'as_member.projects.creation_date',
+    'as_member.projects.description',
+    'as_member.projects.leaders',
+    'as_member.projects.members',
+    'as_member.projects.tags',
+
+    'as_leader.projects.questionnaire',
+    'as_leader.projects.markdown',
+    'as_leader.projects.creation_date',
+    'as_leader.projects.description',
+    'as_leader.projects.leaders',
+    'as_leader.projects.members',
+    'as_leader.projects.tags',
 )
 
 PublicUser = pydantic_model_creator(User, name='PublicUser', exclude=excluded, include=included)

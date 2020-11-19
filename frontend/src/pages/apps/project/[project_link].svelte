@@ -1,5 +1,6 @@
 <script>
     import ProjectPage from '../_components/ProjectPage.svelte';
+    import ProjectAbout from '../_components/ProjectAbout.svelte';
     import { onMount, getContext } from 'svelte';
     import { params } from '@roxi/routify';
     let apiUrl = getContext('apiUrl');
@@ -15,4 +16,5 @@
     <h1>Загрузка...</h1>
 {:then data}
 <ProjectPage {...data}/>
+<ProjectAbout description={data.description}/>
 {/await}

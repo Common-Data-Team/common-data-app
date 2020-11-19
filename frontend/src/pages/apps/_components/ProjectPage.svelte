@@ -1,6 +1,5 @@
 <script>
-    export let title, participants_target, creation_date, participants_count, project_img, leaders;
-    let tags = [{name: 'Технологии'}, {name: 'Здоровье'}];
+    export let title, participants_target, creation_date, participants_count, project_img, tags, leaders;
 </script>
 
 <main>
@@ -32,20 +31,23 @@
 </main>
 <style>
     main {
-        margin: 20px 0 0 0;
         width: 100%;
         display: flex;
+        margin: 20px 0 0 0;
     }
     p, h1 {
         color: #282828;
     }
     .project_img {
         margin: 0 50px 0 3%;
+        width: auto;
+        object-fit: cover;
     }
     .info_block {
         display: flex;
         flex-direction: column;
-        min-width: 300px;
+        max-width: 350px;
+        margin: 0 50px 0 0;
     }
     .title {
         font-style: normal;
@@ -54,6 +56,7 @@
         margin: 5px 0;
     }
     .bar {
+        min-width: 300px;
         width: 100%;
         height: 4px;
         background: #9B9B9B;
@@ -77,6 +80,7 @@
     }
     .tags_block {
         display: flex;
+        flex-wrap: wrap;
         margin: 30px 10px 0 0;
     }
     .tag {
@@ -84,7 +88,7 @@
         border-radius: 18px;
         text-align: center;
         padding: 0.375em 0.75em;
-        margin: 0 10px 0 0;
+        margin: 0 10px 5px 0;
         text-decoration: none;
     }
     .tag p {

@@ -2,7 +2,7 @@
   import {goto, url} from "@roxi/routify";
   import {getContext} from 'svelte';
   import Input from '../_components/Input.svelte'
-  import {user, sendForm, fetchStore, selfUrl} from "../_api"
+  import {user, sendForm, submitForm, selfUrl} from "../_api"
 
   let apiUrl = getContext('apiUrl');
   let form;
@@ -28,23 +28,10 @@
     return true;
   }
 
-  async function submit() {
+  async function handleClick() {
     if (!validateForm()) return;
     showError = false;
-    const store = fetchStore(
-      'https://backend.commondata.ru/users/create', {
-        method: 'POST',
-        credentials: 'omit',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: `username=${email.value}&password=${password.value}`
-      },
-    );
-    let data = await store.get();
-    alert(JSON.stringify(data));
-    let error = await sendForm(true, email.value, password.value);
+    let error = submitForm(true, email.value, password.value)
     if (error) {
       errorMessage = error;
       return;
@@ -79,7 +66,7 @@
         <p class="error-label" class:showError>{errorMessage}</p>
       </div>
       <div class="button-block">
-        <button type="button" on:click={submit}>Вход</button>
+        <button type="button" on:click={handleClick}>Вход</button>
         <div class="p-wrapper"><p class="registration-p"><a class="registration-a"
                                                             href='./signup'>Регистрация</a>
         </p></div>

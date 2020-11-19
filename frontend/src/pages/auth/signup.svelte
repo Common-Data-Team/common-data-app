@@ -1,5 +1,5 @@
 <script>
-  import {user, sendForm, selfUrl} from "../_api.js";
+  import {user, submitForm, selfUrl} from "../_api.js";
   import {goto, url} from "@roxi/routify";
   import {getContext} from 'svelte';
   import Input from '../_components/Input.svelte'
@@ -41,10 +41,11 @@
     return true;
   }
 
-  async function submit() {
+  async function handleClick() {
     if (!validateForm()) return;
     showError = false;
-    let error = await sendForm(false, email.value, password.value);
+    let error = await submitForm(false, email.value, password.value);
+    alert(error)
     if (error) {
       errorMessage = error;
       return;
@@ -83,7 +84,7 @@
       </div>
       <p class="error-label" class:showError>{errorMessage}</p>
       <div class="button-block">
-        <button type="button" on:click={submit}>Регистрация</button>
+        <button type="button" on:click={handleClick}>Регистрация</button>
         <div class="p-wrapper"><p class="registration-p"><a class="registration-a" href='./signin'>Авторизация</a></p>
         </div>
       </div>
@@ -102,7 +103,7 @@
         cursor: pointer;
         margin-right: 3%;
         margin-left: 3%;
-        font-family: "Helvetica Norm";
+        font-family: "Helvetica Norm", sans-serif;
         text-align: center;
         align-self: center;
     }
@@ -113,13 +114,6 @@
         display: flex;
         flex-direction: row;
         margin-left: 5%;
-    }
-
-    .checkboxes-block {
-        margin-top: 1%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
     }
 
     .inputs-block {

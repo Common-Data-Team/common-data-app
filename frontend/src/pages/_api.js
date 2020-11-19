@@ -6,13 +6,14 @@ export const selfUrl = 'http://localhost:5000/';
 
 export let user = writable("");
 
-export async function fetchStore(url, params) {
-  const store = writable(new Promise(() => {}));
+export function fetchStore(url, params) {
+  const store = writable(new Promise(() => {
+  }));
   // if (cache.has(url)){
   //     store.set(Promise.resolve(cache.get(url)))
   // }
   const load = async () => {
-    const response = fetch(url, params);
+    const response = await fetch(url, params);
     const data = response.json();
     // cache.set(url, data)
     store.set(Promise.resolve(data));
@@ -21,10 +22,9 @@ export async function fetchStore(url, params) {
   return store;
 }
 
-export async function sendForm(login, username, password) {
-  let json_response = await fetch(
-    apiUrl + (login ? 'users/token' : 'users/create'),
-    {
+export async function submitForm(isLogin, username, password) {
+  const store = fetchStore(
+    'https://backend.commondata.ru/users/create', {
       method: 'POST',
       credentials: 'omit',
       headers: {
@@ -33,15 +33,36 @@ export async function sendForm(login, username, password) {
       },
       body: `username=${username}&password=${password}`
     },
-  ).then(res => res.json());
-  if (json_response.detail) {
-    return login ? "Неправильная почта или пароль" : "Такая почта уже используется"
+  );
+  let data = await get(store);
+  if (data.detail) {
+    return isLogin ? "Неправильная почта или пароль" : "Такая почта уже используется"
   }
-  let {access_token, token_type, user_id} = json_response;
+  let {access_token, token_type, user_id} = data;
   user.set(access_token);
   setCookie('access_token', access_token, {samesite: 'lax'});
   setCookie('user_id', user_id, {samesite: 'lax'});
 }
+
+// export async function sendForm(login, username, password) {
+//   let json_response = await fetch(
+//     apiUrl + (login ? 'users/token' : 'users/create'),
+//     {
+//       method: 'POST',
+//       credentials: 'omit',
+//       headers: {
+//         'Accept': 'application/json',
+//         'Content-Type': 'application/x-www-form-urlencoded'
+//       },
+//       body: `username=${username}&password=${password}`
+//     },
+//   ).then(res => res.json());
+
+//   let {access_token, token_type, user_id} = json_response;
+//   user.set(access_token);
+//   setCookie('access_token', access_token, {samesite: 'lax'});
+//   setCookie('user_id', user_id, {samesite: 'lax'});
+// }
 
 function setCookie(name, value, options = {}) {
   options = {
@@ -115,8 +136,3 @@ export function clearStoreAndCookie() {
   user = "";
   deleteCookie('access_token');
 }
-
-
-// API part
-
-// const cache = new Map();

@@ -26,10 +26,11 @@ export function submitForm(isLogin, username, password) {
   return fetchStore(
     'https://backend.commondata.ru/users/' + (isLogin ? 'token/':'create/'), {
       method: 'POST',
-      headers: new Headers({
+      credentials: "omit",
+      headers: {
         Accept: 'application/json',
-        // Content-Type: 'application/x-www-form-urlencoded'
-      }),
+        "Content-Type": 'application/x-www-form-urlencoded'
+      },
       body: `username=${username}&password=${password}`
     },
   );

@@ -7,12 +7,16 @@ from logic.tools import generate_link, instance_getter, m2m_editor, exclude
 
 
 included = (
-    'id', 'title', 'project_link', 'participants_target', 'questionnaire', 'is_active',
-    'markdown', 'creation_date', 'description', 'participants_count', 'project_img', 'tags'
+    # 'id', 'title', 'project_link', 'participants_target', 'questionnaire', 'is_active',
+    # 'markdown', 'creation_date', 'description', 'participants_count', 'project_img', 'tags'
     # 'members', 'members.user', 'members.user.fio', 'members.user.avatar', 'members.user.id'
 )
-PrivateProject = pydantic_model_creator(Project, include=included)
-PublicProject = pydantic_model_creator(Project, exclude=('is_active',), include=included)
+excluded = (
+    'members',
+    'leaders.id', 'leaders.user.tags', 'leaders.user.as_leader', 'leaders.user.about', 'leaders.user.as_member'
+)
+PrivateProject = pydantic_model_creator(Project, exclude=excluded, include=included)
+PublicProject = pydantic_model_creator(Project, exclude=excluded, include=included)
 EditableProject = pydantic_model_creator(Project, exclude=(
     'id', 'is_active', 'members', 'leaders', 'creation_date', 'project_link', 'participants_count'
 ))
@@ -42,7 +46,7 @@ async def project_by_link(project_link: str):
 async def create(new_project: New = Body(...), user: User = Depends(get_user)):
     project_link = await generate_link(Project)
     project = await Project.create(**new_project.dict(), project_link=project_link)
-    await project.leaders.add(user)
+    await project.leaders.add(await user.as_leader)
     return await PrivateProject.from_tortoise_orm(project)
 
 

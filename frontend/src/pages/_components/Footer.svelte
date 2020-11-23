@@ -3,13 +3,13 @@
   <div class="column-block">
     <h3>О НАС</h3>
     <ul>
-      <a href="vk.com">
+      <a href="/">
         <li>проектам</li>
       </a>
-      <a href="vk.com">
+      <a href="/">
         <li>пользователям</li>
       </a>
-      <a href="vk.com">
+      <a href="/">
         <li>поддержать проект</li>
       </a>
     </ul>
@@ -17,7 +17,7 @@
   <div class="column-block">
     <h3>СВЯЗАТЬСЯ С НАМИ</h3>
     <ul>
-      <a href="mailto:help@commondata.ru">
+      <a href="/">
         <li>help@commondata.ru</li>
       </a>
     </ul>

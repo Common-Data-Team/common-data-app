@@ -1,5 +1,18 @@
 <script>
+    import { onMount, createEventDispatcher } from 'svelte';
+    import { getCookie } from '../../_api.js';
     export let title, participants_target, creation_date, participants_count, project_img, tags, leaders;
+    export let auth = false;
+    export let edit = false;
+
+    onMount(() => {
+        console.log(leaders);
+        leaders.forEach(leader => {
+            if (getCookie('user_id') === leader.user.id+'') auth = true;
+        });
+    });
+
+    const dispatch = createEventDispatcher();
 </script>
 
 <main>
@@ -24,9 +37,16 @@
 <p class="date_title">время сбора</p>
 <button class="enter_button">Принять участие</button>
 <div class="subscribe_block">
-<img src='/images/button_images/Subscribe.svg' alt="">
+<img src='/images/button_images/subscribe.svg' alt="">
 <p>Подписаться на обновления</p>
 </div>
+{#if auth}
+    {#if edit}
+    <a on:click="{() => {edit = false; dispatch('update')}}" class="edit">Сохранить</a>
+    {:else}
+    <a on:click={() => edit = true} class="edit">Редактировать</a>
+    {/if}
+{/if}
 </div>
 </main>
 <style>
@@ -143,5 +163,15 @@
         font-size: 18px;
         line-height: 24px;
         margin: 0 0 0 20px;
+    }
+    .edit {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    text-decoration-line: underline;
+    margin: 10px 0 0 0;
+  }
+    .edit:hover {
+        cursor: pointer;
     }
 </style>

@@ -104,7 +104,7 @@ export function clearStoreAndCookie() {
 
 // API part
 
-const cache = new Map();
+export const cache = new Map();
 
 export function getData(apiPart, method, object){
     const store = writable(new Promise(() => {}));

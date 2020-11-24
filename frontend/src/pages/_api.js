@@ -112,14 +112,7 @@ export function getData(apiPart, method, object){
         store.set(Promise.resolve(cache.get(apiPart)))
     }
     const load = async () => {
-        const response = await fetch(apiUrl + apiPart,{
-        method: method,
-        headers: new Headers({
-            'Accept': 'application/json',
-            'Authorization': 'Bearer ' + get(user),
-        }),
-        body: JSON.stringify(object)
-    });
+        const response = await fetch(apiUrl + apiPart);
         const data = await response.json();
         cache.set(apiPart, data);
         store.set(Promise.resolve(data));

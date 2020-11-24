@@ -143,7 +143,7 @@
             </div>
           {/if}
           <a href="./auth/signup">
-            <button class="auth-buttons" onclick="./auth/signin">Регистрация</button>
+            <button class="auth-buttons" onclick={() => $goto('./auth/signup')}>Регистрация</button>
           </a>
         </div>
       </div>

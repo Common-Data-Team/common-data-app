@@ -104,17 +104,24 @@ export function clearStoreAndCookie() {
 
 // API part
 
-// const cache = new Map();
+const cache = new Map();
 
-export async function getData(url){
+export function getData(apiPart, method, object){
     const store = writable(new Promise(() => {}));
-    // if (cache.has(url)){
-    //     store.set(Promise.resolve(cache.get(url)))
-    // }
+    if (cache.has(apiPart)){
+        store.set(Promise.resolve(cache.get(apiPart)))
+    }
     const load = async () => {
-        const response = fetch(url);
-        const data = response.json();
-        // cache.set(url, data)
+        const response = await fetch(apiUrl + apiPart,{
+        method: method,
+        headers: new Headers({
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + get(user),
+        }),
+        body: JSON.stringify(object)
+    });
+        const data = await response.json();
+        cache.set(apiPart, data);
         store.set(Promise.resolve(data));
     };
     load();

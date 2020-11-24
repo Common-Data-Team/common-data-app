@@ -1,31 +1,16 @@
 <script>
   import {ready, url, params, goto} from '@roxi/routify';
-  import {getContext} from 'svelte';
+  import {getContext, onMount} from 'svelte';
   import {writable} from "svelte/store";
-  import { getCookie } from '../../../_api.js';
-
+  import { getCookie, getData } from '../../../_api.js';
+  let auth = false;
+  onMount(() => {
+    getCookie('user_id') === $params.user_id ? auth = true : auth = false;
+    if (avatar == null) avatar = '/images/user_images/user.jpg';
+  });
   let apiUrl = getContext('apiUrl');
   let fio, email, avatar, about, tags;
-  function getData(id) {
-    const store = writable(new Promise(() => {}));
-
-    const load = async () => {
-      let auth = false;
-      if (getCookie('user_id') === id) auth = true;
-      const response = await fetch(apiUrl + `users/${id}`);
-      const data = await response.json();
-      console.log(data);
-      if (data.about === null) data.about = 'Напишите о себе!';
-      if (data.avatar === null) data.avatar = '/images/user_images/user.jpg';
-      data.auth = auth;
-      if (data.tags.length === 0) data.tags.push({name: 'Пока нет('});
-      store.set(Promise.resolve(data));
-      $ready();
-    };
-    load();
-    return store;
-  }
-  const promise = getData($params.user_id);
+  const promise = getData('users/'+ $params.user_id);
 </script>
 
 <main>

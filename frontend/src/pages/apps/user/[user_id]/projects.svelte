@@ -2,7 +2,7 @@
     import Project from '../../_components/Project.svelte';
     import { Dialog, Textfield } from 'svelte-mui';
     import {params, goto} from '@roxi/routify';
-    import { authorizedRequest, getCookie } from '../../../_api.js';
+    import { authorizedRequest, getCookie, getData } from '../../../_api.js';
     import { onMount } from 'svelte';
     let screenWidth;
 
@@ -12,63 +12,6 @@
     let title = '';
     let description = '';
     let participants_target = '';
-    export let data = [
-    {
-      title: 'Плитка из камня',
-      tags: ['Наука', 'Медицина'],
-      progress: 42,
-      author: "Камень Камень",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
-      projectImageSrc: "/images/project_images/Rectangle 4.png"
-    },
-    {
-      title: 'Влияние проходимого расстояния на здоровье',
-      tags: ['Наука', 'Медицина'],
-      progress: 92,
-      author: "Камень Иванович",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
-      projectImageSrc: "/images/project_images/star_project.png"
-    },
-    {
-      title: 'Влияние проходимого расстояния на здоровье',
-      tags: ['Наука', 'Медицина'],
-      progress: 80,
-      author: "Камень Иванович",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
-      projectImageSrc: "/images/project_images/follow_project_card.png"
-    },
-
-    {
-      title: 'Плитка из камня',
-      tags: ['Наука', 'Медицина'],
-      progress: 42,
-      author: "Камень Камень",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
-      projectImageSrc: "/images/project_images/Rectangle 4.png"
-    },
-    {
-      title: 'Влияние проходимого расстояния на здоровье',
-      tags: ['Наука', 'Медицина'],
-      progress: 92,
-      author: "Камень Иванович",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
-      projectImageSrc: "/images/project_images/star_project.png"
-    },
-    {
-      title: 'Влияние проходимого расстояния на здоровье',
-      tags: ['Наука', 'Медицина'],
-      progress: 80,
-      author: "Камень Иванович",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
-      projectImageSrc: "/images/project_images/follow_project_card.png"
-    }
-  ];
 let auth;
 function textareaIncrease(event) {
     let elem = event.target;
@@ -83,9 +26,11 @@ async function createProject() {
     const response = await authorizedRequest('projects/create', 'Post', {title, description, participants_target});
     console.log(response[0].project_link);
     if (response[0].project_img === null) response[0].project_img = '/images/project_images/follow_project_card.png';
-    if (response[0] !== null) data = [response[0], ...data];
+    promise = getData('users/'+ $params.user_id);
     visible = false;
 }
+
+let promise = getData('users/'+ $params.user_id);
 </script>
 
 <svelte:head>
@@ -117,6 +62,9 @@ async function createProject() {
 </Dialog>
 
 <main>
+{#await $promise}
+    <h1>Загрузка...</h1>
+{:then {as_leader}}
     <div class = "profile">
         <div class="main-block">
                 <h2 class="pr">Проекты</h2>
@@ -139,12 +87,13 @@ async function createProject() {
                     </div>
                 </div></div>
                     {/if}
-                {#each data as card}
+                {#each as_leader.projects as card}
                     <Project {...card}></Project>
                 {/each}
             </section>
         </div>
     </div>
+{/await}
 </main>
 <style>
 

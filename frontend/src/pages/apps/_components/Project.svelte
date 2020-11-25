@@ -1,11 +1,16 @@
 <script>
     import { goto } from '@roxi/routify';
     import { fade } from 'svelte/transition';
-
+    import { onMount } from 'svelte';
     export let title = 'Влияние проходимого расстояния на здоровье';
     export let progress = 42;
-    export let project_img = "/images/project_images/follow_project_card.png";
+    export let project_img;
     export let project_link;
+    onMount(()=> {
+       if (project_img == null) {
+           project_img = "/images/project_images/follow_project_card.png";
+       }
+    });
   </script>
   
   <div class="project-card" on:click={() => $goto('../../project/'+project_link)} in:fade>

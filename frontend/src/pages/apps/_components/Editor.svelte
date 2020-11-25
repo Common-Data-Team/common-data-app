@@ -1,18 +1,23 @@
 <script>
 	// Import markdown conversion library
-  import marked from 'marked'
+	import { cache, dataStore } from '../../_api.js';
+	import {params} from '@roxi/routify';
+    import marked from 'marked'
 
 	// Declare a variable to store the markdown data. Set a default value
-  let markdown = "# Example Title\n\n- this\n- is\n- a list"
+	export let edit;
+    export let markdown;
 </script>
-
-<!-- Declare a textarea where the user can enter markdown, and bind it to the variable `markdown` -->
-<textarea bind:value={markdown} placeholder="Enter markdown here"/>
 
 <!-- Convert the markdown to HTML and display it -->
 <div class="preview">{@html marked(markdown)}</div>
 
-<!-- Make it look (slightly) nicer ;) -->
+<!-- Declare a textarea where the user can enter markdown, and bind it to the variable `markdown` -->
+{#if edit}
+<textarea bind:value={markdown} on:keyup={() => $dataStore.description = markdown} placeholder="Enter markdown here"></textarea>
+{/if}
+
+
 <style>
 	textarea, .preview {
 		box-sizing: border-box;
@@ -22,15 +27,16 @@
 
 	textarea {
 		font-family: monospace, Roboto;
-		height: 25%;
-		border: none;
-		margin: 0;
+		margin: 0 2% 50px 2%;
+		min-height: 200px;
+		width: 800px;
+		border: 2px solid #000000;
+		border-radius: 5px;
+		outline: none;
 	}
 
 	.preview {
-		height: 75%;
 		padding: 2rem;
-		border-top: solid 2px #888;
 	}
 
 	:global(body) {

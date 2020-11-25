@@ -1,20 +1,28 @@
 <script>
     import ProjectPage from '../_components/ProjectPage.svelte';
     import ProjectAbout from '../_components/ProjectAbout.svelte';
-    import { onMount, getContext } from 'svelte';
-    import { params } from '@roxi/routify';
-    let apiUrl = getContext('apiUrl');
-    async function getData() {
-       const response = await fetch(apiUrl+'projects/' + $params.project_link).then(res => res.json());
-       console.log(response);
-        if (response.project_img === null) response.project_img = '/images/project_images/main_project.png';
-        if (response.leaders[0].user.avatar === null) response.leaders[0].user.avatar = '/images/user_images/user.jpg';
-       return response;
+    import Editor from '../_components/Editor.svelte';
+    import {params} from '@roxi/routify';
+    import {getData, authorizedRequest, dataStore} from '../../_api.js';
+    import ProjectMenu from "../_components/ProjectMenu.svelte";
+
+    async function EditProject() {
+        let data;
+        dataStore.subscribe(value => {
+           data = value;
+        });
+        let {title, participants_target, questionnaire, markdown, description, project_img, tags} = data;
+        console.log(tags);
+        const response = await authorizedRequest('projects/'+$params.project_link+'/edit', 'PUT',
+                {title, participants_target, questionnaire, markdown, description, project_img, tags});
     }
+    let edit = false;
+    let promise = getData('projects/' + $params.project_link);
 </script>
-{#await getData()}
+{#await $promise}
     <h1>Загрузка...</h1>
 {:then data}
-<ProjectPage {...data}/>
-<ProjectAbout description={data.description}/>
+    <ProjectPage {...data} on:update={EditProject} bind:edit={edit}/>
+    <ProjectMenu/>
+    <Editor markdown={data.description} bind:edit={edit}/>
 {/await}

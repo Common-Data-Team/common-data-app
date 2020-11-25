@@ -1,19 +1,50 @@
 <script>
+    import { onMount, createEventDispatcher } from 'svelte';
+    import { getCookie, dataStore } from '../../_api.js';
+    import { fade } from 'svelte/transition';
     export let title, participants_target, creation_date, participants_count, project_img, tags, leaders;
+    let auth = false;
+    export let edit = false;
+
+    onMount(() => {
+        console.log(leaders);
+        leaders.forEach(leader => {
+            if (getCookie('user_id') === leader.user.id+'') auth = true;
+        });
+    });
+
+    const dispatch = createEventDispatcher();
 </script>
 
 <main>
 <img src={project_img} alt="project_img" class="project_img">
 <div class="info_block">
-<h1 class="title">{title}</h1>
+    {#if edit}
+    <input class="title" bind:value={title} on:keyup={() => $dataStore.title = title} in:fade>
+        {:else}
+    <h1 class="title">{title}</h1>
+        {/if}
 <div class="bar">
         <div class="progress" style="width: {participants_count}%"></div>
 </div>
 <p class="progress_title">{participants_count} человек приняло участие</p>
-<p class="target_title">из {participants_target} запрошенных</p>
+<p class="target_title">из {#if edit}<input class="target_title input_target" bind:value={participants_target} in:fade on:keyup={() => $dataStore.participants_target = participants_target}>{:else}{participants_target}{/if} запрошенных</p>
 <div class="tags_block">
-    {#each tags as tag}
-        <div class="tag"><p>{tag.name}</p></div>
+    {#if edit}
+        <div class="tag" in:fade on:click="{() => {tags = [...tags, {name: ''}]; $dataStore.tags = [...$dataStore.tags, {name: ''}]}}"><p>Добавить тэг</p></div>
+    {:else}
+        {#if tags.length === 0}
+            <div class="tag"><p>Тэгов нет</p></div>
+        {/if}
+    {/if}
+    {#each tags as tag, ind}
+        <div class="tag">
+            {#if edit}
+                <input bind:value={tag.name} on:keyup={() => $dataStore.tags[ind].name = tag.name}>
+            {:else}
+                <p>{tag.name}</p>
+            {/if}
+        </div>
     {/each}
 </div>
 <div class="leader_block">
@@ -24,12 +55,24 @@
 <p class="date_title">время сбора</p>
 <button class="enter_button">Принять участие</button>
 <div class="subscribe_block">
-<img src='/images/button_images/Subscribe.svg' alt="">
+<img src='/images/button_images/subscribe.svg' alt="">
 <p>Подписаться на обновления</p>
 </div>
+{#if auth}
+    {#if edit}
+    <a on:click="{() => {edit = false; dispatch('update')}}" class="edit">Сохранить</a>
+    {:else}
+    <a on:click={() => edit = true} class="edit">Редактировать</a>
+    {/if}
+{/if}
 </div>
 </main>
 <style>
+    input {
+        background: transparent;
+		border: 2px solid #000000;
+		border-radius: 5px;
+    }
     main {
         width: 100%;
         display: flex;
@@ -78,10 +121,13 @@
         font-size: 14px;
         line-height: 19px;
     }
+    .input_target {
+        width: 40px;
+    }
     .tags_block {
         display: flex;
         flex-wrap: wrap;
-        margin: 30px 10px 0 0;
+        margin: 15px 10px 0 0;
     }
     .tag {
         background-color: #282828;
@@ -101,7 +147,7 @@
     .leader_block {
         display: flex;
         align-items: center;
-        margin: 20px 0 0 0;
+        margin: 15px 0 0 0;
     }
     .leader_block img {
         width: 37px;
@@ -143,5 +189,15 @@
         font-size: 18px;
         line-height: 24px;
         margin: 0 0 0 20px;
+    }
+    .edit {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    text-decoration-line: underline;
+    margin: 10px 0 0 0;
+  }
+    .edit:hover {
+        cursor: pointer;
     }
 </style>

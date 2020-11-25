@@ -1,11 +1,11 @@
 <script>
-  import {goto} from '@roxi/routify';
-  import {checkStoreAndCoockie, clearStoreAndCookie, getCookie} from "./_api";
+  import { goto } from '@roxi/routify';
+  import { clearStoreAndCookie, getCookie} from "./_api";
   import Project from './_components/Project.svelte';
   import FollowProject from './_components/Follow_Project.svelte';
   import NewProject from './_components/New_Project.svelte';
   import Footer from './_components/Footer.svelte';
-  import {Menu, Menuitem, Button, Icon} from 'svelte-mui';
+  import { Menu, Menuitem }  from 'svelte-mui';
 
   let current_tag = 'all';
   let screenWidth;
@@ -68,7 +68,7 @@
     }
   ]
 
-  let auth = checkStoreAndCoockie();
+  let auth = getCookie('access_token');
 
   function logout() {
     auth = false;
@@ -79,7 +79,7 @@
 
 <svelte:head>
   <title>Common Data</title>
-  <meta name="yandex-verification" content="e2935006109ebd77"/>
+  <meta name="yandex-verification" content="e2935006109ebd77" />
 </svelte:head>
 <svelte:window bind:innerWidth={screenWidth}/>
 
@@ -95,18 +95,18 @@
           <h2>ПОЧЕМУ МЫ?</h2>
           <div class="btn-about">
             <button
-              class:active="{current === 'user'}"
-              on:click="{() => current = 'user'}"
+                class:active="{current === 'user'}"
+                on:click="{() => current = 'user'}"
             >Пользователям
             </button>
             <button
-              class:active="{current === 'project'}"
-              on:click="{() => current = 'project'}"
+                class:active="{current === 'project'}"
+                on:click="{() => current = 'project'}"
             >Проектам
             </button>
           </div>
           {#if current == 'user'}
-            <div class="users-block">
+            <div id="users-block">
               <div class="point-block">
                 <h2>01</h2>
                 <p>Участвуйте в том, что для вас интересно и важно. Мы будем рекомендовать проекты, которые
@@ -124,7 +124,7 @@
               </div>
             </div>
           {:else}
-            <div class="users-block">
+            <div id="users-block">
               <div class="point-block">
                 <h2>01</h2>
                 <p>Формируйте датасеты. Мы поможем вам составить форму для сбора данных, предоставим место
@@ -143,53 +143,48 @@
             </div>
           {/if}
           <a href="./auth/signup">
-            <button class="auth-buttons">Регистрация</button>
+            <button class="auth-buttons" onclick={() => $goto('./auth/signup')}>Регистрация</button>
           </a>
         </div>
       </div>
     {/if}
 
     <div class="auth-menu">
-      <div class="menu-block">
-        <button
-          class:active="{current_tag === 'all'}"
-          on:click="{() => current_tag = 'all'}"
-        >Все
-        </button>
-        <button class:active="{current_tag === 'Бытовое'}"
-                on:click="{() => current_tag = 'Бытовое'}">Бытовое
-        </button>
-        <button class:active="{current_tag === 'Наука'}"
-                on:click="{() => current_tag = 'Наука'}">Наука
-        </button>
-        <button class:active="{current_tag === 'Медицина'}"
-                on:click="{() => current_tag = 'Медицина'}">Медицина
-        </button>
-        <button class:active="{current_tag === 'Нейросети'}"
-                on:click="{() => current_tag = 'Нейросети'}">Нейросети
-        </button>
-      </div>
-      <div class="user-buttons-menu">
-        {#if auth}
-          <Menu origin="top right" width=328 dy=53>
-            <div slot="activator">
-              <!-- svelte-ignore a11y-missing-attribute -->
-              <img src="/images/user_images/user.jpg" class="user-image-menu"/>
+            <div class="menu-block">
+            <button
+                class:active="{current_tag === 'all'}"
+                on:click="{() => current_tag = 'all'}"
+            >Все</button>
+                <button class:active="{current_tag === 'Бытовое'}"
+                on:click="{() => current_tag = 'Бытовое'}">Бытовое</button>
+                <button class:active="{current_tag === 'Наука'}"
+                on:click="{() => current_tag = 'Наука'}">Наука</button>
+                <button class:active="{current_tag === 'Медицина'}"
+                on:click="{() => current_tag = 'Медицина'}">Медицина</button>
+                <button class:active="{current_tag === 'Нейросети'}"
+                on:click="{() => current_tag = 'Нейросети'}">Нейросети</button>
             </div>
+            <div class="user-buttons-menu">
+              {#if auth}
+                  <Menu origin="top right" width=328 dy=53>
+                    <div slot="activator">
+                      <!-- svelte-ignore a11y-missing-attribute -->
+                      <img src="/images/user_images/user.jpg" class="user-image-menu" />
+                    </div>
 
-            <Menuitem>Достижения</Menuitem>
-            <Menuitem on:click={() => $goto('../apps/user/'+getCookie('user_id'))}>Настройки</Menuitem>
-            <hr/>
-            <Menuitem on:click={logout}>Выйти</Menuitem>
-          </Menu>
-        {/if}
-        {#if !auth}
-          <div class="not-user-buttons-menu">
-            <a href='./auth/signin'>вход</a>
-            <a href='./auth/signup'>регистрация</a>
-          </div>
-        {/if}
-      </div>
+                    <Menuitem>Достижения</Menuitem>
+                    <Menuitem on:click={() => $goto('../apps/user/'+getCookie('user_id'))}>Настройки</Menuitem>
+                    <hr />
+                    <Menuitem on:click={logout}>Выйти</Menuitem>
+                </Menu>
+            {/if}
+            {#if !auth}
+                <div class="not-user-buttons-menu">
+                    <a href='./auth/signin'>вход</a>
+                    <a href='./auth/signup'>регистрация</a>
+                </div>
+            {/if}
+            </div>
     </div>
 
     <div class="popular-block">
@@ -198,9 +193,9 @@
         <p class="arrow">→</p>
       </div>
       <section style="--columns-amount: {Math.floor((Math.min(screenWidth, 1200) - 30) / 350)}">
-        {#each data as card}
-          <Project {...card}></Project>
-        {/each}
+          {#each data as card}
+                <Project {...card}></Project>
+          {/each}
       </section>
     </div>
 
@@ -211,9 +206,9 @@
           <p class="arrow">→</p>
         </div>
         <section style="--columns-amount: {Math.floor((Math.min(screenWidth, 1200) - 30) / 500)}">
-          {#each data as card}
-            <FollowProject {...card}></FollowProject>
-          {/each}
+            {#each data as card}
+                <FollowProject {...card}></FollowProject>
+            {/each}
         </section>
       </div>
     {/if}
@@ -225,7 +220,7 @@
       </div>
       <section style="--columns-amount: {Math.floor((Math.min(screenWidth, 1200) - 30) / 223)}">
         {#each data as card}
-          <NewProject {...card}></NewProject>
+            <NewProject {...card}></NewProject>
         {/each}
       </section>
     </div>
@@ -236,205 +231,205 @@
 
 <style>
 
-    main {
-        padding-left: 5%;
-    }
+  main {
+    padding-left: 5%;
+  }
 
-    .btn-about {
-        display: flex;
-    }
+  .btn-about {
+    display: flex;
+  }
 
-    .btn-about button {
-        width: 178px;
-    }
+  .btn-about button {
+    width: 178px;
+  }
 
-    section {
-        display: grid;
-        justify-items: left;
-        grid-template-columns: repeat(var(--columns-amount), 1fr);
-        height: 100%;
-        width: 100%;
-    }
+  section {
+    display: grid;
+    justify-items: left;
+    grid-template-columns: repeat(var(--columns-amount), 1fr);
+    height: 100%;
+    width: 100%;
+  }
 
-    .arrow {
-        font-family: "SF Pro Display";
-        text-align: center;
-        margin-left: 1%;
-    }
+  .arrow {
+    font-family: "SF Pro Display";
+    text-align: center;
+    margin-left: 1%;
+  }
 
-    .auth-buttons {
-        width: 211px;
-        height: 43px;
-        font-size: 20px;
-        background-color: #282828;
-        color: #f9f9f9;
-        text-align: center;
-    }
+  .auth-buttons {
+    width: 211px;
+    height: 43px;
+    font-size: 20px;
+    background-color: #282828;
+    color: #f9f9f9;
+    text-align: center;
+  }
 
-    .not-user-buttons-menu {
-        display: flex;
-        flex-direction: column;
-        text-align: right;
-    }
+  .not-user-buttons-menu {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+  }
 
-    .not-user-buttons-menu a {
-        color: #282828;
+  .not-user-buttons-menu a {
+    color: #282828;
+  }
+
+  .description {
+    display: flex;
+    flex-direction: column;
+    max-width: 537px;
+  }
+
+  .description h2 {
+    margin-bottom: 1%;
+  }
+
+  .description p {
+    margin-bottom: 5%;
+    --plain-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
+  }
+
+  .log-out-block {
+    display: flex;
+    margin-bottom: 2%;
+  }
+
+  button {
+    margin-top: 2%;
+    background: transparent;
+    text-align: center;
+    color: #282828;
+    max-width: 178px;
+    border: 1px solid #282828;
+    border-radius: 0;
+    --plain-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
+  }
+
+  button:hover {
+    box-shadow: inset 0px 0px 0px 2px #282828;
+    border-radius: 0;
+    outline: none;
+  }
+
+  button:active {
+    background-color: #E8E8E8;
+    box-shadow: inset 0px 0px 0px 1px #282828;
+    border-radius: 0;
+    color: #282828;
+    outline: none;
+  }
+
+  button:focus {
+    outline: none;
+  }
+
+  .active {
+    background-color: #282828;
+    outline: none;
+    color: #F9F9F9;
+  }
+
+  .point-block {
+    display: flex;
+    align-items: stretch;
+    margin-top: 5%;
+  }
+
+  .point-block p {
+    max-width: 300px;
+  }
+
+  .point-block h2 {
+    padding-right: 2%;
+    font-size: calc(38px + (40 - 38) * ((100vw - 300px) / (1440 - 300)));
+  }
+
+  .log-out-text {
+    max-width: 40%;
+    padding-right: 2%;
+  }
+
+  .popular-block {
+    max-width: 95%;
+    flex-direction: column;
+    display: flex;
+  }
+
+  .block-title {
+    display: flex;
+    align-items: center;
+    --plain-font-size: calc(24px + (32 - 24) * ((100vw - 300px) / (1440 - 300)));
+    padding-bottom: 1%;
+    padding-top: 5%;
+  }
+
+  a {
+    color: #BDBDBD;
+    font-family: "Helvetica Norm";
+    --plain-font-size: calc(12px + (14 - 12) * ((100vw - 300px) / (1440 - 300)));
+    text-decoration: none;
+  }
+
+  .user-buttons-menu {
+    margin-left: auto;
+  }
+
+  .auth-menu {
+    display: flex;
+    max-width: 90%;
+  }
+
+  .menu-block {
+    display: flex;
+  }
+
+  .user-image-menu {
+    width: 41px;
+    height: 41px;
+    border-radius: 50%;
+  }
+
+
+  .auth-menu button {
+    border: none;
+    padding: 0.188em 0.625em;
+  }
+
+  button {
+    display: block;
+  }
+
+  a:hover {
+    color: #1355FF;
+  }
+
+  @media (max-width: 768px) {
+
+    .popular-block {
+      max-width: 768px;
     }
 
     .description {
-        display: flex;
-        flex-direction: column;
-        max-width: 537px;
+      max-width: 90%;
     }
 
     .description h2 {
-        margin-bottom: 1%;
-    }
-
-    .description p {
-        margin-bottom: 5%;
-        --plain-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
+      margin-top: 2%;
     }
 
     .log-out-block {
-        display: flex;
-        margin-bottom: 2%;
-    }
-
-    button {
-        margin-top: 2%;
-        background: transparent;
-        text-align: center;
-        color: #282828;
-        max-width: 178px;
-        border: 1px solid #282828;
-        border-radius: 0;
-        --plain-font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1440 - 300)));
-    }
-
-    button:hover {
-        box-shadow: inset 0px 0px 0px 2px #282828;
-        border-radius: 0;
-        outline: none;
-    }
-
-    button:active {
-        background-color: #E8E8E8;
-        box-shadow: inset 0px 0px 0px 1px #282828;
-        border-radius: 0;
-        color: #282828;
-        outline: none;
-    }
-
-    button:focus {
-        outline: none;
-    }
-
-    .active {
-        background-color: #282828;
-        outline: none;
-        color: #F9F9F9;
-    }
-
-    .point-block {
-        display: flex;
-        align-items: stretch;
-        margin-top: 5%;
-    }
-
-    .point-block p {
-        max-width: 300px;
-    }
-
-    .point-block h2 {
-        padding-right: 2%;
-        font-size: calc(38px + (40 - 38) * ((100vw - 300px) / (1440 - 300)));
-    }
-
-    .log-out-text {
-        max-width: 40%;
-        padding-right: 2%;
+      flex-direction: column;
     }
 
     .popular-block {
-        max-width: 95%;
-        flex-direction: column;
-        display: flex;
+      flex-direction: column;
     }
 
-    .block-title {
-        display: flex;
-        align-items: center;
-        --plain-font-size: calc(24px + (32 - 24) * ((100vw - 300px) / (1440 - 300)));
-        padding-bottom: 1%;
-        padding-top: 5%;
+    .log-out-text {
+      max-width: 90%;
     }
-
-    a {
-        color: #BDBDBD;
-        font-family: "Helvetica Norm";
-        --plain-font-size: calc(12px + (14 - 12) * ((100vw - 300px) / (1440 - 300)));
-        text-decoration: none;
-    }
-
-    .user-buttons-menu {
-        margin-left: auto;
-    }
-
-    .auth-menu {
-        display: flex;
-        max-width: 90%;
-    }
-
-    .menu-block {
-        display: flex;
-    }
-
-    .user-image-menu {
-        width: 41px;
-        height: 41px;
-        border-radius: 50%;
-    }
-
-
-    .auth-menu button {
-        border: none;
-        padding: 0.188em 0.625em;
-    }
-
-    button {
-        display: block;
-    }
-
-    a:hover {
-        color: #1355FF;
-    }
-
-    @media (max-width: 768px) {
-
-        .popular-block {
-            max-width: 768px;
-        }
-
-        .description {
-            max-width: 90%;
-        }
-
-        .description h2 {
-            margin-top: 2%;
-        }
-
-        .log-out-block {
-            flex-direction: column;
-        }
-
-        .popular-block {
-            flex-direction: column;
-        }
-
-        .log-out-text {
-            max-width: 90%;
-        }
-    }
+  }
 
 </style>

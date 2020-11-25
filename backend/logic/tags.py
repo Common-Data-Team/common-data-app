@@ -13,11 +13,12 @@ excluded = (
 )
 included = ()
 PublicTags = pydantic_model_creator(Tag, exclude=excluded)
+OnlyName = pydantic_model_creator(Tag, include=('name', ))
 
 
-@router.get('/all', response_model=List[PublicTags])
+@router.get('/all', response_model=List[str])
 async def all_tags():
-    return await PublicTags.from_queryset(Tag.all())
+    return [tag.name for tag in await Tag.all()]
 
 
 @router.get('/{name}', response_model=PublicTags)

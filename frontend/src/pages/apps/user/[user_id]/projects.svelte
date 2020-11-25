@@ -12,15 +12,13 @@
     let title = '';
     let description = '';
     let participants_target = '';
-let auth;
+    let auth = getCookie('user_id') === $params.user_id;
 function textareaIncrease(event) {
     let elem = event.target;
     if (elem.scrollTop > 0) {
         elem.style.height = elem.scrollHeight + 'px';
     }
 }
-
-onMount(() => getCookie('user_id') === $params.user_id ? auth = true : auth = false);
 
 async function createProject() {
     const response = await authorizedRequest('projects/create', 'Post', {title, description, participants_target});

@@ -105,7 +105,7 @@ export function clearStoreAndCookie() {
 // API part
 
 export const cache = new Map();
-
+export let dataStore = writable({});
 export function getData(apiPart, method, object){
     const store = writable(new Promise(() => {}));
     if (cache.has(apiPart)){
@@ -116,6 +116,7 @@ export function getData(apiPart, method, object){
         const data = await response.json();
         cache.set(apiPart, data);
         store.set(Promise.resolve(data));
+        dataStore.set(data);
     };
     load();
     return store;

@@ -1,13 +1,10 @@
 <script>
   import {ready, url, params, goto} from '@roxi/routify';
-  import {getContext, onMount} from 'svelte';
+  import { getContext } from 'svelte';
   import {writable} from "svelte/store";
   import { getCookie, getData } from '../../../_api.js';
-  let auth = false;
-  onMount(() => {
-    getCookie('user_id') === $params.user_id ? auth = true : auth = false;
-    if (avatar == null) avatar = '/images/user_images/user.jpg';
-  });
+  let auth = getCookie('user_id') === $params.user_id;
+  console.log(auth);
   let apiUrl = getContext('apiUrl');
   let fio, email, avatar, about, tags;
   const promise = getData('users/'+ $params.user_id);
@@ -17,7 +14,7 @@
   <div class="profile">
     {#await $promise}
       <h1>Загрузка...</h1>
-    {:then {fio, avatar, about, tags, as_leader, auth}}
+    {:then {fio, avatar, about, tags, as_leader}}
       <div class="main-block">
         <h2 class="pr">Профиль</h2>
         {#if auth}

@@ -1,6 +1,6 @@
 <script>
   import { goto } from '@roxi/routify';
-  import {checkStoreAndCoockie, clearStoreAndCookie, getCookie} from "./_api";
+  import { clearStoreAndCookie, getCookie} from "./_api";
   import Project from './_components/Project.svelte';
   import FollowProject from './_components/Follow_Project.svelte';
   import NewProject from './_components/New_Project.svelte';
@@ -68,7 +68,7 @@
     }
   ]
 
-  let auth = checkStoreAndCoockie();
+  let auth = getCookie('access_token');
 
   function logout() {
     auth = false;

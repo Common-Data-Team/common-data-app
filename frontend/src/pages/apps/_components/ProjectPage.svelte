@@ -5,7 +5,7 @@
     export let title, participants_target, creation_date, participants_count, project_img, tags, leaders;
     let auth = false;
     export let edit = false;
-
+    console.log(project_img);
     onMount(() => {
         console.log(leaders);
         leaders.forEach(leader => {
@@ -17,7 +17,7 @@
 </script>
 
 <main>
-<img src={project_img} alt="project_img" class="project_img">
+<img src={'/'+project_img+'.png'} alt="project_img" class="project_img">
 <div class="info_block">
     {#if edit}
     <input class="title" bind:value={title} on:keyup={() => $dataStore.title = title} in:fade>
@@ -40,7 +40,7 @@
     {#each tags as tag, ind}
         <div class="tag">
             {#if edit}
-                <input bind:value={tag.name} on:keyup={() => $dataStore.tags[ind].name = tag.name}>
+                <input class="input_tag" bind:value={tag.name} on:keyup={() => $dataStore.tags[ind].name = tag.name}>
             {:else}
                 <p>{tag.name}</p>
             {/if}
@@ -48,7 +48,7 @@
     {/each}
 </div>
 <div class="leader_block">
-<img src={leaders[0].user.avatar} alt="leader_ava">
+<img src={'/'+leaders[0].user.avatar+'.jpg'} alt="leader_ava">
 <p>{leaders[0].user.fio}</p>
 </div>
 <p class="date">{creation_date.slice(8, 10)}.{creation_date.slice(5, 7)} - ???</p>
@@ -143,6 +143,12 @@
         font-weight: 300;
         font-size: 14px;
         line-height: 17px;
+    }
+    .input_tag {
+        text-align: center;
+        min-width: 100px;
+        color: #FFFFFF;
+        border: 0;
     }
     .leader_block {
         display: flex;

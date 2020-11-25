@@ -7,9 +7,9 @@ export const selfUrl = 'http://localhost:5000/';
 export let user = writable("");
 
 
-export async function sendForm(login, username, password) {
+export async function sendForm(login, username, password, name) {
     let json_response = await fetch(
-        apiUrl + (login ? 'users/token' : 'users/create'),
+        apiUrl + (login ? 'users/token' : 'users/create?fio='+name),
         {
             method: 'POST',
             credentials: 'omit',
@@ -77,14 +77,14 @@ export function checkStoreAndCoockie() {
 }
 
 export async function authorizedRequest(apiPart, method, object) {
-    if (!checkStoreAndCoockie()) {
+    if (!getCookie('access_token')) {
         return [null, "Unauthorized"]
     }
     let json_response = await fetch(apiUrl + apiPart, {
         method: method,
         headers: new Headers({
             'Accept': 'application/json',
-            'Authorization': 'Bearer ' + get(user),
+            'Authorization': 'Bearer ' + getCookie('access_token'),
         }),
         body: JSON.stringify(object)
     }).then(res => res.json());

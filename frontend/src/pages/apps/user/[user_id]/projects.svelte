@@ -23,7 +23,7 @@ function textareaIncrease(event) {
 async function createProject() {
     const response = await authorizedRequest('projects/create', 'Post', {title, description, participants_target});
     console.log(response[0].project_link);
-    if (response[0].project_img === null) response[0].project_img = '/images/project_images/follow_project_card.png';
+    // if (response[0].project_img === null) response[0].project_img = '/images/project_images/follow_project_card.png';
     promise = getData('users/'+ $params.user_id);
     visible = false;
 }

@@ -23,7 +23,7 @@
       </div>
       <div class="user_info">
         <div class="user">
-          <img src={avatar} class="photo" alt="user_photo"/>
+          <img src={'/'+avatar+'.jpg'} class="photo" alt="user_photo"/>
           <h2 class="title" id="name">{fio}</h2>
         </div>
         <div class="self">

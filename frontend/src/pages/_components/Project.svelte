@@ -3,7 +3,7 @@
   export let tags = ['Наука', 'Медицина'];
   export let progress = 42;
   export let author = "Камень Иванович";
-  export let userImageSrc = "/images/user_images/user.jpg";
+  export let userImageSrc = "/images/user_images/default.jpg";
   export let project_img = "/images/project_images/Rectangle 4.png";
   export let project_link = '';
 </script>

@@ -17,7 +17,7 @@
       progress: 42,
       author: "Камень Камень",
       description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
+      userImageSrc: "/images/user_images/default.jpg",
       projectImageSrc: "/images/project_images/Rectangle 4.png"
     },
     {
@@ -26,7 +26,7 @@
       progress: 92,
       author: "Камень Иванович",
       description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
+      userImageSrc: "/images/user_images/default.jpg",
       projectImageSrc: "/images/project_images/star_project.png"
     },
     {
@@ -35,7 +35,7 @@
       progress: 80,
       author: "Камень Иванович",
       description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
+      userImageSrc: "/images/user_images/default.jpg",
       projectImageSrc: "/images/project_images/follow_project_card.png"
     },
 
@@ -45,7 +45,7 @@
       progress: 42,
       author: "Камень Камень",
       description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
+      userImageSrc: "/images/user_images/default.jpg",
       projectImageSrc: "/images/project_images/Rectangle 4.png"
     },
     {
@@ -54,7 +54,7 @@
       progress: 92,
       author: "Камень Иванович",
       description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
+      userImageSrc: "/images/user_images/default.jpg",
       projectImageSrc: "/images/project_images/star_project.png"
     },
     {
@@ -63,7 +63,7 @@
       progress: 80,
       author: "Камень Иванович",
       description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
+      userImageSrc: "/images/user_images/default.jpg",
       projectImageSrc: "/images/project_images/follow_project_card.png"
     }
   ]

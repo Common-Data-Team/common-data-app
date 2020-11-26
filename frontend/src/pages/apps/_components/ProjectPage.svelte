@@ -20,15 +20,15 @@
 <img src={'/'+project_img+'.png'} alt="project_img" class="project_img">
 <div class="info_block">
     {#if edit}
-    <input class="title" bind:value={title} on:keyup={() => $dataStore.title = title} in:fade>
+    <input class="title" bind:value={$dataStore.title} in:fade>
         {:else}
-    <h1 class="title">{title}</h1>
+    <h1 class="title">{$dataStore.title}</h1>
         {/if}
 <div class="bar">
         <div class="progress" style="width: {participants_count}%"></div>
 </div>
 <p class="progress_title">{participants_count} человек приняло участие</p>
-<p class="target_title">из {#if edit}<input class="target_title input_target" bind:value={participants_target} in:fade on:keyup={() => $dataStore.participants_target = participants_target}>{:else}{participants_target}{/if} запрошенных</p>
+<p class="target_title">из {#if edit}<input class="target_title input_target" bind:value={$dataStore.participants_target} in:fade>{:else}{$dataStore.participants_target}{/if} запрошенных</p>
 <div class="tags_block">
     {#if edit}
         <div class="tag" in:fade><p>Добавить тэг</p></div>

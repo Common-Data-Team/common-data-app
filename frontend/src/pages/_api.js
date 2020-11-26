@@ -109,7 +109,7 @@ export let dataStore = writable({});
 export function getData(apiPart, method, object){
     const store = writable(new Promise(() => {}));
     if (cache.has(apiPart)){
-        store.set(Promise.resolve(cache.get(apiPart)))
+        store.set(Promise.resolve(cache.get(apiPart)));
     }
     const load = async () => {
         const response = await fetch(apiUrl + apiPart);

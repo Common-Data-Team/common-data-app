@@ -169,7 +169,7 @@
                   <Menu origin="top right" width=328 dy=53>
                     <div slot="activator">
                       <!-- svelte-ignore a11y-missing-attribute -->
-                      <img src="/images/user_images/user.jpg" class="user-image-menu" />
+                      <img src="/images/user_images/default.jpg" class="user-image-menu" />
                     </div>
 
                     <Menuitem>Достижения</Menuitem>

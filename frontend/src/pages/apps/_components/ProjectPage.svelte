@@ -31,7 +31,7 @@
 <p class="target_title">из {#if edit}<input class="target_title input_target" bind:value={participants_target} in:fade on:keyup={() => $dataStore.participants_target = participants_target}>{:else}{participants_target}{/if} запрошенных</p>
 <div class="tags_block">
     {#if edit}
-        <div class="tag" in:fade on:click="{() => {tags = [...tags, {name: ''}]; $dataStore.tags = [...$dataStore.tags, {name: ''}]}}"><p>Добавить тэг</p></div>
+        <div class="tag" in:fade><p>Добавить тэг</p></div>
     {:else}
         {#if tags.length === 0}
             <div class="tag"><p>Тэгов нет</p></div>
@@ -39,11 +39,7 @@
     {/if}
     {#each tags as tag, ind}
         <div class="tag">
-            {#if edit}
-                <input class="input_tag" bind:value={tag.name} on:keyup={() => $dataStore.tags[ind].name = tag.name}>
-            {:else}
                 <p>{tag.name}</p>
-            {/if}
         </div>
     {/each}
 </div>

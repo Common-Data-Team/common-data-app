@@ -5,11 +5,12 @@
 <script>
   export let value = "";
   export let destroyer = () => {};
-  export let creator = () => {};
+  export let onFocus = () => {};
+  export let onBlur = () => {};
 </script>
 
 <label class="option-label">
-  <input class="option" placeholder="Новая опция..." bind:value on:blur={creator}>
+  <input class="option" placeholder="Новая опция..." bind:value on:focus={onFocus} on:blur={onBlur}>
   {#if value !== ""}
     <button class="cross" on:click={destroyer}>
       <svg width="15" height="15">

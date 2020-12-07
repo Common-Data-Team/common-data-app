@@ -10,13 +10,8 @@
   if (options.slice(-1)[0] !== "" || options.length === 0) {
     options = options.concat("");
   }
-  function creator(enter=false) {
-    if (options.slice(-1)[0] !== "") {
-      options = options.concat("");
-      if (enter){
-        window.focus();
-      }
-    }
+  function creator() {
+    options = options.concat("");
   }
 
   function destroyer(i) {
@@ -24,9 +19,17 @@
     options = options;
   }
 
+  function onFocus() {
+    creator();
+  }
+  function onBlur(){
+    options = options.filter(item => item !== "");
+    creator();
+  }
+
 </script>
 
-<svelte:window on:keydown={event => event.key === 'Enter' ? creator(true): false}/>
+<svelte:window on:keydown={event => event.key === 'Enter' ? creator(): false}/>
 <!--TODO Сделать переключение фокуса по Enter-->
 <label>
   <input class="question" placeholder="Новый вопрос">
@@ -36,7 +39,7 @@
   <div class="option-block">
     <svelte:component this={component} style="width: 40px; margin-right: -10px" color="#1355FF"/>
     <div class="option-wrapper" in:fade|local>
-      <Option bind:value={options[i]} destroyer={() => destroyer(i)} {creator}/>
+      <Option bind:value={options[i]} destroyer={() => destroyer(i)} {onFocus} {onBlur}/>
     </div>
   </div>
 {/each}

@@ -5,7 +5,7 @@
     export let title, participants_target, creation_date, participants_count, project_img, tags, leaders;
     let auth = false;
     export let edit = false;
-
+    console.log(project_img);
     onMount(() => {
         console.log(leaders);
         leaders.forEach(leader => {
@@ -17,21 +17,21 @@
 </script>
 
 <main>
-<img src={project_img} alt="project_img" class="project_img">
+<img src={'/'+project_img+'.png'} alt="project_img" class="project_img">
 <div class="info_block">
     {#if edit}
-    <input class="title" bind:value={title} on:keyup={() => $dataStore.title = title} in:fade>
+    <input class="title" bind:value={$dataStore.title} in:fade>
         {:else}
-    <h1 class="title">{title}</h1>
+    <h1 class="title">{$dataStore.title}</h1>
         {/if}
 <div class="bar">
         <div class="progress" style="width: {participants_count}%"></div>
 </div>
 <p class="progress_title">{participants_count} человек приняло участие</p>
-<p class="target_title">из {#if edit}<input class="target_title input_target" bind:value={participants_target} in:fade on:keyup={() => $dataStore.participants_target = participants_target}>{:else}{participants_target}{/if} запрошенных</p>
+<p class="target_title">из {#if edit}<input class="target_title input_target" bind:value={$dataStore.participants_target} in:fade>{:else}{$dataStore.participants_target}{/if} запрошенных</p>
 <div class="tags_block">
     {#if edit}
-        <div class="tag" in:fade on:click="{() => {tags = [...tags, {name: ''}]; $dataStore.tags = [...$dataStore.tags, {name: ''}]}}"><p>Добавить тэг</p></div>
+        <div class="tag" in:fade><p>Добавить тэг</p></div>
     {:else}
         {#if tags.length === 0}
             <div class="tag"><p>Тэгов нет</p></div>
@@ -39,16 +39,12 @@
     {/if}
     {#each tags as tag, ind}
         <div class="tag">
-            {#if edit}
-                <input bind:value={tag.name} on:keyup={() => $dataStore.tags[ind].name = tag.name}>
-            {:else}
                 <p>{tag.name}</p>
-            {/if}
         </div>
     {/each}
 </div>
 <div class="leader_block">
-<img src={leaders[0].user.avatar} alt="leader_ava">
+<img src={'/'+leaders[0].user.avatar+'.jpg'} alt="leader_ava">
 <p>{leaders[0].user.fio}</p>
 </div>
 <p class="date">{creation_date.slice(8, 10)}.{creation_date.slice(5, 7)} - ???</p>
@@ -143,6 +139,12 @@
         font-weight: 300;
         font-size: 14px;
         line-height: 17px;
+    }
+    .input_tag {
+        text-align: center;
+        min-width: 100px;
+        color: #FFFFFF;
+        border: 0;
     }
     .leader_block {
         display: flex;

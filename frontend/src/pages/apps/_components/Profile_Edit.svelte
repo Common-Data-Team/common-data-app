@@ -2,7 +2,7 @@
     import { Textfield } from 'svelte-mui';
 
     export let user_name = "Даня";
-    export let user_avatar_link = "/images/user_images/user.jpg";
+    export let user_avatar_link = "/images/user_images/default.jpg";
     export let user_projects_page = '/apps/user465_projects';
     export let user_profile_page = '/apps/user465';
     export let tags = [

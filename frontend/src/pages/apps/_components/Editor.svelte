@@ -10,11 +10,11 @@
 </script>
 
 <!-- Convert the markdown to HTML and display it -->
-<div class="preview">{@html marked(markdown)}</div>
+<div class="preview">{@html marked($dataStore.description ? $dataStore.description : '')}</div>
 
 <!-- Declare a textarea where the user can enter markdown, and bind it to the variable `markdown` -->
 {#if edit}
-<textarea bind:value={markdown} on:keyup={() => $dataStore.description = markdown} placeholder="Enter markdown here"></textarea>
+<textarea bind:value={$dataStore.description} placeholder="Enter markdown here"></textarea>
 {/if}
 
 

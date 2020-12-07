@@ -15,7 +15,7 @@
   
   <div class="project-card" on:click={() => $goto('../../project/'+project_link)} in:fade>
     <div class="img-wrapper">
-      <img size="100%, 20%" src="{project_img}" class="img" alt="Картинка проекта">
+      <img size="100%, 20%" src="{'/'+project_img+'.png'}" class="img" alt="Картинка проекта">
     </div>
   
     <div class="title">

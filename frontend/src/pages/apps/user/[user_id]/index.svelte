@@ -2,14 +2,21 @@
   import {ready, url, params, goto} from '@roxi/routify';
   import { getContext } from 'svelte';
   import {writable} from "svelte/store";
-  import { getCookie, getData } from '../../../_api.js';
+  import { getCookie, getData, dataStore, authorizedRequest } from '../../../_api.js';
+
+  function EditProfile() {
+    const {fio, tags, about} = $dataStore;
+    const response = authorizedRequest('users/edit', 'PUT', {fio, tags, about});
+    console.log(response);
+    edit = false;
+  }
+
   let auth = getCookie('user_id') === $params.user_id;
-  console.log(auth);
+  let edit = false;
   let apiUrl = getContext('apiUrl');
-  let fio, email, avatar, about, tags;
   const promise = getData('users/'+ $params.user_id);
 </script>
-
+<!--TODO добавить стили для редактирующих инпутов-->
 <main>
   <div class="profile">
     {#await $promise}
@@ -18,17 +25,29 @@
       <div class="main-block">
         <h2 class="pr">Профиль</h2>
         {#if auth}
-        <a href="/" class="edit">Редактировать</a>
+          {#if edit}
+        <a class="edit" on:click={EditProfile}>Сохранить</a>
+          {:else}
+        <a class="edit" on:click={() => edit = true}>Редактировать</a>
           {/if}
+        {/if}
       </div>
       <div class="user_info">
         <div class="user">
-          <img src={avatar} class="photo" alt="user_photo"/>
+          <img src={'/'+avatar+'.jpg'} class="photo" alt="user_photo"/>
+          {#if edit}
+          <input bind:value={$dataStore.fio} class="title">
+          {:else}
           <h2 class="title" id="name">{fio}</h2>
+          {/if}
         </div>
         <div class="self">
           <h2 class="title"> О себе:</h2>
+          {#if edit}
+            <textarea bind:value={$dataStore.about}></textarea>
+          {:else}
           <p>{about}</p>
+          {/if}
         </div>
         <div class="catigories">
           <h2 class="title">Предпочтения</h2>

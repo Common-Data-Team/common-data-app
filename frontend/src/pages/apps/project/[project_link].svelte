@@ -7,14 +7,11 @@
     import ProjectMenu from "../_components/ProjectMenu.svelte";
 
     async function EditProject() {
-        let data;
-        dataStore.subscribe(value => {
-           data = value;
-        });
-        let {title, participants_target, questionnaire, markdown, description, project_img, tags} = data;
+        let {title, participants_target, questionnaire, markdown, description, project_img, tags} = $dataStore;
         console.log(tags);
         const response = await authorizedRequest('projects/'+$params.project_link+'/edit', 'PUT',
                 {title, participants_target, questionnaire, markdown, description, project_img, tags});
+        console.log(response);
     }
     let edit = false;
     let promise = getData('projects/' + $params.project_link);
@@ -24,5 +21,5 @@
 {:then data}
     <ProjectPage {...data} on:update={EditProject} bind:edit={edit}/>
     <ProjectMenu/>
-    <Editor markdown={data.description} bind:edit={edit}/>
+    <Editor bind:edit={edit}/>
 {/await}

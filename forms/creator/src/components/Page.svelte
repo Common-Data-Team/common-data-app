@@ -1,29 +1,26 @@
 <script>
   import Question from './Question.svelte';
-
-
-  export let questions = [1, 2];
-
-  // questions = questions || [{type: "Statement", content: {statement: "Упсс, это пустая страница :)"}}];
-
-  let selected;
-
-  function destroyer(destroy){
-    questions = questions.filter(item => item !== destroy)
-    console.log(JSON.stringify(questions))
+  import {fade} from 'svelte/transition';
+  export let thisDestroyer;
+  export let questions;
+  export let number;
+  function destroyer(i){
+    questions.splice(i, 1);
+    questions = questions;
   }
 </script>
 
-<div class="component">
+<div class="component" in:fade>
+  <h1>Страница {number}</h1>
+  <button on:click={thisDestroyer}>Удалить страницу</button>
   {#each Array.from(questions.entries()) as [i, _]}
-    <Question bind:instance={questions[i]} destroyer={() => destroyer(questions[i])}/>
+    <Question bind:instance={questions[i]} destroyer={() => destroyer(i)}/>
   {/each}
-</div>
-<div>
   <button on:click={() => {
-    questions = questions.concat({})
+    questions = questions.concat({type: "OneChoice", content: {question: "", options: []}})
   }}>Новый вопрос</button>
 </div>
+
 
 
 <style>
@@ -35,6 +32,7 @@
     align-items: center;
     border: 1px solid #666666;
     border-radius: 30px;
+    margin-bottom: 40px;
   }
 
 </style>

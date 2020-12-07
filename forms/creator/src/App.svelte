@@ -23,7 +23,7 @@
   }
 </script>
 
-<main>
+<main>s
   {#each Array.from($pagesStore.entries()) as [i, questions]}
     <Page number={i+1} bind:questions={$pagesStore[i]} thisDestroyer={() => destroyer(i)}/>
   {/each}

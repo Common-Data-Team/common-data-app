@@ -20,13 +20,15 @@
 
 <script>
   export let questions;
-  questions = questions || [{type: "Statement", content: {statement: "Упсс, это пустая страница :)"}}];
+  export let answerQuestions;
 </script>
 
 
 <div class="component">
   {#each Object.entries(questions) as [i, question]}
-    <svelte:component this={components[question.type]} {...question.content || {}}/>
+    <svelte:component this={components[question.type]}
+                      {...question.content || {}}
+                      bind:answer={answerQuestions[i].answer}/>
     {#if (+i) !== questions.length - 1}
       <hr>
     {/if}

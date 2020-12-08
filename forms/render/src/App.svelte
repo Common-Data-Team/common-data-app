@@ -5,36 +5,35 @@
   import MultipleChoice from './components/MultipleChoice.svelte';
 
   let pages = [
-    undefined,
+    [{type: "Statement", content: {statement: 'Привет! Готовы пройти небольшой опрос?', }}],
     [{
       type: "MultipleChoice",
       content: {question: 'Что добавить в мороженое?', options: ['Ваниль', 'Шоколад', 'Маршмеллоу']}
     },
-    {
-      type: "MultipleChoice",
-      content: {question: 'Что добавить в мороженое?', options: ['Ваниль', 'Шоколад', 'Маршмеллоу']}
-    }],
-    [{type: "ShortText", content: {question: 'Как вас зовут?', placeholder: 'Иван Иванов'}},],
+      {
+        type: "MultipleChoice",
+        content: {question: 'Что добавить в мороженое?', options: ['Ваниль', 'Шоколад', 'Маршмеллоу']}
+      }],
+    [{type: "ShortText", content: {question: 'Как вас зовут?'}},],
     [{type: "OneChoice", content: {question: 'У вас хорошее настроение?', options: ['Да', 'Бывало и лучше', 'Нет']}}],
   ];
 
-  // let saved = JSON.parse(localStorage.getItem('questionnaireData'));
-  let saved;
+  let saved = JSON.parse(localStorage.getItem('questionnaireData'));
+
+  // Если ранее не было ответов,
+  // генерируем объект для ответов по подобию объекта вопросов
   if (!saved) {
-    saved = {currentPage: 0, answer: []};
-    for (const [i, page] of pages.entries()){
-      saved.answer.push([])
-      if (page) {
-        for (const {type, content} of page) {
-          saved.answer[i].push({question: content.question, answer: null})
-        }
+    saved = {currentPage: 0, answerPages: []};
+    for (const [i, page] of pages.entries()) {
+      saved.answerPages.push([])
+      for (const {type, content} of page) {
+        saved.answerPages[i].push({question: content.question, answer: null})
       }
     }
   }
 
   let store = writable(saved);
   store.subscribe(val => localStorage.setItem("questionnaireData", JSON.stringify(val)))
-  store.subscribe(val => console.log('Updated'))
 
   $: percent = $store.currentPage * 100 / (pages.length - 1);
 
@@ -58,10 +57,10 @@
 <svelte:window on:keydown={handleKeys}/>
 <main>
   <div class="animation-box">
-    {#each pages as page}
+    {#each Array.from(pages.entries()) as [i, page]}
       {#if $store.currentPage === pages.indexOf(page)}
         <div class="page-wrapper" transition:fade>
-          <Page questions={page}/>
+          <Page questions={page} bind:answerQuestions={$store.answerPages[i]}/>
           {#if $store.currentPage === pages.length - 1}
             <button class="submit-button">Отправить</button>
           {/if}

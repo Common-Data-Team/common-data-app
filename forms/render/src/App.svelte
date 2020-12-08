@@ -1,10 +1,9 @@
 <script>
   import {fade} from 'svelte/transition';
-
+  import {writable} from 'svelte/store';
   import Page from './components/Page.svelte';
   import MultipleChoice from './components/MultipleChoice.svelte';
 
-  let answers = {};
   let pages = [
     undefined,
     [{
@@ -19,13 +18,30 @@
     [{type: "OneChoice", content: {question: 'У вас хорошее настроение?', options: ['Да', 'Бывало и лучше', 'Нет']}}],
   ];
 
-  let currentPage = 0;
-  $: percent = currentPage * 100 / (pages.length - 1);
+  // let saved = JSON.parse(localStorage.getItem('questionnaireData'));
+  let saved;
+  if (!saved) {
+    saved = {currentPage: 0, answer: []};
+    for (const [i, page] of pages.entries()){
+      saved.answer.push([])
+      if (page) {
+        for (const {type, content} of page) {
+          saved.answer[i].push({question: content.question, answer: null})
+        }
+      }
+    }
+  }
+
+  let store = writable(saved);
+  store.subscribe(val => localStorage.setItem("questionnaireData", JSON.stringify(val)))
+  store.subscribe(val => console.log('Updated'))
+
+  $: percent = $store.currentPage * 100 / (pages.length - 1);
 
   function updatePage(value) {
-    let updated = currentPage + value;
+    let updated = $store.currentPage + value;
     if (-1 < updated && updated < pages.length) {
-      currentPage += value;
+      $store.currentPage += value;
     }
   }
 
@@ -43,10 +59,10 @@
 <main>
   <div class="animation-box">
     {#each pages as page}
-      {#if currentPage === pages.indexOf(page)}
+      {#if $store.currentPage === pages.indexOf(page)}
         <div class="page-wrapper" transition:fade>
           <Page questions={page}/>
-          {#if currentPage === pages.length - 1}
+          {#if $store.currentPage === pages.length - 1}
             <button class="submit-button">Отправить</button>
           {/if}
         </div>

@@ -2,7 +2,7 @@
   import {Checkbox} from "svelte-mui";
   export let question = 'Выберите несколько';
   export let options = [];
-  let group = [];
+  export let group = [];
 </script>
 
 <h2>{question}</h2>

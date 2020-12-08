@@ -29,7 +29,7 @@
 
 </script>
 
-<svelte:window on:keydown={event => event.key === 'Enter' ? creator(): false}/>
+<!--<svelte:window on:keydown={event => event.key === 'Enter' ? creator(): false}/>-->
 <!--TODO Сделать переключение фокуса по Enter-->
 <label>
   <input class="question" placeholder="Новый вопрос">

@@ -1,18 +1,19 @@
 <script>
     import { onMount, createEventDispatcher } from 'svelte';
-    import { getCookie, dataStore } from '../../_api.js';
+    import { getCookie, dataStore, apiUrl } from '../../_api.js';
     import { fade } from 'svelte/transition';
+    import { goto } from '@roxi/routify'
+    import { Menu, Menuitem }  from 'svelte-mui';
+    import Tags from './Tags.svelte'
+
     export let title, participants_target, creation_date, participants_count, project_img, tags, leaders;
     let auth = false;
     export let edit = false;
-    console.log(project_img);
-    onMount(() => {
-        console.log(leaders);
+    onMount(async () => {
         leaders.forEach(leader => {
             if (getCookie('user_id') === leader.user.id+'') auth = true;
         });
     });
-
     const dispatch = createEventDispatcher();
 </script>
 
@@ -29,21 +30,8 @@
 </div>
 <p class="progress_title">{participants_count} человек приняло участие</p>
 <p class="target_title">из {#if edit}<input class="target_title input_target" bind:value={$dataStore.participants_target} in:fade>{:else}{$dataStore.participants_target}{/if} запрошенных</p>
-<div class="tags_block">
-    {#if edit}
-        <div class="tag" in:fade><p>Добавить тэг</p></div>
-    {:else}
-        {#if tags.length === 0}
-            <div class="tag"><p>Тэгов нет</p></div>
-        {/if}
-    {/if}
-    {#each tags as tag, ind}
-        <div class="tag">
-                <p>{tag.name}</p>
-        </div>
-    {/each}
-</div>
-<div class="leader_block">
+<Tags {edit} {tags} />
+<div class="leader_block" on:click={() => $goto("../user/"+leaders[0].user.id)}>
 <img src={'/'+leaders[0].user.avatar+'.jpg'} alt="leader_ava">
 <p>{leaders[0].user.fio}</p>
 </div>
@@ -78,6 +66,7 @@
         color: #282828;
     }
     .project_img {
+        min-width: 300px;
         margin: 0 50px 0 3%;
         width: auto;
         object-fit: cover;
@@ -119,44 +108,27 @@
     }
     .input_target {
         width: 40px;
-    }
-    .tags_block {
-        display: flex;
-        flex-wrap: wrap;
-        margin: 15px 10px 0 0;
-    }
-    .tag {
-        background-color: #282828;
-        border-radius: 18px;
-        text-align: center;
-        padding: 0.375em 0.75em;
-        margin: 0 10px 5px 0;
-        text-decoration: none;
-    }
-    .tag p {
-        color: #F9F9F9;
-        font-style: normal;
-        font-weight: 300;
-        font-size: 14px;
-        line-height: 17px;
-    }
-    .input_tag {
-        text-align: center;
-        min-width: 100px;
-        color: #FFFFFF;
-        border: 0;
+        font-family: "Helvetica Neue";
     }
     .leader_block {
         display: flex;
         align-items: center;
         margin: 15px 0 0 0;
     }
+    .leader_block:hover {
+        cursor: pointer;
+    }
     .leader_block img {
         width: 37px;
         height: 37px;
         border-radius: 37px;
-        margin: 0 30px 0 0;
+        margin: 0 10px 0 0;
         border: 1px solid #E0E0E0;
+    }
+    .leader_block p {
+        margin: 0;
+        font-size: 18px;
+        line-height: 19px;
     }
     .date {
         font-weight: 400;

@@ -7,7 +7,6 @@
   function EditProfile() {
     const {fio, tags, about} = $dataStore;
     const response = authorizedRequest('users/edit', 'PUT', {fio, tags, about});
-    console.log(response);
     edit = false;
   }
 

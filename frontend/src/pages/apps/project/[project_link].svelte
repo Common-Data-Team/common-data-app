@@ -8,10 +8,8 @@
 
     async function EditProject() {
         let {title, participants_target, questionnaire, markdown, description, project_img, tags} = $dataStore;
-        console.log(tags);
         const response = await authorizedRequest('projects/'+$params.project_link+'/edit', 'PUT',
                 {title, participants_target, questionnaire, markdown, description, project_img, tags});
-        console.log(response);
     }
     let edit = false;
     let promise = getData('projects/' + $params.project_link);

@@ -3,10 +3,11 @@
   import { getContext } from 'svelte';
   import {writable} from "svelte/store";
   import { getCookie, getData, dataStore, authorizedRequest } from '../../../_api.js';
+  import Tags from '../../_components/Tags.svelte'
 
   function EditProfile() {
     const {fio, tags, about} = $dataStore;
-    const response = authorizedRequest('users/edit', 'PUT', {fio, tags, about});
+    const response = authorizedRequest('users/edit', 'PUT', {fio, tags: tags.map(e => e.name), about});
     edit = false;
   }
 
@@ -50,13 +51,7 @@
         </div>
         <div class="catigories">
           <h2 class="title">Предпочтения</h2>
-          <div class="tag-container">
-            <div class="tags">
-              {#each tags as tag}
-                <a class="tag-href">{tag.name}</a>
-              {/each}
-            </div>
-          </div>
+          <Tags {edit} {tags}/>
         </div>
         <div clsaa="exexperience">
           <h2 class="title">Участие в проектах:</h2>

@@ -11,7 +11,13 @@
         console.log(data);
         return data;
     }
-
+    function deleteTag(name) {
+        if (edit) {
+            tags = tags.filter(e => e.name !== name);
+            $dataStore.tags = tags;
+            console.log($dataStore.tags);
+        }
+    }
     let response = getTags();
 </script>
 <div class="tags_block">
@@ -24,7 +30,9 @@
         <p>qwe</p>
             {:then tag_names}
             {#each tag_names as tag_name}
-            <Menuitem on:click="{() => {tags = [...tags, {name: tag_name}]; $dataStore.tags = tags}}">{tag_name}</Menuitem>
+                {#if !tags.some(e => e.name === tag_name)}
+            <Menuitem on:click="{() => {tags = [...tags, {name: tag_name}]; $dataStore.tags = tags; console.log(tags.includes({name:'AI' }))}}">{tag_name}</Menuitem>
+                {/if}
             {/each}
             {/await}
     </Menu>
@@ -34,7 +42,7 @@
         {/if}
     {/if}
     {#each tags as tag, ind}
-        <div class="tag">
+        <div on:click={() => deleteTag(tag.name)} class="tag">
                 <p>{tag.name}</p>
         </div>
     {/each}
@@ -52,6 +60,9 @@
         padding: 0.375em 0.75em;
         margin: 0 10px 5px 0;
         text-decoration: none;
+    }
+    .tag:hover {
+        cursor: pointer;
     }
     .tag p {
         color: #F9F9F9;

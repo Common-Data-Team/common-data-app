@@ -13,6 +13,7 @@
         leaders.forEach(leader => {
             if (getCookie('user_id') === leader.user.id+'') auth = true;
         });
+        console.log(tags);
     });
     const dispatch = createEventDispatcher();
 </script>

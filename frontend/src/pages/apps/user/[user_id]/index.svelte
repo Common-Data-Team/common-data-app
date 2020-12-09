@@ -44,7 +44,7 @@
         <div class="self">
           <h2 class="title"> О себе:</h2>
           {#if edit}
-            <textarea bind:value={$dataStore.about}></textarea>
+            <textarea class="self_textarea" bind:value={$dataStore.about}></textarea>
           {:else}
           <p>{about}</p>
           {/if}
@@ -73,7 +73,21 @@
   </div>
 </main>
 <style>
-
+input, textarea {
+  background: transparent;
+  border: 2px solid #000000;
+  border-radius: 5px;
+  width: 70%;
+}
+input {
+  font-family: "Helvetica Neue";
+  font-size: 24px;
+}
+textarea {
+  overflow: auto;
+  font-family: "Helvetica Norm";
+  font-size: 16px;
+}
   .tag-container {
     margin-top: 2%;
     max-width: 70%;
@@ -152,9 +166,12 @@
   }
 
   .self {
-    margin-bottom: 10%;
+    margin-bottom: 5%;
   }
-
+  .self p {
+    width: 70%;
+    white-space: pre-wrap;
+  }
   .catigories {
     margin-bottom: 10%;
   }
@@ -174,7 +191,9 @@
     border-radius: 50%;
     margin-bottom: 1%;
   }
-
+  .self_textarea {
+    height: 80px;
+  }
   li {
     list-style-type: none;
     margin-bottom: 30%;

@@ -42,5 +42,12 @@
   :global(body) {
     padding: 0;
   }
-
+  @media (max-width: 1000px) {
+    textarea {
+      width: 90%;
+    }
+    .preview {
+      padding: 10px 3%;
+    }
+  }
 </style>

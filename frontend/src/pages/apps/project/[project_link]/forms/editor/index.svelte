@@ -2,7 +2,7 @@
   import {writable} from 'svelte/store';
   import Page from './components/Page.svelte';
 
-  let saved = JSON.parse(localStorage.getItem("pagesStore"))
+  let saved = JSON.parse(localStorage.getItem("pagesStore"));
   let pagesStore = writable(saved || [
     [
       {type: "OneChoice", content: {question: 'Выберите один', options: []}},
@@ -20,6 +20,7 @@
       {type: "OneChoice", content: {question: "", options: []}}
     ]]);
   }
+  const promise = getData('projects/' + $params.project_link);
 </script>
 
 <main>

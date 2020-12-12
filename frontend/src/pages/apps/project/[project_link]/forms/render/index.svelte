@@ -6,7 +6,7 @@
   import MultipleChoice from './_components/MultipleChoice.svelte';
 
   let pages = [
-    [{type: "Statement", content: {statement: 'Привет! Готовы пройти небольшой опрос?', }}],
+    [{type: "Statement", content: {statement: 'Привет! Готовы пройти небольшой опрос?',}}],
     [{
       type: "MultipleChoice",
       content: {question: 'Что добавить в мороженое?', options: ['Ваниль', 'Шоколад', 'Маршмеллоу']}
@@ -115,6 +115,13 @@
     transition: all ease 0.5s;
   }
 
+  a {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+  }
+
   .progress-title {
     padding: 0;
     margin: 0 0 5px 0;
@@ -199,5 +206,4 @@
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
   }
-
 </style>

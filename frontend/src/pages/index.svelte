@@ -1,6 +1,6 @@
 <script>
   import { goto } from '@roxi/routify';
-  import { clearStoreAndCookie, getCookie} from "./_api";
+  import { clearStoreAndCookie, getCookie, getData} from "./_api";
   import Project from './_components/Project.svelte';
   import FollowProject from './_components/Follow_Project.svelte';
   import NewProject from './_components/New_Project.svelte';
@@ -75,6 +75,7 @@
     clearStoreAndCookie();
   }
 
+  const promise = getData('projects/all');
 </script>
 
 <svelte:head>
@@ -189,16 +190,20 @@
 
     <div class="popular-block">
       <div class="block-title">
-        <h2>ПОПУЛЯРНОЕ СЕЙЧАС</h2>
+        <h2>ПРОЕКТЫ</h2>
         <p class="arrow">→</p>
       </div>
       <section style="--columns-amount: {Math.floor((Math.min(screenWidth, 1200) - 30) / 350)}">
+        {#await $promise}
+        <p>Загрузка...</p>
+        {:then data}
           {#each data as card}
                 <Project {...card}></Project>
           {/each}
+        {/await}
       </section>
     </div>
-
+<!--
     {#if auth}
       <div class="popular-block">
         <div class="block-title">
@@ -224,10 +229,10 @@
         {/each}
       </section>
     </div>
+    -->
   </div>
 </main>
-
-<Footer></Footer>
+<Footer/>
 
 <style>
 

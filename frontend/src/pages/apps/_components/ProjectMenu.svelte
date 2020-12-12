@@ -28,4 +28,12 @@
   .active {
     border-bottom: 1px solid #282828;
   }
+  @media (max-width: 600px) {
+    a {
+      display: none;
+    }
+    .active {
+      display: block;
+    }
+  }
 </style>

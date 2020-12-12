@@ -19,7 +19,9 @@
 </script>
 
 <main>
-  <img src={'/'+project_img+'.png'} alt="project_img" class="project_img">
+  <div class="project_img">
+  <img src={'/'+project_img+'.png'} alt="project_img">
+  </div>
   <div class="info_block">
     {#if edit}
       <input class="title" bind:value={$dataStore.title} in:fade>
@@ -77,17 +79,18 @@
   }
 
   .project_img {
-    min-width: 300px;
-    margin: 0 50px 0 3%;
-    width: auto;
+    margin: 0 30px 0 3%;
+  }
+  .project_img img {
     object-fit: cover;
+    width: auto;
   }
 
   .info_block {
     display: flex;
     flex-direction: column;
     max-width: 350px;
-    margin: 0 50px 0 0;
+    padding: 0 10px 0 0;
   }
 
   .title {
@@ -98,7 +101,7 @@
   }
 
   .bar {
-    min-width: 300px;
+    min-width: 200px;
     width: 100%;
     height: 4px;
     background: #9B9B9B;
@@ -168,11 +171,11 @@
 
   .enter_button {
     background-color: #282828;
-    padding: 12px 71px;
     font-weight: 300;
     font-size: 20px;
     line-height: 24px;
     width: 300px;
+    min-width: 200px;
     margin: 30px 0 0 0;
     transition: all ease 0.7s;
   }
@@ -211,5 +214,22 @@
 
   .edit:hover {
     cursor: pointer;
+  }
+  @media (max-width: 1000px) {
+    main {
+      flex-direction: column;
+    }
+    .project_img img{
+    min-width: 250px;
+    width: 100%;
+    height: auto;
+    max-width: 500px;
+  }
+  .info_block {
+    width: 100%;
+    padding: 0 15px 0 3%;
+    margin: 0;
+  }
+
   }
 </style>

@@ -1,34 +1,35 @@
 <script>
+  import { goto } from '@roxi/routify'
   export let title = 'Влияние проходимого расстояния на здоровье';
   export let tags = ['Наука', 'Медицина'];
-  export let progress = 42;
-  export let author = "Камень Иванович";
+  export let participants_count = 42;
+  export let leaders = [];
   export let userImageSrc = "/images/user_images/default.jpg";
   export let project_img = "/images/project_images/Rectangle 4.png";
   export let project_link = '';
 </script>
 
-<div class="project-card">
+<div class="project-card" on:click={$goto('apps/project/'+project_link)}>
   <div class="img-wrapper">
-    <img size="100%, 20%" src="{project_img}" class="img" alt="Картинка проекта">
+    <img size="100%, 20%" src="/{project_img}.png" class="img" alt="Картинка проекта">
   </div>
   <div class="title">
     <h2 class="project-title">{title}</h2>
   </div>
   <div class="tags">
     {#each tags as tag}
-      <a href="/" class="tag-href">{tag}</a>
+      <a href="/" class="tag-href">{tag.name}</a>
     {/each}
   </div>
-  <p class="percent-title">Собрано {progress}%</p>
+  <p class="percent-title">Собрано {participants_count}%</p>
 
   <div class="bar">
-    <div class="progress" style="width: {progress}%"></div>
+    <div class="progress" style="width: {participants_count}%"></div>
   </div>
 
   <div class="user">
-    <img src="{userImageSrc}" class="user-img" alt="Аватарка"/>
-    <p>{author}</p>
+    <img src="/{leaders[0].user.avatar}.jpg" class="user-img" alt="Аватарка"/>
+    <p>{leaders[0].user.fio}</p>
   </div>
 </div>
 
@@ -43,7 +44,7 @@
 
   .img {
     max-height: 100%;
-    max-width: 100%;
+    width: 100%;
   }
 
   .img-wrapper {

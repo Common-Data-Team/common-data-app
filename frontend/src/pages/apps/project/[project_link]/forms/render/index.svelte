@@ -7,13 +7,12 @@
   import {dataStore, getData} from '../../../../../_api';
   let {questionnaire} = $dataStore;
 
-  if (questionnaire){
-    localStorage.setItem('questionnaire', questionnaire);
-  } else {
-    questionnaire = localStorage.getItem('questionnaire');
-  }
+  // if (questionnaire){
+  //   localStorage.setItem('questionnaire', questionnaire);
+  // } else {
+  //   questionnaire = localStorage.getItem('questionnaire');
+  // }
   questionnaire = JSON.parse(questionnaire);
-  console.log(typeof questionnaire)
   let saved = JSON.parse(localStorage.getItem('questionnaireData'));
   saved = undefined;
   // Если ранее не было ответов,
@@ -48,7 +47,6 @@
       updatePage(-1)
     }
   }
-
 </script>
 
 <svelte:window on:keydown={handleKeys}/>

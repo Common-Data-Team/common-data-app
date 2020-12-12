@@ -13,6 +13,7 @@
 {#await $promise}
   <h1>Загрузка...</h1>
 {:then data}
+  <!--Сделать нормальную структуру-->
   <ProjectPage {...data} on:update={() => EditProject($params.project_link)} bind:edit={edit}/>
   <ProjectMenu/>
   <Editor bind:edit={edit}/>

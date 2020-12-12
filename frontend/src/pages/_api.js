@@ -107,6 +107,7 @@ export function clearStoreAndCookie() {
 // API part
 export const cache = new Map();
 export let dataStore = writable({});
+// TODO добавить контроль над сроком действия токена
 
 export function getData(apiPart) {
   const store = writable(new Promise(() => {}));

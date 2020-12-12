@@ -3,9 +3,9 @@
   import Option from './Option.svelte';
 
   export let component;
-  export let question = 'Выберите несколько';
+  export let question;
   export let options = [];
-  export let group = [];
+  let group = [];
 
   if (options.slice(-1)[0] !== "" || options.length === 0) {
     options = options.concat("");
@@ -32,7 +32,7 @@
 <!--<svelte:window on:keydown={event => event.key === 'Enter' ? creator(): false}/>-->
 <!--TODO Сделать переключение фокуса по Enter-->
 <label>
-  <input class="question forms_input" placeholder="Новый вопрос">
+  <input class="question forms_input" placeholder="Новый вопрос" bind:value={question}>
 </label>
 
 {#each Array.from(options.entries()) as [i, option]}
@@ -43,12 +43,6 @@
     </div>
   </div>
 {/each}
-<!--<button class="plus" on:click={create}>-->
-<!--  <svg width="17" height="17">-->
-<!--    <line x1="9" y1="0" x2="9" y2="17"></line>-->
-<!--    <line x1="0" y1="9" x2="17" y2="9"></line>-->
-<!--  </svg>-->
-<!--</button>-->
 
 <style>
   .option-wrapper {
@@ -65,15 +59,5 @@
     font-weight: bold;
     margin: 10px 0 5px 0;
     padding: 5px;
-  }
-
-  line {
-    color: black;
-    stroke: currentColor;
-    stroke-width: 1px;
-  }
-
-  .plus {
-    padding: 8px;
   }
 </style>

@@ -37,7 +37,7 @@
         <option value="{component_str}">{name}</option>
       {/each}
     </select>
-    <button on:click={destroyer}>Удалить вопрос</button>
+    <button class="forms_button" on:click={destroyer}>Удалить вопрос</button>
   </div>
   <svelte:component this={components[instance.type].component}
                     bind:content={instance.content}/>

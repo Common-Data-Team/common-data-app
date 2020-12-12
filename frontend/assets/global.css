@@ -65,8 +65,29 @@ button {
     padding: 8px;
     cursor: pointer;
 }
+.forms_button {
+    background-color: transparent;
+    color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 2s;
+}
+.forms_button:hover {
+    background-color: #cccccc;
+}
+.forms_input {
+    background-color: transparent;
+    border-radius: 2px;
+    border: 2px solid transparent;
+}
 
-
+.forms_input::placeholder {
+    color: #282828;
+}
+.forms_input:focus {
+    border: 2px solid #000000;
+}
 input:focus {
     outline: none;
 }

@@ -20,21 +20,20 @@
       {type: "OneChoice", content: {question: "", options: []}}
     ]]);
   }
-  const promise = getData('projects/' + $params.project_link);
 </script>
 
 <main>
   {#each Array.from($pagesStore.entries()) as [i, questions]}
     <Page number={i+1} bind:questions={$pagesStore[i]} thisDestroyer={() => destroyer(i)}/>
   {/each}
-  <button on:click={creator}>Новая страница</button>
+  <button class="forms_button" on:click={creator}>Новая страница</button>
 </main>
 
 <style>
   main {
     text-align: center;
     padding: 1em;
-    max-width: 240px;
+    min-width: 640px;
     margin: 0 auto;
   }
 
@@ -44,7 +43,6 @@
     font-size: 4em;
     font-weight: 100;
   }
-
   @media (min-width: 640px) {
     main {
       max-width: none;

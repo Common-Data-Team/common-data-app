@@ -2,7 +2,7 @@
   import {onMount, createEventDispatcher} from 'svelte';
   import {getCookie, dataStore, apiUrl} from '../../_api.js';
   import {fade} from 'svelte/transition';
-  import {goto} from '@roxi/routify'
+  import {goto, url} from '@roxi/routify'
   import {Menu, Menuitem} from 'svelte-mui';
   import Tags from './Tags.svelte'
 
@@ -46,13 +46,16 @@
       <img src='/images/button_images/subscribe.svg' alt="">
       <p>Подписаться на обновления</p>
     </div>
+    <div class="edit_block">
     {#if auth}
       {#if edit}
         <a on:click="{() => {edit = false; dispatch('update')}}" class="edit">Сохранить</a>
       {:else}
         <a on:click={() => edit = true} class="edit">Редактировать</a>
       {/if}
+        <a href={$url("./forms/editor")} class="edit">Изменить форму</a>
     {/if}
+    </div>
   </div>
 </main>
 
@@ -189,13 +192,15 @@
     line-height: 24px;
     margin: 0 0 0 20px;
   }
-
+  .edit_block {
+    display: flex;
+  }
   .edit {
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
     text-decoration-line: underline;
-    margin: 10px 0 0 0;
+    margin: 10px 20px 0 0;
   }
 
   .edit:hover {

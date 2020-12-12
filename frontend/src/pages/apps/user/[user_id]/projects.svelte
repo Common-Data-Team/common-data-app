@@ -57,9 +57,6 @@ let promise = getData('users/'+ $params.user_id);
     <div class = "profile">
         <div class="main-block">
                 <h2 class="pr">Проекты</h2>
-            {#if auth}
-        <a href="/" class="edit">Редактировать</a>
-          {/if}
         </div> 
         <div class="user_info">
             <section id='card_section' style="--columns-amount: {Math.floor((Math.min(screenWidth, 500) - 30) / 223)}">
@@ -94,10 +91,11 @@ let promise = getData('users/'+ $params.user_id);
         padding: 0;
         margin: 0;
         width: 223px;
+        outline: none;
     }
 
-    .new-project-btn {
-        outline: none;
+    .new-project-btn:hover {
+        cursor: pointer;
     }
     .project-card {
         height: 100%;

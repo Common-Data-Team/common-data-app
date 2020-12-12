@@ -31,7 +31,7 @@
     </div>
     <p class="progress_title">{participants_count} человек приняло участие</p>
     <p class="target_title">из
-      {#if edit}<input class="target_title input_target" bind:value={$dataStore.participants_target}
+      {#if edit}<input type="number" class="target_title input_target" bind:value={$dataStore.participants_target}
                        in:fade>{:else}{$dataStore.participants_target}{/if} запрошенных</p>
     <Tags {edit} {tags}/>
     <div class="leader_block" on:click={() => $goto("../../user/"+leaders[0].user.id)}>

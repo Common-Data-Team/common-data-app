@@ -5,7 +5,6 @@
   import {params} from '@roxi/routify';
   import {getData, authorizedRequest, dataStore} from '../../../_api.js';
   import ProjectMenu from "../../_components/ProjectMenu.svelte";
-  import {projectLink} from '../stores';
 
   async function EditProject() {
     let {title, participants_target, questionnaire, markdown, description, project_img, tags} = $dataStore;

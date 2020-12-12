@@ -3,7 +3,7 @@
   import {goto, url} from "@roxi/routify";
   import {getContext} from 'svelte';
   import Input from '../_components/Input.svelte'
-  import Checkbox from "svelte-checkbox";
+  import {Checkbox} from "svelte-mui";
 
   let checked = false;
 
@@ -80,10 +80,11 @@
         <Input bind:this={password2} span="Подтверждение пароля" name="password" type="password"/>
       </div>
       <div class="privacy-policy">
-        <Checkbox size="1.5rem" secondaryColor="#282828" primaryColor="#1355FF"></Checkbox>
+      <Checkbox color="#1355FF">
         <span class="text-login01">Я принимаю <a
             style='text-decoration: underline;'>
                     пользовательское соглашение</a></span>
+      </Checkbox>
       </div>
       <p class="error-label" class:showError>{errorMessage}</p>
       <div class="button-block">

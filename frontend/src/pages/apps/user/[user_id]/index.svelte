@@ -3,11 +3,11 @@
   import { getContext } from 'svelte';
   import {writable} from "svelte/store";
   import { getCookie, getData, dataStore, authorizedRequest } from '../../../_api.js';
+  import Tags from '../../_components/Tags.svelte'
 
   function EditProfile() {
     const {fio, tags, about} = $dataStore;
-    const response = authorizedRequest('users/edit', 'PUT', {fio, tags, about});
-    console.log(response);
+    const response = authorizedRequest('users/edit', 'PUT', {fio, tags: tags.map(e => e.name), about});
     edit = false;
   }
 
@@ -44,20 +44,14 @@
         <div class="self">
           <h2 class="title"> О себе:</h2>
           {#if edit}
-            <textarea bind:value={$dataStore.about}></textarea>
+            <textarea class="self_textarea" bind:value={$dataStore.about}></textarea>
           {:else}
           <p>{about}</p>
           {/if}
         </div>
         <div class="catigories">
           <h2 class="title">Предпочтения</h2>
-          <div class="tag-container">
-            <div class="tags">
-              {#each tags as tag}
-                <a class="tag-href">{tag.name}</a>
-              {/each}
-            </div>
-          </div>
+          <Tags {edit} {tags}/>
         </div>
         <div clsaa="exexperience">
           <h2 class="title">Участие в проектах:</h2>
@@ -79,7 +73,21 @@
   </div>
 </main>
 <style>
-
+input, textarea {
+  background: transparent;
+  border: 2px solid #000000;
+  border-radius: 5px;
+  width: 70%;
+}
+input {
+  font-family: "Helvetica Neue";
+  font-size: 24px;
+}
+textarea {
+  overflow: auto;
+  font-family: "Helvetica Norm";
+  font-size: 16px;
+}
   .tag-container {
     margin-top: 2%;
     max-width: 70%;
@@ -158,9 +166,12 @@
   }
 
   .self {
-    margin-bottom: 10%;
+    margin-bottom: 5%;
   }
-
+  .self p {
+    width: 70%;
+    white-space: pre-wrap;
+  }
   .catigories {
     margin-bottom: 10%;
   }
@@ -180,7 +191,9 @@
     border-radius: 50%;
     margin-bottom: 1%;
   }
-
+  .self_textarea {
+    height: 80px;
+  }
   li {
     list-style-type: none;
     margin-bottom: 30%;

@@ -5,11 +5,7 @@
 
   const configs = [
     {
-        condition: meta => meta.routes[1].filepath === '/apps/user/[user_id]/projects.svelte',
-        transition: fade
-    },
-    {
-        condition: meta => meta.routes[1].filepath === '/apps/user/[user_id]/index.svelte',
+        condition: meta => meta.routes[0].filepath === '/apps/project/[project_link]/index.svelte',
         transition: fade
     },
     {

@@ -74,7 +74,9 @@
     padding-right: 25px;
     padding-bottom: 5%;
   }
-
+  .project-card:hover {
+    cursor: pointer;
+  }
   .user-img {
     width: 36px;
     height: 36px;

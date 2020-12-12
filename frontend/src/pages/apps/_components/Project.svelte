@@ -4,7 +4,7 @@
   import {onMount} from 'svelte';
 
   export let title = 'Влияние проходимого расстояния на здоровье';
-  export let progress = 42;
+  export let participants_count = 42;
   export let project_img;
   export let project_link;
   onMount(() => {
@@ -24,7 +24,7 @@
   </div>
 
   <div class="bar">
-    <div class="progress" style="width: {progress}%"></div>
+    <div class="progress" style="width: {participants_count}%"></div>
   </div>
 </div>
 
@@ -61,7 +61,9 @@
     padding-right: 1%;
     padding-bottom: 5%;
   }
-
+  .project-card:hover {
+    cursor: pointer;
+  }
   .project-title {
     font-size: calc(16px + (18 - 16) * ((100vw - 300px) / (1440 - 300)));
     padding-top: 5%;

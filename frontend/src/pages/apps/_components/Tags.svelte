@@ -27,7 +27,7 @@
   {#if edit}
     <Menu origin="top left" width=150 dy=40 class="menu">
       <div slot="activator">
-        <div class="tag" in:fade><p>Добавить тэг</p></div>
+        <div class="tag " in:fade><p>Добавить тэг</p></div>
       </div>
       {#await response}
         <p>qwe</p>
@@ -66,6 +66,7 @@
     padding: 0.375em 0.75em;
     margin: 0 10px 5px 0;
     text-decoration: none;
+    transition: 2s;
   }
 
   .tag:hover {

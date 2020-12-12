@@ -27,33 +27,16 @@
   {#each Array.from($pagesStore.entries()) as [i, questions]}
     <Page number={i+1} bind:questions={$pagesStore[i]} thisDestroyer={() => destroyer(i)}/>
   {/each}
-  <div class="button-block">
-    <button class="forms_button" on:click={creator}>Новая страница</button>
-    <button class="save_button">Сохранить форму</button>
-  </div>
+  <button class="forms_button" on:click={creator}>Новая страница</button>
 </main>
 
 <style>
   main {
-    width: 99%;
+    text-align: center;
+    padding: 1em;
+    width: 80%;
+    max-width: 500px;
     margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  button {
-    width: 200px;
-  }
-
-  .button-block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    height: 100px;
-    width: 100%;
-    margin-bottom: 70px;
   }
 
   @media (min-width: 640px) {

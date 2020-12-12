@@ -73,24 +73,26 @@
 
   <div class="bottom-block">
     <p class="created-on">Сделано на <a class="commondata-link" href="https://commondata.ru">Common Data</a></p>
-    <div>
-      <p class="progress-title">Прогресс: {Math.round(percent)}%</p>
-      <div class="progress-bar">
-        <div class="filled-progress-bar" style="width: {percent}%"></div>
+    <div class="rule_block">
+      <div>
+        <p class="progress-title">Прогресс: {Math.round(percent)}%</p>
+        <div class="progress-bar">
+          <div class="filled-progress-bar" style="width: {percent}%"></div>
+        </div>
       </div>
+      <button class="switch-page-button" on:click={() => updatePage(-1)}>
+        <svg width="30" height="30px">
+          <line x1="0" x2="15" y1="25" y2="7"></line>
+          <line x1="30" x2="15" y1="25" y2="7"></line>
+        </svg>
+      </button>
+      <button class="switch-page-button" on:click={() => updatePage(+1)}>
+        <svg width="30" height="30px">
+          <line x1="0" x2="15" y1="7" y2="25"></line>
+          <line x1="30" x2="15" y1="7" y2="25"></line>
+        </svg>
+      </button>
     </div>
-    <button class="switch-page-button" on:click={() => updatePage(-1)}>
-      <svg width="30" height="30px">
-        <line x1="0" x2="15" y1="25" y2="7"></line>
-        <line x1="30" x2="15" y1="25" y2="7"></line>
-      </svg>
-    </button>
-    <button class="switch-page-button" on:click={() => updatePage(+1)}>
-      <svg width="30" height="30px">
-        <line x1="0" x2="15" y1="7" y2="25"></line>
-        <line x1="30" x2="15" y1="7" y2="25"></line>
-      </svg>
-    </button>
   </div>
 
 </main>
@@ -116,33 +118,31 @@
     transition: all ease 0.5s;
   }
 
-  a {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 10;
-  }
-
   .progress-title {
     padding: 0;
     margin: 0 0 5px 0;
   }
 
   .created-on {
+    display: inline-block;
     margin-right: 20px;
     cursor: default;
   }
 
   .commondata-link {
+    position: relative;
     color: #0b7dda;
     transition: color 0.7s ease;
+    margin: 0;
   }
 
   .commondata-link:hover {
     text-decoration: none;
     color: #1355FF;
   }
-
+  .rule_block {
+    display: flex;
+  }
   .page-wrapper {
     position: absolute;
     display: flex;
@@ -206,5 +206,13 @@
     transition: width ease-in 0.5s;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+  }
+  @media (max-width: 600px) {
+    .bottom-block {
+      right: 10px;
+      bottom: 10px;
+      flex-direction: column-reverse;
+      align-items: start;
+    }
   }
 </style>

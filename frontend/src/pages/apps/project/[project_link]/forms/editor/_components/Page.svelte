@@ -28,10 +28,11 @@
     display: flex;
     flex-flow: column nowrap;
     width: 100%;
+    max-width: 1000px;
     align-items: center;
     border: 1px solid #666666;
     border-radius: 30px;
     margin-bottom: 40px;
-    padding: 20px;
+    padding: 20px 0;
   }
 </style>

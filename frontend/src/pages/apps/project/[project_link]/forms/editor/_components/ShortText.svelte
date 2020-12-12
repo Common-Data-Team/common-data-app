@@ -2,15 +2,19 @@
   export let content = {};
 </script>
 
-<label>
-  <input class="question" placeholder="Новый вопрос" bind:value={content.question}>
-</label>
-<label>
-  <input type="text" placeholder="Начните вводить">
-</label>
-
+<div class="component">
+  <label>
+    <input class="question" placeholder="Новый вопрос" bind:value={content.question}>
+  </label>
+  <label>
+    <input type="text" placeholder="Начните вводить">
+  </label>
+</div>
 
 <style>
+  .component {
+    max-width: 1000px;
+  }
   input {
     background: transparent;
     border: 2px solid transparent;

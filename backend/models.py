@@ -45,6 +45,7 @@ class Project(Model):
     project_link = fields.CharField(max_length=64)
     participants_target = fields.IntField()
 
+    last_modified = fields.DatetimeField(null=True, auto_now=True)
     questionnaire = fields.TextField(null=True)
     is_active = fields.BooleanField(default=True)
     markdown = fields.TextField(default="# Вы можете редактировать содержимое страницы")

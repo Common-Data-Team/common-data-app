@@ -4,28 +4,23 @@
   import {writable} from 'svelte/store';
   import Page from './_components/Page.svelte';
   import MultipleChoice from './_components/MultipleChoice.svelte';
+  import {dataStore, getData} from '../../../../../_api';
+  let {questionnaire} = $dataStore;
 
-  let pages = [
-    [{type: "Statement", content: {statement: 'Привет! Готовы пройти небольшой опрос?',}}],
-    [{
-      type: "MultipleChoice",
-      content: {question: 'Что добавить в мороженое?', options: ['Ваниль', 'Шоколад', 'Маршмеллоу']}
-    },
-      {
-        type: "MultipleChoice",
-        content: {question: 'Что добавить в мороженое?', options: ['Ваниль', 'Шоколад', 'Маршмеллоу']}
-      }],
-    [{type: "ShortText", content: {question: 'Как вас зовут?'}},],
-    [{type: "OneChoice", content: {question: 'У вас хорошее настроение?', options: ['Да', 'Бывало и лучше', 'Нет']}}],
-  ];
-
+  if (questionnaire){
+    localStorage.setItem('questionnaire', questionnaire);
+  } else {
+    questionnaire = localStorage.getItem('questionnaire');
+  }
+  questionnaire = JSON.parse(questionnaire);
+  console.log(typeof questionnaire)
   let saved = JSON.parse(localStorage.getItem('questionnaireData'));
-
+  saved = undefined;
   // Если ранее не было ответов,
   // генерируем объект для ответов по подобию объекта вопросов
   if (!saved) {
     saved = {currentPage: 0, answerPages: []};
-    for (const [i, page] of pages.entries()) {
+    for (const [i, page] of questionnaire.entries()) {
       saved.answerPages.push([])
       for (const {type, content} of page) {
         saved.answerPages[i].push({question: content.question, answer: null, type: type})
@@ -34,13 +29,14 @@
   }
 
   let store = writable(saved);
+  console.log(saved)
   store.subscribe(val => localStorage.setItem("questionnaireData", JSON.stringify(val)))
 
-  $: percent = $store.currentPage * 100 / (pages.length - 1);
+  $: percent = $store.currentPage * 100 / (questionnaire.length - 1);
 
   function updatePage(value) {
     let updated = $store.currentPage + value;
-    if (-1 < updated && updated < pages.length) {
+    if (-1 < updated && updated < questionnaire.length) {
       $store.currentPage += value;
     }
   }
@@ -60,11 +56,11 @@
   <!--  <a href="../">&#8592; Назад</a>-->
   <button class="back-button" on:click={() => window.history.back()}>&#8592; Назад</button>
   <div class="animation-box">
-    {#each Array.from(pages.entries()) as [i, page]}
-      {#if $store.currentPage === pages.indexOf(page)}
+    {#each Array.from(questionnaire.entries()) as [i, page]}
+      {#if $store.currentPage === questionnaire.indexOf(page)}
         <div class="page-wrapper" in:fade>
           <Page questions={page} bind:answerQuestions={$store.answerPages[i]}/>
-          {#if $store.currentPage === pages.length - 1}
+          {#if $store.currentPage === questionnaire.length - 1}
             <button class="submit-button">Отправить</button>
           {/if}
         </div>

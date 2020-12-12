@@ -5,12 +5,7 @@
   import {params} from '@roxi/routify';
   import {getData, authorizedRequest, dataStore} from '../../../_api.js';
   import ProjectMenu from "../../_components/ProjectMenu.svelte";
-
-  async function EditProject() {
-    let {title, participants_target, questionnaire, markdown, description, project_img, tags} = $dataStore;
-    const response = await authorizedRequest('projects/' + $params.project_link + '/edit', 'PUT',
-      {title, participants_target, questionnaire, markdown, description, project_img, tags});
-  }
+  import {EditProject} from './_apiEdit';
 
   let edit = false;
   let promise = getData('projects/' + $params.project_link);
@@ -18,7 +13,7 @@
 {#await $promise}
   <h1>Загрузка...</h1>
 {:then data}
-  <ProjectPage {...data} on:update={EditProject} bind:edit={edit}/>
+  <ProjectPage {...data} on:update={() => EditProject($params.project_link)} bind:edit={edit}/>
   <ProjectMenu/>
   <Editor bind:edit={edit}/>
 {/await}

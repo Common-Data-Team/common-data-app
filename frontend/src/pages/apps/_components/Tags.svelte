@@ -9,7 +9,6 @@
   async function getTags() {
     const response = await fetch(apiUrl + 'tags/all');
     const data = await response.json();
-    console.log(data);
     return data;
   }
 
@@ -17,7 +16,6 @@
     if (edit) {
       tags = tags.filter(e => e.name !== name);
       $dataStore.tags = tags;
-      console.log($dataStore.tags);
     }
   }
   let response = getTags();

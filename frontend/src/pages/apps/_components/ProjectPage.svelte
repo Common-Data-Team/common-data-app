@@ -41,7 +41,7 @@
     <p class="date">{creation_date.slice(8, 10)}.{creation_date.slice(5, 7)} - ???</p>
     <p class="date_title">время сбора</p>
 <!--    <a href='./forms/render' class="enter_button">Принять участие</a>-->
-    <button on:click={() => $goto('./forms/render')} class="enter_button">Принять участие</button>
+    <button disabled={edit} on:click={() => $goto('./forms/render')} class="enter_button">Принять участие</button>
     <div class="subscribe_block">
       <img src='/images/button_images/subscribe.svg' alt="">
       <p>Подписаться на обновления</p>
@@ -174,6 +174,12 @@
     line-height: 24px;
     width: 300px;
     margin: 30px 0 0 0;
+    transition: all ease 0.7s;
+  }
+
+  .enter_button:disabled {
+    background: #444444;
+    color: #bbbbbb;
   }
 
   .subscribe_block {

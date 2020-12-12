@@ -1,14 +1,28 @@
 <script>
   import {writable} from 'svelte/store';
   import Page from './_components/Page.svelte';
-  import {goto} from '@roxi/routify';
-  let saved = JSON.parse(localStorage.getItem("pagesStore"));
+  import {goto, params} from '@roxi/routify';
+  import {dataStore} from '../../../../../_api';
+  import {EditProject} from '../../_apiEdit';
+
+  let {last_modified, questionnaire} = $dataStore;
+  let backLastModified = Number.parseInt(last_modified || 0)
+  let frontLastModified = Number.parseInt(localStorage.getItem('lastUpdated') || 0)
+  let saved;
+
+  if (backLastModified > frontLastModified) {
+    saved = questionnaire;
+  } else {
+    saved = JSON.parse(localStorage.getItem("pagesStore"));
+  }
+
   let pagesStore = writable(saved || [
     [
       {type: "OneChoice", content: {question: 'Выберите один', options: []}},
     ],
   ]);
   pagesStore.subscribe(val => localStorage.setItem("pagesStore", JSON.stringify(val)));
+  pagesStore.subscribe(_ => localStorage.setItem('lastUpdated', Date.now().toString()));
 
   function destroyer(i) {
     $pagesStore.splice(i, 1);
@@ -21,15 +35,23 @@
     ]]);
   }
 
-  function save(){
-  //  TODO fetch save
+  function synchronize(){
+      let cleanedPages = $pagesStore;
+      $dataStore.questionnaire = JSON.stringify($pagesStore);
+  }
+  async function save(){
+    synchronize()
+    await EditProject($params.project_link);
     $goto('../../');
   }
 </script>
 
 <main>
   <a class="back-button" href="../">&#8592; К проекту</a>
-  <a class="view-button" href="./render">Превью <img class="eye" src="/images/button_images/eye.svg"></a>
+  <button class="view-button"
+          on:click={() => {synchronize(); $goto('../render')}}>
+    Превью <img class="eye" src="/images/button_images/eye.svg">
+  </button>
   {#each Array.from($pagesStore.entries()) as [i, questions]}
     <Page number={i+1} bind:questions={$pagesStore[i]} thisDestroyer={() => destroyer(i)}/>
   {/each}
@@ -48,11 +70,12 @@
     align-items: center;
   }
 
-  a {
+  .back-button, .view-button {
     text-decoration: none;
     border-radius: 20px;
     border: 1px solid black;
     padding: 0.7em;
+    color: black;
     background: white;
     position: fixed;
     font-size: 1em;
@@ -66,10 +89,11 @@
     top: 10px;
     right: 10px;
   }
-  a:hover {
+  .back-button:hover, .view-button:hover {
     border-color: #0b7dda;
-  }
+    color: #0b7dda;
 
+  }
   .eye {
     width: 12px;
   }

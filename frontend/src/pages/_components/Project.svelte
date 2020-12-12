@@ -1,5 +1,6 @@
 <script>
   import { goto } from '@roxi/routify'
+  import Tags from '../apps/_components/Tags.svelte'
   export let title = 'Влияние проходимого расстояния на здоровье';
   export let tags = ['Наука', 'Медицина'];
   export let participants_count = 42;
@@ -9,25 +10,21 @@
   export let project_link = '';
 </script>
 
-<div class="project-card" on:click={$goto('apps/project/'+project_link)}>
-  <div class="img-wrapper">
+<div class="project-card">
+  <div class="img-wrapper" on:click={$goto('apps/project/'+project_link)}>
     <img size="100%, 20%" src="/{project_img}.png" class="img" alt="Картинка проекта">
   </div>
-  <div class="title">
+  <div class="title" on:click={$goto('apps/project/'+project_link)}>
     <h2 class="project-title">{title}</h2>
   </div>
-  <div class="tags">
-    {#each tags as tag}
-      <a href="/" class="tag-href">{tag.name}</a>
-    {/each}
-  </div>
+  <Tags {tags}/>
   <p class="percent-title">Собрано {participants_count}%</p>
 
   <div class="bar">
     <div class="progress" style="width: {participants_count}%"></div>
   </div>
 
-  <div class="user">
+  <div class="user" on:click={$goto('apps/user/'+leaders[0].user.id)}>
     <img src="/{leaders[0].user.avatar}.jpg" class="user-img" alt="Аватарка"/>
     <p>{leaders[0].user.fio}</p>
   </div>
@@ -37,14 +34,14 @@
 <style>
 
   .title {
-    padding-top: 2%;
     max-height: 60px;
-    padding-bottom: 1%;
+    padding: 6px 0 0 0;
   }
 
   .img {
     max-height: 100%;
     width: 100%;
+    object-fit: cover;
   }
 
   .img-wrapper {
@@ -75,7 +72,7 @@
     padding-right: 25px;
     padding-bottom: 5%;
   }
-  .project-card:hover {
+  .title:hover, .img-wrapper:hover, .user:hover {
     cursor: pointer;
   }
   .user-img {
@@ -118,9 +115,7 @@
     border-radius: 18px;
     text-align: center;
     padding: 0.375em 0.75em;
-    margin: 5%;
-    margin-right: 2%;
-    margin-left: 0%;
+    margin: 4px 2% 10px 0;
     color: #F9F9F9;
   }
 
@@ -136,6 +131,7 @@
   .percent-title {
     --plain-font-size: calc(12px + (14 - 12) * ((100vw - 300px) / (1440 - 300)));
     padding-bottom: 2%;
+    margin: 5px 0 0 0;
   }
 
   .project-title {

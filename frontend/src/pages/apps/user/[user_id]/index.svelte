@@ -88,24 +88,6 @@ textarea {
   font-family: "Helvetica Norm";
   font-size: 16px;
 }
-  .tag-container {
-    margin-top: 2%;
-    max-width: 70%;
-    text-align: left;
-  }
-
-
-  .tag-href {
-    background-color: #282828;
-    border-radius: 18px;
-    text-align: center;
-    padding: 0.375em 0.75em;
-    margin-right: 2%;
-    margin-left: 0;
-    color: #F9F9F9;
-    text-decoration: none;
-    margin-top: 2%;
-  }
 
   .ex-tag {
     text-decoration: none;
@@ -114,12 +96,6 @@ textarea {
   .ex-tag:hover {
     cursor: pointer;
           }
-  .tags {
-    display: flex;
-    justify-content: left;
-    align-items: left;
-    flex-wrap: wrap;
-  }
 
   #name {
     padding-top: 3%;
@@ -154,7 +130,9 @@ textarea {
     margin-top: 15%;
     text-decoration-line: underline;
   }
-
+  .edit:hover {
+    cursor: pointer;
+  }
   .user_info {
     display: flex;
     flex-direction: column;

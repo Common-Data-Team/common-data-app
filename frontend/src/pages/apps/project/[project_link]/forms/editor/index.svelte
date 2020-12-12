@@ -34,7 +34,8 @@
   main {
     text-align: center;
     padding: 1em;
-    min-width: 640px;
+    width: 1200px;
+    min-width: 500px;
     margin: 0 auto;
   }
 

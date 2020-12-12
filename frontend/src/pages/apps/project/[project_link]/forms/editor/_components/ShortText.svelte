@@ -34,8 +34,18 @@
   }
   .question{
     font-weight: bold;
-    margin: 20px 0;
     border: 0;
+    color: #000000;
   }
-
+  .question::placeholder {
+    color: #757580;
+  }
+  input {
+    margin: 10px 0;
+  }
+  input::placeholder {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    color: #757580;
+    padding: 5px 0;
+  }
 </style>

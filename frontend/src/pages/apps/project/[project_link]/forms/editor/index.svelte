@@ -34,8 +34,8 @@
   main {
     text-align: center;
     padding: 1em;
-    width: 1200px;
-    min-width: 500px;
+    width: 80%;
+    max-width: 500px;
     margin: 0 auto;
   }
 

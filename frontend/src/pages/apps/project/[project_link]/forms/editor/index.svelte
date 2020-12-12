@@ -1,6 +1,6 @@
 <script>
   import {writable} from 'svelte/store';
-  import Page from './components/Page.svelte';
+  import Page from './_components/Page.svelte';
 
   let saved = JSON.parse(localStorage.getItem("pagesStore"));
   let pagesStore = writable(saved || [
@@ -23,6 +23,7 @@
 </script>
 
 <main>
+  <a href="../">К описанию проекта</a>
   {#each Array.from($pagesStore.entries()) as [i, questions]}
     <Page number={i+1} bind:questions={$pagesStore[i]} thisDestroyer={() => destroyer(i)}/>
   {/each}
@@ -38,12 +39,6 @@
     margin: 0 auto;
   }
 
-  h1 {
-    color: #ff3e00;
-    text-transform: uppercase;
-    font-size: 4em;
-    font-weight: 100;
-  }
   @media (min-width: 640px) {
     main {
       max-width: none;

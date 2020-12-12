@@ -14,7 +14,6 @@
 
   let edit = false;
   let promise = getData('projects/' + $params.project_link);
-  $projectLink = $params.project_link;
 </script>
 {#await $promise}
   <h1>Загрузка...</h1>

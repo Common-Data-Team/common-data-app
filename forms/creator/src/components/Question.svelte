@@ -24,22 +24,23 @@
 </script>
 
 <script>
-  export let instance = {};
-  export let destroyer = () => {
-  };
-  let selected = "OneChoice";
+  import {fade} from 'svelte/transition'
+  // {type: "Statement", content: {statement: "Упсс, это пустая страница :)"}
+  export let instance;
+  export let destroyer = () => {};
 </script>
 
-<div class="component">
+<div class="component" in:fade>
   <div class="panel">
-    <select bind:value={selected}>
+    <select bind:value={instance.type}>
       {#each Object.entries(components) as [component_str, {name, component_js}]}
         <option value="{component_str}">{name}</option>
       {/each}
     </select>
     <button on:click={destroyer}>Удалить вопрос</button>
   </div>
-  <svelte:component this={components[selected].component} content={instance.content}/>
+  <svelte:component this={components[instance.type].component}
+                    bind:content={instance.content}/>
 </div>
 
 <style>

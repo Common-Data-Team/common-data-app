@@ -1,11 +1,11 @@
 <script>
   import { goto } from '@roxi/routify';
-  import {checkStoreAndCoockie, clearStoreAndCookie, getCookie} from "./_api";
+  import { clearStoreAndCookie, getCookie, getData} from "./_api";
   import Project from './_components/Project.svelte';
   import FollowProject from './_components/Follow_Project.svelte';
   import NewProject from './_components/New_Project.svelte';
   import Footer from './_components/Footer.svelte';
-  import { Menu, Menuitem, Button, Icon } from 'svelte-mui';
+  import { Menu, Menuitem }  from 'svelte-mui';
 
   let current_tag = 'all';
   let screenWidth;
@@ -17,7 +17,7 @@
       progress: 42,
       author: "Камень Камень",
       description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
+      userImageSrc: "/images/user_images/default.jpg",
       projectImageSrc: "/images/project_images/Rectangle 4.png"
     },
     {
@@ -26,7 +26,7 @@
       progress: 92,
       author: "Камень Иванович",
       description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
+      userImageSrc: "/images/user_images/default.jpg",
       projectImageSrc: "/images/project_images/star_project.png"
     },
     {
@@ -35,7 +35,7 @@
       progress: 80,
       author: "Камень Иванович",
       description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
+      userImageSrc: "/images/user_images/default.jpg",
       projectImageSrc: "/images/project_images/follow_project_card.png"
     },
 
@@ -45,7 +45,7 @@
       progress: 42,
       author: "Камень Камень",
       description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
+      userImageSrc: "/images/user_images/default.jpg",
       projectImageSrc: "/images/project_images/Rectangle 4.png"
     },
     {
@@ -54,7 +54,7 @@
       progress: 92,
       author: "Камень Иванович",
       description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
+      userImageSrc: "/images/user_images/default.jpg",
       projectImageSrc: "/images/project_images/star_project.png"
     },
     {
@@ -63,18 +63,19 @@
       progress: 80,
       author: "Камень Иванович",
       description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
+      userImageSrc: "/images/user_images/default.jpg",
       projectImageSrc: "/images/project_images/follow_project_card.png"
     }
   ]
 
-  let auth = checkStoreAndCoockie();
+  let auth = getCookie('access_token');
 
   function logout() {
     auth = false;
     clearStoreAndCookie();
   }
 
+  const promise = getData('projects/all');
 </script>
 
 <svelte:head>
@@ -143,7 +144,7 @@
             </div>
           {/if}
           <a href="./auth/signup">
-            <button class="auth-buttons" onclick="./auth/signin">Регистрация</button>
+            <button class="auth-buttons" onclick={() => $goto('./auth/signup')}>Регистрация</button>
           </a>
         </div>
       </div>
@@ -169,9 +170,9 @@
                   <Menu origin="top right" width=328 dy=53>
                     <div slot="activator">
                       <!-- svelte-ignore a11y-missing-attribute -->
-                      <img src="/images/user_images/user.jpg" class="user-image-menu" />
+                      <img src="/images/user_images/default.jpg" class="user-image-menu" />
                     </div>
-                
+
                     <Menuitem>Достижения</Menuitem>
                     <Menuitem on:click={() => $goto('../apps/user/'+getCookie('user_id'))}>Настройки</Menuitem>
                     <hr />
@@ -189,16 +190,20 @@
 
     <div class="popular-block">
       <div class="block-title">
-        <h2>ПОПУЛЯРНОЕ СЕЙЧАС</h2>
+        <h2>ПРОЕКТЫ</h2>
         <p class="arrow">→</p>
       </div>
       <section style="--columns-amount: {Math.floor((Math.min(screenWidth, 1200) - 30) / 350)}">
+        {#await $promise}
+        <p>Загрузка...</p>
+        {:then data}
           {#each data as card}
                 <Project {...card}></Project>
           {/each}
+        {/await}
       </section>
     </div>
-
+<!--
     {#if auth}
       <div class="popular-block">
         <div class="block-title">
@@ -224,10 +229,10 @@
         {/each}
       </section>
     </div>
+    -->
   </div>
 </main>
-
-<Footer></Footer>
+<Footer/>
 
 <style>
 

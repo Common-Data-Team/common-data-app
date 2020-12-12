@@ -9,7 +9,7 @@ class User(Model):
 
     fio = fields.CharField(null=True, max_length=128)
     level = fields.IntField(default=0)
-    avatar = fields.CharField(null=True, max_length=256)
+    avatar = fields.CharField(max_length=256, default='images/user_images/default')
     about = fields.TextField(default='Инфомация обо мне')
     is_admin = fields.BooleanField(default=False)
     # social_networks = fields.TextField()
@@ -45,13 +45,14 @@ class Project(Model):
     project_link = fields.CharField(max_length=64)
     participants_target = fields.IntField()
 
+    last_modified = fields.DatetimeField(null=True, auto_now=True)
     questionnaire = fields.TextField(null=True)
     is_active = fields.BooleanField(default=True)
     markdown = fields.TextField(default="# Вы можете редактировать содержимое страницы")
     creation_date = fields.DatetimeField(auto_now_add=True)
     description = fields.TextField(null=True)
     participants_count = fields.IntField(default=0)
-    project_img = fields.CharField(256, null=True)
+    project_img = fields.CharField(256, default='images/project_images/default')
 
     members = fields.ManyToManyField('models.Member', related_name='projects')
     leaders = fields.ManyToManyField('models.Leader', related_name='projects')

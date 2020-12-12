@@ -2,7 +2,7 @@
     import Project from '../../_components/Project.svelte';
     import { Dialog, Textfield } from 'svelte-mui';
     import {params, goto} from '@roxi/routify';
-    import { authorizedRequest, getCookie } from '../../../_api.js';
+    import { authorizedRequest, getCookie, getData } from '../../../_api.js';
     import { onMount } from 'svelte';
     let screenWidth;
 
@@ -10,82 +10,18 @@
     export let user_profile_page = '/apps/user465';
     export let visible = false;
     let title = '';
-    let description = '';
     let participants_target = '';
-    export let data = [
-    {
-      title: 'Плитка из камня',
-      tags: ['Наука', 'Медицина'],
-      progress: 42,
-      author: "Камень Камень",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
-      projectImageSrc: "/images/project_images/Rectangle 4.png"
-    },
-    {
-      title: 'Влияние проходимого расстояния на здоровье',
-      tags: ['Наука', 'Медицина'],
-      progress: 92,
-      author: "Камень Иванович",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
-      projectImageSrc: "/images/project_images/star_project.png"
-    },
-    {
-      title: 'Влияние проходимого расстояния на здоровье',
-      tags: ['Наука', 'Медицина'],
-      progress: 80,
-      author: "Камень Иванович",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
-      projectImageSrc: "/images/project_images/follow_project_card.png"
-    },
-
-    {
-      title: 'Плитка из камня',
-      tags: ['Наука', 'Медицина'],
-      progress: 42,
-      author: "Камень Камень",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
-      projectImageSrc: "/images/project_images/Rectangle 4.png"
-    },
-    {
-      title: 'Влияние проходимого расстояния на здоровье',
-      tags: ['Наука', 'Медицина'],
-      progress: 92,
-      author: "Камень Иванович",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
-      projectImageSrc: "/images/project_images/star_project.png"
-    },
-    {
-      title: 'Влияние проходимого расстояния на здоровье',
-      tags: ['Наука', 'Медицина'],
-      progress: 80,
-      author: "Камень Иванович",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/user.jpg",
-      projectImageSrc: "/images/project_images/follow_project_card.png"
-    }
-  ];
-let auth;
-function textareaIncrease(event) {
-    let elem = event.target;
-    if (elem.scrollTop > 0) {
-        elem.style.height = elem.scrollHeight + 'px';
-    }
-}
-
-onMount(() => getCookie('user_id') === $params.user_id ? auth = true : auth = false);
+    let auth = getCookie('user_id') === $params.user_id;
 
 async function createProject() {
-    const response = await authorizedRequest('projects/create', 'Post', {title, description, participants_target});
+    const response = await authorizedRequest('projects/create', 'Post', {title, description: '', participants_target});
     console.log(response[0].project_link);
-    if (response[0].project_img === null) response[0].project_img = '/images/project_images/follow_project_card.png';
-    if (response[0] !== null) data = [response[0], ...data];
+    // if (response[0].project_img === null) response[0].project_img = '/images/project_images/follow_project_card.png';
+    promise = getData('users/'+ $params.user_id);
     visible = false;
 }
+
+let promise = getData('users/'+ $params.user_id);
 </script>
 
 <svelte:head>
@@ -93,7 +29,7 @@ async function createProject() {
 </svelte:head>
 <svelte:window bind:innerWidth={screenWidth}/>
 
-<Dialog width="490" bind:visible>
+<Dialog width="480" bind:visible>
     <div slot="title">Новый проект</div>
 
     <Textfield
@@ -103,8 +39,6 @@ async function createProject() {
         label="Название проекта"
     />
 <!--    TODO сделать улетающий label для textarea-->
-    <textarea class="description_input" placeholder="Описание проекта" on:keyup={textareaIncrease} bind:value={description}></textarea>
-    <div class="focus-line"></div>
     <Textfield
         name="Сколько человек требуется опросить?"
         autocomplete="off"
@@ -117,12 +51,12 @@ async function createProject() {
 </Dialog>
 
 <main>
+{#await $promise}
+    <h1>Загрузка...</h1>
+{:then {as_leader}}
     <div class = "profile">
         <div class="main-block">
                 <h2 class="pr">Проекты</h2>
-            {#if auth}
-        <a href="/" class="edit">Редактировать</a>
-          {/if}
         </div> 
         <div class="user_info">
             <section id='card_section' style="--columns-amount: {Math.floor((Math.min(screenWidth, 500) - 30) / 223)}">
@@ -139,55 +73,15 @@ async function createProject() {
                     </div>
                 </div></div>
                     {/if}
-                {#each data as card}
+                {#each as_leader.projects as card}
                     <Project {...card}></Project>
                 {/each}
             </section>
         </div>
     </div>
+{/await}
 </main>
 <style>
-
-    .description_input {
-        width: 100%;
-        border: 0;
-        border-bottom: 1px solid #999999;
-        background-color: transparent;
-        resize: vertical;
-        font-size: 17px;
-        height: 25px;
-        font-family: Roboto, 'Segoe UI', sans-serif;
-        font-weight: 400;
-        color: #333;
-        padding: 0;
-    }
-    .description_input:focus {
-        outline: none;
-    }
-    .description_input::placeholder {
-        padding: 5px 0 0 0;
-        font-size: 15px;
-        color: #ababab;
-    }
-    .description_input:focus ~ .focus-line {
-		transform: scaleX(1);
-		opacity: 1;
-	}
-    .focus-line {
-		height: 2px;
-		-webkit-transform: scaleX(0);
-		transform: scaleX(0);
-		transition: transform 0.18s cubic-bezier(0.4, 0, 0.2, 1),
-			opacity 0.18s cubic-bezier(0.4, 0, 0.2, 1),
-			-webkit-transform 0.18s cubic-bezier(0.4, 0, 0.2, 1);
-		transition: transform 0.18s cubic-bezier(0.4, 0, 0.2, 1),
-			opacity 0.18s cubic-bezier(0.4, 0, 0.2, 1);
-		opacity: 0;
-		z-index: 2;
-		background: #1976d2;
-        margin: -5px 0 0 0;
-        width: 100%;
-	}
     section {
         min-width: 466px;
     }
@@ -197,10 +91,11 @@ async function createProject() {
         padding: 0;
         margin: 0;
         width: 223px;
+        outline: none;
     }
 
-    .new-project-btn {
-        outline: none;
+    .new-project-btn:hover {
+        cursor: pointer;
     }
     .project-card {
         height: 100%;

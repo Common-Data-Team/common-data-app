@@ -1,5 +1,5 @@
 <script>
-  import {user, sendForm, selfUrl} from "../_api.js";
+  import {sendForm, selfUrl} from "../_api.js";
   import {goto, url} from "@roxi/routify";
   import {getContext} from 'svelte';
   import Input from '../_components/Input.svelte'
@@ -22,6 +22,10 @@
   $: showError = !!errorMessage;
 
   function validateForm() {
+    if (name === '') {
+      errorMessage = "Пожалуйста, укажите имя";
+      return false;
+    }
     if (!email.input.checkValidity() || email.value === "") {
       errorMessage = "Пожалуйста, укажите почту";
       return false;
@@ -44,7 +48,7 @@
   async function submit() {
     if (!validateForm()) return;
     showError = false;
-    let error = await sendForm(false, email.value, password.value);
+    let error = await sendForm(false, email.value, password.value, name.value);
     if (error) {
       errorMessage = error;
       return;

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Depends, status
+from fastapi import APIRouter, HTTPException, Depends, status, Form
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from tortoise.contrib.pydantic import pydantic_model_creator
 from models import User, Member, Leader, Tag
@@ -23,7 +23,22 @@ included = (
 )
 
 excluded = (
-    'tags', 'tags.projects', 'as_leader.projects',
+    'tags.projects',
+    'as_member.projects.questionnaire',
+    'as_member.projects.markdown',
+    'as_member.projects.creation_date',
+    'as_member.projects.description',
+    'as_member.projects.leaders',
+    'as_member.projects.members',
+    'as_member.projects.tags',
+
+    'as_leader.projects.questionnaire',
+    'as_leader.projects.markdown',
+    'as_leader.projects.creation_date',
+    'as_leader.projects.description',
+    'as_leader.projects.leaders',
+    'as_leader.projects.members',
+    'as_leader.projects.tags',
 )
 
 PublicUser = pydantic_model_creator(User, name='PublicUser', exclude=excluded, include=included)
@@ -92,8 +107,8 @@ def create_access_token(data, expires_data: Optional[timedelta] = None):
     return encoded_jwt
 
 
-async def create_user_and_token(email, password):
-    user = await User.create(email=email, hashed_password=pwd_context.hash(password))
+async def create_user_and_token(email: str, password: str, fio: str):
+    user = await User.create(email=email, hashed_password=pwd_context.hash(password), fio=fio)
     await Member.create(user=user)
     await Leader.create(user=user)
     expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
@@ -115,11 +130,11 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
 
 
 @router.post('/create', response_model=Token)
-async def new_user(form_data: OAuth2PasswordRequestForm = Depends()):
+async def new_user(fio: str, form_data: OAuth2PasswordRequestForm = Depends()):
     user = await User.get_or_none(email=form_data.username)
     if user is not None:
         raise HTTPException(400, 'User already exists')
-    user, token = await create_user_and_token(form_data.username, form_data.password)
+    user, token = await create_user_and_token(form_data.username, form_data.password, fio)
     return Token(access_token=token, token_type='bearer', user_id=user.id)
 
 

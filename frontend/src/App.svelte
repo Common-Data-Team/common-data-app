@@ -12,7 +12,7 @@
   //   setContext('selfUrl', 'https://commondata.ru/');
   // }
   setContext('apiUrl', 'https://backend.commondata.ru/');
-  setContext('selfUrl', 'https://commondata.ru/');
+  setContext('selfUrl', 'http://localhost:5000/');
 </script>
 
 <svelte:head>

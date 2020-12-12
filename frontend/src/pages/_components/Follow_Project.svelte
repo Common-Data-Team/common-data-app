@@ -3,7 +3,7 @@
   export let tags = ['Наука', 'Медицина'];
   export let author = "Камень Иванович";
   export let description = "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.";
-  export let userImageSrc = "/images/user_images/user.jpg";
+  export let userImageSrc = "/images/user_images/default.jpg";
   export let projectImageSrc = "/images/project_images/follow_project_card.png";
 </script>
 

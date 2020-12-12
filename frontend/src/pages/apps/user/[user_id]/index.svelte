@@ -1,62 +1,57 @@
 <script>
-  import {ready, url, params} from '@roxi/routify';
-  import {getContext} from 'svelte';
+  import {ready, url, params, goto} from '@roxi/routify';
+  import { getContext } from 'svelte';
   import {writable} from "svelte/store";
-  import { getCookie } from '../../../_api.js';
+  import { getCookie, getData, dataStore, authorizedRequest } from '../../../_api.js';
+  import Tags from '../../_components/Tags.svelte'
 
-  let apiUrl = getContext('apiUrl');
-  let fio, email, avatar, about, tags;
-  function getData(id) {
-    const store = writable(new Promise(() => {}));
-
-    const load = async () => {
-      let auth = false;
-      if (getCookie('user_id') === id) auth = true;
-      const response = await fetch(apiUrl + `users/${id}`);
-      const data = await response.json();
-      console.log(data);
-      if (data.about === null) data.about = 'Напишите о себе!';
-      if (data.avatar === null) data.avatar = '/images/user_images/user.jpg';
-      data.auth = auth;
-      if (data.tags.length === 0) data.tags.push({name: 'Пока нет('});
-      store.set(Promise.resolve(data));
-      $ready();
-    };
-    load();
-    return store;
+  function EditProfile() {
+    const {fio, tags, about} = $dataStore;
+    const response = authorizedRequest('users/edit', 'PUT', {fio, tags: tags.map(e => e.name), about});
+    edit = false;
   }
-  const promise = getData($params.user_id);
-</script>
 
+  let auth = getCookie('user_id') === $params.user_id;
+  let edit = false;
+  let apiUrl = getContext('apiUrl');
+  const promise = getData('users/'+ $params.user_id);
+</script>
+<!--TODO добавить стили для редактирующих инпутов-->
 <main>
   <div class="profile">
     {#await $promise}
       <h1>Загрузка...</h1>
-    {:then {fio, avatar, about, tags, as_leader, auth}}
+    {:then {fio, avatar, about, tags, as_leader}}
       <div class="main-block">
         <h2 class="pr">Профиль</h2>
         {#if auth}
-        <a href="/" class="edit">Редактировать</a>
+          {#if edit}
+        <a class="edit" on:click={EditProfile}>Сохранить</a>
+          {:else}
+        <a class="edit" on:click={() => edit = true}>Редактировать</a>
           {/if}
+        {/if}
       </div>
       <div class="user_info">
         <div class="user">
-          <img src={avatar} class="photo" alt="user_photo"/>
+          <img src={'/'+avatar+'.jpg'} class="photo" alt="user_photo"/>
+          {#if edit}
+          <input bind:value={$dataStore.fio} class="title">
+          {:else}
           <h2 class="title" id="name">{fio}</h2>
+          {/if}
         </div>
         <div class="self">
           <h2 class="title"> О себе:</h2>
+          {#if edit}
+            <textarea class="self_textarea" bind:value={$dataStore.about}></textarea>
+          {:else}
           <p>{about}</p>
+          {/if}
         </div>
         <div class="catigories">
           <h2 class="title">Предпочтения</h2>
-          <div class="tag-container">
-            <div class="tags">
-              {#each tags as tag}
-                <a class="tag-href">{tag.name}</a>
-              {/each}
-            </div>
-          </div>
+          <Tags {edit} {tags}/>
         </div>
         <div clsaa="exexperience">
           <h2 class="title">Участие в проектах:</h2>
@@ -66,7 +61,7 @@
             <ul>Пока проектов нет.</ul>
               {:else}
               {#each as_leader.projects as project}
-                <ul><a href={project.project_href} class="ex-tag">{project.title}</a></ul>
+                <ul><a on:click={() => $goto('../../project/'+project.project_link)} class="ex-tag">{project.title}</a></ul>
               {/each}
               {/if}
             </li>
@@ -78,36 +73,29 @@
   </div>
 </main>
 <style>
-
-  .tag-container {
-    margin-top: 2%;
-    max-width: 70%;
-    text-align: left;
-  }
-
-
-  .tag-href {
-    background-color: #282828;
-    border-radius: 18px;
-    text-align: center;
-    padding: 0.375em 0.75em;
-    margin-right: 2%;
-    margin-left: 0;
-    color: #F9F9F9;
-    text-decoration: none;
-    margin-top: 2%;
-  }
+input, textarea {
+  background: transparent;
+  border: 2px solid #000000;
+  border-radius: 5px;
+  width: 70%;
+}
+input {
+  font-family: "Helvetica Neue";
+  font-size: 24px;
+}
+textarea {
+  overflow: auto;
+  font-family: "Helvetica Norm";
+  font-size: 16px;
+}
 
   .ex-tag {
     text-decoration: none;
   }
 
-  .tags {
-    display: flex;
-    justify-content: left;
-    align-items: left;
-    flex-wrap: wrap;
-  }
+  .ex-tag:hover {
+    cursor: pointer;
+          }
 
   #name {
     padding-top: 3%;
@@ -142,7 +130,9 @@
     margin-top: 15%;
     text-decoration-line: underline;
   }
-
+  .edit:hover {
+    cursor: pointer;
+  }
   .user_info {
     display: flex;
     flex-direction: column;
@@ -154,9 +144,12 @@
   }
 
   .self {
-    margin-bottom: 10%;
+    margin-bottom: 5%;
   }
-
+  .self p {
+    width: 70%;
+    white-space: pre-wrap;
+  }
   .catigories {
     margin-bottom: 10%;
   }
@@ -176,7 +169,9 @@
     border-radius: 50%;
     margin-bottom: 1%;
   }
-
+  .self_textarea {
+    height: 80px;
+  }
   li {
     list-style-type: none;
     margin-bottom: 30%;

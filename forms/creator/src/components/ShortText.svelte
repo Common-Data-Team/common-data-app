@@ -1,15 +1,12 @@
 <script>
   export let content = {};
-  let {question, placeholder} = content;
-  question = question || 'Enter a text';
-  placeholder = placeholder || 'Short Text';
 </script>
 
 <label>
-  <input class="question" placeholder="Новый вопрос">
+  <input class="question" placeholder="Новый вопрос" bind:value={content.question}>
 </label>
 <label>
-  <input type="text" placeholder={placeholder}>
+  <input type="text" placeholder="Начните вводить">
 </label>
 
 

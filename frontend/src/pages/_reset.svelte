@@ -1,17 +1,34 @@
 <script>
-  import PageTransition from './_components/PageTransition.svelte';
+  import { BaseTransition } from '@roxi/routify/decorators'
+  import { fade } from 'svelte/transition'
   import {selfUrl} from './_api.js';
+
+  const configs = [
+    {
+        condition: meta => meta.routes[1].filepath === '/apps/user/[user_id]/projects.svelte',
+        transition: fade
+    },
+    {
+        condition: meta => meta.routes[1].filepath === '/apps/user/[user_id]/index.svelte',
+        transition: fade
+    },
+    {
+      condition: () => true,
+      transition: () => {}
+    }
+  ]
 </script>
 
 <svelte:head>
   <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml">
 </svelte:head>
-
 <main>
   <a href="{selfUrl}" class="logo-class">
     <img src="/logo.svg" alt="Common data">
   </a>
-  <slot decorator={PageTransition}/>
+  <BaseTransition {configs}>
+  <slot/>
+  </BaseTransition>
 </main>
 
 <style>

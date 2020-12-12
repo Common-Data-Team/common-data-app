@@ -34,7 +34,7 @@
       {#if edit}<input class="target_title input_target" bind:value={$dataStore.participants_target}
                        in:fade>{:else}{$dataStore.participants_target}{/if} запрошенных</p>
     <Tags {edit} {tags}/>
-    <div class="leader_block" on:click={() => $goto("../user/"+leaders[0].user.id)}>
+    <div class="leader_block" on:click={() => $goto("../../user/"+leaders[0].user.id)}>
       <img src={'/'+leaders[0].user.avatar+'.jpg'} alt="leader_ava">
       <p>{leaders[0].user.fio}</p>
     </div>

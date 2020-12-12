@@ -47,6 +47,10 @@
       updatePage(-1)
     }
   }
+
+  function submit(){
+
+  }
 </script>
 
 <svelte:window on:keydown={handleKeys}/>
@@ -59,7 +63,7 @@
         <div class="page-wrapper" in:fade>
           <Page questions={page} bind:answerQuestions={$store.answerPages[i]}/>
           {#if $store.currentPage === questionnaire.length - 1}
-            <button class="submit-button">Отправить</button>
+            <button on:click={submit} class="submit-button">Отправить</button>
           {/if}
         </div>
       {/if}

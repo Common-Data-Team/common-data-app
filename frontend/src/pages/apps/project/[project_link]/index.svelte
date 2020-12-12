@@ -1,11 +1,11 @@
 <script>
-  import ProjectPage from '../_components/ProjectPage.svelte';
-  import ProjectAbout from '../_components/ProjectAbout.svelte';
-  import Editor from '../_components/Editor.svelte';
+  import ProjectPage from '../../_components/ProjectPage.svelte';
+  import ProjectAbout from '../../_components/ProjectAbout.svelte';
+  import Editor from '../../_components/Editor.svelte';
   import {params} from '@roxi/routify';
-  import {getData, authorizedRequest, dataStore} from '../../_api.js';
-  import ProjectMenu from "../_components/ProjectMenu.svelte";
-  import {projectLink} from './stores';
+  import {getData, authorizedRequest, dataStore} from '../../../_api.js';
+  import ProjectMenu from "../../_components/ProjectMenu.svelte";
+  import {projectLink} from '../stores';
 
   async function EditProject() {
     let {title, participants_target, questionnaire, markdown, description, project_img, tags} = $dataStore;

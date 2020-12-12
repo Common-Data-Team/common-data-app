@@ -19,7 +19,6 @@
     $pagesStore = $pagesStore.concat([[
       {type: "OneChoice", content: {question: "", options: []}}
     ]]);
-
   }
 </script>
 

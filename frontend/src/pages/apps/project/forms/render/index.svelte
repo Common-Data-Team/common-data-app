@@ -3,6 +3,7 @@
   import {writable} from 'svelte/store';
   import Page from './components/Page.svelte';
   import MultipleChoice from './components/MultipleChoice.svelte';
+  import {projectLink} from "../../stores";
 
   let pages = [
     [{type: "Statement", content: {statement: 'Привет! Готовы пройти небольшой опрос?', }}],
@@ -56,6 +57,7 @@
 
 <svelte:window on:keydown={handleKeys}/>
 <main>
+  <a href={$projectLink}>К описанию проекта {$projectLink}</a>
   <div class="animation-box">
     {#each Array.from(pages.entries()) as [i, page]}
       {#if $store.currentPage === pages.indexOf(page)}

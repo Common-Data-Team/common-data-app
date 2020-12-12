@@ -1,0 +1,1 @@
+locust -f load_testing.py

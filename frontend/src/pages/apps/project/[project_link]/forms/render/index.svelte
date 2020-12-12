@@ -57,7 +57,8 @@
 
 <svelte:window on:keydown={handleKeys}/>
 <main>
-  <a href="../">К описанию проекта</a>
+  <!--  <a href="../">&#8592; Назад</a>-->
+  <button class="back-button" on:click={() => window.history.back()}>&#8592; Назад</button>
   <div class="animation-box">
     {#each Array.from(pages.entries()) as [i, page]}
       {#if $store.currentPage === pages.indexOf(page)}
@@ -118,6 +119,26 @@
     transition: all ease 0.5s;
   }
 
+  .back-button {
+    color: black;
+    background: white;
+    border: 1px solid black;
+    border-radius: 20px;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+    transition: all ease 0.7s;
+    font-size: 1em;
+    padding: 0.7em;
+  }
+
+  .back-button:hover {
+    color: #0b7dda;
+    border-color: #0b7dda;
+    cursor: pointer;
+  }
+
   .progress-title {
     padding: 0;
     margin: 0 0 5px 0;
@@ -140,9 +161,11 @@
     text-decoration: none;
     color: #1355FF;
   }
+
   .rule_block {
     display: flex;
   }
+
   .page-wrapper {
     position: absolute;
     display: flex;
@@ -207,10 +230,12 @@
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
   }
+
   @media (max-width: 600px) {
     .bottom-block {
       right: 10px;
-      bottom: 10px;
+      bottom: 5px;
+      height: 40px;
       flex-direction: column-reverse;
       align-items: start;
     }

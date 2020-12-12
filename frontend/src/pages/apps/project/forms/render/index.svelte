@@ -28,7 +28,7 @@
     for (const [i, page] of pages.entries()) {
       saved.answerPages.push([])
       for (const {type, content} of page) {
-        saved.answerPages[i].push({question: content.question, answer: null})
+        saved.answerPages[i].push({question: content.question, answer: null, type: type})
       }
     }
   }

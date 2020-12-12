@@ -66,7 +66,7 @@ button {
     cursor: pointer;
 }
 .forms_button {
-    background-color: #FFFFFF;
+    background-color: transparent;
     color: #000000;
     display: flex;
     justify-content: center;
@@ -74,9 +74,10 @@ button {
     transition: 2s;
 }
 .forms_button:hover {
-    background-color: transparent;
+    background-color: #cccccc;
 }
 .forms_input {
+    background-color: transparent;
     border-radius: 2px;
     border: 2px solid transparent;
 }

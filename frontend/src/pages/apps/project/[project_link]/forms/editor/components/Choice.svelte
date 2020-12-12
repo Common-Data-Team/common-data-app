@@ -32,7 +32,7 @@
 <!--<svelte:window on:keydown={event => event.key === 'Enter' ? creator(): false}/>-->
 <!--TODO Сделать переключение фокуса по Enter-->
 <label>
-  <input class="question" placeholder="Новый вопрос">
+  <input class="question forms_input" placeholder="Новый вопрос">
 </label>
 
 {#each Array.from(options.entries()) as [i, option]}
@@ -63,7 +63,8 @@
 
   .question {
     font-weight: bold;
-    border: none;
+    margin: 10px 0 5px 0;
+    padding: 5px;
   }
 
   line {

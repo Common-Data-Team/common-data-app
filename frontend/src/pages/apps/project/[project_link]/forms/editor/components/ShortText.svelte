@@ -34,7 +34,8 @@
   }
   .question{
     font-weight: bold;
-    border: none;
+    margin: 20px 0;
+    border: 0;
   }
 
 </style>

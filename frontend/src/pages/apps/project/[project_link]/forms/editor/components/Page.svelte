@@ -12,11 +12,11 @@
 
 <div class="component" in:fade>
   <h1>Страница {number}</h1>
-  <button on:click={thisDestroyer}>Удалить страницу</button>
+  <button class="forms_button" on:click={thisDestroyer}>Удалить страницу</button>
   {#each Array.from(questions.entries()) as [i, _]}
     <Question bind:instance={questions[i]} destroyer={() => destroyer(i)}/>
   {/each}
-  <button on:click={() => {
+  <button class="forms_button" on:click={() => {
     questions = questions.concat({type: "OneChoice", content: {question: "", options: []}})
   }}>Новый вопрос</button>
 </div>
@@ -28,10 +28,10 @@
     display: flex;
     flex-flow: column nowrap;
     width: 100%;
-    height: 100%;
     align-items: center;
     border: 1px solid #666666;
     border-radius: 30px;
     margin-bottom: 40px;
+    padding: 20px;
   }
 </style>

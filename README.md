@@ -1,6 +1,10 @@
+![Баннер](https://i.ibb.co/fXDPf45/Frame-97.png)  
+
+![Technology](https://img.shields.io/badge/svelte-svelte--v3-orange) ![Technology](https://img.shields.io/badge/python-3.7-blue) ![Forks](https://img.shields.io/github/forks/common-data-team/common-data-app?style=social)
+
 # Common Data
 
-Common data — это сервис, в котором пользователь может безопасно делиться своими данными с исследовательскими и гражданскими проектами, ценности которых он разделяет.
+Common data — это сервис, в котором пользователь может безопасно делиться своими данными с исследовательскими и гражданскими проектами, ценности которых он разделяет.  
 
 ## Почему мы?
 

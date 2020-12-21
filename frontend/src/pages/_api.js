@@ -2,7 +2,7 @@ import {writable, get} from 'svelte/store'
 import {setContext} from "svelte";
 
 export const apiUrl = 'https://backend.commondata.ru/';
-export const selfUrl = 'http://localhost:5000/';
+export const selfUrl = 'http://commondata.ru/';
 
 export let user = writable("");
 

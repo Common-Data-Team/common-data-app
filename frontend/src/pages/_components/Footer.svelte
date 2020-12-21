@@ -3,13 +3,13 @@
   <div class="column-block">
     <h3>О НАС</h3>
     <ul>
-      <a href="vk.com">
+      <a href="/">
         <li>проектам</li>
       </a>
-      <a href="vk.com">
+      <a href="/">
         <li>пользователям</li>
       </a>
-      <a href="vk.com">
+      <a href="https://www.patreon.com/commondatateam">
         <li>поддержать проект</li>
       </a>
     </ul>
@@ -25,7 +25,7 @@
   <div class="column-block">
     <h3>СОЦСЕТИ</h3>
     <ul>
-      <a href="https://github.com/tpofd/common-data-app">
+      <a href="https://github.com/Common-Data-Team/common-data-app">
         <li>github</li>
       </a>
     </ul>

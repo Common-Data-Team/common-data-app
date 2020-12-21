@@ -81,9 +81,10 @@
   .project_img {
     margin: 0 30px 0 3%;
   }
+
   .project_img img {
     object-fit: cover;
-    width: auto;
+    width: 800px;
   }
 
   .info_block {

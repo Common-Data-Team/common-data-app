@@ -12,7 +12,7 @@
   let current = 'user';
   let data = [
     {
-      title: 'Плитка из камня',
+      title: 'Плитка из камня.',
       tags: ['Наука', 'Медицина'],
       progress: 42,
       author: "Камень Камень",

@@ -172,7 +172,10 @@
                         on:click={() => menu_visibility = !menu_visibility}/>
                    {#if menu_visibility}
                      <ul class="menu-list">
+                       <li class="menu-item">Достижения</li>
                        <li class="menu-item" on:click={() => $goto('../apps/user/'+getCookie('user_id'))}>Профиль</li>
+                       <hr/>
+                       <li class="menu-item" on:click={logout}>Выйти</li>
                      </ul>
                    {/if}
                  </div>
@@ -358,19 +361,25 @@
     position: relative;
   }
 
+  .menu:hover {
+    cursor: pointer;
+  }
+
   .menu-list {
+    background-color: #FFFFFF;
     position: absolute;
-    right: 2px;
-    width: 300px;
+    top: 35px;
+    right: 0;
+    width: 320px;
     text-align: left;
     padding: 0;
-    box-shadow: 0 3px 3px -2px rgb(0 0 0/20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
+    border-radius: 3px;
+    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
   }
 
   .menu-item {
     list-style-type: none;
     padding: 15px;
-    transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
   }
 
   .menu-item:hover {

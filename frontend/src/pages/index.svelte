@@ -5,8 +5,8 @@
   import FollowProject from './_components/Follow_Project.svelte';
   import NewProject from './_components/New_Project.svelte';
   import Footer from './_components/Footer.svelte';
-  import { Menu, Menuitem }  from 'svelte-mui';
 
+  let menu_visibility = false;
   let current_tag = 'all';
   let screenWidth;
   let current = 'user';
@@ -107,7 +107,7 @@
             </button>
           </div>
           {#if current == 'user'}
-            <div id="users-block">
+            <div class="users-block">
               <div class="point-block">
                 <h2>01</h2>
                 <p>Участвуйте в том, что для вас интересно и важно. Мы будем рекомендовать проекты, которые
@@ -125,7 +125,7 @@
               </div>
             </div>
           {:else}
-            <div id="users-block">
+            <div class="users-block">
               <div class="point-block">
                 <h2>01</h2>
                 <p>Формируйте датасеты. Мы поможем вам составить форму для сбора данных, предоставим место
@@ -167,17 +167,15 @@
             </div>
             <div class="user-buttons-menu">
               {#if auth}
-                  <Menu origin="top right" width=328 dy=53>
-                    <div slot="activator">
-                      <!-- svelte-ignore a11y-missing-attribute -->
-                      <img src="/images/user_images/default.jpg" class="user-image-menu" />
-                    </div>
-
-                    <Menuitem>Достижения</Menuitem>
-                    <Menuitem on:click={() => $goto('../apps/user/'+getCookie('user_id'))}>Настройки</Menuitem>
-                    <hr />
-                    <Menuitem on:click={logout}>Выйти</Menuitem>
-                </Menu>
+                 <div class="menu">
+                   <img src="/images/user_images/default.jpg" class="user-image-menu"
+                        on:click={() => menu_visibility = !menu_visibility}/>
+                   {#if menu_visibility}
+                     <ul class="menu-list">
+                       <li class="menu-item" on:click={() => $goto('../apps/user/'+getCookie('user_id'))}>Профиль</li>
+                     </ul>
+                   {/if}
+                 </div>
             {/if}
             {#if !auth}
                 <div class="not-user-buttons-menu">
@@ -354,6 +352,29 @@
   .log-out-text {
     max-width: 40%;
     padding-right: 2%;
+  }
+
+  .menu {
+    position: relative;
+  }
+
+  .menu-list {
+    position: absolute;
+    right: 2px;
+    width: 300px;
+    text-align: left;
+    padding: 0;
+    box-shadow: 0 3px 3px -2px rgb(0 0 0/20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
+  }
+
+  .menu-item {
+    list-style-type: none;
+    padding: 15px;
+    transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
+  }
+
+  .menu-item:hover {
+    background-color: #E8E8E8;
   }
 
   .popular-block {

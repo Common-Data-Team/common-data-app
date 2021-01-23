@@ -1,6 +1,7 @@
 <script>
   import { goto } from '@roxi/routify';
   import { clearStoreAndCookie, getCookie, getData} from "./_api";
+  import {scale} from 'svelte/transition'
   import Project from './_components/Project.svelte';
   import FollowProject from './_components/Follow_Project.svelte';
   import NewProject from './_components/New_Project.svelte';
@@ -171,7 +172,7 @@
                    <img src="/images/user_images/default.jpg" class="user-image-menu"
                         on:click={() => menu_visibility = !menu_visibility}/>
                    {#if menu_visibility}
-                     <ul class="menu-list">
+                     <ul class="menu-list" transition:scale="{{duration:300}}">
                        <li class="menu-item">Достижения</li>
                        <li class="menu-item" on:click={() => $goto('../apps/user/'+getCookie('user_id'))}>Профиль</li>
                        <hr/>

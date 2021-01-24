@@ -1,6 +1,6 @@
 <script>
   import { goto } from '@roxi/routify';
-  import { clearStoreAndCookie, getCookie, getData} from "./_api";
+  import {clearStoreAndCookie, getCookie, getData} from "./_api";
   import Project from './_components/Project.svelte';
   import FollowProject from './_components/Follow_Project.svelte';
   import NewProject from './_components/New_Project.svelte';
@@ -169,8 +169,7 @@
             <div class="user-buttons-menu">
               {#if auth}
                 <Menu>
-                  <img src="/images/user_images/default.jpg" class="user-image-menu" slot="activation"
-                       on:click={() => menu_visibility = !menu_visibility}/>
+                  <img src="/images/user_images/default.jpg" class="user-image-menu" slot="activation"/>
                   <MenuItem>Достижения</MenuItem>
                   <MenuItem on:click={() => $goto('../apps/user/'+getCookie('user_id'))}>Профиль</MenuItem>
                   <hr/>
@@ -354,35 +353,6 @@
   .log-out-text {
     max-width: 40%;
     padding-right: 2%;
-  }
-
-  .menu {
-    position: relative;
-  }
-
-  .menu:hover {
-    cursor: pointer;
-  }
-
-  .menu-list {
-    background-color: #FFFFFF;
-    position: absolute;
-    top: 35px;
-    right: 0;
-    width: 320px;
-    text-align: left;
-    padding: 0;
-    border-radius: 3px;
-    box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
-  }
-
-  .menu-item {
-    list-style-type: none;
-    padding: 15px;
-  }
-
-  .menu-item:hover {
-    background-color: #E8E8E8;
   }
 
   .popular-block {

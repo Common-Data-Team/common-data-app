@@ -1,13 +1,13 @@
 <script>
   import { goto } from '@roxi/routify';
   import { clearStoreAndCookie, getCookie, getData} from "./_api";
-  import {scale} from 'svelte/transition'
   import Project from './_components/Project.svelte';
   import FollowProject from './_components/Follow_Project.svelte';
   import NewProject from './_components/New_Project.svelte';
   import Footer from './_components/Footer.svelte';
+  import Menu from '_components/Menu.svelte'
+  import MenuItem from '_components/MenuItem.svelte'
 
-  let menu_visibility = false;
   let current_tag = 'all';
   let screenWidth;
   let current = 'user';
@@ -168,18 +168,14 @@
             </div>
             <div class="user-buttons-menu">
               {#if auth}
-                 <div class="menu">
-                   <img src="/images/user_images/default.jpg" class="user-image-menu"
-                        on:click={() => menu_visibility = !menu_visibility}/>
-                   {#if menu_visibility}
-                     <ul class="menu-list" transition:scale="{{duration:300}}">
-                       <li class="menu-item">Достижения</li>
-                       <li class="menu-item" on:click={() => $goto('../apps/user/'+getCookie('user_id'))}>Профиль</li>
-                       <hr/>
-                       <li class="menu-item" on:click={logout}>Выйти</li>
-                     </ul>
-                   {/if}
-                 </div>
+                <Menu>
+                  <img src="/images/user_images/default.jpg" class="user-image-menu" slot="activation"
+                       on:click={() => menu_visibility = !menu_visibility}/>
+                  <MenuItem>Достижения</MenuItem>
+                  <MenuItem on:click={() => $goto('../apps/user/'+getCookie('user_id'))}>Профиль</MenuItem>
+                  <hr/>
+                  <MenuItem on:click={logout}>Выход</MenuItem>
+                </Menu>
             {/if}
             {#if !auth}
                 <div class="not-user-buttons-menu">
@@ -237,7 +233,9 @@
 <Footer/>
 
 <style>
-
+  hr {
+    margin: 0;
+  }
   main {
     padding-left: 5%;
   }

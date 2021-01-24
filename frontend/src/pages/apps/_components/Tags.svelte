@@ -2,7 +2,8 @@
   import {getCookie, dataStore, apiUrl} from '../../_api.js';
   import {fade} from 'svelte/transition';
   import {goto} from '@roxi/routify'
-  import {Menu, Menuitem} from 'svelte-mui';
+  import Menu from '../../_components/Menu.svelte'
+  import MenuItem from '../../_components/MenuItem.svelte'
   export let tags;
   export let edit = false;
 
@@ -24,7 +25,7 @@
 <div class="tags_block">
   {#if edit}
     <Menu origin="top left" width=150 dy=40 class="menu">
-      <div slot="activator">
+      <div slot="activation">
         <div class="tag " in:fade><p>Добавить тэг</p></div>
       </div>
       {#await response}
@@ -32,8 +33,8 @@
       {:then tag_names}
         {#each tag_names as tag_name}
           {#if !tags.some(e => e.name === tag_name)}
-            <Menuitem
-              on:click="{() => {tags = [...tags, {name: tag_name}]; $dataStore.tags = tags; console.log(tags.includes({name:'AI' }))}}">{tag_name}</Menuitem>
+            <MenuItem top_margin="100"
+              on:click="{() => {tags = [...tags, {name: tag_name}]; $dataStore.tags = tags; console.log(tags.includes({name:'AI' }))}}">{tag_name}</MenuItem>
           {/if}
         {/each}
       {/await}

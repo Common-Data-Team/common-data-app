@@ -1,6 +1,7 @@
 <script>
-    import {slide} from 'svelte/transition'
+    import {scale, slide} from 'svelte/transition'
     let menu_visibility = false;
+    export let top_margin = 20;
 </script>
 
 <div class="menu">
@@ -8,7 +9,7 @@
     <slot name="activation"></slot>
     </div>
     {#if menu_visibility}
-        <div class="menu-list" transition:slide>
+        <div class="menu-list" style={"top: ${top_margin}px}"} transition:scale>
             <slot/>
         </div>
     {/if}
@@ -26,7 +27,6 @@
     .menu-list {
         background-color: #FFFFFF;
         position: absolute;
-        top: 60px;
         right: 0;
         width: 320px;
         text-align: left;

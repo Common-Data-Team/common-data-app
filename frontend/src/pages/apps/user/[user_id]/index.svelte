@@ -3,7 +3,7 @@
   import { getContext } from 'svelte';
   import {writable} from "svelte/store";
   import { getCookie, getData, dataStore, authorizedRequest } from '../../../_api.js';
-  import Tags from '../../_components/Tags.svelte'
+  import Tags from '../../../_components/Tags.svelte'
 
   function EditProfile() {
     const {fio, tags, about} = $dataStore;

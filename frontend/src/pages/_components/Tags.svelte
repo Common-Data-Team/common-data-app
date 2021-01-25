@@ -1,9 +1,9 @@
 <script>
-  import {getCookie, dataStore, apiUrl} from '../../_api.js';
+  import {getCookie, dataStore, apiUrl} from '../_api.js';
   import {fade} from 'svelte/transition';
   import {goto} from '@roxi/routify'
-  import Menu from '../../_components/Menu.svelte'
-  import MenuItem from '../../_components/MenuItem.svelte'
+  import Menu from './Menu.svelte'
+  import MenuItem from './MenuItem.svelte'
   export let tags;
   export let edit = false;
 

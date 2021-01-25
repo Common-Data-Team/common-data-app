@@ -3,7 +3,6 @@
   import {clearStoreAndCookie, getCookie, getData} from "./_api";
   import Project from './_components/Project.svelte';
   import FollowProject from './_components/Follow_Project.svelte';
-  import NewProject from './_components/New_Project.svelte';
   import Footer from './_components/Footer.svelte';
   import Menu from '_components/Menu.svelte'
   import MenuItem from '_components/MenuItem.svelte'
@@ -433,6 +432,10 @@
 
     .log-out-text {
       max-width: 90%;
+    }
+    .menu-block {
+      width: auto;
+      overflow-x: scroll;
     }
   }
 

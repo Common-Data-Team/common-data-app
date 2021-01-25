@@ -1,10 +1,10 @@
 <script>
-  import ProjectPage from '../../_components/ProjectPage.svelte';
-  import ProjectAbout from '../../_components/ProjectAbout.svelte';
-  import Editor from '../../_components/Editor.svelte';
+  import ProjectPage from './_components/ProjectPage.svelte';
+  import ProjectAbout from './_components/ProjectAbout.svelte';
+  import Editor from './_components/Editor.svelte';
   import {params} from '@roxi/routify';
   import {getData, authorizedRequest, dataStore} from '../../../_api.js';
-  import ProjectMenu from "../../_components/ProjectMenu.svelte";
+  import ProjectMenu from "./_components/ProjectMenu.svelte";
   import {EditProject} from './_apiEdit';
 
   let edit = false;

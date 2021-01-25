@@ -1,6 +1,6 @@
 <script>
   // Import markdown conversion library
-  import {cache, dataStore} from '../../_api.js';
+  import {cache, dataStore} from '../../../../_api.js';
   import {params} from '@roxi/routify';
   import marked from 'marked'
 

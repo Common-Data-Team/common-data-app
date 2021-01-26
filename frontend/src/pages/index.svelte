@@ -143,8 +143,8 @@
             </div>
           {/if}
           <div class="auth-buttons-block">
-            <button class="auth-buttons" onclick={() => $goto('./auth/signup')}>Регистрация</button>
-            <button class="auth-buttons mobile-only" onclick={() => $goto('./auth/signin')}>Войти</button>
+            <button class="auth-buttons" on:click={() => $goto('./auth/signup')}>Регистрация</button>
+            <button class="auth-buttons mobile-only" on:click={() => $goto('./auth/signin')}>Войти</button>
           </div>
         </div>
       </div>

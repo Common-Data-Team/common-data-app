@@ -70,6 +70,7 @@
     flex-direction: column;
     width: 350px;
     padding-bottom: 5%;
+    margin: 0 10px;
   }
   .title:hover, .img-wrapper:hover, .user:hover {
     cursor: pointer;
@@ -140,7 +141,8 @@
 
   @media (max-width: 400px) {
     .project-card {
-      width: 300px;
+      width: auto;
+      min-width: 200px;
     }
   }
 </style>

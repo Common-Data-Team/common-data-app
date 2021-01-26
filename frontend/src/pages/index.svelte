@@ -2,7 +2,6 @@
   import { goto } from '@roxi/routify';
   import {clearStoreAndCookie, getCookie, getData} from "./_api";
   import Project from './_components/Project.svelte';
-  import FollowProject from './_components/Follow_Project.svelte';
   import Footer from './_components/Footer.svelte';
   import Menu from '_components/Menu.svelte'
   import MenuItem from '_components/MenuItem.svelte'
@@ -189,7 +188,7 @@
         <h2>ПРОЕКТЫ</h2>
         <p class="arrow">→</p>
       </div>
-      <section style="--columns-amount: {Math.floor((Math.min(screenWidth, 1200) - 30) / 350)}">
+      <section style="--columns-amount: {Math.floor((Math.min(screenWidth, 1200) - 110) / 350)}">
         {#await $promise}
         <p>Загрузка...</p>
         {:then data}
@@ -409,6 +408,10 @@
   }
 
   @media (max-width: 768px) {
+
+    main {
+      padding-right: 5%;
+    }
 
     .popular-block {
       max-width: 768px;

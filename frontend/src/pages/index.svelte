@@ -142,9 +142,10 @@
               </div>
             </div>
           {/if}
-          <a href="./auth/signup">
+          <div class="auth-buttons-block">
             <button class="auth-buttons" onclick={() => $goto('./auth/signup')}>Регистрация</button>
-          </a>
+            <button class="auth-buttons mobile-only" onclick={() => $goto('./auth/signin')}>Войти</button>
+          </div>
         </div>
       </div>
     {/if}
@@ -175,7 +176,7 @@
                 </Menu>
             {/if}
             {#if !auth}
-                <div class="not-user-buttons-menu">
+                <div class="not-user-buttons-menu desktop-only">
                     <a href='./auth/signin'>вход</a>
                     <a href='./auth/signup'>регистрация</a>
                 </div>
@@ -259,6 +260,12 @@
     margin-left: 1%;
   }
 
+  .auth-buttons-block {
+    width: 100%;
+    display: flex;
+    padding-right: 20px;
+  }
+
   .auth-buttons {
     width: 211px;
     height: 43px;
@@ -266,6 +273,7 @@
     background-color: #282828;
     color: #f9f9f9;
     text-align: center;
+    margin-right: 10px;
   }
 
   .not-user-buttons-menu {
@@ -407,10 +415,18 @@
     color: #1355FF;
   }
 
+  .mobile-only {
+    display: none;
+  }
+
   @media (max-width: 768px) {
 
     main {
       padding-right: 5%;
+    }
+
+    .btn-about {
+      margin: 5px 0 10px 0;
     }
 
     .popular-block {
@@ -439,6 +455,22 @@
     .menu-block {
       width: auto;
       overflow-x: scroll;
+      margin: 20px 0 10px 0;
+    }
+
+    .auth-buttons {
+      width: 40vw;
+      min-width: 100px;
+      font-size: min(5vw, 20px);
+      margin-top: 20px;
+    }
+
+    .mobile-only {
+      display: block;
+    }
+
+    .desktop-only {
+      display: none;
     }
   }
 

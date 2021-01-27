@@ -189,7 +189,7 @@
         <h2>ПРОЕКТЫ</h2>
         <p class="arrow">→</p>
       </div>
-      <section style="--columns-amount: {Math.floor((Math.min(screenWidth, 1200) - 110) / 350)}">
+      <section style="--columns-amount: {Math.floor((Math.min(screenWidth, 1200) - 120) / 350)}">
         {#await $promise}
         <p>Загрузка...</p>
         {:then data}
@@ -465,6 +465,12 @@
       margin-top: 20px;
     }
 
+    .user-buttons-menu {
+      position: absolute;
+      top: 0;
+      left: 350px;
+    }
+
     .mobile-only {
       display: block;
     }
@@ -472,6 +478,12 @@
     .desktop-only {
       display: none;
     }
+  }
+
+  @media (max-width: 400px) {
+   .user-buttons-menu {
+     left: 82%;
+   }
   }
 
 </style>

@@ -1,72 +1,14 @@
 <script>
   import { goto } from '@roxi/routify';
-  import { clearStoreAndCookie, getCookie, getData} from "./_api";
+  import {clearStoreAndCookie, getCookie, getData} from "./_api";
   import Project from './_components/Project.svelte';
-  import FollowProject from './_components/Follow_Project.svelte';
-  import NewProject from './_components/New_Project.svelte';
   import Footer from './_components/Footer.svelte';
-  import { Menu, Menuitem }  from 'svelte-mui';
+  import Menu from '_components/Menu.svelte'
+  import MenuItem from '_components/MenuItem.svelte'
 
   let current_tag = 'all';
   let screenWidth;
   let current = 'user';
-  let data = [
-    {
-      title: 'Плитка из камня',
-      tags: ['Наука', 'Медицина'],
-      progress: 42,
-      author: "Камень Камень",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/default.jpg",
-      projectImageSrc: "/images/project_images/Rectangle 4.png"
-    },
-    {
-      title: 'Влияние проходимого расстояния на здоровье',
-      tags: ['Наука', 'Медицина'],
-      progress: 92,
-      author: "Камень Иванович",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/default.jpg",
-      projectImageSrc: "/images/project_images/star_project.png"
-    },
-    {
-      title: 'Влияние проходимого расстояния на здоровье',
-      tags: ['Наука', 'Медицина'],
-      progress: 80,
-      author: "Камень Иванович",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/default.jpg",
-      projectImageSrc: "/images/project_images/follow_project_card.png"
-    },
-
-    {
-      title: 'Плитка из камня',
-      tags: ['Наука', 'Медицина'],
-      progress: 42,
-      author: "Камень Камень",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/default.jpg",
-      projectImageSrc: "/images/project_images/Rectangle 4.png"
-    },
-    {
-      title: 'Влияние проходимого расстояния на здоровье',
-      tags: ['Наука', 'Медицина'],
-      progress: 92,
-      author: "Камень Иванович",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/default.jpg",
-      projectImageSrc: "/images/project_images/star_project.png"
-    },
-    {
-      title: 'Влияние проходимого расстояния на здоровье',
-      tags: ['Наука', 'Медицина'],
-      progress: 80,
-      author: "Камень Иванович",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/default.jpg",
-      projectImageSrc: "/images/project_images/follow_project_card.png"
-    }
-  ]
 
   let auth = getCookie('access_token');
 
@@ -107,7 +49,7 @@
             </button>
           </div>
           {#if current == 'user'}
-            <div id="users-block">
+            <div class="users-block">
               <div class="point-block">
                 <h2>01</h2>
                 <p>Участвуйте в том, что для вас интересно и важно. Мы будем рекомендовать проекты, которые
@@ -125,7 +67,7 @@
               </div>
             </div>
           {:else}
-            <div id="users-block">
+            <div class="users-block">
               <div class="point-block">
                 <h2>01</h2>
                 <p>Формируйте датасеты. Мы поможем вам составить форму для сбора данных, предоставим место
@@ -143,9 +85,10 @@
               </div>
             </div>
           {/if}
-          <a href="./auth/signup">
-            <button class="auth-buttons" onclick={() => $goto('./auth/signup')}>Регистрация</button>
-          </a>
+          <div class="auth-buttons-block">
+            <button class="auth-buttons" on:click={() => $goto('./auth/signup')}>Регистрация</button>
+            <button class="auth-buttons mobile-only" on:click={() => $goto('./auth/signin')}>Войти</button>
+          </div>
         </div>
       </div>
     {/if}
@@ -167,20 +110,16 @@
             </div>
             <div class="user-buttons-menu">
               {#if auth}
-                  <Menu origin="top right" width=328 dy=53>
-                    <div slot="activator">
-                      <!-- svelte-ignore a11y-missing-attribute -->
-                      <img src="/images/user_images/default.jpg" class="user-image-menu" />
-                    </div>
-
-                    <Menuitem>Достижения</Menuitem>
-                    <Menuitem on:click={() => $goto('../apps/user/'+getCookie('user_id'))}>Профиль</Menuitem>
-                    <hr />
-                    <Menuitem on:click={logout}>Выйти</Menuitem>
+                <Menu>
+                  <img src="/images/user_images/default.jpg" class="user-image-menu" slot="activation"/>
+                  <MenuItem>Достижения</MenuItem>
+                  <MenuItem on:click={() => $goto('../apps/user/'+getCookie('user_id'))}>Профиль</MenuItem>
+                  <hr/>
+                  <MenuItem on:click={logout}>Выход</MenuItem>
                 </Menu>
             {/if}
             {#if !auth}
-                <div class="not-user-buttons-menu">
+                <div class="not-user-buttons-menu desktop-only">
                     <a href='./auth/signin'>вход</a>
                     <a href='./auth/signup'>регистрация</a>
                 </div>
@@ -193,7 +132,7 @@
         <h2>ПРОЕКТЫ</h2>
         <p class="arrow">→</p>
       </div>
-      <section style="--columns-amount: {Math.floor((Math.min(screenWidth, 1200) - 30) / 350)}">
+      <section style="--columns-amount: {Math.floor((Math.min(screenWidth, 1200) - 120) / 350)}">
         {#await $promise}
         <p>Загрузка...</p>
         {:then data}
@@ -235,9 +174,11 @@
 <Footer/>
 
 <style>
-
+  hr {
+    margin: 0;
+  }
   main {
-    padding-left: 5%;
+    padding-left: 3%;
   }
 
   .btn-about {
@@ -262,6 +203,12 @@
     margin-left: 1%;
   }
 
+  .auth-buttons-block {
+    width: 100%;
+    display: flex;
+    padding-right: 20px;
+  }
+
   .auth-buttons {
     width: 211px;
     height: 43px;
@@ -269,6 +216,7 @@
     background-color: #282828;
     color: #f9f9f9;
     text-align: center;
+    margin-right: 10px;
   }
 
   .not-user-buttons-menu {
@@ -410,7 +358,19 @@
     color: #1355FF;
   }
 
+  .mobile-only {
+    display: none;
+  }
+
   @media (max-width: 768px) {
+
+    main {
+      padding-right: 5%;
+    }
+
+    .btn-about {
+      margin: 5px 0 10px 0;
+    }
 
     .popular-block {
       max-width: 768px;
@@ -435,6 +395,38 @@
     .log-out-text {
       max-width: 90%;
     }
+    .menu-block {
+      width: auto;
+      overflow-x: scroll;
+      margin: 20px 0 10px 0;
+    }
+
+    .auth-buttons {
+      width: 40vw;
+      min-width: 100px;
+      font-size: min(5vw, 20px);
+      margin-top: 20px;
+    }
+
+    .user-buttons-menu {
+      position: absolute;
+      top: 0;
+      left: 350px;
+    }
+
+    .mobile-only {
+      display: block;
+    }
+
+    .desktop-only {
+      display: none;
+    }
+  }
+
+  @media (max-width: 400px) {
+   .user-buttons-menu {
+     left: 82%;
+   }
   }
 
 </style>

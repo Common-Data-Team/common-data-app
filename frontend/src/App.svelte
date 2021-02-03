@@ -4,15 +4,16 @@
   import {setContext} from "svelte";
 
   // TODO Выстроить условие среды
-  // if (true) {
-  //   setContext('apiUrl', 'http://localhost:8000/');
-  //   setContext('selfUrl', 'http://localhost:5000/');
-  // } else {
-  //   setContext('apiUrl', 'https://backend.commondata.ru/');
-  //   setContext('selfUrl', 'https://commondata.ru/');
-  // }
-  setContext('apiUrl', 'https://backend.commondata.ru/');
-  setContext('selfUrl', 'http://localhost:5000/');
+  if (process.env.NODE_ENV === 'dev') {
+    setContext('apiUrl', 'https://backend.commondata.ru/');
+    setContext('selfUrl', 'http://localhost:5000/');
+    console.log('Dev')
+  } else {
+    setContext('apiUrl', 'https://backend.commondata.ru/');
+    setContext('selfUrl', 'https://commondata.ru/');
+    console.log('Prod')
+  }
+
 </script>
 
 <svelte:head>

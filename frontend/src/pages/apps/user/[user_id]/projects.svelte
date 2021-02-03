@@ -1,5 +1,5 @@
 <script>
-    import Project from '../../_components/Project.svelte';
+    import Project from './_components/User_project.svelte';
     import { Dialog, Textfield } from 'svelte-mui';
     import {params, goto} from '@roxi/routify';
     import { authorizedRequest, getCookie, getData } from '../../../_api.js';

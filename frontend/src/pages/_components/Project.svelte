@@ -1,6 +1,6 @@
 <script>
   import { goto } from '@roxi/routify'
-  import Tags from '../apps/_components/Tags.svelte'
+  import Tags from './Tags.svelte'
   export let title = 'Влияние проходимого расстояния на здоровье';
   export let tags = ['Наука', 'Медицина'];
   export let participants_count = 42;
@@ -69,8 +69,8 @@
     display: flex;
     flex-direction: column;
     width: 350px;
-    padding-right: 25px;
     padding-bottom: 5%;
+    margin: 0 10px;
   }
   .title:hover, .img-wrapper:hover, .user:hover {
     cursor: pointer;
@@ -139,4 +139,10 @@
     padding-top: 2%;
   }
 
+  @media (max-width: 400px) {
+    .project-card {
+      width: auto;
+      min-width: 200px;
+    }
+  }
 </style>

@@ -2,17 +2,15 @@
   import {sendForm, selfUrl} from "../_api.js";
   import {goto, url} from "@roxi/routify";
   import {getContext} from 'svelte';
-  import Input from '../_components/Input.svelte'
+  import Input from './_components/Input.svelte'
   import Checkbox from '../_components/Checkbox.svelte'
-  import Radio from '../_components/Radio.svelte'
-
-  let checked = false;
 
   let socialNetworks = {
     facebook: 'https://facebook.com',
     twitter: 'https://twitter.com',
     vkontakte: 'https://vk.com'
   };
+
   let apiUrl = getContext('apiUrl');
   let form;
   let name;
@@ -98,15 +96,7 @@
   .privacy-policy {
     display: flex;
     text-align: center;
-  }
-
-  .text-login01 {
-    cursor: pointer;
-    margin-right: 3%;
-    margin-left: 3%;
-    font-family: "Helvetica Norm";
-    text-align: center;
-    align-self: center;
+    margin-top: 5%;
   }
 
   .component {
@@ -115,13 +105,6 @@
     display: flex;
     flex-direction: row;
     margin-left: 5%;
-  }
-
-  .checkboxes-block {
-    margin-top: 1%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
   }
 
   .inputs-block {
@@ -180,11 +163,6 @@
     align-items: center;
     justify-content: flex-start;
     margin-left: 20px;
-  }
-
-  .registration-p {
-    /*margin-left: 20px;*/
-    /*margin-top: 5px;*/
   }
 
   ul {

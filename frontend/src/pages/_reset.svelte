@@ -47,4 +47,9 @@
       max-width: 300px;
     }
   }
+  @media (max-width: 400px) {
+    img {
+      max-width: 75%;
+    }
+  }
 </style>

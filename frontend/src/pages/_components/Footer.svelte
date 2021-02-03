@@ -1,48 +1,54 @@
 <footer>
   <img src="white_logo.svg" class="logo-white" alt="logo-white"/>
-  <div class="column-block">
-    <h3>О НАС</h3>
-    <ul>
-      <a href="/">
-        <li>проектам</li>
-      </a>
-      <a href="/">
-        <li>пользователям</li>
-      </a>
-      <a href="https://www.patreon.com/commondatateam">
-        <li>поддержать проект</li>
-      </a>
-    </ul>
-  </div>
-  <div class="column-block">
-    <h3>СВЯЗАТЬСЯ С НАМИ</h3>
-    <ul>
-      <a href="mailto:help@commondata.ru">
-        <li>help@commondata.ru</li>
-      </a>
-    </ul>
-  </div>
-  <div class="column-block">
-    <h3>СОЦСЕТИ</h3>
-    <ul>
-      <a href="https://github.com/Common-Data-Team/common-data-app">
-        <li>github</li>
-      </a>
-    </ul>
+  <div class="content">
+    <div class="column-block">
+      <h3>О НАС</h3>
+      <ul>
+        <a href="https://commondata.ru">
+          <li>проектам</li>
+        </a>
+        <a href="https://commondata.ru">
+          <li>пользователям</li>
+        </a>
+        <a href="https://www.patreon.com/commondatateam">
+          <li>поддержать проект</li>
+        </a>
+      </ul>
+    </div>
+    <div class="column-block">
+      <h3>СВЯЗАТЬСЯ С НАМИ</h3>
+      <ul>
+        <a href="mailto:help@commondata.ru">
+          <li>help@commondata.ru</li>
+        </a>
+      </ul>
+    </div>
+    <div class="column-block">
+      <h3>СОЦСЕТИ</h3>
+      <ul>
+        <a href="https://github.com/tpofd/common-data-app">
+          <li>github</li>
+        </a>
+      </ul>
+    </div>
   </div>
 </footer>
 
 <style>
   footer {
-    flex: 0 0 auto;
     display: flex;
     bottom: 0;
     padding: 5% 0;
     margin-top: 5%;
     width: 100%;
     background: #282828;
-    justify-content: center;
     align-items: stretch;
+  }
+
+  .content {
+    display: flex;
+    justify-content: space-around;
+    flex: 1 1;
   }
 
   .column-block {
@@ -52,6 +58,8 @@
   .logo-white {
     max-width: 285px;
     margin-right: 15%;
+    flex: 0 0 0;
+    margin-left: 5%;
   }
 
   h3 {
@@ -79,7 +87,25 @@
     color: #1355FF;
   }
 
-  @media (max-width: 768px) {
+  @media (min-width: 2000px) {
+    footer {
+      justify-content: left;
+    }
+
+    .content {
+      flex: 0 0 300px;
+    }
+
+    .logo-white {
+      margin-right: 5%;
+    }
+
+    .column-block {
+      flex:  0 0;
+    }
+  }
+
+  @media (max-width: 1270px) {
 
     footer {
       flex-direction: column;
@@ -94,7 +120,11 @@
     .column-block {
       padding-left: 5%;
     }
+  }
 
-
+  @media (max-width: 700px) {
+    .content {
+      flex-direction: column;
+    }
   }
 </style>

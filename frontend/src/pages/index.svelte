@@ -9,63 +9,6 @@
   let current_tag = 'all';
   let screenWidth;
   let current = 'user';
-  let data = [
-    {
-      title: 'Плитка из камня.',
-      tags: ['Наука', 'Медицина'],
-      progress: 42,
-      author: "Камень Камень",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/default.jpg",
-      projectImageSrc: "/images/project_images/Rectangle 4.png"
-    },
-    {
-      title: 'Влияние проходимого расстояния на здоровье',
-      tags: ['Наука', 'Медицина'],
-      progress: 92,
-      author: "Камень Иванович",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/default.jpg",
-      projectImageSrc: "/images/project_images/star_project.png"
-    },
-    {
-      title: 'Влияние проходимого расстояния на здоровье',
-      tags: ['Наука', 'Медицина'],
-      progress: 80,
-      author: "Камень Иванович",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/default.jpg",
-      projectImageSrc: "/images/project_images/follow_project_card.png"
-    },
-
-    {
-      title: 'Плитка из камня',
-      tags: ['Наука', 'Медицина'],
-      progress: 42,
-      author: "Камень Камень",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/default.jpg",
-      projectImageSrc: "/images/project_images/Rectangle 4.png"
-    },
-    {
-      title: 'Влияние проходимого расстояния на здоровье',
-      tags: ['Наука', 'Медицина'],
-      progress: 92,
-      author: "Камень Иванович",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/default.jpg",
-      projectImageSrc: "/images/project_images/star_project.png"
-    },
-    {
-      title: 'Влияние проходимого расстояния на здоровье',
-      tags: ['Наука', 'Медицина'],
-      progress: 80,
-      author: "Камень Иванович",
-      description: "В ходе нового исследования специалисты из Университета Эдинбурга выяснили, что причина облысения заложена в генах, причём тех, что передаются по материнской линии.",
-      userImageSrc: "/images/user_images/default.jpg",
-      projectImageSrc: "/images/project_images/follow_project_card.png"
-    }
-  ]
 
   let auth = getCookie('access_token');
 
@@ -235,7 +178,7 @@
     margin: 0;
   }
   main {
-    padding-left: 5%;
+    padding-left: 3%;
   }
 
   .btn-about {

@@ -3,14 +3,14 @@
   import {goto, url} from "@roxi/routify";
   import {getContext} from 'svelte';
   import Input from './_components/Input.svelte'
-
-  let checked = false;
+  import Checkbox from '../_components/Checkbox.svelte'
 
   let socialNetworks = {
     facebook: 'https://facebook.com',
     twitter: 'https://twitter.com',
     vkontakte: 'https://vk.com'
   };
+
   let apiUrl = getContext('apiUrl');
   let form;
   let name;
@@ -79,11 +79,7 @@
         <Input bind:this={password2} span="Подтверждение пароля" name="password" type="password"/>
       </div>
       <div class="privacy-policy">
-<!--      <Checkbox color="#1355FF">-->
-<!--        <span class="text-login01">Я принимаю <a-->
-<!--            style='text-decoration: underline;'>-->
-<!--                    пользовательское соглашение</a></span>-->
-<!--      </Checkbox>-->
+        <Checkbox></Checkbox>
       </div>
       <p class="error-label" class:showError>{errorMessage}</p>
       <div class="button-block">
@@ -100,15 +96,7 @@
   .privacy-policy {
     display: flex;
     text-align: center;
-  }
-
-  .text-login01 {
-    cursor: pointer;
-    margin-right: 3%;
-    margin-left: 3%;
-    font-family: "Helvetica Norm";
-    text-align: center;
-    align-self: center;
+    margin-top: 5%;
   }
 
   .component {
@@ -117,13 +105,6 @@
     display: flex;
     flex-direction: row;
     margin-left: 5%;
-  }
-
-  .checkboxes-block {
-    margin-top: 1%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
   }
 
   .inputs-block {
@@ -182,11 +163,6 @@
     align-items: center;
     justify-content: flex-start;
     margin-left: 20px;
-  }
-
-  .registration-p {
-    /*margin-left: 20px;*/
-    /*margin-top: 5px;*/
   }
 
   ul {

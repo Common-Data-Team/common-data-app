@@ -4,13 +4,13 @@
     <div class="column-block">
       <h3>О НАС</h3>
       <ul>
-        <a href="vk.com">
+        <a href="https://commondata.ru">
           <li>проектам</li>
         </a>
-        <a href="vk.com">
+        <a href="https://commondata.ru">
           <li>пользователям</li>
         </a>
-        <a href="vk.com">
+        <a href="https://www.patreon.com/commondatateam">
           <li>поддержать проект</li>
         </a>
       </ul>

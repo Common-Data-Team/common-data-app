@@ -3,8 +3,8 @@
   import {clearStoreAndCookie, getCookie, getData} from "./_api";
   import Project from './_components/Project.svelte';
   import Footer from './_components/Footer.svelte';
-  import Menu from '_components/Menu.svelte'
-  import MenuItem from '_components/MenuItem.svelte'
+  import Menu from './_components/Menu.svelte'
+  import MenuItem from './_components/MenuItem.svelte'
 
   let current_tag = 'all';
   let screenWidth;

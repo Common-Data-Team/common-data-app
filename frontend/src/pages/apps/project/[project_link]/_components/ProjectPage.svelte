@@ -3,7 +3,6 @@
   import {getCookie, dataStore, apiUrl} from '../../../../_api.js';
   import {fade} from 'svelte/transition';
   import {goto, url} from '@roxi/routify'
-  import {Menu, Menuitem} from 'svelte-mui';
   import Tags from '../../../../_components/Tags.svelte'
 
   export let title, participants_target, creation_date, participants_count, project_img, tags, leaders;

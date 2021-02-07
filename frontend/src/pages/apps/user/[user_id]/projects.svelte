@@ -1,6 +1,5 @@
 <script>
     import Project from './_components/User_project.svelte';
-    import { Dialog, Textfield } from 'svelte-mui';
     import {params, goto} from '@roxi/routify';
     import { authorizedRequest, getCookie, getData } from '../../../_api.js';
     import { onMount } from 'svelte';
@@ -28,27 +27,27 @@ let promise = getData('users/'+ $params.user_id);
     <title>Мои проекты</title>
 </svelte:head>
 <svelte:window bind:innerWidth={screenWidth}/>
+<!--TODO сделать компонент-->
+<!--<Dialog width="480" bind:visible>-->
+<!--    <div slot="title">Новый проект</div>-->
 
-<Dialog width="480" bind:visible>
-    <div slot="title">Новый проект</div>
-
-    <Textfield
-        name="Название проекта"
-        autocomplete="off"
-        bind:value={title}
-        label="Название проекта"
-    />
-<!--    TODO сделать улетающий label для textarea-->
-    <Textfield
-        name="Сколько человек требуется опросить?"
-        autocomplete="off"
-        bind:value={participants_target}
-        label="Сколько человек требуется опросить?"
-    />
-    <div slot="actions" class="actions center">
-        <button on:click={createProject}>Создать проект</button>
-    </div>
-</Dialog>
+<!--    <Textfield-->
+<!--        name="Название проекта"-->
+<!--        autocomplete="off"-->
+<!--        bind:value={title}-->
+<!--        label="Название проекта"-->
+<!--    />-->
+<!--&lt;!&ndash;    TODO сделать улетающий label для textarea&ndash;&gt;-->
+<!--    <Textfield-->
+<!--        name="Сколько человек требуется опросить?"-->
+<!--        autocomplete="off"-->
+<!--        bind:value={participants_target}-->
+<!--        label="Сколько человек требуется опросить?"-->
+<!--    />-->
+<!--    <div slot="actions" class="actions center">-->
+<!--        <button on:click={createProject}>Создать проект</button>-->
+<!--    </div>-->
+<!--</Dialog>-->
 
 <main>
 {#await $promise}

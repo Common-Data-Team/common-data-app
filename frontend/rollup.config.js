@@ -1,3 +1,4 @@
+import alias from '@rollup/plugin-alias';
 import svelte from 'rollup-plugin-svelte-hot';
 import Hmr from 'rollup-plugin-hot'
 import resolve from '@rollup/plugin-node-resolve';
@@ -10,6 +11,7 @@ import getConfig from '@roxi/routify/lib/utils/config'
 import autoPreprocess from 'svelte-preprocess'
 import postcssImport from 'postcss-import'
 import { injectManifest } from 'rollup-plugin-workbox'
+import * as path from "path";
 
 
 const { distDir } = getConfig() // use Routify's distDir for SSOT
@@ -60,7 +62,11 @@ export default {
                 })
             ]
         }),
-
+        alias({
+            entries: [
+                { find: 'global_components', replacement: path.resolve(__dirname, 'src/pages/_components/') },
+            ]
+        }),
         // resolve matching modules from current working directory
         resolve({
             browser: true,

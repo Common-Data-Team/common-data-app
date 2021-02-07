@@ -1,5 +1,5 @@
 <script>
-  import {Checkbox} from 'svelte-mui';
+  import Checkbox from 'global_components/Checkbox.svelte';
   import Choice from './Choice.svelte';
 
   export let content;

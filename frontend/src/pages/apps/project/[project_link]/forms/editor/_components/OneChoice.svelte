@@ -1,5 +1,5 @@
 <script>
-  import {Radio} from 'svelte-mui';
+  import Radio from 'global_components/Radio.svelte';
   import Choice from './Choice.svelte';
 
   export let content;

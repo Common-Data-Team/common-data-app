@@ -1,5 +1,5 @@
 <script>
-  import {Checkbox} from "svelte-mui";
+  import Checkbox from 'global_components/Checkbox.svelte';
 
   export let question = 'Выберите несколько';
   export let options = [];

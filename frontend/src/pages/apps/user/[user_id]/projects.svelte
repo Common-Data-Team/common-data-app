@@ -104,7 +104,7 @@ let promise = getData('users/'+ $params.user_id);
 
     .dialog button {
         margin-top: 3px;
-        font-size: max(1.2vw, 18px);
+        font-size: 18px;
     }
 
     .new-project-btn {
@@ -211,6 +211,7 @@ let promise = getData('users/'+ $params.user_id);
         main {
             margin: 0;
             width: 223px;
+            padding: 20px;
         }
         section {
             min-width: 223px !important;
@@ -224,7 +225,7 @@ let promise = getData('users/'+ $params.user_id);
 
         .dialog {
             padding: 20px 15px;
-            margin: auto;
+            margin: 10px;
         }
     }
 </style>

@@ -15,10 +15,12 @@
     let auth = getCookie('user_id') === $params.user_id;
 
 async function createProject() {
+    console.log(title);
     const response = await authorizedRequest('projects/create', 'Post', {title, description: '', participants_target});
-    console.log(response[0].project_link);
     // if (response[0].project_img === null) response[0].project_img = '/images/project_images/follow_project_card.png';
     promise = getData('users/'+ $params.user_id);
+    title = ''
+    participants_target = ''
     visible = false;
 }
 
@@ -31,13 +33,17 @@ let promise = getData('users/'+ $params.user_id);
 <svelte:window bind:innerWidth={screenWidth} />
 {#if visible}
 <div id="window" on:click={(e) => {
-    if (event.target.closest('.dialog') === null && visible) visible = false;
+    if (event.target.closest('.dialog') === null && visible) {
+        visible = false;
+        title = '';
+        participants_target = '';
+        }
 }}>
         <div class="dialog" transition:fly="{{ y: 200, duration: 800 }}">
             <h1>Новый проект</h1>
             <hr/>
-            <Input class="dialog-input" bind:this={title} span="Название проекта" type="text"/>
-            <Input class="dialog-input" bind:this={participants_target} span="Сколько человек требуется опросить?" type="number"/>
+            <Input class="dialog-input" bind:value={title} name="title" span="Название проекта" type="text"/>
+            <Input class="dialog-input" bind:value={participants_target} name="target" span="Сколько человек требуется опросить?" type="number"/>
             <button on:click={createProject}>Создать проект</button>
         </div>
 </div>

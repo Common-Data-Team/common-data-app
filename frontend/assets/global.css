@@ -3,6 +3,7 @@
     src: url("/fonts/HelveticaNeueBoldCondensed.ttf") format("truetype");
     font-style: normal;
     font-weight: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -10,6 +11,7 @@
     src: url("/fonts/HelveticaNeueCyr-Roman.ttf") format("truetype");
     font-style: normal;
     font-weight: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -17,6 +19,7 @@
     src: url("/fonts/SFProDisplay-Light.ttf") format("truetype");
     font-style: normal;
     font-weight: normal;
+    font-display: swap;
 }
 
 html, body {

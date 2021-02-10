@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+		<!--	created with www.mysitemapgenerator.com	-->
+		<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+	<loc>https://commondata.ru/</loc>
+	<lastmod>2021-02-10T21:05:56+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://commondata.ru/auth/signin/</loc>
+	<lastmod>2021-02-10T21:06:00+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://commondata.ru/auth/signup/</loc>
+	<lastmod>2021-02-10T21:06:00+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://commondata.ru/auth/signin/signup/</loc>
+	<lastmod>2021-02-10T21:06:00+01:00</lastmod>
+	<priority>0.4</priority>
+</url>
+<url>
+	<loc>https://commondata.ru/auth/signup/signin/</loc>
+	<lastmod>2021-02-10T21:06:00+01:00</lastmod>
+	<priority>0.4</priority>
+</url>
+</urlset>

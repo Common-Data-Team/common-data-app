@@ -65,6 +65,7 @@
     ]
   },
   "dependencies": {
+    "@rollup/plugin-alias": "^3.1.2",
     "marked": "^1.2.6"
   }
 }

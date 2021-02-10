@@ -1,8 +1,9 @@
 <script>
     import Project from './_components/User_project.svelte';
-    import { Dialog, Textfield } from 'svelte-mui';
+    import Input from 'global_components/Input.svelte'
     import {params, goto} from '@roxi/routify';
     import { authorizedRequest, getCookie, getData } from '../../../_api.js';
+    import { fly } from 'svelte/transition'
     import { onMount } from 'svelte';
     let screenWidth;
 
@@ -14,10 +15,12 @@
     let auth = getCookie('user_id') === $params.user_id;
 
 async function createProject() {
+    console.log(title);
     const response = await authorizedRequest('projects/create', 'Post', {title, description: '', participants_target});
-    console.log(response[0].project_link);
     // if (response[0].project_img === null) response[0].project_img = '/images/project_images/follow_project_card.png';
     promise = getData('users/'+ $params.user_id);
+    title = ''
+    participants_target = ''
     visible = false;
 }
 
@@ -27,36 +30,31 @@ let promise = getData('users/'+ $params.user_id);
 <svelte:head>
     <title>Мои проекты</title>
 </svelte:head>
-<svelte:window bind:innerWidth={screenWidth}/>
-
-<Dialog width="480" bind:visible>
-    <div slot="title">Новый проект</div>
-
-    <Textfield
-        name="Название проекта"
-        autocomplete="off"
-        bind:value={title}
-        label="Название проекта"
-    />
-<!--    TODO сделать улетающий label для textarea-->
-    <Textfield
-        name="Сколько человек требуется опросить?"
-        autocomplete="off"
-        bind:value={participants_target}
-        label="Сколько человек требуется опросить?"
-    />
-    <div slot="actions" class="actions center">
-        <button on:click={createProject}>Создать проект</button>
-    </div>
-</Dialog>
-
+<svelte:window bind:innerWidth={screenWidth} />
+{#if visible}
+<div id="window" on:click={(e) => {
+    if (event.target.closest('.dialog') === null && visible) {
+        visible = false;
+        title = '';
+        participants_target = '';
+        }
+}}>
+        <div class="dialog" transition:fly="{{ y: 200, duration: 800 }}">
+            <h1>Новый проект</h1>
+            <hr/>
+            <Input class="dialog-input" bind:value={title} name="title" span="Название проекта" type="text"/>
+            <Input class="dialog-input" bind:value={participants_target} name="target" span="Сколько человек требуется опросить?" type="number"/>
+            <button on:click={createProject}>Создать проект</button>
+        </div>
+</div>
+{/if}
 <main>
 {#await $promise}
     <h1>Загрузка...</h1>
 {:then {as_leader}}
     <div class = "profile">
         <div class="main-block">
-                <h2 class="pr">Проекты</h2>
+            <h2 class="pr">Проекты</h2>
         </div> 
         <div class="user_info">
             <section id='card_section' style="--columns-amount: {Math.floor((Math.min(screenWidth, 500) - 30) / 223)}">
@@ -85,6 +83,36 @@ let promise = getData('users/'+ $params.user_id);
     section {
         min-width: 466px;
     }
+
+    #window {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        z-index: 100;
+    }
+
+    .dialog {
+        width: 450px;
+        background-color: #FFFFFF;
+        border-radius: 10px;
+        box-shadow: 0px 0px 103px 0px #A097A0;
+        padding: 30px 30px 35px 30px;
+        z-index: 1000;
+    }
+
+    .dialog :global(.dialog-input) {
+        margin: 15px 0;
+        width: 100%;
+    }
+
+    .dialog button {
+        margin-top: 3px;
+        font-size: 18px;
+    }
+
     .new-project-btn {
         background-color: transparent;
         text-align: left;
@@ -189,11 +217,21 @@ let promise = getData('users/'+ $params.user_id);
         main {
             margin: 0;
             width: 223px;
+            padding: 20px;
         }
         section {
             min-width: 223px !important;
             display: flex !important;
             flex-direction: column;
+        }
+
+        #window {
+            align-items: center;
+        }
+
+        .dialog {
+            padding: 20px 15px;
+            margin: 10px;
         }
     }
 </style>

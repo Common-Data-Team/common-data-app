@@ -21,7 +21,10 @@ import { url, isActive } from '@roxi/routify';
 
 <style>
     main {
-        min-width: 100%;
+        position: absolute;
+        left: 0;
+        width: 100%;
+        max-width: 1800px;
         height: 100%;
     }
     .right-menu {
@@ -90,6 +93,7 @@ import { url, isActive } from '@roxi/routify';
   }
     .content {
         position: relative;
+        min-height: calc(100% - 120px);
     }
     @media (min-width: 1800px) {
         main {

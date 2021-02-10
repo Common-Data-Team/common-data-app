@@ -4,14 +4,11 @@
     <div class="column-block">
       <h3>О НАС</h3>
       <ul>
-        <a href="https://commondata.ru">
-          <li>проектам</li>
-        </a>
-        <a href="https://commondata.ru">
-          <li>пользователям</li>
-        </a>
         <a href="https://www.patreon.com/commondatateam">
           <li>поддержать проект</li>
+        </a>
+        <a href="/privacy">
+          <li>пользовательское соглашение</li>
         </a>
       </ul>
     </div>

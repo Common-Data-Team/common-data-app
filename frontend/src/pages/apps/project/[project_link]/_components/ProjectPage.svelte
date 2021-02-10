@@ -3,7 +3,6 @@
   import {getCookie, dataStore, apiUrl} from '../../../../_api.js';
   import {fade} from 'svelte/transition';
   import {goto, url} from '@roxi/routify'
-  import {Menu, Menuitem} from 'svelte-mui';
   import Tags from '../../../../_components/Tags.svelte'
 
   export let title, participants_target, creation_date, participants_count, project_img, tags, leaders;
@@ -81,10 +80,10 @@
   .project_img {
     margin: 0 30px 0 3%;
   }
-
   .project_img img {
     object-fit: cover;
-    width: 800px;
+    max-width: 700px;
+    height: auto;
   }
 
   .info_block {

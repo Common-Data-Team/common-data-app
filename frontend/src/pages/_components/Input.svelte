@@ -22,8 +22,8 @@
 </script>
 
 <label style="--spanColor: {spanColor};
-              --mainColor: {mainColor};">
-  <input bind:this={input} { placeholder } {type} class="{className}" {name} {value} on:input={handleInput}
+              --mainColor: {mainColor};" class="{className}">
+  <input bind:this={input} { placeholder } {type} {name} {value} on:input={handleInput}
          on:focus={() => focus = true}
          on:blur={() => focus = value !== ""}>
   <span class:focus>{span}</span>

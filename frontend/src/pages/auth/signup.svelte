@@ -2,8 +2,8 @@
   import {sendForm, selfUrl} from "../_api.js";
   import {goto, url} from "@roxi/routify";
   import {getContext} from 'svelte';
-  import Input from './_components/Input.svelte'
-  import Checkbox from '../_components/Checkbox.svelte'
+  import Input from 'global_components/Input.svelte'
+  import Checkbox from 'global_components/Checkbox.svelte'
 
   let socialNetworks = {
     facebook: 'https://facebook.com',

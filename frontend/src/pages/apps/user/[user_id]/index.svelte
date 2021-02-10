@@ -15,6 +15,18 @@
   let edit = false;
   let apiUrl = getContext('apiUrl');
   const promise = getData('users/'+ $params.user_id);
+
+  //функция загрузки и предпросмотра изображения
+  let  avatar_file, file_input;
+	
+	const onFileSelected =(e)=>{
+  let image = e.target.files[0];
+  let reader = new FileReader();
+  reader.readAsDataURL(image);
+  reader.onload = e => {
+    avatar_file = e.target.result
+  };
+}
 </script>
 <!--TODO добавить стили для редактирующих инпутов-->
 <main>
@@ -34,7 +46,20 @@
       </div>
       <div class="user_info">
         <div class="user">
-          <img src={'/'+avatar+'.jpg'} class="photo" alt="user_photo"/>
+          {#if edit}
+            <div id="app">
+              {#if avatar_file}
+              <img class="avatar" src={avatar_file} alt="" />
+              {:else}
+              <img class="avatar" src={'/' + avatar + '.jpg'} alt="" />
+              {/if}
+              <img class="upload" src="/images/user_images/upload.svg" alt="" on:click={()=>{file_input.click();}} />
+              <div class="chan" on:click={()=>{file_input.click();}}></div>
+              <input style="display:none" type="file" accept=".jpg, .jpeg, .png" on:change={(e)=>onFileSelected(e)} bind:this={file_input} >
+            </div>
+          {:else}
+            <img src={'/'+avatar+'.jpg'} class="photo" alt="user_photo"/>
+          {/if}
           {#if edit}
           <input bind:value={$dataStore.fio} class="title">
           {:else}
@@ -73,12 +98,41 @@
   </div>
 </main>
 <style>
+
+  #app {
+    position:relative;
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    margin-bottom: 1%;
+  }
+
+  .avatar {
+    position:absolute;
+    object-fit: cover;
+    filter: brightness(70%);
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    border-radius: 50%;
+  }
+
+.upload {
+  position:absolute;
+  height:30px;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}
+
 input, textarea {
   background: transparent;
   border: 2px solid #000000;
   border-radius: 5px;
   width: 70%;
 }
+
 input {
   font-family: "Helvetica Neue";
   font-size: 24px;

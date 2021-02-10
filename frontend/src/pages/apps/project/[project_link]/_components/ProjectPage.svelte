@@ -82,7 +82,8 @@
   }
   .project_img img {
     object-fit: cover;
-    width: auto;
+    max-width: 700px;
+    height: auto;
   }
 
   .info_block {

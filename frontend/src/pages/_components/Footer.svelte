@@ -4,28 +4,20 @@
     <div class="column-block">
       <h3>О НАС</h3>
       <ul>
-        <a href="https://www.patreon.com/commondatateam">
-          <li>поддержать проект</li>
-        </a>
-        <a href="/privacy">
-          <li>пользовательское соглашение</li>
-        </a>
+          <li><a href="https://www.patreon.com/commondatateam">поддержать проект</a></li>
+          <li><a href="/privacy">пользовательское соглашение</a></li>
       </ul>
     </div>
     <div class="column-block">
       <h3>СВЯЗАТЬСЯ С НАМИ</h3>
       <ul>
-        <a href="mailto:help@commondata.ru">
-          <li>help@commondata.ru</li>
-        </a>
+          <li><a href="mailto:help@commondata.ru">help@commondata.ru</a></li>
       </ul>
     </div>
     <div class="column-block">
       <h3>СОЦСЕТИ</h3>
       <ul>
-        <a href="https://github.com/tpofd/common-data-app">
-          <li>github</li>
-        </a>
+          <li><a href="https://github.com/tpofd/common-data-app">github</a></li>
       </ul>
     </div>
   </div>

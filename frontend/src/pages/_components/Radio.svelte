@@ -1,8 +1,9 @@
 <script>
     export let title = 'Я люблю данные'
+    export let choice = "0"
 </script>
 
-<input class="custom-radio" name="color" type="radio" id="color-green" value="green">
+<input class="custom-radio" name="color" type="radio" id="color-green" value={choice}>
 <label for="color-green">{title}</label>
 
 <style>

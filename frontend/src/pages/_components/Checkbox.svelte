@@ -1,8 +1,8 @@
 <script>
-    
+    export let choice = "0"
 </script>
 
-<input type="checkbox" class="custom-checkbox" id="happy" name="happy" value="yes">
+<input type="checkbox" class="custom-checkbox" id="happy" name="happy" value={choice}>
 <label for="happy">Я принимаю пользовательское соглашение</label>
 
 <style>

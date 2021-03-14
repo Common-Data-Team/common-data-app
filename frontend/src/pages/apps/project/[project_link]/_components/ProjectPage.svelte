@@ -82,6 +82,7 @@
   }
   .project_img img {
     object-fit: cover;
+    width: 100%;
     max-width: 700px;
     height: auto;
   }

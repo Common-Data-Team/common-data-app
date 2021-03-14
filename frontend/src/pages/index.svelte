@@ -18,6 +18,7 @@
   }
 
   const promise = getData('projects/all');
+  const tags_promise = getData('tags/all')
 </script>
 
 <svelte:head>
@@ -99,14 +100,13 @@
                 class:active="{current_tag === 'all'}"
                 on:click="{() => current_tag = 'all'}"
             >Все</button>
-                <button class:active="{current_tag === 'Бытовое'}"
-                on:click="{() => current_tag = 'Бытовое'}">Бытовое</button>
-                <button class:active="{current_tag === 'Наука'}"
-                on:click="{() => current_tag = 'Наука'}">Наука</button>
-                <button class:active="{current_tag === 'Медицина'}"
-                on:click="{() => current_tag = 'Медицина'}">Медицина</button>
-                <button class:active="{current_tag === 'Нейросети'}"
-                on:click="{() => current_tag = 'Нейросети'}">Нейросети</button>
+              {#await $tags_promise}
+              {:then tags}
+                {#each tags as tag}
+                  <button class:active="{current_tag === tag}"
+                          on:click="{() => current_tag = tag}">{tag}</button>
+                {/each}
+              {/await}
             </div>
             <div class="user-buttons-menu">
               {#if auth}
@@ -137,7 +137,9 @@
         <p>Загрузка...</p>
         {:then data}
           {#each data as card}
+            {#if current_tag == 'all' || card.tags.find(tag => tag.name === current_tag) != undefined}
                 <Project {...card}></Project>
+            {/if}
           {/each}
         {/await}
       </section>

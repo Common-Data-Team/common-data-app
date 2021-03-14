@@ -20,6 +20,10 @@
 </label>
 
 <style>
+  label {
+    margin: 5px 0;
+  }
+
   .custom-checkbox {
     position: absolute;
     z-index: -1;

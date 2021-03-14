@@ -37,10 +37,11 @@
 
 {#each Array.from(options.entries()) as [i, option]}
   <div class="option-block">
-    <svelte:component this={component} style="width: 40px; margin-right: -10px" color="#1355FF"/>
-    <div class="option-wrapper" in:fade|local>
-      <Option bind:value={options[i]} destroyer={() => destroyer(i)} {onFocus} {onBlur}/>
-    </div>
+    <svelte:component this={component} style="width: 40px; margin-right: -10px" color="#1355FF">
+      <div class="option-wrapper" in:fade|local>
+        <Option bind:value={options[i]} destroyer={() => destroyer(i)} {onFocus} {onBlur}/>
+      </div>
+    </svelte:component>
   </div>
 {/each}
 

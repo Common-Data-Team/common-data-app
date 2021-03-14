@@ -2,7 +2,6 @@
   let checked = false
   export let title
   export let group
-  export let choice = 0
 
   function changeGroup() {
     if (checked) {

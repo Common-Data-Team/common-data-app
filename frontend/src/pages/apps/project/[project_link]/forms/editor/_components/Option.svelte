@@ -29,10 +29,6 @@
     display: flex;
   }
 
-  .option-label {
-    margin-top: 3px;
-  }
-
   line {
     color: black;
     stroke: currentColor;

@@ -6,7 +6,6 @@
   export let question;
   export let options = [];
   let group = [];
-
   if (options.slice(-1)[0] !== "" || options.length === 0) {
     options = options.concat("");
   }
@@ -37,10 +36,11 @@
 
 {#each Array.from(options.entries()) as [i, option]}
   <div class="option-block">
-    <svelte:component this={component} style="width: 40px; margin-right: -10px" color="#1355FF"/>
+    <svelte:component this={component} style="width: 40px; margin-right: -10px" color="#1355FF" {group} bind:title={options[i]}>
     <div class="option-wrapper" in:fade|local>
       <Option bind:value={options[i]} destroyer={() => destroyer(i)} {onFocus} {onBlur}/>
     </div>
+    </svelte:component>
   </div>
 {/each}
 

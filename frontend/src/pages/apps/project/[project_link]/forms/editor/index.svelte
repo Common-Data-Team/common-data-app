@@ -9,7 +9,6 @@
   let backLastModified = Number.parseInt(last_modified || 0)
   let frontLastModified = Number.parseInt(localStorage.getItem('lastUpdated') || 0)
   let saved;
-
   if (backLastModified > frontLastModified) {
     saved = questionnaire;
   } else {

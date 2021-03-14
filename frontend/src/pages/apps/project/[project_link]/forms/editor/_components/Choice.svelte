@@ -30,6 +30,7 @@
 
 <!--<svelte:window on:keydown={event => event.key === 'Enter' ? creator(): false}/>-->
 <!--TODO Сделать переключение фокуса по Enter-->
+<div class="component">
 <label>
   <input class="question forms_input" placeholder="Новый вопрос" bind:value={question}>
 </label>
@@ -43,6 +44,7 @@
     </svelte:component>
   </div>
 {/each}
+</div>
 
 <style>
   .option-wrapper {

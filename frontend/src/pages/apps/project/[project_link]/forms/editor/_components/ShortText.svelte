@@ -14,6 +14,7 @@
 <style>
   .component {
     max-width: 1000px;
+    min-width: 300px;
   }
   input {
     background: transparent;

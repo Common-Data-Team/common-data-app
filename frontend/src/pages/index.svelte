@@ -100,8 +100,7 @@
                 class:active="{current_tag === 'all'}"
                 on:click="{() => current_tag = 'all'}"
             >Все</button>
-              {#await $tags_promise}
-              {:then tags}
+              {#await $tags_promise then tags}
                 {#each tags as tag}
                   <button class:active="{current_tag === tag}"
                           on:click="{() => current_tag = tag}">{tag}</button>

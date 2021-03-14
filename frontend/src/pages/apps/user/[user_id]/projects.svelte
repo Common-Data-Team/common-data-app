@@ -1,51 +1,52 @@
 <script>
-    import Project from './_components/User_project.svelte';
-    import Input from 'global_components/Input.svelte'
-    import {params, goto} from '@roxi/routify';
-    import { authorizedRequest, getCookie, getData } from '../../../_api.js';
-    import { fly } from 'svelte/transition'
-    import { onMount } from 'svelte';
-    let screenWidth;
-
-    export let user_projects_page = '/apps/user465_projects';
-    export let user_profile_page = '/apps/user465';
-    export let visible = false;
-    let title = '';
-    let participants_target = '';
-    let auth = getCookie('user_id') === $params.user_id;
+  import Project from './_components/User_project.svelte';
+  import Input from 'global_components/Input.svelte'
+  import {params, goto} from '@roxi/routify';
+  import { authorizedRequest, getCookie, getData } from '../../../_api.js';
+  import { fly } from 'svelte/transition'
+  import { onMount } from 'svelte';
+  let error_message = ''
+  let screenWidth;
+  export let user_projects_page = '/apps/user465_projects';
+  export let user_profile_page = '/apps/user465';
+  export let visible = false;
+  let title = '';
+  let participants_target = '';
+  let auth = getCookie('user_id') === $params.user_id;
 
 async function createProject() {
-    console.log(title);
-    const response = await authorizedRequest('projects/create', 'Post', {title, description: '', participants_target});
-    // if (response[0].project_img === null) response[0].project_img = '/images/project_images/follow_project_card.png';
-    promise = getData('users/'+ $params.user_id);
-    title = ''
-    participants_target = ''
-    visible = false;
+  const response = await authorizedRequest('projects/create', 'Post', {title, description: '', participants_target});
+  if (response[1] != null) {
+    error_message = response[1]
+  } else {
+    $goto('../../project/'+response[0].project_link)
+  }
 }
 
 let promise = getData('users/'+ $params.user_id);
 </script>
 
 <svelte:head>
-    <title>Мои проекты</title>
+  <title>Мои проекты</title>
 </svelte:head>
 <svelte:window bind:innerWidth={screenWidth} />
 {#if visible}
 <div id="window" on:click={(e) => {
-    if (event.target.closest('.dialog') === null && visible) {
-        visible = false;
-        title = '';
-        participants_target = '';
-        }
+  if (event.target.closest('.dialog') === null && visible) {
+      visible = false;
+      title = '';
+      participants_target = '';
+      }
 }}>
-        <div class="dialog" transition:fly="{{ y: 200, duration: 800 }}">
-            <h1>Новый проект</h1>
-            <hr/>
-            <Input class="dialog-input" bind:value={title} name="title" span="Название проекта" type="text"/>
-            <Input class="dialog-input" bind:value={participants_target} name="target" span="Сколько человек требуется опросить?" type="number"/>
-            <button on:click={createProject}>Создать проект</button>
-        </div>
+  <div class="dialog" transition:fly="{{ y: 200, duration: 800 }}">
+    <h1>Новый проект</h1>
+    <hr/>
+    <Input class="dialog-input" bind:value={title} name="title" span="Название проекта" type="text"/>
+    <Input class="dialog-input" bind:value={participants_target} name="target"
+           span="Сколько человек требуется опросить?" type="number"/>
+    <button on:click={createProject}>Создать проект</button>
+    <p>{error_message}</p>
+  </div>
 </div>
 {/if}
 <main>

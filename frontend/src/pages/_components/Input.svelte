@@ -23,7 +23,7 @@
 
 <label style="--spanColor: {spanColor};
               --mainColor: {mainColor};" class="{className}">
-  <input bind:this={input} { placeholder } {type} {name} {value} on:input={handleInput}
+  <input bind:this={input} { placeholder } {type} {name} {value} min="0" on:input={handleInput}
          on:focus={() => focus = true}
          on:blur={() => focus = value !== ""}>
   <span class:focus>{span}</span>

@@ -122,6 +122,12 @@
     height: 200px;
   }
 
+  @media (max-width: 1300px) {
+    main {
+      padding: 60px 0;
+    }
+  }
+
   @media (min-width: 640px) {
     main {
       max-width: none;

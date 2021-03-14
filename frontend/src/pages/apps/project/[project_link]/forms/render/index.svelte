@@ -228,7 +228,7 @@
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
   }
-
+  
   @media (max-width: 600px) {
     .bottom-block {
       right: 10px;
